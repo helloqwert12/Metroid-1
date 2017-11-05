@@ -8,7 +8,7 @@
 using namespace std;
 
 /*
-	base component
+	Base component
 	các hiệu ứng nào có ảnh hưởng đến object suốt game thì kế thừa lại.
 	hãy chắc rằng bạn kiểm soát được hoàn toàn khả năng update của class kế thừa
 	(nên test bằng cách update rời trước)
@@ -50,12 +50,12 @@ private:
 	Sprite* _refSprite;
 };
 
+
 enum eGravityStatus
 {
 	FALLING__DOWN,
 	SHALLOWED
 };
-
 
 class Gravity : public IComponent
 {

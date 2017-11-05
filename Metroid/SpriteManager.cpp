@@ -31,19 +31,24 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	pSprite = new Sprite(spriteHandle, L"Resources//Images//mainmenu.png");
 	this->_listSprite[eID::MAIN_MENU] = pSprite;
 
+	pSprite = new Sprite(spriteHandle, L"Resources//Fonts//fontEx.png", 30, 10);
+	this->_listSprite[eID::FONTEX] = pSprite;
+
 	pSprite = new Sprite(spriteHandle, L"Resources//Fonts//fontFull.png", 54, 6);
 	this->_listSprite[eID::FONTFULL] = pSprite;
 
-	// Đọc file xml để tạo đối tượng sprite
-	//pSprite = loadXMLDoc(spriteHandle, L"Resources//Map//stage21.tmx");
-	//pSprite->setOrigin(VECTOR2ZERO);
-	//pSprite->setScale(2.0f);
-	//this->_listSprite[eID::MAP_STAGE_21] = pSprite;
+	pSprite = new Sprite(spriteHandle, L"Resources//Images//life.png");
+	this->_listSprite[eID::LIFE_ICON] = pSprite;
 
-	//pSprite = loadXMLDoc(spriteHandle, L"Resources//Map//stage22.tmx");
-	//pSprite->setOrigin(VECTOR2ZERO);
-	//pSprite->setScale(2.0f);
-	//this->_listSprite[eID::MAP_STAGE_22] = pSprite;
+	pSprite = new Sprite(spriteHandle, L"Resources//Images//player.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::PLAYER, pSprite));
+	this->loadSpriteInfo(eID::PLAYER, "Resources//Images//player.txt");
+
+	// Đọc file xml để tạo đối tượng sprite
+	pSprite = loadXMLDoc(spriteHandle, L"Resources//Maps//test.tmx");
+	pSprite->setOrigin(VECTOR2ZERO);
+	pSprite->setScale(2.0f);
+	this->_listSprite[eID::MAP_METROID] = pSprite;
 }
 
 Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spritehandle, LPWSTR path)

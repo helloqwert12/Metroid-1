@@ -43,7 +43,7 @@ void Game::init()
 	//_devicemanager->Init(*wnd_Instance);
 	_input->init(hWindow->getWnd(), hWindow->gethInstance());
 	//_input->init(wnd_Instance->getWnd(), wnd_Instance->gethInstance());
-	this->_frameRate = 1000.0f / hWindow->getFrameRate(); //1000/30 = 33 milisecond
+	this->_frameRate = 1000.0f / hWindow->getFrameRate(); //1000/60 = 16 milisecond
 
 	D3DXCreateSprite(_devicemanager->getDevice(), &this->_spriteHandle);
 	this->loadResource();
@@ -101,6 +101,7 @@ void Game::render() // call once per frame
 	if (device->getDevice()->BeginScene() != DI_OK)
 		return;
 	device->clearScreen();
+
 	// main game's logic
 	updateInput(time);
 	update(time);
@@ -111,10 +112,6 @@ void Game::render() // call once per frame
 	device->present();
 }
 
-void Game::draw()
-{
-}
-
 void Game::updateInput(float deltatime)
 {
 	// do nothing.
@@ -122,6 +119,12 @@ void Game::updateInput(float deltatime)
 }
 
 void Game::update(float deltatime)
+{
+	// do nothing.
+	// override this for effection
+}
+
+void Game::draw()
 {
 	// do nothing.
 	// override this for effection

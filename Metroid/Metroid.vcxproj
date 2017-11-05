@@ -144,15 +144,24 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="dxaudio.cpp" />
+    <ClCompile Include="EmptyObject.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="IntroScene.cpp" />
+    <ClCompile Include="Info.cpp" />
+    <ClCompile Include="myutils.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="QuadTreeNode.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="MetroidGame.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -164,25 +173,37 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextSprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Viewport.cpp" />
+    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="dxaudio.h" />
+    <ClInclude Include="EmptyObject.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Help.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="IntroScene.h" />
+    <ClInclude Include="Info.h" />
+    <ClInclude Include="myutils.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="QuadTreeNode.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="MetroidGame.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />
     <ClInclude Include="pugixml\pugixml.hpp" />
@@ -195,10 +216,13 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextSprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileSet.h" />
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Viewport.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

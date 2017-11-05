@@ -16,7 +16,7 @@ public:
 	virtual ~Event();
 	virtual void fireEvent(EventArg* e); // active an event - kích hoạt sự kiện
 	void operator+=(EventFunction pFunction); // regist an action - đăng kí sự kiện
-	void operator-=(EventFunction pFucntion); // remove an action - huỷ sự kiện
+	void operator-=(EventFunction pFunction); // remove an action - huỷ sự kiện
 private:
 	vector<EventFunction> _listaction;
 };

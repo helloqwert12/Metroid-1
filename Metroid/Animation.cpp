@@ -4,7 +4,6 @@ Animation::Animation(Sprite* spriteSheet, float timeAnimate, bool loop)
 {
 	_spriteSheet = spriteSheet;
 	_timeAnimate = timeAnimate;
-
 	_canAnimate = true;
 	_totalFrames = 0;
 	_index = 0;

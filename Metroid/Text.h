@@ -64,7 +64,7 @@ private:
 	int _fontHeight;
 	UINT _fontWeight;
 	bool _italic;
-	DWORD _textAlign;					//DT_LEFT | DT_WORDBREAK | DT_CENTER | DT_RIGHT ...
+	DWORD _textAlign;	//DT_LEFT | DT_WORDBREAK | DT_CENTER | DT_RIGHT ...
 	D3DCOLOR _color;
 
 	RECT _textRect;

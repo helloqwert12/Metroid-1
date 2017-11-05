@@ -18,17 +18,27 @@
 using namespace std;
 
 #define WINDOW_WIDTH 512
-#define WINDOW_HEIGHT 448
+#define WINDOW_HEIGHT 450
 #define SCALE_FACTOR 2.0f
 
-#define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)	// màu trắnng
+#define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)	// màu trắng
 #define COLOR_KEY D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f)		// màu khi mà load hình nó bỏ qua -> trong suốt
+
+#define MAX_OBJECTS 4
+#define MAX_LEVELS 32
 
 enum eID
 {
 	PLAYER = 0,
 	MAIN_MENU = 1,
 	FONTFULL = 2,
+	FONTEX = 3,
+
+	LIFE_ICON = 4,
+
+	MAP_METROID = 5,
+
+	WALL = 40,
 };
 
 enum eStatus
@@ -96,6 +106,5 @@ if(p) \
 } \
 
 #endif // !SAFE_DELETE
-
 
 #endif // !__NS_FRAMEWORK__

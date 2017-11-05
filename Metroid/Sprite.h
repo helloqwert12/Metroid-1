@@ -54,7 +54,6 @@ public:
 	RECT getFrameRect();
 	RECT getFrameRectByIndex(int index);
 
-
 	//Chuyển qua frame kế tiếp
 	void nextFrame();
 

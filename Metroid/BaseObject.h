@@ -84,7 +84,7 @@ public:
 protected:
 	Sprite* _sprite;
 	// nếu muốn dùng animation thì class kế thừa khai báo animation
-	// khởi tạo anition thì reference đến sprite
+	// khởi tạo animation thì reference đến sprite
 	eID _id;
 	eStatus _status;
 	eDirection _physicsSide;

@@ -48,8 +48,6 @@ private:
 
 	static InputController* _instance;
 	
-	//vector<KeyEvent> _keydownQueue;			// list action for keydown.
-	//vector<KeyEvent> _keyupQueue;			// list action for keyup	
 	pGInput _input;
 	pGKeyboard _keyboard;
 	BYTE _keyBuffer[256]; // BYTE = unsigned char

@@ -24,7 +24,7 @@ public:
 	/*
 		draw LPDIRECT3DTEXTURE9 to screen, directX manage draw to buffer, we dont care about buffer anymore.
 		@spriteHandle: sprite handle managed by directX, it work for load content.
-		@rect: a part of image want to draw, remmember RECT is defined: {top, left, right, bot} (4 lines)
+		@rect: a part of image want to draw, remember RECT is defined: {top, left, right, bot} (4 lines)
 		@center: a center of frame to draw:
 			- if you chose NULL, topleft of image will be drawn at @position
 			- if you chose x,y of frame, topleft of image will be drawn at @position - (x ,y)

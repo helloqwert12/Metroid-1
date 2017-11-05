@@ -34,8 +34,6 @@ void InputController::release()
 
 bool InputController::init(HWND hWnd, HINSTANCE hinstance)
 {
-	//_keydownQueue.clear();
-	//_keyupQueue.clear();
 	this->_hWnd = hWnd;
 	HRESULT rs;
 	rs = DirectInput8Create(

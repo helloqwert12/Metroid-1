@@ -16,7 +16,6 @@ SceneManager* SceneManager::getInstance()
 	{
 		_instance = new SceneManager();
 	}
-
 	return _instance;
 }
 
@@ -24,7 +23,6 @@ bool SceneManager::init()
 {
 	if (!_scenes.empty())
 		_scenes.back()->init();
-
 	return true;
 }
 
@@ -91,6 +89,5 @@ Scene* SceneManager::getCurrentScene()
 {
 	if (!_scenes.empty())
 		return _scenes.back();
-
 	return nullptr;
 }

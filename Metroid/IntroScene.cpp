@@ -1,5 +1,6 @@
 #include "IntroScene.h"
 #include "SoundManager.h"
+#include "PlayScene.h"
 
 void IntroScene::updateInput(float deltatime)
 {
@@ -44,7 +45,7 @@ bool IntroScene::init()
 	_ok = false;
 	_draw = true;
 
-	SoundManager::getInstance()->PlayLoop(INTRO_SCENE);
+	//SoundManager::getInstance()->PlayLoop(INTRO_SCENE);
 
 	return true;
 }
@@ -63,7 +64,7 @@ void IntroScene::update(float dt)
 		}
 		if (_access->isTimeLoop(800))
 		{
-			//SceneManager::getInstance()->replaceScene(new PlayScene());
+			SceneManager::getInstance()->replaceScene(new PlayScene());
 		}
 	}
 }
@@ -92,7 +93,7 @@ void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 
 void IntroScene::release()
 {
-	SoundManager::getInstance()->Stop(INTRO_SCENE);
+	//SoundManager::getInstance()->Stop(INTRO_SCENE);
 
 	SAFE_DELETE(_playOption);
 	SAFE_DELETE(_introtable);

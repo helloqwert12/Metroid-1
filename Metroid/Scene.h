@@ -17,8 +17,10 @@ public:
 	void virtual release() = 0;
 
 	Viewport*  getViewport();
+
 protected:
 	Viewport* _viewport;
+
 private:
 
 };

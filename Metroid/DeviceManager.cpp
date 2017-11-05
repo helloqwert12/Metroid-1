@@ -65,7 +65,6 @@ void DeviceManager::present()
 	this->_pDevice->Present(0, 0, 0, 0);
 }
 
-
 void DeviceManager::clearScreen()
 {
 	this->_pDevice->ColorFill(_surface, NULL, D3DCOLOR_XRGB(0, 0, 0));
