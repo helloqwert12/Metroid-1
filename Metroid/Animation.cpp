@@ -6,16 +6,18 @@ Animation::Animation(Sprite* spriteSheet, float timeAnimate, bool loop)
 	_timeAnimate = timeAnimate;
 	_canAnimate = true;
 	_totalFrames = 0;
+
 	_index = 0;
 	_timer = 0;
-	_valueFlashes = 0.5f;
 
 	_startFrame = 0;
 	_endFrame = _totalFrames - 1;
 
 	this->setIndex(0);
 	this->setLoop(loop);
+
 	_canFlashes = false;
+	_valueFlashes = 0.5f;
 	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
@@ -25,9 +27,9 @@ Animation::Animation(Sprite* spriteSheet, int totalFrames, int cols, float timeA
 	_timeAnimate = timeAnimate;
 	_canAnimate = true;
 	_totalFrames = totalFrames;
+
 	_index = 0;
 	_timer = 0;
-	_valueFlashes = 0.5f;
 
 	_startFrame = 0;
 	_endFrame = _totalFrames - 1;
@@ -37,14 +39,15 @@ Animation::Animation(Sprite* spriteSheet, int totalFrames, int cols, float timeA
 
 	for (int i = 0; i < totalFrames; i++)
 	{
-		int x = i % cols;
-		int y = i / cols;
+		int x = i % cols;	// cột
+		int y = i / cols;	// dòng
 
 		this->addFrameRect(x * frameW, y * frameH, frameW, frameH);
 	}
 
 	_currentRect = _frameRectList[_index];
 
+	_valueFlashes = 0.5f;
 	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
@@ -109,6 +112,12 @@ void Animation::update(float dt)
 	}
 }
 
+void Animation::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
+{
+	_spriteSheet->setFrameRect(_currentRect);
+	_spriteSheet->render(spriteHandle, viewport);
+}
+
 void Animation::setTimeAnimate(float time)
 {
 	_timeAnimate = time;
@@ -142,24 +151,17 @@ bool Animation::isAnimate()
 	return _canAnimate;
 }
 
-bool Animation::isLastAnimation()
-{
-	//
-	return false;
-}
-
 void Animation::addFrameRect(RECT rect)
 {
-	//nếu là rect đầu tiên thì set current luôn
+	// Nếu là rect đầu tiên thì set currentRect luôn
 	if (_frameRectList.empty())
 	{
 		_currentRect = rect;
 	}
 
-
 	_frameRectList.push_back(rect);
-	_totalFrames = _frameRectList.size();
 
+	_totalFrames = _frameRectList.size();
 	_endFrame = _totalFrames - 1;
 }
 
@@ -222,21 +224,6 @@ void Animation::restart(int from)
 		_canAnimate = true;
 }
 
-void Animation::enableFlashes(bool enable)
-{
-	if (_canFlashes == enable)
-		return;
-
-	_canFlashes = enable;
-	_spriteSheet->setColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-}
-
-void Animation::setValueFlashes(float value)
-{
-	if (_valueFlashes != value)
-		_valueFlashes = value;
-}
-
 void Animation::animateFromTo(int from, int to, bool loop)
 {
 	if (from <= to)
@@ -258,6 +245,21 @@ void Animation::animateFromTo(int from, int to, bool loop)
 		_canAnimate = true;
 }
 
+void Animation::enableFlashes(bool enable)
+{
+	if (_canFlashes == enable)
+		return;
+
+	_canFlashes = enable;
+	_spriteSheet->setColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+}
+
+void Animation::setValueFlashes(float value)
+{
+	if (_valueFlashes != value)
+		_valueFlashes = value;
+}
+
 void Animation::setColorFlash(D3DXCOLOR color)
 {
 	_flashColor = color;
@@ -266,10 +268,4 @@ void Animation::setColorFlash(D3DXCOLOR color)
 D3DXCOLOR Animation::getColorFlash()
 {
 	return _flashColor;
-}
-
-void Animation::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
-{
-	_spriteSheet->setFrameRect(_currentRect);
-	_spriteSheet->render(spriteHandle, viewport);
 }

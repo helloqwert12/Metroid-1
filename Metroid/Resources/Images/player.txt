@@ -1,6 +1,8 @@
 frame_name		left	top	right	bottom
-walk_right_01		71	5	86	30	
-walk_right_02		93	0	120	35
-walk_right_03		109	6	135	29
+default_01		327	8	345	39
+walk_right_01		119	8	134	39
+walk_right_02		136	8	153	39
+walk_right_03		155	8	175	39
+jump_01		177	15	195	39
 
 		

@@ -25,6 +25,7 @@ public:
 
 private:
 	SceneManager();
+
 	static SceneManager* _instance;
 
 	vector<Scene*> _scenes;

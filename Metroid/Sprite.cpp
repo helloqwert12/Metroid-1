@@ -1,9 +1,5 @@
 ﻿#include "Sprite.h"
 
-Sprite::~Sprite()
-{
-}
-
 Sprite::Sprite(LPD3DXSPRITE spriteHandle, LPWSTR filePath, int totalFrames, int cols)
 {
 	_origin = GVector2(0.5f, 0.5f);
@@ -26,19 +22,10 @@ Sprite::Sprite(LPD3DXSPRITE spriteHandle, LPWSTR filePath, int totalFrames, int 
 
 	this->setIndex(0);
 	this->updateBounding();
+}
 
-	_isDrawBounding = false;
-	_surface = nullptr;
-
-	//create surface
-	DeviceManager::getInstance()->getDevice()->CreateOffscreenPlainSurface(
-		WINDOW_WIDTH,
-		WINDOW_HEIGHT,
-		D3DFMT_X8R8G8B8,
-		D3DPOOL_DEFAULT,
-		&_surface,
-		NULL
-	);
+Sprite::~Sprite()
+{
 }
 
 void Sprite::release()
@@ -57,8 +44,6 @@ void Sprite::render(LPD3DXSPRITE spriteHandle)
 		_origin,
 		_zIndex
 	);
-
-	return;
 }
 
 void Sprite::render(LPD3DXSPRITE spriteHandle, Viewport* viewport)
@@ -72,28 +57,6 @@ void Sprite::render(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		_rotate,
 		_origin,
 		_zIndex
-	);
-
-	//Vẽ bounding để xem
-	if (_surface == nullptr || _isDrawBounding == false)
-	{
-		return;
-	}
-
-	RECT r;
-	r.top = WINDOW_HEIGHT - _bound.top;
-	r.left = _bound.left;
-	r.bottom = WINDOW_HEIGHT - _bound.bottom;
-	r.right = _bound.right;
-
-	DeviceManager::getInstance()->getDevice()->ColorFill(_surface, NULL, D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
-
-	DeviceManager::getInstance()->getDevice()->StretchRect(
-		_surface,
-		NULL,
-		DeviceManager::getInstance()->getSurface(),
-		&r,
-		D3DTEXF_NONE
 	);
 }
 
@@ -245,28 +208,16 @@ RECT Sprite::getFrameRect()
 RECT Sprite::getFrameRectByIndex(int index)
 {
 	index = index % _totalFrames;
+
+	this->setIndex(index);
+
 	RECT rect;
 	rect.left = (long)_currentFrame.x * _frameWidth;
 	rect.right = _frameRect.left + _frameWidth;
 	rect.top = (long)_currentFrame.y * _frameHeight;
 	rect.bottom = _frameRect.top + _frameHeight;
+
 	return rect;
-}
-
-void Sprite::nextFrame()
-{
-	if (_totalFrames <= 1)
-		return;
-
-	this->setIndex(_index + 1);
-}
-
-void Sprite::setIndex(int index)
-{
-	if (_index != index)
-		_index = index;
-
-	this->setCurrentFrame();
 }
 
 int Sprite::getFrameWidth()
@@ -287,12 +238,6 @@ int Sprite::getTextureWidth()
 int Sprite::getTextureHeight()
 {
 	return _textureHeight * abs(_scale.y);
-}
-
-void Sprite::drawBounding(bool draw)
-{
-	if (draw != _isDrawBounding)
-		_isDrawBounding = draw;
 }
 
 void Sprite::setOpacity(float opacity)
@@ -320,12 +265,20 @@ D3DXCOLOR Sprite::getColor()
 	return _color;
 }
 
-void Sprite::setFrameRect()
+void Sprite::nextFrame()
 {
-	this->_frameRect.left = (long)_currentFrame.x * _frameWidth;
-	this->_frameRect.right = _frameRect.left + _frameWidth;
-	this->_frameRect.top = (long)_currentFrame.y * _frameHeight;
-	this->_frameRect.bottom = _frameRect.top + _frameHeight;
+	if (_totalFrames <= 1)
+		return;
+
+	this->setIndex(_index + 1);
+}
+
+void Sprite::setIndex(int index)
+{
+	if (_index != index)
+		_index = index;
+
+	this->setCurrentFrame();
 }
 
 void Sprite::setCurrentFrame()
@@ -339,6 +292,14 @@ void Sprite::setCurrentFrame()
 	this->setFrameRect();
 }
 
+void Sprite::setFrameRect()
+{
+	this->_frameRect.left = (long)_currentFrame.x * _frameWidth;
+	this->_frameRect.right = _frameRect.left + _frameWidth;
+	this->_frameRect.top = (long)_currentFrame.y * _frameHeight;
+	this->_frameRect.bottom = _frameRect.top + _frameHeight;
+}
+
 void Sprite::updateBounding()
 {
 	float scaleW = _frameWidth * abs(_scale.x);
@@ -348,53 +309,4 @@ void Sprite::updateBounding()
 	this->_bound.bottom = _position.y - scaleH * _origin.y;
 	this->_bound.right = _bound.left + scaleW;
 	this->_bound.top = _bound.bottom + scaleH;
-
-	// 4 điểm của hcn
-	GVector2 p1 = GVector2(_bound.left, _bound.top);
-	GVector2 p2 = GVector2(_bound.right, _bound.top);
-	GVector2 p3 = GVector2(_bound.right, _bound.bottom);
-	GVector2 p4 = GVector2(_bound.left, _bound.bottom);
-	_anchorPoint = GVector2(_bound.left + scaleW * _origin.x, _bound.bottom + scaleH * _origin.y);
-
-	//rotate 4 điểm
-	p1 = rotatePointAroundOrigin(p1, _rotate, _anchorPoint);
-	p2 = rotatePointAroundOrigin(p2, _rotate, _anchorPoint);
-	p3 = rotatePointAroundOrigin(p3, _rotate, _anchorPoint);
-	p4 = rotatePointAroundOrigin(p4, _rotate, _anchorPoint);
-
-	_bound.left = min(min(p1.x, p2.x), min(p3.x, p4.x));
-	_bound.top = max(max(p1.y, p2.y), max(p3.y, p4.y));
-	_bound.right = max(max(p1.x, p2.x), max(p3.x, p4.x));
-	_bound.bottom = min(min(p1.y, p2.y), min(p3.y, p4.y));
-}
-
-GVector2 Sprite::rotatePointAroundOrigin(GVector2 point, float angle, GVector2 origin)
-{
-	// nhân ma trận xoay
-	/*
-	x' = x.cos(t) - y.sin(t)
-	y' = x.sin(t) + y.cos(t)
-
-	t là góc quay theo radian
-	vậy quanh quanh 1 điểm mình dời về góc rồi quay xong dời lại
-	*/
-
-	GVector2 newPoint;
-	//trừ vì sprite xoay với cái này lệch 90*
-	float rad = -angle * (M_PI / 180);
-
-	float _sin = sin(rad);
-	float _cos = cos(rad);
-
-	//dời điểm về góc
-	point -= origin;
-
-	//xoay
-	newPoint.x = point.x * _cos - point.y * _sin;
-	newPoint.y = point.x * _sin + point.y * _cos;
-
-	//dời về chổ cũ
-	newPoint += origin;
-
-	return newPoint;
 }

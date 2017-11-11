@@ -1,5 +1,5 @@
-#include "PlayScene.h"
-#include "myutils.h"
+﻿#include "PlayScene.h"
+#include "maputils.h"
 
 PlayScene::PlayScene()
 {
@@ -12,23 +12,17 @@ PlayScene::~PlayScene()
 	_viewport = nullptr;
 }
 
-void PlayScene::setViewport(Viewport* viewport)
-{
-	if (_viewport != viewport)
-		_viewport = viewport;
-}
-
 bool PlayScene::init()
 {
 	auto player = new Player();
 	player->init();
-	player->setPosition(300, 150);
+	player->setPosition(1170, 600);
 	player->getBounding();
 	this->_player = player;
 
-	_text = new Text(L"Arial", "", 10, 25);
-
 	_tileMap = TileMap::LoadFromFile("Resources//Maps//test.tmx", eID::MAP_METROID);
+
+	_text = new Text(L"Arial", "", 10, 25);
 
 	auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
 	RECT rectMap;
@@ -39,15 +33,14 @@ bool PlayScene::init()
 
 	_root = new QuadTreeNode(rectMap);
 
-	auto listObject = GetListObjectFromFile("Resources//Maps//stage21.tmx");
-	//auto listObject = GetListObjectFromFile("Resources//Maps//test.tmx");
+	auto listObject = GetListObjectFromFile("Resources//Maps//test.tmx");
 
 	for (auto obj : (*listObject))
 	{
 		_root->Insert(obj);
 	}
-	listObject->clear();
 
+	listObject->clear();
 	return true;
 }
 
@@ -62,17 +55,19 @@ void PlayScene::update(float dt)
 	sprintf(str, "Delta Time: %f", dt);
 	_text->setText(str);
 
-	if (this->checkEndGame() == true)
+	if (this->checkEndGame())
 	{
 		return;
 	}
 
-	RECT viewport_in_transform = _viewport->getBounding();
+	this->updateViewport(_player);
+
+	RECT viewportInTransform = _viewport->getBounding();
 
 	_root->DeleteObjects();
 
 	_activeObject.clear();
-	_activeObject = _root->Retrieve(viewport_in_transform);
+	_activeObject = _root->Retrieve(viewportInTransform);
 	_activeObject.push_back(_player);
 
 	for (auto obj : _activeObject)
@@ -96,16 +91,12 @@ void PlayScene::update(float dt)
 
 void PlayScene::updateViewport(BaseObject* objTracker)
 {
-	GVector2 current_position = _viewport->getPositionWorld();
 	GVector2 worldsize = this->_tileMap->getWorldSize();
 
-	GVector2 new_position = GVector2(max(objTracker->getPositionX() - 260, 0), WINDOW_HEIGHT);
+	//GVector2 new_position = GVector2(max(objTracker->getPositionX() - 260, 0), WINDOW_HEIGHT);
+	GVector2 new_position = GVector2(max(objTracker->getPositionX() - 260, 0), max(objTracker->getPositionY() + 400, 0));
 
-	if (new_position.x < current_position.x)
-	{
-		new_position.x = current_position.x;
-	}
-
+	// Không cho đi quá map.
 	if (new_position.x + WINDOW_WIDTH > worldsize.x)
 	{
 		new_position.x = worldsize.x - WINDOW_WIDTH;
@@ -123,16 +114,13 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 		object->draw(spriteHandle, _viewport);
 	}
 
-#if _DEBUG
 	_text->draw();
-#endif
 }
 
 void PlayScene::release()
 {
 	_root->Release();
 	SAFE_DELETE(_root);
-	_tileMap->release();
 	SAFE_DELETE(_tileMap);
 }
 
@@ -144,6 +132,7 @@ bool PlayScene::checkEndGame()
 		SceneManager::getInstance()->replaceScene(gameoverScene);
 		return true;
 	}
+
 	return false;
 }
 
@@ -157,12 +146,14 @@ BaseObject* PlayScene::getObject(eID id)
 	{
 		return nullptr;
 	}
+
 	for (BaseObject* object : _activeObject)
 	{
 		objectID = object->getId();
 		if (objectID == id)
 			return object;
 	}
+
 	return nullptr;
 }
 

@@ -24,7 +24,6 @@ public:
 
 	RECT getBounding() override;
 
-#pragma region Hide all
 	float getPositionX() override;
 	float getPositionY() override;
 	void setPosition(GVector3 vector) override;
@@ -46,7 +45,6 @@ public:
 
 	void setZIndex(float z) override;
 	float getZIndex() override;
-#pragma endregion
 
 private:
 	map<string, IComponent*> _listComponent;

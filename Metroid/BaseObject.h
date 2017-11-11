@@ -74,8 +74,8 @@ public:
 
 	virtual float checkCollision(BaseObject* object, float dt);
 
-	// vật nào cũng có vận tốc, mặc định là đứng yên sẽ return 0
-	// nếu vật có chuyển động phải override lại để lấy vận tốc.
+	// Object nào cũng có vận tốc, mặc định là đứng yên sẽ trả về 0
+	// Nếu object có chuyển động phải override lại để lấy vận tốc.
 	virtual GVector2 getVelocity();
 
 	virtual void setPhysicsBodySide(eDirection side);
@@ -83,11 +83,10 @@ public:
 
 protected:
 	Sprite* _sprite;
-	// nếu muốn dùng animation thì class kế thừa khai báo animation
-	// khởi tạo animation thì reference đến sprite
+
 	eID _id;
 	eStatus _status;
-	eDirection _physicsSide;
+	eDirection _physicsSide; // Hướng bị va chạm của object
 };
 
 #endif // !__BASEOBJECT_H__

@@ -11,7 +11,7 @@
 #include "BaseObject.h"
 #include "TextSprite.h"
 
-EVENT_RECEIVER
+[event_receiver(native)]
 class IntroScene : public Scene, public IControlable
 {
 public:
@@ -19,22 +19,22 @@ public:
 	~IntroScene();
 
 	bool init() override;
+	void updateInput(float deltatime) override;
 	void update(float dt) override;
 	void draw(LPD3DXSPRITE spriteHandle) override;
 	void release() override;
-	void updateInput(float deltatime) override;
+
+	void onKeyPressed(KeyEventArg* key_event);
 
 private:
 	Sprite* _introtable;
 
-	void onKeyPressed(KeyEventArg* key_event);
-
 	StopWatch* _flash;
 	StopWatch* _access;
+
 	bool _ok;
 	bool _draw;
 
-	TextSprite* _gameTitle;
 	TextSprite* _playOption;
 	TextSprite* _thienAn;
 	TextSprite* _huuDat;

@@ -1,8 +1,8 @@
-#include "StopWatch.h"
+﻿#include "StopWatch.h"
 
 StopWatch::StopWatch()
 {
-	_stopwatch = 0.0f;
+	_stopWatch = 0.0f;
 	_isStart = false;
 	_isFinish = false;
 }
@@ -16,21 +16,21 @@ bool StopWatch::isFinish()
 	return this->_isFinish;
 }
 
-// milisecond
+// đơn vị milisecond
 bool StopWatch::isTimeLoop(float time)
 {
 	float _totalgametime = GameTime::getInstance()->getTotalGameTime();
 	if (_isStart == false)
 	{
-		_stopwatch = time + _totalgametime;
+		_stopWatch = time + _totalgametime;
 		_isStart = true;
 		return false;
 	}
 
-	float delta = _stopwatch - _totalgametime;
+	float delta = _stopWatch - _totalgametime;
 	if (delta <= 0)
 	{
-		_stopwatch = time + delta + _totalgametime;
+		_stopWatch = time + delta + _totalgametime;
 		return true;
 	}
 
@@ -45,12 +45,12 @@ bool StopWatch::isStopWatch(float time)
 	float _totalgametime = GameTime::getInstance()->getTotalGameTime();
 	if (_isStart == false)
 	{
-		_stopwatch = time + _totalgametime;
+		_stopWatch = time + _totalgametime;
 		_isStart = true;
 		return false;
 	}
 
-	float delta = _stopwatch - _totalgametime;
+	float delta = _stopWatch - _totalgametime;
 	if (delta <= 0)
 	{
 		_isFinish = true;

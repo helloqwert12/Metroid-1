@@ -15,14 +15,14 @@ public:
 	void resetLastTick();
 	void updateGameTime();
 
-	float getElapsedGameTime(); // Tổng thời gian trôi qua kể từ lần cuối gọi update
-	float getTotalGameTime();	// Tổng thời gian trôi qua kể từ lúc gọi Init
+	float getTotalGameTime();	// Tổng thời gian trôi qua kể từ lúc gọi hàm init
+	float getElapsedGameTime(); // Tổng thời gian trôi qua kể từ lần cuối gọi hàm updateGameTime
 
 private:
 	static GameTime* _instance;
 
-	TimeSpan _elapsedGameTime;
 	TimeSpan _totalGameTime;
+	TimeSpan _elapsedGameTime;
 	LARGE_INTEGER _Query;
 	float _freQuery;
 
@@ -33,10 +33,8 @@ private:
 	GameTime(TimeSpan& elapsedGameTime);
 	GameTime(void);
 
-	void setElapsedGameTime(TimeSpan& elapsedGt);
-	void setTotalGameTime(TimeSpan& totalGt);
+	void setTotalGameTime(TimeSpan& totalGametime);
+	void setElapsedGameTime(TimeSpan& elapsedGametime);
 };
-
-typedef GameTime* pGameTime;
 
 #endif // !__GAMETIME_H__

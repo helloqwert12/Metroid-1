@@ -3,54 +3,10 @@
 TileMap::TileMap()
 {
 	_mapIndex = NULL;
-	_checkPoint = -1;
 }
 
 TileMap::~TileMap()
 {
-}
-
-void TileMap::release()
-{
-}
-
-void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
-{
-	// duyệt mảng từ 0 đến _width * _height có thể phát sinh đển hàng ngàn lần vẽ
-	// giải quyết bằng cách, kiểm tra toạ độ viewport trước khi lặp vòng for để xác định cặp giá trị i, j cho vòng for 2 lớp.
-	RECT screenRectEx =
-	{
-		viewport->getPositionWorld().x,
-		viewport->getPositionWorld().y,
-		viewport->getPositionWorld().x + viewport->getWidth(),
-		viewport->getPositionWorld().y - viewport->getHeight()
-	}; // top lớn hơn bottom (sử dụng hệ toạ độ đề các)
-
-	int colBegin = max(screenRectEx.left / _frameWidth, 0);
-	int colEnd = min(screenRectEx.right / _frameWidth + 1, _mapSize.x);
-	int rowBegin = _mapSize.y - min(screenRectEx.top / _frameHeight + 1, _mapSize.y);
-	int rowEnd = _mapSize.y - max(screenRectEx.bottom / _frameHeight, 0);
-	// right và bottom cộng 1 vì cần có một tile vẽ tràn một phần ra khỏi màn hình.
-
-	GVector2 pos;
-
-	for (int col = colBegin; col < colEnd; col++)
-	{
-		for (int row = rowBegin; row < rowEnd; row++)
-		{
-			pos.x = col * _frameWidth;
-			pos.y = (_mapSize.y - row - 1) * _frameHeight;	// nếu có viewport
-			this->_tileSet->draw(spriteHandle, this->_mapIndex[row][col], pos, viewport);
-		}
-	}
-}
-
-GVector2 TileMap::getWorldSize()
-{
-	GVector2 result;
-	result.x = this->_mapSize.x * this->_frameWidth;
-	result.y = this->_mapSize.y * this->_frameHeight;
-	return result;
 }
 
 TileMap* TileMap::LoadFromFile(const string path, eID spriteId)
@@ -70,17 +26,12 @@ TileMap* TileMap::LoadFromFile(const string path, eID spriteId)
 	if (map == NULL)
 		return nullptr;
 
-	xml_node properties = map.child("properties");
-	if (properties != NULL)
-	{
-		tileMap->setCheckpoint(properties.child("property").attribute("value").as_int() * 2);
-	}
-
-	// Đọc tileset từ xml
+	// Đọc và tạo TileSet từ file XML
 	xml_node tileset = map.child("tileset");
 	tileMap->_tileSet = new TileSet(spriteId);
 	tileMap->_tileSet->loadListTiles(tileset);
 
+	// Lấy mapSize (kích thước Map tính theo số ô Tile (cột, dòng))
 	xml_node layer = map.child("layer");
 	tileMap->_mapSize.x = layer.attribute("width").as_int();
 	tileMap->_mapSize.y = layer.attribute("height").as_int();
@@ -92,9 +43,10 @@ TileMap* TileMap::LoadFromFile(const string path, eID spriteId)
 		tileMap->_mapIndex[i] = new int[(int)tileMap->_mapSize.x];
 	}
 
+	// Đọc danh sách các Tile ID từ file XML
 	tileMap->getElementMatrixIndex(layer);
 
-	// Lưu lại framewidth frameheight của mỗi tile. Để phụ vụ cho việc vẽ map.
+	// Lưu lại frameWidth, frameHeight của mỗi tile. Để phụ vụ cho việc vẽ map.
 	tileMap->_frameWidth = tileMap->_tileSet->getSprite()->getFrameWidth();
 	tileMap->_frameHeight = tileMap->_tileSet->getSprite()->getFrameHeight();
 
@@ -118,6 +70,44 @@ void TileMap::getElementMatrixIndex(xml_node& node)
 	}
 }
 
+void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
+{
+	// Duyệt từ 0 đến _width * _height có thể phát sinh đển hàng ngàn lần vẽ
+	// Nên ta kiểm tra toạ độ viewport để xác định cặp giá trị index i, j trước khi chạy vòng lặp for 2 lớp
+	RECT screenRect =
+	{
+		viewport->getPositionWorld().x,
+		viewport->getPositionWorld().y,
+		viewport->getPositionWorld().x + viewport->getWidth(),
+		viewport->getPositionWorld().y - viewport->getHeight()
+	}; // top lớn hơn bottom (sử dụng hệ toạ độ x, y)
+
+	int colBegin = max(screenRect.left / _frameWidth, 0);
+	int colEnd = min(screenRect.right / _frameWidth + 1, _mapSize.x);
+	int rowBegin = _mapSize.y - min(screenRect.top / _frameHeight + 1, _mapSize.y);
+	int rowEnd = _mapSize.y - max(screenRect.bottom / _frameHeight, 0);
+	// cộng thêm 1 vì cần có một Tile vẽ tràn một phần ra khỏi màn hình.
+
+	GVector2 position; // tọa độ world (x, y)
+	for (int row = rowBegin; row < rowEnd; row++)
+	{
+		for (int col = colBegin; col < colEnd; col++)
+		{
+			position.x = col * _frameWidth;
+			position.y = (_mapSize.y - row - 1) * _frameHeight;
+			this->_tileSet->draw(spriteHandle, this->_mapIndex[row][col], position, viewport);
+		}
+	}
+}
+
+GVector2 TileMap::getWorldSize()
+{
+	GVector2 result;
+	result.x = this->_mapSize.x * this->_frameWidth;
+	result.y = this->_mapSize.y * this->_frameHeight;
+	return result;
+}
+
 int TileMap::worldHeight()
 {
 	return _frameWidth * _mapSize.x;
@@ -126,19 +116,4 @@ int TileMap::worldHeight()
 int TileMap::worldWidth()
 {
 	return _frameHeight * _mapSize.y;
-}
-
-int TileMap::getCheckpoint()
-{
-	return _checkPoint;
-}
-
-void TileMap::setCheckpoint(int checkPoint)
-{
-	_checkPoint = checkPoint;
-}
-
-void TileMap::setColor(D3DXCOLOR color)
-{
-	_tileSet->setColor(color);
 }

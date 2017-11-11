@@ -16,7 +16,7 @@ void Player::init()
 	__hook(&InputController::__eventkeyReleased, _input, &Player::onKeyReleased);
 
 	_sprite = SpriteManager::getInstance()->getSprite(eID::PLAYER);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::PLAYER, "walk_right_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::PLAYER, "default_01"));
 	_sprite->setZIndex(1.0f);
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
@@ -31,15 +31,27 @@ void Player::init()
 	__hook(&CollisionBody::onCollisionEnd, collisionBody, &Player::onCollisionEnd);
 
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::NORMAL]->addFrameRect(eID::PLAYER, "walk_right_01", NULL);
+	_animations[eStatus::NORMAL]->addFrameRect(eID::PLAYER, "default_01", NULL);
 
 	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::PLAYER, "walk_right_01", "walk_right_02", "walk_right_03", NULL);
-	
+
+	_animations[eStatus::JUMPING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::JUMPING]->addFrameRect(eID::PLAYER, "jump_01", NULL);
+
+	_animations[eStatus::FALLING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::FALLING]->addFrameRect(eID::PLAYER, "default_01", NULL);
+
+	_animations[eStatus::STAND_UP] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::STAND_UP]->addFrameRect(eID::PLAYER, "default_01", NULL);
+
+	_animations[eStatus::STAND_DOWN] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::STAND_DOWN]->addFrameRect(eID::PLAYER, "default_01", NULL);
+
 	this->setOrigin(GVector2(0.5f, 0.0f));
 	this->setStatus(eStatus::NORMAL);
 
-	// create stopWatch
+	// Create stopWatch
 	_stopWatch = new StopWatch();
 
 	this->resetValues();
@@ -66,6 +78,7 @@ void Player::update(float deltatime)
 
 void Player::updateInput(float dt)
 {
+	// Use event instead
 }
 
 void Player::updateStatus(float dt)
@@ -91,18 +104,6 @@ void Player::updateStatus(float dt)
 	{
 		this->moveRight();
 	}
-	else if ((this->getStatus() & eStatus::MOVING_UP) == eStatus::MOVING_UP)
-	{
-		this->moveUp();
-	}
-	else if ((this->getStatus() & eStatus::MOVING_DOWN) == eStatus::MOVING_DOWN)
-	{
-		this->moveDown();
-	}
-	else if ((this->getStatus() & eStatus::SIT_DOWN) == eStatus::SIT_DOWN)
-	{
-		this->sitDown();
-	}
 	else if ((this->getStatus() & eStatus::FALLING) == eStatus::FALLING)
 	{
 		this->falling();
@@ -125,23 +126,14 @@ void Player::updateCurrentAnimateIndex()
 	if ((_currentAnimateIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT || ((_currentAnimateIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT))
 	{
 		_currentAnimateIndex = (eStatus)(_currentAnimateIndex & ~(eStatus::MOVING_LEFT | MOVING_RIGHT));
-		if ((_currentAnimateIndex & eStatus::MOVING_UP) == eStatus::MOVING_UP)
-		{
-			_currentAnimateIndex = eStatus::MOVING_UP;
-		}
-		else if ((_currentAnimateIndex & eStatus::MOVING_DOWN) == eStatus::MOVING_DOWN)
-		{
-			_currentAnimateIndex = eStatus::MOVING_DOWN;
-		}
-		else
-			_currentAnimateIndex = (eStatus)(_currentAnimateIndex | eStatus::RUNNING);
+		
+		_currentAnimateIndex = (eStatus)(_currentAnimateIndex | eStatus::RUNNING);
 	}
 
 	if ((_currentAnimateIndex & eStatus::JUMPING) == eStatus::JUMPING)
 	{
 		_currentAnimateIndex = eStatus::JUMPING;
 	}
-
 
 	if (this->isInStatus(eStatus::DIE))
 	{
@@ -164,7 +156,6 @@ void Player::resetValues()
 void Player::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_animations[_currentAnimateIndex]->draw(spriteHandle, viewport);
-
 	_info->draw(spriteHandle, viewport);
 }
 
@@ -185,7 +176,9 @@ void Player::release()
 	SAFE_DELETE(_sprite);
 	SAFE_DELETE(_stopWatch);
 	SAFE_DELETE(_info);
-	this->unhookinputevent();
+
+	if (_input != nullptr)
+		__unhook(_input);
 }
 
 void Player::onKeyPressed(KeyEventArg* key_event)
@@ -202,7 +195,6 @@ void Player::onKeyPressed(KeyEventArg* key_event)
 			this->removeStatus(eStatus::MOVING_RIGHT);
 			this->addStatus(eStatus::MOVING_LEFT);
 		}
-
 		break;
 	}
 	case DIK_RIGHT:
@@ -214,23 +206,24 @@ void Player::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	}
+	case DIK_UP:
+	{
+		break;
+	}
 	case DIK_DOWN:
 	{
 		break;
 	}
-
 	case DIK_X:
 	{
 		if (!this->isInStatus(eStatus::SIT_DOWN) || this->isInStatus(eStatus::MOVING_LEFT) || this->isInStatus(eStatus::MOVING_RIGHT))
 			this->jump();
 		break;
 	}
-
-	case DIK_UP:
+	case DIK_Z:
 	{
 		break;
 	}
-
 	default:
 		break;
 	}
@@ -243,26 +236,30 @@ void Player::onKeyReleased(KeyEventArg* key_event)
 
 	switch (key_event->_key)
 	{
+	case DIK_LEFT:
+	{
+		this->removeStatus(eStatus::MOVING_LEFT);
+		break;
+	}
 	case DIK_RIGHT:
 	{
 		this->removeStatus(eStatus::MOVING_RIGHT);
 		break;
 	}
-	case DIK_LEFT:
+	case DIK_UP:
 	{
-		this->removeStatus(eStatus::MOVING_LEFT);
 		break;
 	}
 	case DIK_DOWN:
 	{
 		break;
 	}
-	case DIK_UP:
+	case DIK_X:
 	{
-		if (this->isInStatus(eStatus::MOVING_UP))
-			this->setStatus(STAND_UP);
-		else if (this->isInStatus(eStatus::MOVING_DOWN))
-			this->setStatus(STAND_DOWN);
+		break;
+	}
+	case DIK_Z:
+	{
 		break;
 	}
 	default:
@@ -284,7 +281,7 @@ void Player::onCollisionEnd(CollisionEventArg* collision_event)
 	{
 		if (preWall == collision_event->_otherObject)
 		{
-			// hết chạm với land là fall chứ ko có jump
+			// hết chạm với land là fall chứ không có jump
 			this->removeStatus(eStatus::JUMPING);
 			preWall = nullptr;
 		}
@@ -300,6 +297,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getStatus() == eStatus::DESTROY || this->isInStatus(eStatus::DIE))
 		return 0.0f;
+
 	if (this == object)
 		return 0.0f;
 
@@ -371,17 +369,6 @@ void Player::standing()
 
 void Player::moveLeft()
 {
-	auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
-	GVector2 viewportPosition = viewport->getPositionWorld();
-	float playerPositionX = this->getPositionX();
-	auto halfwidth = this->getSprite()->getFrameWidth() * this->getSprite()->getOrigin().x;
-	
-	// Không cho đi vượt cạnh trái
-	if (playerPositionX + halfwidth - _movingSpeed * 0.33 <= viewportPosition.x)
-	{
-		this->setPositionX(viewportPosition.x + halfwidth);
-		return;
-	}
 	if (this->getScale().x > 0)
 		this->setScaleX(this->getScale().x * (-1));
 
@@ -398,26 +385,6 @@ void Player::moveRight()
 	move->setVelocity(GVector2(_movingSpeed, move->getVelocity().y));
 }
 
-void Player::moveDown()
-{
-	auto move = (Movement*)this->_componentList["Movement"];
-	
-	if (this->getScale().x > 0)
-		this->setScaleX(this->getScale().x * (-1));
-	move->setVelocity(GVector2(-_movingSpeed, -_movingSpeed));
-}
-
-void Player::moveUp()
-{
-	auto move = (Movement*)this->_componentList["Movement"];
-
-	if (this->getScale().x > 0)
-		this->setScaleX(this->getScale().x * (-1));
-	move->setVelocity(GVector2(-_movingSpeed, _movingSpeed));
-
-	this->getVelocity();
-}
-
 void Player::jump()
 {
 	if (this->isInStatus(eStatus::JUMPING) || this->isInStatus(eStatus::FALLING))
@@ -426,18 +393,10 @@ void Player::jump()
 	this->addStatus(eStatus::JUMPING);
 
 	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(move->getVelocity().x, JUMP_VEL));
+	move->setVelocity(GVector2(move->getVelocity().x, JUMP_VELOCITY));
 
 	auto g = (Gravity*)this->_componentList["Gravity"];
 	g->setStatus(eGravityStatus::FALLING__DOWN);
-
-	//SoundManager::getInstance()->Play(eSoundId::JUMP_SOUND);
-}
-
-void Player::sitDown()
-{
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(0, move->getVelocity().y));
 }
 
 void Player::falling()
@@ -446,30 +405,25 @@ void Player::falling()
 	gravity->setStatus(eGravityStatus::FALLING__DOWN);
 }
 
-void Player::hit()
-{
-}
-
-void Player::revive()
-{
-}
-
 void Player::die()
 {
 	if (!this->isInStatus(eStatus::DIE))
 		this->setStatus(eStatus::DIE);
 
 	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(-MOVE_SPEED * (this->getScale().x / SCALE_FACTOR), JUMP_VEL));
+	move->setVelocity(GVector2(-MOVE_SPEED * (this->getScale().x / SCALE_FACTOR), JUMP_VELOCITY));
 
 	auto g = (Gravity*)this->_componentList["Gravity"];
 	g->setStatus(eGravityStatus::FALLING__DOWN);
+}
 
-	//SoundManager::getInstance()->Play(eSoundId::DEAD);
+void Player::revive()
+{
 }
 
 void Player::setLifeNumber(int number)
 {
+	_lifeNum = number;
 }
 
 int Player::getLifeNumber()
@@ -479,14 +433,12 @@ int Player::getLifeNumber()
 
 void Player::setStatus(eStatus status)
 {
+	_status = status;
 }
 
 RECT Player::getBounding()
 {
-	int offset = 10;
-
 	RECT bound = _sprite->getBounding();
-
 	return bound;
 }
 
@@ -494,59 +446,4 @@ GVector2 Player::getVelocity()
 {
 	auto move = (Movement*)this->_componentList["Movement"];
 	return move->getVelocity();
-}
-
-void Player::forceMoveRight()
-{
-	onKeyPressed(new KeyEventArg(DIK_RIGHT));
-}
-
-void Player::unforceMoveRight()
-{
-	onKeyReleased(new KeyEventArg(DIK_RIGHT));
-}
-
-void Player::forceMoveLeft()
-{
-	onKeyPressed(new KeyEventArg(DIK_LEFT));
-}
-
-void Player::unforceMoveLeft()
-{
-	onKeyReleased(new KeyEventArg(DIK_LEFT));
-}
-
-void Player::forceJump()
-{
-	onKeyPressed(new KeyEventArg(DIK_X));
-}
-
-void Player::unforceJump()
-{
-	onKeyReleased(new KeyEventArg(DIK_X));
-}
-
-void Player::removeGravity()
-{
-	auto graivity = (Gravity*)(this->_componentList.find("Gravity")->second);
-	graivity->setGravity(VECTOR2ZERO);
-}
-
-void Player::unhookinputevent()
-{
-	if (_input != nullptr)
-		__unhook(_input);
-}
-
-float Player::getMovingSpeed()
-{
-	return _movingSpeed;
-}
-
-void safeCheckCollision(BaseObject* activeobj, BaseObject* passiveobj, float dt)
-{
-	if (activeobj != nullptr && passiveobj != nullptr)
-	{
-		activeobj->checkCollision(passiveobj, dt);
-	}
 }

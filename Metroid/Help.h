@@ -5,7 +5,7 @@
 #include "TextSprite.h"
 #include <vector>
 
-EVENT_RECEIVER
+[event_receiver(native)]
 class Help : public IControlable
 {
 public:
@@ -14,10 +14,10 @@ public:
 
 	void init();
 	void update(float deltatime);
-
-	void onKeyPressed(KeyEventArg* key_event);
 	void updateInput(float deltatime) override;
 	void draw(LPD3DXSPRITE spriteHandle);
+
+	void onKeyPressed(KeyEventArg* key_event);
 
 private:
 	vector<int> _stack_Key;

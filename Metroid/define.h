@@ -1,12 +1,12 @@
-﻿#ifndef __NS_FRAMEWORK__
-#define __NS_FRAMEWORK__
+﻿#ifndef __FRAMEWORK__
+#define __FRAMEWORK__
 
 #define _USE_MATH_DEFINES
 
-#include <d3d9.h>		// d3d9.lib
-#include <d3dx9.h>		// d3dx9.lib
-#include <dinput.h>		// dinput8.lib, dxguid.lib
-#include <dsound.h>		// dsound.lib
+#include <d3d9.h>
+#include <d3dx9.h>
+#include <dinput.h>
+#include <dsound.h>
 
 #include <windows.h>
 #include <exception>
@@ -22,25 +22,26 @@ using namespace std;
 #define SCALE_FACTOR 2.0f
 
 #define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)	// màu trắng
-#define COLOR_KEY D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f)		// màu khi mà load hình nó bỏ qua -> trong suốt
+#define COLOR_KEY D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f)		// màu khi mà load hình nó sẽ bỏ qua thành trong suốt
 
 #define MAX_OBJECTS 4
 #define MAX_LEVELS 32
 
+// ID của object
 enum eID
 {
 	PLAYER = 0,
 	MAIN_MENU = 1,
 	FONTFULL = 2,
-	FONTEX = 3,
 
-	LIFE_ICON = 4,
+	LIFE_ICON = 3,
 
-	MAP_METROID = 5,
+	MAP_METROID = 4,
 
 	WALL = 40,
 };
 
+// Trạng thái của object
 enum eStatus
 {
 	NORMAL = 0,
@@ -65,23 +66,19 @@ enum eStatus
 	BEING_HIT = (1 << 13),
 };
 
+// Hướng bị va chạm của object
 enum eDirection
 {
 	NONE = 0,
 	TOP = 1,
-	BOTTOM = 2,
-	LEFT = 4,
-	RIGHT = 8,
+	LEFT = 2,
+	RIGHT = 4,
+	BOTTOM = 8,
 	TOP_BOTTOM = (TOP | BOTTOM),
 	ALL = (TOP | BOTTOM | LEFT | RIGHT),
 };
 
-enum eMapType
-{
-	VERTICAL = 0,
-	HORIZONTAL = 1
-};
-
+// ID của Sound
 enum eSoundId
 {
 	INTRO_SCENE,
@@ -91,10 +88,9 @@ enum eSoundId
 
 typedef D3DXVECTOR3 GVector3;
 typedef D3DXVECTOR2 GVector2;
+
 #define VECTOR2ZERO GVector2(0.0f, 0.0f)
 #define VECTOR2ONE  GVector2(1.0f, 1.0f)
-
-#define EVENT_RECEIVER [event_receiver(native)]
 
 #ifndef SAFE_DELETE
 
@@ -107,4 +103,4 @@ if(p) \
 
 #endif // !SAFE_DELETE
 
-#endif // !__NS_FRAMEWORK__
+#endif // !__FRAMEWORK__

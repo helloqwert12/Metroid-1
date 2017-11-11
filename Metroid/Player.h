@@ -12,17 +12,16 @@
 #include <list>
 #include "Info.h"
 
-#define MOVE_SPEED 125
-#define JUMP_VEL 450
+#define MOVE_SPEED 150
+#define JUMP_VELOCITY 520
 #define GRAVITY 800
 #define REVIVE_TIME 2000
-#define PROTECT_TIME 3000
 
-EVENT_RECEIVER
+[event_receiver(native)]
 class Player : public BaseObject, public IControlable
 {
 public:
-	Player(int life = 5);
+	Player(int life = 30);
 	~Player();
 
 	void init();
@@ -43,34 +42,18 @@ public:
 	void setLifeNumber(int number);
 	int getLifeNumber();
 
-	void setStatus(eStatus status) override;
+	void setStatus(eStatus status);
 
-	void removeGravity();
-	void forceMoveRight();
-	void unforceMoveRight();
-	void forceMoveLeft();
-	void unforceMoveLeft();
-	void forceJump();
-	void unforceJump();
-	void unhookinputevent();
-
+	// Player's Actions
 	void standing();
 	void moveLeft();
 	void moveRight();
-
-	void moveUp();
-	void moveDown();
-
 	void jump();
-	void sitDown();
 	void falling();
-	void hit();
-	void revive();
 	void die();
+	void revive();
 
-	float getMovingSpeed();
-
-	RECT getBounding() override;
+	RECT getBounding();
 
 private:
 	map<int, Animation*> _animations;
@@ -95,7 +78,5 @@ private:
 
 	BaseObject* preWall;
 };
-
-void safeCheckCollision(BaseObject* activeobj, BaseObject* passiveobj, float dt);
 
 #endif // !__PLAYER_H__

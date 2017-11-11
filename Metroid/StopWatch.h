@@ -1,17 +1,7 @@
-#ifndef __STOP_WATCH__
-#define __STOP_WATCH__
+#ifndef __STOPWATCH__
+#define __STOPWATCH__
 
 #include "GameTime.h"
-
-/*
-	now we have a type are called pFunction. It's just a type stores address of function.
-	example: 
-		pFunction pF = &RandomFunction;		
-	or
-		pFunction pF = &ClassName::Method
-
-	With RandomFunction and Method is a name of one function or method have no return value and argument
-*/
 
 typedef void(*pFunction)(void);
 
@@ -26,10 +16,11 @@ public:
 	bool isStopWatch(float time);
 	void timeLoopAction(float milisecond, pFunction action);
 	void restart();
+
 private:
-	float	_stopwatch;
+	float	_stopWatch;
 	bool	_isStart;
 	bool	_isFinish;
 };
 
-#endif // !__STOP_WATCH__
+#endif // !__STOPWATCH__

@@ -14,16 +14,13 @@ public:
 	MetroidGame(HINSTANCE hInstance, LPWSTR title);
 	~MetroidGame();
 
-	void init();						// init your objects
-	void release();						// release your objects
+	void init();
+	void release();
 
-	void updateInput(float deltatime);	// update input, include played objects and menu button
-	void update(float deltatime);		// update your objects
-	void draw();						// draw your objects
+	void updateInput(float deltatime);
+	void update(float deltatime);
+	void draw();
 	void loadResource();
-
-private:
-
 };
 
 #endif // !__METROID_GAME_H__

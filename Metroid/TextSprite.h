@@ -6,6 +6,9 @@
 class TextSprite : public BaseObject
 {
 public:
+	TextSprite(eID type, string text, GVector2 position);
+	~TextSprite();
+
 	void init();
 	void update(float deltatime);
 	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
@@ -14,11 +17,8 @@ public:
 
 	void setString(string text);
 
-	void setPosition(GVector2 position);
 	GVector2 getPosition();
-
-	TextSprite(eID type, string text, GVector2 position);
-	~TextSprite();
+	void setPosition(GVector2 position);
 
 private:
 	eID _type;

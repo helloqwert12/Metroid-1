@@ -1,4 +1,4 @@
-#ifndef __TIMESPAN_H__
+﻿#ifndef __TIMESPAN_H__
 #define	__TIMESPAN_H__
 
 #include "define.h"
@@ -6,16 +6,16 @@
 class TimeSpan
 {
 public:
-	static const UINT64 TicksPerSecond = 10000000;
-	static const UINT64 TicksPerMilisecond = 10000;
+	static const UINT64 TicksPerSecond = 10000000;	// Số tick trong 1 second
+	static const UINT64 TicksPerMilisecond = 10000;	// Số tick trong 1 milisecond
+	// 1 tick = 100 nanosecond
 
-	TimeSpan(void);
+	TimeSpan();
 	TimeSpan(UINT64);
+	~TimeSpan();
 
-	float getMiliSeconds();
+	float getMiliSeconds();		// Lấy thời gian (milisecond)
 	UINT64 getTicks();
-
-	~TimeSpan(void);
 
 	TimeSpan operator +(TimeSpan);
 	TimeSpan operator +(UINT64);

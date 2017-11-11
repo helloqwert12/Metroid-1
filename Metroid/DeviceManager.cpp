@@ -1,8 +1,8 @@
-#include "DeviceManager.h"
+﻿#include "DeviceManager.h"
 
 DeviceManager* DeviceManager::_instance = nullptr;
 
-DeviceManager::DeviceManager(void)
+DeviceManager::DeviceManager()
 {
 	_pD3d = NULL;
 	_pDevice = NULL;
@@ -23,6 +23,7 @@ void DeviceManager::Init(Graphics windows)
 	l_preParameter.BackBufferCount = 1;
 	l_preParameter.BackBufferHeight = windows.getHeight();
 	l_preParameter.BackBufferWidth = windows.getWidth();
+
 	_pD3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
@@ -32,8 +33,9 @@ void DeviceManager::Init(Graphics windows)
 		&_pDevice);
 
 	if (_pDevice == NULL)
-		throw new exception("Can not create device");
+		return;
 
+	// Tạo back buffer
 	_pDevice->GetBackBuffer(NULL, NULL, D3DBACKBUFFER_TYPE_MONO, &_surface);
 }
 
@@ -44,25 +46,9 @@ DeviceManager* DeviceManager::getInstance()
 	return _instance;
 }
 
-DeviceManager::~DeviceManager(void)
-{
-	if (_pD3d != NULL)
-		_pD3d->Release();
-	if (_pDevice != NULL)
-		_pDevice->Release();
-	if (_surface != NULL)
-		_surface->Release();
-}
-
-void DeviceManager::release()
-{
-	delete _instance;
-	_instance = NULL;
-}
-
 void DeviceManager::present()
 {
-	this->_pDevice->Present(0, 0, 0, 0);
+	this->_pDevice->Present(NULL, NULL, NULL, NULL);
 }
 
 void DeviceManager::clearScreen()
@@ -78,4 +64,20 @@ LPDIRECT3DDEVICE9 DeviceManager::getDevice()
 LPDIRECT3DSURFACE9 DeviceManager::getSurface()
 {
 	return _surface;
+}
+
+void DeviceManager::release()
+{
+	delete _instance;
+	_instance = NULL;
+}
+
+DeviceManager::~DeviceManager()
+{
+	if (_pD3d != NULL)
+		_pD3d->Release();
+	if (_pDevice != NULL)
+		_pDevice->Release();
+	if (_surface != NULL)
+		_surface->Release();
 }

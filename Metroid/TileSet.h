@@ -7,17 +7,14 @@
 #include "Tile.h"
 #include "pugixml/pugixml.hpp"
 
-// Class helper for class Map.
 class TileSet
 {
 private:
 	Sprite *_tileImage;
-	int _widthtile;  // kích thước tile
-	int _heighttile; // kích thước tile
-	string _filename;
-	int _columns;
-	int _rows;
-	vector<Tile*> _listTiles;
+	int _widthTile;  // width của 1 tile
+	int _heightTile; // height của 1 tile
+
+	vector<Tile*> _listTiles;	// List chứa các tile
 
 public:
 	TileSet(eID spriteId);
@@ -27,11 +24,12 @@ public:
 	int getHeighttile() const;
 	void setHeighttile(const int &value);
 
+	// Đọc TileSet từ file XML
 	void loadListTiles(pugi::xml_node& node);
+
 	Sprite* getSprite();
 
-	void setColor(D3DXCOLOR color);
-
+	// Vẽ 1 ô tile tương ứng với id. Gọi hàm này trong TileMap
 	void draw(LPD3DXSPRITE spriteHandle, int id, GVector2 position, Viewport *viewport);
 };
 

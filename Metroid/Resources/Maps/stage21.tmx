@@ -56,7 +56,7 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="1" name="REVIVE" type="53" x="92.4167" y="141.25" width="18.25" height="20.75">
+<!--   <object id="1" name="REVIVE" type="53" x="92.4167" y="141.25" width="18.25" height="20.75">
    <properties>
     <property name="status" type="int" value="0"/>
    </properties>
@@ -82,14 +82,14 @@
     <property name="ActiveBoundX" type="float" value="32"/>
     <property name="ActiveBoundY" type="float" value="32"/>
    </properties>
-  </object>
+  </object> -->
   <object id="19" name="Wall" type="40" x="32.25" y="66.5" width="127.75" height="12.75"/>
   <object id="24" name="Wall" type="40" x="1" y="66.5" width="16" height="95.5"/>
   <object id="28" name="Wall" type="40" x="0" y="162.5" width="256" height="2.25"/>
-  <object id="29" name="Wall" type="40" x="224" y="96" width="16" height="64"/>
-  <object id="30" name="Wall" type="40" x="170.75" y="97.25" width="52.5" height="4"/>
-  <object id="31" name="Wall" type="40" x="240" y="64" width="16" height="32"/>
-  <object id="32" name="Stair" type="41" x="112" y="104.5" width="58.25" height="57">
+<!--   <object id="29" name="Wall" type="40" x="224" y="96" width="16" height="64"/> -->
+<!--   <object id="30" name="Wall" type="40" x="170.75" y="97.25" width="52.5" height="4"/> -->
+<!--   <object id="31" name="Wall" type="40" x="240" y="64" width="16" height="32"/> -->
+<!--   <object id="32" name="Stair" type="41" x="112" y="104.5" width="58.25" height="57">
    <properties>
     <property name="direct" type="bool" value="true"/>
    </properties>
@@ -118,6 +118,6 @@
    <properties>
     <property name="status" type="int" value="0"/>
    </properties>
-  </object>
+  </object> -->
  </objectgroup>
 </map>

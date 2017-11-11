@@ -1,10 +1,10 @@
 #include "TimeSpan.h"
 
-TimeSpan::TimeSpan(void)
+TimeSpan::TimeSpan()
 {
 }
 
-TimeSpan::~TimeSpan(void)
+TimeSpan::~TimeSpan()
 {
 }
 

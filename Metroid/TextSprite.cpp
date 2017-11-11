@@ -1,11 +1,22 @@
-#include "TextSprite.h"
+﻿#include "TextSprite.h"
+
+TextSprite::TextSprite(eID type, string text, GVector2 position) : BaseObject(type)
+{
+	this->_type = type;
+	this->_text = text;
+	_position = position;
+}
+
+TextSprite::~TextSprite()
+{
+}
 
 void TextSprite::init()
 {
 	this->_sprite = SpriteManager::getInstance()->getSprite(_type);
 	this->rows = _sprite->getTextureHeight() / _sprite->getFrameHeight();
 	this->_columns = _sprite->getTextureWidth() / _sprite->getFrameWidth();
-	_framewidth = _sprite->getFrameWidth();
+	this->_framewidth = _sprite->getFrameWidth();
 }
 
 void TextSprite::update(float deltatime)
@@ -19,13 +30,16 @@ void TextSprite::draw(LPD3DXSPRITE spriteHandle)
 
 void TextSprite::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
-	int x = 0, y = 0;
-	int index = 0;
 	int i = 0;
-	for each (char c in _text)
+	int index = 0;
+
+	// Sprite đánh thứ tự index theo 0-based
+	for each (char c in this->_text)
 	{
 		if (c >= 'A' && c <= 'Z')
 		{
+			// Thứ tự của char kể từ 'A'
+			// VD: A => index = 0; B => index = 1
 			index = ((int)c) - 'A';
 		}
 		else if (c >= 'a' && c <= 'z')
@@ -36,17 +50,17 @@ void TextSprite::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		{
 			index = (((int)c) - '0') + 26;
 		}
-		else if (c == ' ')
+		else if (c == '-')
 		{
-			index = 53;
+			index = 44;
 		}
 		else if (c == ':')
 		{
 			index = 45;
 		}
-		else if (c == '-')
+		else if (c == ' ')
 		{
-			index = 44;
+			index = 53;
 		}
 
 		_sprite->setIndex(index);
@@ -60,6 +74,7 @@ void TextSprite::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		{
 			_sprite->render(spriteHandle, viewport);
 		}
+
 		i++;
 	}
 }
@@ -73,23 +88,12 @@ void TextSprite::setString(string text)
 	this->_text = text;
 }
 
-void TextSprite::setPosition(GVector2 position)
-{
-	_position = position;
-}
-
 GVector2 TextSprite::getPosition()
 {
 	return _position;
 }
 
-TextSprite::TextSprite(eID type, string text, GVector2 position) : BaseObject(type)
+void TextSprite::setPosition(GVector2 position)
 {
-	this->_type = type;
-	this->_text = text;
 	_position = position;
-}
-
-TextSprite::~TextSprite()
-{
 }

@@ -1,15 +1,14 @@
-#include "Texture.h"
+﻿#include "Texture.h"
 #include "DeviceManager.h"
 
-Texture::Texture(void)
+Texture::Texture()
 {
 	_color = COLOR_WHITE;
-	_texture = nullptr;		// nullptr have the same meaning NULL.
+	_texture = nullptr;
 }
 
-Texture::~Texture(void)
+Texture::~Texture()
 {
-	// do nothing. use release instead.
 }
 
 HRESULT Texture::loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCOLOR color, D3DXCOLOR colorkey)
@@ -67,25 +66,28 @@ void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position
 	D3DXMATRIX matTransformed;
 	D3DXMATRIX matOld;
 
-	// origin in position
+	// Tính vị trí điểm neo (chính giữa) để vẽ
+	// origin mặc định là (0.5f, 0.5f), set trong Sprite
 	GVector3 center = GVector3(abs(srcRect->right - srcRect->left) * origin.x, abs(srcRect->top - srcRect->bottom) * (1 - origin.y), zIndex);
 	
-	// get matrix texture
+	// Lấy ma trận texture
 	spriteHandle->GetTransform(&matOld);
 
+	// Transform
 	D3DXMatrixTransformation2D(
-		&matTransformed,		// ma tran ket qua sau transform
-		&position,				// goc toa do / diem neo
+		&matTransformed,		// ma trận kết quả sau khi transform
+		&position,				// điểm neo (scaling center)
 		0.0f,
-		&scale,					// ti le scale
-		&position,				// goc toa do / diem neo
-		D3DXToRadian(rotate),	// goc xoay theo radian
-		0						// vi tri
+		&scale,					// tỉ lệ scale
+		&position,				// điểm neo (rotaion center)
+		D3DXToRadian(rotate),	// góc xoay (tính theo radian)
+		0
 	);
 
+	// Nhân ma trận
 	matFinal = matTransformed * matOld;
 
-	//set matrix transformed
+	// Set ma trận đã được transform
 	spriteHandle->SetTransform(&matFinal);
 
 	// BEGIN
@@ -106,10 +108,9 @@ void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position
 
 void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, Viewport viewport, GVector2 position, GVector2 scale, float rotate, GVector2 origin, float zIndex)
 {
-	GVector3 positionViewport;
-	positionViewport = viewport.getPositionInViewport(&GVector3(position.x, position.y, zIndex));
+	GVector3 positionInViewport = viewport.getPositionInViewport(&GVector3(position.x, position.y, zIndex));
 
-	render(spriteHandle, srcRect, GVector2((int)positionViewport.x, (int)positionViewport.y), scale, rotate, origin, positionViewport.z);
+	render(spriteHandle, srcRect, GVector2((int)positionInViewport.x, (int)positionInViewport.y), scale, rotate, origin, positionInViewport.z);
 }
 
 void Texture::setColor(D3DXCOLOR color)

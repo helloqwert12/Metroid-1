@@ -1,5 +1,20 @@
 #include "Help.h"
 
+Help::Help()
+{
+}
+
+void Help::init()
+{
+	initStackKey();
+	_radian = 0.0f;
+	_opacity = 0.0f;
+	_message = new TextSprite(eID::FONTFULL, "", GVector2(150, 30));
+	_message->init();
+
+	__hook(&InputController::__eventkeyPressed, _input, &Help::onKeyPressed);
+}
+
 void Help::initStackKey()
 {
 	_stack_Key.push_back(DIK_X);
@@ -8,6 +23,11 @@ void Help::initStackKey()
 	_stack_Key.push_back(DIK_LEFT);
 	_stack_Key.push_back(DIK_RIGHT);
 	_stack_Key.push_back(DIK_UP);
+	_stack_Key.push_back(DIK_DOWN);
+}
+
+void Help::updateInput(float deltatime)
+{
 }
 
 void Help::update(float deltatime)
@@ -33,17 +53,24 @@ void Help::update(float deltatime)
 	case DIK_UP:
 		_message->setString("Press up Arrow for aim up");
 		break;
+	case DIK_DOWN:
+		_message->setString("Press up Arrow for stand down");
+		break;
 	case DIK_X:
 		_message->setString("Press key X for jump");
 		break;
 	case DIK_Z:
 		_message->setString("Press key Z for fire");
 		break;
-
 	default:
 		_message->setString("Well done Enjoy Your Game");
 		break;
 	}
+}
+
+void Help::draw(LPD3DXSPRITE spriteHandle)
+{
+	_message->draw(spriteHandle);
 }
 
 void Help::onKeyPressed(KeyEventArg* key_event)
@@ -56,29 +83,6 @@ void Help::onKeyPressed(KeyEventArg* key_event)
 	{
 		_stack_Key.pop_back();
 	}
-}
-
-void Help::init()
-{
-	initStackKey();
-	_radian = 0.0f;
-	_opacity = 0.0f;
-	_message = new TextSprite(eID::FONTFULL, "", GVector2(150, 30));
-	_message->init();
-	__hook(&InputController::__eventkeyPressed, _input, &Help::onKeyPressed);
-}
-
-void Help::updateInput(float deltatime)
-{
-}
-
-void Help::draw(LPD3DXSPRITE spriteHandle)
-{
-	_message->draw(spriteHandle);
-}
-
-Help::Help()
-{
 }
 
 Help::~Help()

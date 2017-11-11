@@ -24,35 +24,23 @@ public:
 	void setText(string text);
 	string getText();
 
-	/*
-	Set kích thước chữ
-	*/
+	// Set kích thước chữ
 	void setFontHeight(int fontheight);
 	int getFontHeight();
 	
-	/*
-	Set độ đậm chữ
-		@fontW: có thể sử dụng các mẫu FW_NORMAL, FW_BOLD, FW_LIGHT
-	*/
+	// Set độ đậm chữ (@fontW: có thể sử dụng các mẫu FW_NORMAL, FW_BOLD, FW_LIGHT)
 	void setFontWeight(UINT fontW);
 	UINT getFontWeight();
 
-	/*
-	Set chữ có nghiêng hay không
-	*/
+	// Set chữ có nghiêng hay không
 	void setItalic(bool i);
 	bool isItalic();
 
-	/*
-	Set canh lề cho chữ
-		@align: DT_LEFT, DT_CENTER, DT_RIGHT, DT_WORDBREAK, v.v..
-	*/
+	// Set canh lề cho chữ (@align: DT_LEFT, DT_CENTER, DT_RIGHT, DT_WORDBREAK,...)
 	void setTextAlign(DWORD align);
 	DWORD getTextAlign();
 
-	/*
-	Set màu cho chữ
-	*/
+	// Set màu chữ
 	void setColor(D3DCOLOR color);
 	D3DCOLOR getColor();
 
@@ -64,7 +52,7 @@ private:
 	int _fontHeight;
 	UINT _fontWeight;
 	bool _italic;
-	DWORD _textAlign;	//DT_LEFT | DT_WORDBREAK | DT_CENTER | DT_RIGHT ...
+	DWORD _textAlign;
 	D3DCOLOR _color;
 
 	RECT _textRect;

@@ -11,12 +11,11 @@ void Tile::draw(LPD3DXSPRITE spriteHandle, GVector2 position, Viewport *viewport
 {
 	if (_refSprite == NULL)
 	{
-		throw new exception("refSprite references to not set an instance of object");
+		return;
 	}
 
 	_refSprite->setPosition(position);
 	_refSprite->setFrameRect(this->_srcRect);
-	//_refSprite->setIndex(_id - 1);
 
 	if (viewport == NULL)
 	{
@@ -28,7 +27,7 @@ void Tile::draw(LPD3DXSPRITE spriteHandle, GVector2 position, Viewport *viewport
 	}
 }
 
-const int& Tile::getId() const
+int Tile::getId() const
 {
 	return this->_id;
 }

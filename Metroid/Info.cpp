@@ -32,7 +32,17 @@ void Info::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_iconLife->render(spriteHandle);
 	_textLife->setPosition(GVector2(_iconLife->getPosition().x + GAP, _iconLife->getPosition().y + GAP / 1.4));
-	_textLife->setString(" 0" + to_string(_lifeNumber));
+	
+	if (_lifeNumber > 0 && _lifeNumber < 10) 
+	{
+		_textLife->setString(" 0" + to_string(_lifeNumber));
+
+	}
+	else if (_lifeNumber > 10 && _lifeNumber < 99)
+	{
+		_textLife->setString(" " + to_string(_lifeNumber));
+	}
+	
 	_textLife->draw(spriteHandle);
 }
 

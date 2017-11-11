@@ -3,11 +3,6 @@
 
 #include "define.h"
 
-/*
-	Viewport là class dùng để chuyển hệ toạ độ top-left về hệ toạ độ đê-cac
-	là toạ độ camera trong thế giới game.
-*/
-
 class Viewport
 {
 public:
@@ -22,12 +17,13 @@ public:
 	float getWidth();
 	float getHeight();
 
+	// Chuyển từ tọa độ world (x, y) sang tọa độ trong viewport (top-left)
 	GVector3 getPositionInViewport(GVector3* position);
 
-	// kiểm tra HCN có nằm trong màn hình không.
+	// kiểm tra HCN có nằm trong viewport (màn hình) không.
 	bool isContains(const RECT& rect);
 
-	// Lấy kích thước của viewport bằng HCN, tính trong world lớn
+	// Lấy kích thước HCN của viewport, tính trong world lớn
 	RECT getBounding();
 
 private:

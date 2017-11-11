@@ -35,6 +35,7 @@ void Wall::release()
 	{
 		SAFE_DELETE(it.second);
 	}
+
 	_listComponent.clear();
 }
 

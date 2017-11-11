@@ -12,7 +12,7 @@
 #include "IntroScene.h"
 using namespace std;
 
-EVENT_RECEIVER
+[event_receiver(native)]
 class PlayScene : public Scene
 {
 public:
@@ -25,8 +25,6 @@ public:
 	void draw(LPD3DXSPRITE spriteHandle) override;
 	void release() override;
 
-	void setViewport(Viewport* viewport);
-
 	BaseObject* getObject(eID id);
 
 	Player* getPlayer();
@@ -34,15 +32,15 @@ public:
 private:
 	Text* _text;
 
+	TileMap* _tileMap;
+
 	QuadTreeNode* _root;
+
+	BaseObject* _player;
 
 	// Danh sách đối tượng nằm trong vùng active.
 	// Mỗi vòng lặp sẽ được kiểm tra chỉnh sửa tại update, và sử dụng lại tại draw.
 	vector<BaseObject*> _activeObject;
-
-	TileMap* _tileMap;
-
-	BaseObject* _player;
 
 	void updateViewport(BaseObject* objTracker);
 

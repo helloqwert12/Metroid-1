@@ -3,7 +3,6 @@
 
 #include "define.h"
 #include "dxaudio.h"
-
 #include <map>
 #include <wincon.h>
 
@@ -18,6 +17,7 @@ public:
 	void Stop(eSoundId);
 	void PlayLoop(eSoundId);
 	bool IsPlaying(eSoundId);
+
 private:
 	SoundManager();
 	static SoundManager* _instance;

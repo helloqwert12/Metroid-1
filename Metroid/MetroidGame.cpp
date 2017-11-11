@@ -11,19 +11,14 @@ MetroidGame::~MetroidGame()
 void MetroidGame::init()
 {
 	Game::init();
-	// init game
-#if _DEBUG
+
 	SceneManager::getInstance()->addScene(new IntroScene());
-#else
-	SceneManager::getInstance()->addScene(new IntroScene());
-#endif
 }
 
 void MetroidGame::release()
 {
 	Game::release();
 
-	// release game
 	SceneManager::getInstance()->clearScenes();
 }
 
@@ -48,8 +43,7 @@ void MetroidGame::draw()
 
 void MetroidGame::loadResource()
 {
-	// Game::init đã gọi hàm này rồi nên không cần gọi lại MetroidGame::loadResource()
-	// load resource
+	// Game::init đã gọi hàm loadResource này rồi nên không cần gọi lại MetroidGame::loadResource()
 	SpriteManager::getInstance()->loadResource(_spriteHandle);
 	SoundManager::getInstance()->loadSound(Game::hWindow->getWnd());
 }

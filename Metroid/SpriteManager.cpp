@@ -3,36 +3,35 @@
 
 SpriteManager* SpriteManager::_instance = nullptr;
 
-SpriteManager::SpriteManager(void)
+SpriteManager* SpriteManager::getInstance()
 {
-	// do nothing.
+	if (_instance == nullptr)
+		_instance = new SpriteManager();
+	return _instance;
 }
 
-SpriteManager::~SpriteManager(void)
+SpriteManager::SpriteManager()
+{
+}
+
+SpriteManager::~SpriteManager()
 {
 	for (auto spr = _listSprite.begin(); spr != _listSprite.end(); ++spr)
 	{
-		spr->second->release(); // release image
+		spr->second->release(); // release sprite's texture
 		delete spr->second; // delete sprite
 	}
-	if (_listSprite.empty() == false)
-		_listSprite.clear(); // remove all from MAP
+
+	if (!_listSprite.empty())
+		_listSprite.clear(); // Xóa hết con trỏ Sprite khỏi map
 }
 
 void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 {
-	/* if you have any image, load them with this format */
-	// [psedue code]
-	// sp = new SPRITE(...)
-	// this->_listSprite.insert(pair<eID, Sprite*>(eID::ENUMOBJECT, sp));
-
 	Sprite* pSprite = NULL;
 
 	pSprite = new Sprite(spriteHandle, L"Resources//Images//mainmenu.png");
 	this->_listSprite[eID::MAIN_MENU] = pSprite;
-
-	pSprite = new Sprite(spriteHandle, L"Resources//Fonts//fontEx.png", 30, 10);
-	this->_listSprite[eID::FONTEX] = pSprite;
 
 	pSprite = new Sprite(spriteHandle, L"Resources//Fonts//fontFull.png", 54, 6);
 	this->_listSprite[eID::FONTFULL] = pSprite;
@@ -44,10 +43,10 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::PLAYER, pSprite));
 	this->loadSpriteInfo(eID::PLAYER, "Resources//Images//player.txt");
 
-	// Đọc file xml để tạo đối tượng sprite
+	// Tileset
 	pSprite = loadXMLDoc(spriteHandle, L"Resources//Maps//test.tmx");
 	pSprite->setOrigin(VECTOR2ZERO);
-	pSprite->setScale(2.0f);
+	pSprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::MAP_METROID] = pSprite;
 }
 
@@ -69,12 +68,12 @@ Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spritehandle, LPWSTR path)
 	// Tìm tên file.
 	// Cắt từ chuỗi path ra để tìm thư mục.
 	// Sau đó ghép với tên file ảnh được lấy từ file xml để load ảnh.
-	string filename = image.attribute("source").as_string();		// get filename from xml node
+	string filename = image.attribute("source").as_string();		// lấy filename từ xml node
 	wstring L_filename = wstring(filename.begin(), filename.end());	// convert to wstring.
 	wstring strpath = wstring(path);								// convert to wstring.
-	int index = strpath.find_last_of(L'//');						// cut to find path
-	strpath = strpath.substr(0, index);
-	strpath += L"/" + L_filename;									// concat string.  Final string is strpath.
+	int index = strpath.find_last_of(L'//');						// cắt chuỗi để tìm path thư mục
+	strpath = strpath.substr(0, index - 1);
+	strpath += L"//" + L_filename;									// nối chuỗi
 
 	return new Sprite(spritehandle, (LPWSTR)strpath.c_str(), tilecount, columns);
 }
@@ -82,12 +81,11 @@ Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spritehandle, LPWSTR path)
 Sprite* SpriteManager::getSprite(eID id)
 {
 	Sprite* it = this->_listSprite.find(id)->second;
-	return new Sprite(*it); // get the copy version of Sprite
+	return new Sprite(*it);
 }
 
 RECT SpriteManager::getSourceRect(eID id, string name)
 {
-	//return _sourceRectList[id].at(name);
 	return _sourceRectList[id][name];
 }
 
@@ -113,65 +111,8 @@ void SpriteManager::loadSpriteInfo(eID id, const char* fileInfoPath)
 	fclose(file);
 }
 
-void SpriteManager::releaseSprite(eID id)
-{
-	Sprite* it = this->_listSprite.find(id)->second;
-	delete it; // delete the sprite only, dont release image
-	this->_listSprite.erase(id); // erase function only remove the pointer from MAP, dont delete it.
-}
-
-void SpriteManager::releaseTexture(eID id)
-{
-	Sprite* spr = this->_listSprite.find(id)->second;
-	spr->release(); // release image
-	delete spr;
-	this->_listSprite.erase(id); // erase function only remove the pointer from MAP, dont delete it.
-}
-
-SpriteManager* SpriteManager::getInstance()
-{
-	if (_instance == nullptr)
-		_instance = new SpriteManager();
-	return _instance;
-}
-
 void SpriteManager::release()
 {
-	delete _instance; // _instance is static attribute, only static function can delete it.
+	delete _instance;
 	_instance = nullptr;
 }
-
-/*
-	HOW TO USE:
-	spritemanager is basic class to manage load and release sprite and texture.
-	It load all image you have, if you want to use sprite any where, just getSprite from SpriteManager.
-	if you dont want you use this image any more, you can call release.
-
-	everytime use this, you have to call SpriteManager::getInstance() first.
-	this is Singleton format.
-	Seemore about Singleton: http://www.stdio.vn/articles/read/224/singleton-pattern
-
-	you can call directly: SpriteManager::getInstance()->DOSOMETHING()
-	or reference it:
-		 	SpriteManager* _spritemanager;
-			...
-			_spritemanager = SpriteManager::getInstance();
-			...
-			_spritemanager->DOSOMETHING()
-
-	Next, you should call loadresource(LPD3DXSPRITE spriteHandle) in Game::loadresource().
-	It will load all your image from file to memory.
-	Remember: Insert your code to loadresource to load image from file.
-
-	If you want object reference to Sprite. call:
-		SpriteManager::getInstance()->getSprite(eID::OBJECT_ID)
-		what is eID::OBJECT_ID ?  
-		in define.h you can insert element to eID.
-
-	OK. Now you have sprite to draw.
-
-	If you dont want to use this sprite any more, call releaseSprite or releaseTexture
-	they often are called in object::release
-		
-	Call SpriteManager::release() in game:release() to clean all memory.
-*/

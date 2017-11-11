@@ -8,7 +8,6 @@ Graphics::~Graphics()
 {
 }
 
-
 Graphics::Graphics(HINSTANCE hInstance, LPWSTR wcName, int width, int height, int fps, int isFullScreen)
 {
 	this->_hInstance = hInstance;
@@ -23,7 +22,6 @@ Graphics::Graphics(HINSTANCE hInstance, LPWSTR wcName, int width, int height, in
 
 void Graphics::initWindow()
 {
-	/* --- Init Window class extra --- */
 	WNDCLASSEX wc;
 	wc.cbSize = sizeof(WNDCLASSEX);//
 
@@ -42,7 +40,7 @@ void Graphics::initWindow()
 
 	RegisterClassEx(&wc);
 
-	/* --- Init window --- */
+	// Init window
 	DWORD style;
 	if (this->_isFullScreen)
 		style = WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP;
@@ -66,7 +64,7 @@ void Graphics::initWindow()
 		throw;
 	}
 
-	/* --- Show and Update --- */
+	// Show và Update
 	ShowWindow(this->_hWnd, SW_SHOWNORMAL);
 	UpdateWindow(this->_hWnd);
 }

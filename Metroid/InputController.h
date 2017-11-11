@@ -1,5 +1,5 @@
-﻿#ifndef __INPUT_CTRL_H__
-#define __INPUT_CTRL_H__
+﻿#ifndef __INPUTCONTROLLER_H__
+#define __INPUTCONTROLLER_H__
 
 #include "define.h"
 #include "Graphics.h"
@@ -9,16 +9,14 @@
 
 #define KEYBOARD_BUFFER_SIZE 1024
 
-typedef LPDIRECTINPUT pGInput;
-typedef LPDIRECTINPUTDEVICE8 pGKeyboard;
-
-typedef void(*KeyEvent)(int);
-
 class KeyEventArg : public EventArg
 {
-	// Dont need any private or protected.
 public:
-	KeyEventArg(int keycode) { _key = keycode; }
+	KeyEventArg(int keycode) 
+	{ 
+		_key = keycode; 
+	}
+
 	int _key;
 };
 
@@ -31,67 +29,27 @@ public:
 	static InputController* getInstance();
 	static void release();
 
-	bool init(HWND, HINSTANCE); // should be called in game::init()
-	void update(); // should be called in main game loop
-	int isKeyDown(int keycode); // check if keycode is down.
-	bool isKeyPressed(int keycode);
-	bool isKeyRelease(int keycode);
+	bool init(HWND, HINSTANCE); // Gọi hàm này trong Game::init()
+	void update(); // Gọi hàm này trong game loop để update
 
-	Event _keyPressed;
-	Event _keyReleased;
+	int isKeyDown(int keycode); // Kiểm tra phím có được nhấn không
 
-	// dùng marco __event thì có thể trỏ được đến các hàm thành viên của các lớp. nhưng cách sử dụng phức tạp hơn
+	// Events
 	__event void __eventkeyPressed(KeyEventArg* e);
 	__event void __eventkeyReleased(KeyEventArg* e);
 
 private:
-
 	static InputController* _instance;
 	
-	pGInput _input;
-	pGKeyboard _keyboard;
-	BYTE _keyBuffer[256]; // BYTE = unsigned char
-	HWND _hWnd; // refference to another place. Dont release!!!
+	LPDIRECTINPUT _input;
+	LPDIRECTINPUTDEVICE8 _keyboard;
+	BYTE _keyBuffer[256]; // DirectInput keyboard state buffer 
+	HWND _hWnd; // Dùng để reference đến window (gửi Quit Message)
+
+	// Buffered keyboard data
 	DIDEVICEOBJECTDATA _keyEvents[KEYBOARD_BUFFER_SIZE];
 
 	InputController();
-
-	bool _previousKeyBuffer[256];
 };
 
-typedef InputController* pInputController;
-
-#endif // !__INPUT_CTRL_H__
-
-// HOW TO USE
-/*
-	call InputController::getInstance()->init() at Game::init
-	call InputController::getInstance()->update() at game loop.
-	if you want to check if key down use:
-			InputController::getInstance()->isKeydown(int keycode) at game loop or update function of an object
-			With key down you can hold key to keep action.
-	if you want to check if key is pressed:
-			InputController::getInstance()->_keyPress += (EventFunction)&[Insert name of function here];
-	if you want to check if key is released:
-			InputController::getInstance()->_keyReleased += (EventFunction)&[Insert name of function here];
-	if you dont want to refference this function any more, call:
-			InputController::getInstance()->_keyPress -= (EventFunction)&[Insert name of function here]
-			InputController::getInstance()->_keyReleased -= (EventFunction)&[Insert name of function here];
-	The referenced function have prototype:
-		void <FunctionName>(KeyEventArg* e);
-	Should call InputController::release() at Game::release()
-	Example:
-	void Jump(KeyEventArg* e)
-	{
-		if (e == NULL)
-			return;
-		switch (e->_keycode)
-		{
-			case [Space]:
-			// I'm jumping....
-		}
-	}
-
-	InputController::getInstance()->_keyPressed += (EventFunction) &Jump;
-			And you can press space to make me jump
-*/
+#endif // !__INPUTCONTROLLER_H__

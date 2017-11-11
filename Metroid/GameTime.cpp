@@ -1,4 +1,4 @@
-#include "GameTime.h"
+﻿#include "GameTime.h"
 
 GameTime* GameTime::_instance = nullptr;
 
@@ -30,13 +30,13 @@ void GameTime::release()
 
 void GameTime::init()
 {
+	// Trả về số lượng tick trong 1 second (TickPerSecond)
 	QueryPerformanceFrequency(&this->_Query);
 
-	this->_freQuery = (float)_Query.QuadPart / 10000000;
-	//10000000 mean use microsecond.
-	// if want to use milisecond use 1000
-	// if want to use second use 1
+	// Tính số giây trong 1 tick
+	this->_freQuery = (float)_Query.QuadPart / TimeSpan::TicksPerSecond;
 
+	// Hàm trả về milisecond
 	QueryPerformanceCounter(&_Query);
 	startTicks = lastTicks = _Query.QuadPart;
 	_totalGameTime = (TimeSpan)0;
@@ -59,17 +59,12 @@ void GameTime::updateGameTime()
 		return;
 	}
 
-	auto gt = ((float)(curTicks - lastTicks)) / _freQuery;
-	this->setTotalGameTime(_totalGameTime + gt);
-	this->setElapsedGameTime(
-		TimeSpan((UINT64)gt)
-	);
-	lastTicks = curTicks;
-}
+	auto gameTime = ((float)(curTicks - lastTicks)) / _freQuery;	// đơn vị tick
 
-float GameTime::getElapsedGameTime()
-{
-	return this->_elapsedGameTime.getMiliSeconds();
+	this->setTotalGameTime(_totalGameTime + gameTime);
+	this->setElapsedGameTime(TimeSpan((UINT64)gameTime));
+
+	lastTicks = curTicks;
 }
 
 float GameTime::getTotalGameTime()
@@ -77,12 +72,17 @@ float GameTime::getTotalGameTime()
 	return this->_totalGameTime.getMiliSeconds();
 }
 
-void GameTime::setElapsedGameTime(TimeSpan& elapsedgametime)
+float GameTime::getElapsedGameTime()
 {
-	this->_elapsedGameTime = elapsedgametime;
+	return this->_elapsedGameTime.getMiliSeconds();
 }
 
 void GameTime::setTotalGameTime(TimeSpan& totalGametime)
 {
 	this->_totalGameTime = totalGametime;
+}
+
+void GameTime::setElapsedGameTime(TimeSpan& elapsedGametime)
+{
+	this->_elapsedGameTime = elapsedGametime;
 }

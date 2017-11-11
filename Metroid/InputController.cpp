@@ -35,6 +35,7 @@ void InputController::release()
 bool InputController::init(HWND hWnd, HINSTANCE hinstance)
 {
 	this->_hWnd = hWnd;
+
 	HRESULT rs;
 	rs = DirectInput8Create(
 		hinstance,
@@ -42,6 +43,7 @@ bool InputController::init(HWND hWnd, HINSTANCE hinstance)
 		IID_IDirectInput8,
 		(void**)&_input,
 		NULL);
+
 	if (rs != DI_OK)
 		return false;
 
@@ -57,9 +59,7 @@ bool InputController::init(HWND hWnd, HINSTANCE hinstance)
 	if (rs != DI_OK)
 		return false;
 
-	// Set Property for keyboard buffer.
 	DIPROPDWORD dipdw;
-
 	dipdw.diph.dwSize = sizeof(DIPROPDWORD);
 	dipdw.diph.dwHeaderSize = sizeof(DIPROPHEADER);
 	dipdw.diph.dwHow = DIPH_DEVICE;
@@ -79,37 +79,34 @@ bool InputController::init(HWND hWnd, HINSTANCE hinstance)
 
 void InputController::update()
 {
-	for (int i = 0; i < 256; i++)
-	{
-		_previousKeyBuffer[i] = ((_keyBuffer[i] & 0x80) > 0);
-	}
-
-	// collect state of all of keys.
+	// Get trạng thái của tất cả các phím
 	_keyboard->GetDeviceState(sizeof(this->_keyBuffer), _keyBuffer);
+
+	// Nếu ESC được nhấn thì gửi message để thoát
 	if (isKeyDown(DIK_ESCAPE))
 	{
 		PostMessage(_hWnd, WM_QUIT, 0, 0);
 	}
 
+	// Collect all buffered events
 	DWORD dw = KEYBOARD_BUFFER_SIZE;
 	HRESULT rs = _keyboard->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _keyEvents, &dw, 0);
 
+	// Kiểm tra từng phím xem phím có được nhấn hoặc thả
 	int keycode, keystate;
-	for (DWORD i = 0; i < dw; i++) // not use for each statement.
+	for (DWORD i = 0; i < dw; i++)
 	{
 		keycode = _keyEvents[i].dwOfs;
 		keystate = _keyEvents[i].dwData;
 		if ((keystate & 0x80) > 0)
 		{
 			KeyEventArg* arg = new KeyEventArg(keycode);
-			_keyPressed.fireEvent(arg);
 			__raise __eventkeyPressed(arg);
 			delete arg;
 		}
 		else
 		{
 			KeyEventArg* arg = new KeyEventArg(keycode);
-			_keyReleased.fireEvent(arg);
 			__raise __eventkeyReleased(arg);
 			delete arg;
 		}
@@ -119,16 +116,4 @@ void InputController::update()
 int InputController::isKeyDown(int keycode)
 {
 	return ((_keyBuffer[keycode] & 0x80) > 0);
-}
-
-bool InputController::isKeyPressed(int keycode)
-{
-	// Không dùng được
-	return isKeyDown(keycode) && !(_previousKeyBuffer[keycode]);
-}
-
-bool InputController::isKeyRelease(int keycode)
-{
-	// Không dùng được 
-	return !isKeyDown(keycode) && (_previousKeyBuffer[keycode]);
 }

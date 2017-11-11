@@ -20,9 +20,6 @@ public:
 
 protected:
 	Viewport* _viewport;
-
-private:
-
 };
 
 #endif // !__SCENE_H__

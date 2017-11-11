@@ -31,7 +31,7 @@ void Text::draw()
 	_font->DrawTextA(
 		NULL,
 		_text.c_str(),
-		-1,			// số chữ để vẽ ra, -1 là vẽ hết
+		-1,		// số chữ để vẽ ra, -1 là vẽ hết
 		&_textRect,
 		_textAlign,
 		_color

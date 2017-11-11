@@ -6,59 +6,41 @@
 #include "Sprite.h"
 #include "SpriteManager.h"
 #include "pugixml\pugixml.hpp"
-
 using namespace std;
 using namespace pugi;
 
 class TileMap
 {
 public:
-
-	void draw(LPD3DXSPRITE, Viewport*);
-	void release();
-
-	/*
-	Load dữ liệu từ một file xml.
-		path: file tiledmap xml được định nghĩa cấu trúc sẵn.
-		eID: sprite id được đăng kí ở sprite manager.
-	*/
+	// Tạo TileMap từ file XML (@spriteId: ID của TileMap)
 	static TileMap* LoadFromFile(const string path, eID spriteId);
 
-	// Lấy kich thước map.
+	// Lấy kich thước Map.
 	GVector2 getWorldSize();
 
 	TileMap();
 	~TileMap();
 
+	void draw(LPD3DXSPRITE, Viewport*);
+
 	int worldWidth();
 	int worldHeight();
-	
-	int getCheckpoint();
-	void setCheckpoint(int checkPoint);
-
-	void setColor(D3DXCOLOR color);
 
 private:
-
 	int _frameWidth;	// độ rộng một frame (độ rộng của tile)
 	int _frameHeight;	// độ cao một frame (độ cao của tile)
 
-	int _checkPoint;
-
-	// Kích thước map tính theo số ô Tile.
+	// Kích thước Map tính theo số ô Tile (cột, dòng)
 	GVector2 _mapSize;
 
-	// Ma trận Tile id.
-	// Id trong ma trận này được so sánh với Id của Tile trong TileSet.listTiles
+	// Ma trận Tile ID.
+	// ID trong ma trận này được so sánh với ID của Tile trong TileSet.listTiles
 	int** _mapIndex;
 
-	// Chứa list tile.
+	// TileSet chứa listTiles.
 	TileSet* _tileSet;
 
-	/*
-		[Function Helper]
-		Đọc dữ liệu một mảng tile id
-	*/
+	// Đọc dữ liệu danh sách các Tile ID từ file XML
 	void getElementMatrixIndex(xml_node& node);
 };
 

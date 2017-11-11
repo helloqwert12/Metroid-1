@@ -12,6 +12,7 @@ void Movement::update(float deltatime)
 {
 	if (_refSprite == NULL)
 		return;
+
 	auto position = this->_refSprite->getPosition();
 
 	this->_velocity += this->_accelerate * deltatime / 1000;
@@ -42,6 +43,13 @@ GVector2 Movement::getVelocity()
 
 
 #pragma region Gravity
+Gravity::Gravity(GVector2 gravity, Movement* movement)
+{
+	this->_gravity = gravity;
+	this->_refmovement = movement;
+	this->_status = FALLING__DOWN;
+}
+
 void Gravity::update(float deltatime)
 {
 	switch (_status)
@@ -54,6 +62,7 @@ void Gravity::update(float deltatime)
 	default:
 		break;
 	}
+
 	auto veloc = this->_refmovement->getVelocity();
 	this->_refmovement->setVelocity(veloc + _additionalVeloc);
 }
@@ -72,13 +81,6 @@ void Gravity::setGravity(GVector2 gravity)
 {
 	this->_gravity = gravity;
 }
-
-Gravity::Gravity(GVector2 gravity, Movement* movement)
-{
-	this->_gravity = gravity;
-	this->_refmovement = movement;
-	this->_status = FALLING__DOWN;
-}
 #pragma endregion
 
 
@@ -89,7 +91,7 @@ SinMovement::SinMovement(GVector2 amplitude, float frequency, Sprite* refsprite)
 	this->_refSprite = refsprite;
 	_radianVeloc = frequency * 2 * M_PI;
 	_radian = 0.0f;
-	this->_linearVeloc = _amplitude * _radianVeloc; //( A * ω)
+	this->_linearVeloc = _amplitude * _radianVeloc; // (A * ω)
 }
 
 void SinMovement::update(float deltatime)
@@ -123,73 +125,4 @@ void SinMovement::setFrequency(float freq)
 	_radianVeloc = freq;
 	this->_linearVeloc = _amplitude * _radianVeloc;
 }
-
-string SinMovement::GetName()
-{
-	return "SinMovement";
-}
-
 #pragma endregion
-
-
-#pragma region RoundMovement
-RoundMovement::RoundMovement(float radius, float frequency, float radian, Sprite* refSprite)
-{
-	this->setRadius(radius);
-	this->setAngularVeloc(frequency);
-	this->_refSprite = refSprite;
-	_radian = radian;
-	_roundposition = GVector2(_radius * cos(_radian), _radius * sin(_radian));
-}
-
-void RoundMovement::update(float deltatime)
-{
-	/*
-	góc xoay được tính theo công thức
-	φ = ω * t
-	*/
-
-	_radian += _radianVeloc * deltatime / 1000;
-	/*
-	vận tốc tuyến tính được tính theo công thức
-	x = R * cos(φ)
-	và		y = R * sin(φ)
-	*/
-	GVector2 veloc;
-	veloc.x = _radius * sin(_radian);
-	veloc.y = -_radius * cos(_radian);
-
-	auto pos = this->_refSprite->getPosition();
-	pos += veloc * deltatime / 1000;
-	this->_refSprite->setPosition(pos);
-}
-
-void RoundMovement::setAngularVeloc(float frequency)
-{
-	_radianVeloc = frequency * 2 * M_PI;
-}
-
-void RoundMovement::setRadius(float r)
-{
-	this->_radius = r;
-}
-
-float RoundMovement::getRadius()
-{
-	return _radius;
-}
-
-float RoundMovement::getAngularVeloc()
-{
-	return _radianVeloc;
-}
-
-RoundMovement::~RoundMovement()
-{
-}
-#pragma endregion
-
-string IComponent::GetName()
-{
-	return "Icomponent";
-}
