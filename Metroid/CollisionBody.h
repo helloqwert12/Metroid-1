@@ -5,21 +5,7 @@
 #include "IComponent.h"
 #include "Event.h"
 
-class CollisionEventArg : public EventArg
-{
-public:
-	CollisionEventArg(BaseObject* object)
-	{
-		_otherObject = object;
-		_sideCollision = eDirection::NONE;
-	}
-
-	BaseObject* _otherObject;	// object cần kiểm tra va chạm
-	eDirection _sideCollision;	// hướng va chạm
-};
-
 // HỆ TỌA ĐỘ WOLRD (X, Y)
-[event_source(native)]
 class CollisionBody : public IComponent
 {
 public:
@@ -28,18 +14,14 @@ public:
 
 	/*
 	Kiểm tra va chạm với object khác lấy được hướng va chạm, không gọi event Begin, End.
-		@otherObject: object cần kt va chạm
+		@otherObject: object cần kiểm tra va chạm
 		@direction: lấy hướng bị va chạm của otherObject
-		@dt: delta time của mỗi frame
-		@isUpdatePosition:	TRUE khi muốn CollisionBody sẽ cập nhật vị trí object lại nếu object chồng lấp lên object khác
+		@dt: deltatime của mỗi frame
+		@isUpdatePosition:	TRUE khi muốn CollisionBody sẽ cập nhật vị trí object lại nếu object chồng lắp lên object khác
 	*/
 	bool checkCollision(BaseObject* otherObject, eDirection& direction, float dt, bool isUpdatePosition = true);
 
 	void update(float dt);
-	
-	// Event bắt đầu va chạm, va chạm kết thúc
-	__event void onCollisionBegin(CollisionEventArg* e);
-	__event void onCollisionEnd(CollisionEventArg* e);
 
 	// Kiểm tra va chạm và trả về thời gian bắt đầu va chạm và hướng va chạm (AABB)
 	float isCollide(BaseObject* otherObject, eDirection& direction, float dt);

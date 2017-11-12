@@ -48,9 +48,11 @@ enum eGravityStatus
 class Gravity : public IComponent
 {
 public:
-	// khởi tạo trọng lực của đối tượng, tham chiếu đến movement conponent của đối tượng
-	// @gravity: vector trọng lực của đối tượng. sẽ không đổi theo thời gian
-	// @movement: tham chiếu đến movement của đối tượng
+	/* 
+	Khởi tạo trọng lực của object, tham chiếu đến movement conponent của object
+		@gravity: vector trọng lực của object, sẽ không đổi theo thời gian
+		@movement: tham chiếu đến movement của object
+	*/
 	Gravity(GVector2 gravity, Movement* movement);
 	void setStatus(eGravityStatus status);
 	eGravityStatus getStatus();
@@ -74,8 +76,6 @@ public:
 	chuyển động hình sin
 		@amplitude :  biên độ
 		@frequency : tần số chuyển động
-		@Axis : hướng chuyển động (= X hoặc Y)
-		throw exception nếu Axis khác x hoặc y
 	*/
 	SinMovement(GVector2 amplitude, float frequency, Sprite* refSprite);
 

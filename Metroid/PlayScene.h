@@ -12,18 +12,17 @@
 #include "IntroScene.h"
 using namespace std;
 
-[event_receiver(native)]
 class PlayScene : public Scene
 {
 public:
 	PlayScene();
 	~PlayScene();
 
-	bool init() override;
-	void updateInput(float dt) override;
-	void update(float dt) override;
-	void draw(LPD3DXSPRITE spriteHandle) override;
-	void release() override;
+	bool init();
+	void updateInput(float dt);
+	void update(float dt);
+	void draw(LPD3DXSPRITE spriteHandle);
+	void release();
 
 	BaseObject* getObject(eID id);
 
@@ -38,8 +37,8 @@ private:
 
 	BaseObject* _player;
 
-	// Danh sách đối tượng nằm trong vùng active.
-	// Mỗi vòng lặp sẽ được kiểm tra chỉnh sửa tại update, và sử dụng lại tại draw.
+	// List các object nằm trong vùng active.
+	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để draw.
 	vector<BaseObject*> _activeObject;
 
 	void updateViewport(BaseObject* objTracker);

@@ -24,9 +24,6 @@ using namespace std;
 #define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)	// màu trắng
 #define COLOR_KEY D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f)		// màu khi mà load hình nó sẽ bỏ qua thành trong suốt
 
-#define MAX_OBJECTS 4
-#define MAX_LEVELS 32
-
 // ID của object
 enum eID
 {
@@ -74,7 +71,6 @@ enum eDirection
 	LEFT = 2,
 	RIGHT = 4,
 	BOTTOM = 8,
-	TOP_BOTTOM = (TOP | BOTTOM),
 	ALL = (TOP | BOTTOM | LEFT | RIGHT),
 };
 

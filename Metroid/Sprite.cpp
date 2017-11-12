@@ -302,11 +302,12 @@ void Sprite::setFrameRect()
 
 void Sprite::updateBounding()
 {
-	float scaleW = _frameWidth * abs(_scale.x);
-	float scaleH = _frameHeight * abs(_scale.y);
+	float scaledWidth = _frameWidth * abs(_scale.x);
+	float scaledHeight = _frameHeight * abs(_scale.y);
 
-	this->_bound.left = _position.x - scaleW * _origin.x;
-	this->_bound.bottom = _position.y - scaleH * _origin.y;
-	this->_bound.right = _bound.left + scaleW;
-	this->_bound.top = _bound.bottom + scaleH;
+	// position là vị trí chính giữa lúc vẽ
+	this->_bound.left = _position.x - scaledWidth * _origin.x;
+	this->_bound.bottom = _position.y - scaledHeight * _origin.y;
+	this->_bound.right = _bound.left + scaledWidth;
+	this->_bound.top = _bound.bottom + scaledHeight;
 }

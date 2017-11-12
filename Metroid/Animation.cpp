@@ -88,6 +88,7 @@ void Animation::update(float dt)
 	if (!_canFlashes && !_canAnimate)
 		return;
 
+	// Do _timeAnimate tính bằng second nên chia 1000 để chuyển từ milisecond sang second
 	_timer += dt / 1000;
 	if (_timer >= _timeAnimate)
 	{

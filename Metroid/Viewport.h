@@ -23,7 +23,7 @@ public:
 	// kiểm tra HCN có nằm trong viewport (màn hình) không.
 	bool isContains(const RECT& rect);
 
-	// Lấy kích thước HCN của viewport, tính trong world lớn
+	// Lấy kích thước HCN của viewport, tính trong world (x, y)
 	RECT getBounding();
 
 private:

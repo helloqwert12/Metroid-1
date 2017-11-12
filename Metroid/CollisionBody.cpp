@@ -51,14 +51,14 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 	return false;
 }
 
-float CollisionBody::isCollide(BaseObject* otherSprite, eDirection& direction, float dt)
+float CollisionBody::isCollide(BaseObject* otherObject, eDirection& direction, float dt)
 {
 	RECT myRect = _target->getBounding();
-	RECT otherRect = otherSprite->getBounding();
+	RECT otherRect = otherObject->getBounding();
 
 	// Sử dụng Broadphase rect để kiểm tra trước vùng tiếp theo có va chạm không
 	RECT broadphaseRect = getSweptBroadphaseRect(_target, dt);	// là bound của object được mở rộng ra thêm một phần bằng với vận tốc (dự đoán trước bound)
-	if (!isColliding(broadphaseRect, otherRect))				// kiểm tra tính chồng lắp của 2 hcn
+	if (!isColliding(broadphaseRect, otherRect))				// kiểm tra tính chồng lắp của 2 HCN
 	{
 		// Không va chạm trả về 1 đi tiếp bình thường
 		direction = eDirection::NONE;
@@ -67,7 +67,7 @@ float CollisionBody::isCollide(BaseObject* otherSprite, eDirection& direction, f
 
 	// SweptAABB
 	// Vận tốc mỗi frame
-	GVector2 otherVeloc = GVector2(otherSprite->getVelocity().x * dt / 1000, otherSprite->getVelocity().y * dt / 1000);
+	GVector2 otherVeloc = GVector2(otherObject->getVelocity().x * dt / 1000, otherObject->getVelocity().y * dt / 1000);
 	GVector2 myVelocity = GVector2(_target->getVelocity().x * dt / 1000, _target->getVelocity().y * dt / 1000);
 	GVector2 velocity = myVelocity;
 
@@ -146,7 +146,7 @@ float CollisionBody::isCollide(BaseObject* otherSprite, eDirection& direction, f
 	if (_txEntry > _tyEntry)
 	{
 		// Xét x
-		// Khoảng cách gần nhất mà nhỏ hơn 0 nghĩa là thằng kia đang nằm bên trái object này => va chạm bên phải nó
+		// Khoảng cách gần nhất mà nhỏ hơn 0 nghĩa là object kia đang nằm bên trái object này => va chạm bên phải nó
 		if (_dxEntry < 0.0f)
 		{
 			direction = eDirection::RIGHT;
@@ -159,7 +159,7 @@ float CollisionBody::isCollide(BaseObject* otherSprite, eDirection& direction, f
 	else
 	{
 		// Xét y
-		// Khoảng cách gần nhất mà nhỏ hơn 0 nghĩa là thằng kia đang nằm bên dưới object này => va chạm bên trên nó
+		// Khoảng cách gần nhất mà nhỏ hơn 0 nghĩa là object kia đang nằm bên dưới object này => va chạm bên trên nó
 		if (_dyEntry < 0.0f)
 		{
 			direction = eDirection::TOP;

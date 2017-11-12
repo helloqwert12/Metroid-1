@@ -1,37 +1,48 @@
-#ifndef __QNODE_H__
-#define __QNODE_H__
+﻿#ifndef __QUADTREENODE_H__
+#define __QUADTREENODE_H__
 
 #include "define.h"
 #include "BaseObject.h"
-#include "pugixml\pugixml.hpp"
 #include <algorithm>
-using namespace pugi;
+#include <vector>
+
+#define MAX_OBJECT 4
+#define MAX_LEVEL 32
 
 class QuadTreeNode
 {
 public:
-	QuadTreeNode(const RECT bounds, short level = 0);
-	~QuadTreeNode() {};
-
-	vector<BaseObject*> Retrieve(const RECT bounds);
-	void Insert(BaseObject* object);
-	void DeleteObjects();
-	void Release();
+	QuadTreeNode(const RECT bound, short level = 0);
+	~QuadTreeNode();
 
 	static QuadTreeNode* getInstance();
 	static void setInstance(QuadTreeNode* root);
 
+	// Insert 1 object vào Node
+	void insert(BaseObject* object);
+
+	// Lấy list các object có khả năng va chạm với viewport
+	vector<BaseObject*> retrieve(const RECT viewportBound);
+
+	// Kiểm tra các object nào đã bị DESTROY thì xóa
+	void deleteObjects();
+
+	void release();
+
 protected:
 	static QuadTreeNode* _instance;
 
-	short m_level;
-	RECT m_bounds;
-	std::vector<BaseObject*> m_objects;
-	std::vector<QuadTreeNode*> m_children;
+	short _level;
+	RECT _bound;
 
-	short GetIndex(const RECT& bounds);
+	vector<QuadTreeNode*> _children;	// list chứa 4 Node con
+	vector<BaseObject*> _objects;		// list chứa các object của Node hiện tại
 
-	void Split(void);
+	// Kiểm tra xem HCN đang xét thuộc về phần hình vuông index thứ mấy (0-3)
+	short getIndex(const RECT& bound);
+
+	// Chia Node hiện tại thành 4 Node con
+	void split();
 };
 
-#endif // !__QNODE_H__
+#endif // !__QUADTREENODE_H__

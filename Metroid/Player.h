@@ -17,7 +17,6 @@
 #define GRAVITY 800
 #define REVIVE_TIME 2000
 
-[event_receiver(native)]
 class Player : public BaseObject, public IControlable
 {
 public:
@@ -32,9 +31,6 @@ public:
 
 	void onKeyPressed(KeyEventArg* key_event);
 	void onKeyReleased(KeyEventArg* key_event);
-
-	void onCollisionBegin(CollisionEventArg* collision_arg);
-	void onCollisionEnd(CollisionEventArg* collision_arg);
 
 	float checkCollision(BaseObject* object, float dt);
 	void checkPosition();
