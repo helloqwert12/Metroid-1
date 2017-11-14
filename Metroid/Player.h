@@ -1,4 +1,4 @@
-#ifndef __PLAYER_H__
+﻿#ifndef __PLAYER_H__
 #define __PLAYER_H__
 
 #include "define.h"
@@ -29,8 +29,18 @@ public:
 	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
 	void release();
 
-	void onKeyPressed(KeyEventArg* key_event);
-	void onKeyReleased(KeyEventArg* key_event);
+	// Events
+	void onKeyPressed(KeyEventArg* keyEvent);
+	void onKeyReleased(KeyEventArg* keyEvent);
+
+	void standing();
+	void moveLeft();
+	void moveRight();
+	void jump();
+	void falling();
+	void shoot();
+	void bomb();
+	void die();
 
 	float checkCollision(BaseObject* object, float dt);
 	void checkPosition();
@@ -40,16 +50,9 @@ public:
 
 	void setStatus(eStatus status);
 
-	// Player's Actions
-	void standing();
-	void moveLeft();
-	void moveRight();
-	void jump();
-	void falling();
-	void die();
-	void revive();
-
 	RECT getBounding();
+
+	void resetValues();
 
 private:
 	map<int, Animation*> _animations;
@@ -70,8 +73,7 @@ private:
 
 	void updateCurrentAnimateIndex();
 
-	void resetValues();
-
+	// Dùng để xét đã rời khỏi Wall đụng trước đó hay chưa
 	BaseObject* preWall;
 };
 

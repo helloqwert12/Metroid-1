@@ -2,13 +2,21 @@
 #include "SoundManager.h"
 #include "PlayScene.h"
 
+IntroScene::IntroScene()
+{
+}
+
+IntroScene::~IntroScene()
+{
+}
+
 bool IntroScene::init()
 {
 	__hook(&InputController::__eventkeyPressed, _input, &IntroScene::onKeyPressed);
 
-	_introtable = SpriteManager::getInstance()->getSprite(eID::MAIN_MENU);
-	_introtable->setScale(2.0f);
-	_introtable->setPosition(256, 225);
+	_background = SpriteManager::getInstance()->getSprite(eID::INTRO);
+	_background->setScale(2.0f);
+	_background->setPosition(256, 225);
 
 	_playOption = new TextSprite(eID::FONTFULL, "PRESS START KEY", GVector2(145, 255));
 	_playOption->init();
@@ -45,9 +53,9 @@ void IntroScene::updateInput(float deltatime)
 {
 }
 
-void IntroScene::onKeyPressed(KeyEventArg* key_event)
+void IntroScene::onKeyPressed(KeyEventArg* keyEvent)
 {
-	if (key_event->_key == DIK_Z) 
+	if (keyEvent->keycode == DIK_Z)
 	{
 		_ok = true;
 	}
@@ -70,7 +78,7 @@ void IntroScene::update(float dt)
 
 void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 {
-	_introtable->render(spriteHandle);
+	_background->render(spriteHandle);
 
 	if (!_ok)
 	{
@@ -95,18 +103,10 @@ void IntroScene::release()
 	//SoundManager::getInstance()->Stop(INTRO_SCENE);
 
 	SAFE_DELETE(_playOption);
-	SAFE_DELETE(_introtable);
+	SAFE_DELETE(_background);
 	SAFE_DELETE(_flash);
 	SAFE_DELETE(_access);
 
 	//if (_input != nullptr)
-		//__unhook(_input);
-}
-
-IntroScene::IntroScene()
-{
-}
-
-IntroScene::~IntroScene()
-{
+	//	__unhook(_input);
 }

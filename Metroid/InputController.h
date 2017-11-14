@@ -14,10 +14,10 @@ class KeyEventArg : public EventArg
 public:
 	KeyEventArg(int keycode) 
 	{ 
-		_key = keycode; 
+		this->keycode = keycode; 
 	}
 
-	int _key;
+	int keycode;
 };
 
 [event_source(native)]

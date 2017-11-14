@@ -24,8 +24,6 @@ public:
 	void draw(LPD3DXSPRITE spriteHandle);
 	void release();
 
-	BaseObject* getObject(eID id);
-
 	Player* getPlayer();
 
 private:
@@ -41,6 +39,7 @@ private:
 	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để draw.
 	vector<BaseObject*> _activeObject;
 
+	// Update tọa độ viewport theo 1 object
 	void updateViewport(BaseObject* objTracker);
 
 	bool checkEndGame();

@@ -24,22 +24,22 @@ public:
 	void draw(LPD3DXSPRITE spriteHandle) override;
 	void release() override;
 
-	void onKeyPressed(KeyEventArg* key_event);
+	void onKeyPressed(KeyEventArg* keyEvent);
 
 private:
-	Sprite* _introtable;
-
-	StopWatch* _flash;
-	StopWatch* _access;
-
-	bool _ok;
-	bool _draw;
+	Sprite* _background;
 
 	TextSprite* _playOption;
 	TextSprite* _thienAn;
 	TextSprite* _huuDat;
 	TextSprite* _siDat;
 	TextSprite* _leHuy;
+
+	StopWatch* _flash;
+	StopWatch* _access;
+
+	bool _ok;
+	bool _draw;
 };
 
 #endif // !__INTRO_SCENE__

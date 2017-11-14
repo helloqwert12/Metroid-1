@@ -135,9 +135,6 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Source Files\Tile</Filter>
     </ClCompile>
-    <ClCompile Include="Help.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
     <ClCompile Include="EmptyObject.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
@@ -258,9 +255,6 @@
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
     <ClInclude Include="EmptyObject.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Help.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="Info.h">

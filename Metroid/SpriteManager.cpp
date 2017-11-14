@@ -30,10 +30,10 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 {
 	Sprite* pSprite = NULL;
 
-	pSprite = new Sprite(spriteHandle, L"Resources//Images//mainmenu.png");
-	this->_listSprite[eID::MAIN_MENU] = pSprite;
+	pSprite = new Sprite(spriteHandle, L"Resources//Images//intro.png");
+	this->_listSprite[eID::INTRO] = pSprite;
 
-	pSprite = new Sprite(spriteHandle, L"Resources//Fonts//fontFull.png", 54, 6);
+	pSprite = new Sprite(spriteHandle, L"Resources//Images//font.png", 54, 6);
 	this->_listSprite[eID::FONTFULL] = pSprite;
 
 	pSprite = new Sprite(spriteHandle, L"Resources//Images//life.png");
@@ -44,7 +44,7 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	this->loadSpriteInfo(eID::PLAYER, "Resources//Images//player.txt");
 
 	// Tileset
-	pSprite = loadXMLDoc(spriteHandle, L"Resources//Maps//test.tmx");
+	pSprite = loadXMLDoc(spriteHandle, L"Resources//Maps//map.tmx");
 	pSprite->setOrigin(VECTOR2ZERO);
 	pSprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::MAP_METROID] = pSprite;

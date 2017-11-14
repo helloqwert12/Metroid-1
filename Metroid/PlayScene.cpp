@@ -16,14 +16,14 @@ bool PlayScene::init()
 {
 	auto player = new Player();
 	player->init();
-	player->setPosition(1170, 595);
+	player->setPosition(1170, 2550);
 	player->getBounding();
 	this->_player = player;
 
 	_text = new Text(L"Arial", "", 10, 25);
 
 	// Tạo TileMap
-	_tileMap = TileMap::LoadFromFile("Resources//Maps//test.tmx", eID::MAP_METROID);
+	_tileMap = TileMap::LoadFromFile("Resources//Maps//map.tmx", eID::MAP_METROID);
 
 	// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
 	auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
@@ -37,7 +37,7 @@ bool PlayScene::init()
 	_root = new QuadTreeNode(rectMap);
 	QuadTreeNode::setInstance(_root);
 
-	auto listObject = GetListObjectFromFile("Resources//Maps//test.tmx");
+	auto listObject = GetListObjectFromFile("Resources//Maps//map.tmx");
 
 	// Insert tất cả các object vào QuadTree
 	for (auto obj : (*listObject))
@@ -146,27 +146,6 @@ bool PlayScene::checkEndGame()
 	}
 
 	return false;
-}
-
-BaseObject* PlayScene::getObject(eID id)
-{
-	if (id == eID::PLAYER)
-		return getPlayer();
-
-	eID objectID;
-	if (_activeObject.size() == 0)
-	{
-		return nullptr;
-	}
-
-	for (BaseObject* object : _activeObject)
-	{
-		objectID = object->getId();
-		if (objectID == id)
-			return object;
-	}
-
-	return nullptr;
 }
 
 Player* PlayScene::getPlayer()

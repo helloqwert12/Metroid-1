@@ -24,11 +24,11 @@ public:
 class Movement : public IComponent
 {
 public:
-	Movement(GVector2 accel, GVector2 veloc, Sprite* refSprite);
+	Movement(GVector2 accelerate, GVector2 velocicty, Sprite* refSprite);
 	void update(float deltatime);
 
-	void setAccelerate(GVector2 accel);
-	void setVelocity(GVector2 veloc);
+	void setAccelerate(GVector2 accelerate);
+	void setVelocity(GVector2 velocicty);
 	GVector2 getAccelerate();
 	GVector2 getVelocity();
 
@@ -41,7 +41,7 @@ private:
 
 enum eGravityStatus
 {
-	FALLING__DOWN,
+	FALLING_DOWN,
 	SHALLOWED
 };
 
@@ -61,10 +61,10 @@ public:
 
 private:
 	GVector2 _gravity;
-	GVector2 _additionalVeloc;
-	Movement* _refmovement;
-	eGravityStatus _status;
+	GVector2 _additionalVelocity;
+	Movement* _refMovement;
 	Sprite* _refSprite;
+	eGravityStatus _status;
 };
 
 

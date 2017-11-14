@@ -20,11 +20,13 @@ public:
 
 	void setLifeNumber(int number);
 	int getLifeNumber();
+	void setDebugAttack(string str);
 
 private:
 	Sprite* _iconLife;
-	TextSprite* _textLife;
 	int _lifeNumber;
+	TextSprite* _textLife;
+	TextSprite* _debugAttack;
 };
 
 #endif // !__INFO_H__

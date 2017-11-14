@@ -28,14 +28,14 @@ using namespace std;
 enum eID
 {
 	PLAYER = 0,
-	MAIN_MENU = 1,
+	INTRO = 1,
 	FONTFULL = 2,
 
 	LIFE_ICON = 3,
 
 	MAP_METROID = 4,
 
-	WALL = 40,
+	WALL = 20,
 };
 
 // Trạng thái của object
@@ -45,22 +45,14 @@ enum eStatus
 	MOVING_LEFT = (1 << 0),
 	MOVING_RIGHT = (1 << 1),
 	JUMPING = (1 << 2),
-	RUNNING = (1 << 3),
-	DIE = (1 << 4),
-	SIT_DOWN = (1 << 5),
-	FALLING = (1 << 6),
-
-	DESTROY = (1 << 7),
-
-	ATTACKING = (1 << 8),
-
-	MOVING_UP = (1 << 9),
-	MOVING_DOWN = (1 << 10),
-
-	STAND_UP = (1 << 11),
-	STAND_DOWN = (1 << 12),
-
-	BEING_HIT = (1 << 13),
+	FALLING = (1 << 3),
+	RUNNING = (1 << 4),
+	LOOKING_UP = (1 << 5),
+	ROLLING_DOWN = (1 << 6),
+	ATTACKING = (1 << 7),
+	BEING_HIT = (1 << 8),
+	DIE = (1 << 9),
+	DESTROY = (1 << 10),
 };
 
 // Hướng bị va chạm của object

@@ -85,7 +85,7 @@ protected:
 	Sprite* _sprite;
 
 	eID _id;
-	eStatus _status;
+	eStatus _status; // Trạng thái của object
 	eDirection _physicsSide; // Hướng bị va chạm của object
 };
 

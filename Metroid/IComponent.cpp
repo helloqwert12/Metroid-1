@@ -1,10 +1,10 @@
 ﻿#include "IComponent.h"
 
 #pragma region Movement
-Movement::Movement(GVector2 accel, GVector2 veloc, Sprite* refSprite)
+Movement::Movement(GVector2 accelerate, GVector2 velocicty, Sprite* refSprite)
 {
-	this->_accelerate = accel;
-	this->_velocity = veloc;
+	this->_accelerate = accelerate;
+	this->_velocity = velocicty;
 	this->_refSprite = refSprite;
 }
 
@@ -20,14 +20,14 @@ void Movement::update(float deltatime)
 	this->_refSprite->setPosition(position);
 }
 
-void Movement::setAccelerate(GVector2 accel)
+void Movement::setAccelerate(GVector2 accelerate)
 {
-	this->_accelerate = accel;
+	this->_accelerate = accelerate;
 }
 
-void Movement::setVelocity(GVector2 veloc)
+void Movement::setVelocity(GVector2 velocicty)
 {
-	this->_velocity = veloc;
+	this->_velocity = velocicty;
 }
 
 GVector2 Movement::getAccelerate()
@@ -46,25 +46,25 @@ GVector2 Movement::getVelocity()
 Gravity::Gravity(GVector2 gravity, Movement* movement)
 {
 	this->_gravity = gravity;
-	this->_refmovement = movement;
-	this->_status = FALLING__DOWN;
+	this->_refMovement = movement;
+	this->_status = FALLING_DOWN;
 }
 
 void Gravity::update(float deltatime)
 {
 	switch (_status)
 	{
-	case FALLING__DOWN:
-		this->_additionalVeloc = this->_gravity * deltatime / 1000;
+	case FALLING_DOWN:
+		this->_additionalVelocity = this->_gravity * deltatime / 1000;
 		break;
 	case SHALLOWED:
-		this->_additionalVeloc = VECTOR2ZERO;
+		this->_additionalVelocity = VECTOR2ZERO;
 	default:
 		break;
 	}
 
-	auto veloc = this->_refmovement->getVelocity();
-	this->_refmovement->setVelocity(veloc + _additionalVeloc);
+	auto velocity = this->_refMovement->getVelocity();
+	this->_refMovement->setVelocity(velocity + _additionalVelocity);
 }
 
 void Gravity::setStatus(eGravityStatus status)

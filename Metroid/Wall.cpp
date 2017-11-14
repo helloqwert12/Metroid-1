@@ -6,7 +6,7 @@ Wall::Wall(int x, int y, int width, int height) : BaseObject(eID::WALL)
 	this->_bound.bottom = y;
 	this->_bound.top = y + height;
 	this->_bound.right = x + width;
-	BaseObject::setPhysicsBodySide(eDirection::ALL);
+	this->setPhysicsBodySide(eDirection::ALL);
 }
 
 void Wall::init()

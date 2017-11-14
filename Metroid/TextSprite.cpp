@@ -50,6 +50,10 @@ void TextSprite::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		{
 			index = (((int)c) - '0') + 26;
 		}
+		else if (c == '.')
+		{
+			index = 36;
+		}
 		else if (c == '-')
 		{
 			index = 44;
