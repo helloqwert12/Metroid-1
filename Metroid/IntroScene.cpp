@@ -69,7 +69,7 @@ void IntroScene::update(float dt)
 		{
 			_draw = !_draw;
 		}
-		if (_access->isStopWatch(800))
+		if (_access->isStopWatch(600))
 		{
 			SceneManager::getInstance()->replaceScene(new PlayScene());
 		}

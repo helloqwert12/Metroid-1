@@ -1,0 +1,6 @@
+frame_name		left	top	right	bottom
+y_ripper_01		422	46	438	54
+p_ripper_01		440	46	456	54
+br_ripper_01		458	46	474	54
+o_ripper_01		476	46	492	54
+f_ripper_01		494	46	510	54

@@ -159,6 +159,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="QuadTreeNode.cpp" />
+    <ClCompile Include="Ripper.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="MetroidGame.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="QuadTreeNode.h" />
+    <ClInclude Include="Ripper.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="MetroidGame.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />

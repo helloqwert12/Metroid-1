@@ -107,6 +107,17 @@ void Player::init()
 
 void Player::update(float deltatime)
 {
+	if (_info->getEnergy() <= 0)
+	{
+		this->setStatus(DIE);
+		_protectTime = 0;
+	}
+
+	if (_protectTime > 0)
+	{
+		_protectTime -= deltatime;
+	}
+
 	this->_info->update(deltatime);
 
 	this->checkPosition();
@@ -195,6 +206,7 @@ void Player::resetValues()
 
 	this->setScale(SCALE_FACTOR);
 	_movingSpeed = MOVE_SPEED;
+	_protectTime = PROTECT_TIME;
 
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(GVector2(0, 0));
@@ -207,6 +219,11 @@ void Player::resetValues()
 
 void Player::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
+	if (_protectTime > 0)
+		_animations[_currentAnimateIndex]->enableFlashes(true);
+	else
+		_animations[_currentAnimateIndex]->enableFlashes(false);
+	
 	_animations[_currentAnimateIndex]->draw(spriteHandle, viewport);
 	_info->draw(spriteHandle, viewport);
 }
@@ -389,6 +406,55 @@ void Player::bomb()
 	_info->setDebugAttack("BOMB");
 }
 
+void Player::beHit(eDirection direction)
+{
+	_protectTime = PROTECT_TIME;
+
+	if (direction == NONE)
+	{
+		_info->setEnergy(_info->getEnergy() - 2);
+		return;
+	}
+
+	//if (this->isInStatus(eStatus::BEING_HIT))
+	//	return;
+
+	//this->setStatus(eStatus::BEING_HIT);
+
+	auto gravity = (Gravity*)this->_componentList["Gravity"];
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+	auto move = (Movement*)this->_componentList["Movement"];
+
+	switch (direction)
+	{
+	case RIGHT:
+	{
+		// Nếu va chạm RIGHT thì bị văng sang bên phải (player hướng sang trái)
+		if (this->getScale().x > 0)
+			this->setScaleX(this->getScale().x * (-1));
+		move->setVelocity(GVector2(MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+		break;
+	}
+	case LEFT:
+	{
+		// Nếu va chạm LEFT thì bị văng sang bên trái (player hướng sang phải)
+		if (this->getScale().x < 0)
+			this->setScaleX(this->getScale().x * (-1));
+		move->setVelocity(GVector2(-MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+		break;
+	}
+	default:
+	{
+		if (this->getScale().x > 0)
+			move->setVelocity(GVector2(-MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+		else
+			move->setVelocity(GVector2(MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+		break;
+	}
+	}
+}
+
 void Player::die()
 {
 	if (!this->isInStatus(eStatus::DIE))
@@ -461,6 +527,30 @@ float Player::checkCollision(BaseObject* object, float dt)
 			
 			if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 				this->addStatus(eStatus::FALLING);
+		}
+	}
+	else if (objectId == RIPPER)
+	{
+		if (!((Ripper*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, false))
+			{
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+				beHit(direction);
+
+				_info->setEnergy(_info->getEnergy() - 8);
+			}
+
+			//if (this->weaponCheckCollision(object, direction, dt, false))
+			//{
+			//	((Ripper*)object)->wasHit(1);
+			//}
+			//if (((Ripper*)object)->isDead())
+			//	_info->AddScore(300);
 		}
 	}
 }

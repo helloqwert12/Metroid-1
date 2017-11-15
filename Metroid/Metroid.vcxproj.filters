@@ -153,6 +153,9 @@
     <ClCompile Include="maputils.cpp">
       <Filter>Source Files\Tile</Filter>
     </ClCompile>
+    <ClCompile Include="Ripper.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="maputils.h">
       <Filter>Header Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Ripper.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

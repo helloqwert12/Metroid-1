@@ -8,6 +8,7 @@
 #include <ctime>
 
 #include "Wall.h"
+#include "Ripper.h"
 
 using namespace pugi;
 
@@ -21,5 +22,6 @@ map<string, string> GetObjectProperties(xml_node node);
 BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight);
 
 BaseObject* GetWall(xml_node item, int mapHeight);
+BaseObject* GetRipper(xml_node item, int mapHeight);
 
 #endif //!__MAPUTIL_H__

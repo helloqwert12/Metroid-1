@@ -47,6 +47,10 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::PLAYER, sprite));
 	this->loadSpriteInfo(eID::PLAYER, "Resources//Images//player.txt");
 
+	sprite = new Sprite(spriteHandle, L"Resources//Images//enemy.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::ENEMY, sprite));
+	this->loadSpriteInfo(eID::ENEMY, "Resources//Images//enemy.txt");
+
 	// Tileset
 	sprite = loadXMLDoc(spriteHandle, L"Resources//Maps//map.tmx");
 	sprite->setOrigin(VECTOR2ZERO);

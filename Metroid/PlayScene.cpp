@@ -77,6 +77,11 @@ void PlayScene::update(float dt)
 	// Lấy HCN bound của viewport
 	RECT viewportInTransform = _viewport->getBounding();
 
+	//viewportInTransform.left -= WINDOW_WIDTH / 2;
+	//viewportInTransform.top +=  WINDOW_HEIGHT / 2;
+	//viewportInTransform.right += WINDOW_WIDTH / 2;
+	//viewportInTransform.bottom -= WINDOW_HEIGHT / 2;
+
 	_root->deleteObjects();
 
 	_activeObject.clear();
@@ -115,14 +120,8 @@ void PlayScene::updateViewport(BaseObject* objTracker)
 {
 	GVector2 worldsize = this->_tileMap->getWorldSize();
 
-	//GVector2 new_position = GVector2(max(objTracker->getPositionX() - 260, 0), WINDOW_HEIGHT);
-	GVector2 newPosition = GVector2(max(objTracker->getPositionX() - 260, 0), max(objTracker->getPositionY() + 400, 0));
-
-	// Không cho đi quá map.
-	if (newPosition.x + WINDOW_WIDTH > worldsize.x)
-	{
-		newPosition.x = worldsize.x - WINDOW_WIDTH;
-	}
+	//GVector2 newPosition = GVector2(max(objTracker->getPositionX() - 260, 0), WINDOW_HEIGHT);
+	GVector2 newPosition = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, 0), max(objTracker->getPositionY() + 400, 0));
 
 	_viewport->setPositionWorld(newPosition);
 }

@@ -77,11 +77,12 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 	case WALL:
 		return GetWall(item, mapHeight);
 		break;
+	case RIPPER:
+		return GetRipper(item, mapHeight);
 	default:
 		return nullptr;
 	}
 }
-
 
 BaseObject* GetWall(xml_node item, int mapHeight)
 {
@@ -89,13 +90,29 @@ BaseObject* GetWall(xml_node item, int mapHeight)
 	if (properties.size() == 0)
 		return nullptr;
 
-	auto x = 2 * stoi(properties["x"]);
-	auto y = 2 * stoi(properties["y"]);
+	// Do tọa độ được tạo từ Tiled Map Editor là top-left, nên ta chuyển về tọa độ world (x, y)
 	auto width = 2 * stoi(properties["width"]);
 	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
 
-	// Do tọa độ được tạo từ Tiled Map Editor là top-left, nên ta chuyển về tọa độ world (x, y)
-	auto wall = new Wall(x, mapHeight - y - height, width, height);
+	auto wall = new Wall(x, y, width, height);
 	wall->init();
 	return wall;
+}
+
+BaseObject* GetRipper(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	auto ripper = new Ripper(x, y, false);
+	ripper->init();
+	return ripper;
 }

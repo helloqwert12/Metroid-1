@@ -89,6 +89,10 @@ void Game::render()
 	// Lấy tổng thời gian trôi qua kể từ lần cuối gọi hàm updateGameTime
 	float time = _gameTime->getElapsedGameTime();
 
+	// Xử lý kéo cửa sổ không bị dồn frame
+	if (time > this->_frameRate * 2)
+		time = _frameRate;
+
 	if (device->getDevice()->BeginScene() != DI_OK)
 		return;
 

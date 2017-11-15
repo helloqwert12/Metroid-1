@@ -10,11 +10,12 @@
 #include "IComponent.h"
 #include "CollisionBody.h"
 #include "Info.h"
+#include "Ripper.h"
 
 #define MOVE_SPEED 150
-#define JUMP_VELOCITY 520
+#define JUMP_VELOCITY 510
 #define GRAVITY 800
-#define REVIVE_TIME 2000
+#define PROTECT_TIME 2000
 
 class Player : public BaseObject, public IControlable
 {
@@ -39,6 +40,7 @@ public:
 	void falling();
 	void shoot();
 	void bomb();
+	void beHit(eDirection direction);
 	void die();
 
 	void checkPosition();
@@ -64,6 +66,8 @@ private:
 	eStatus _currentAnimateIndex;
 
 	Info* _info;
+
+	float _protectTime;
 
 	GVector2 getVelocity();
 

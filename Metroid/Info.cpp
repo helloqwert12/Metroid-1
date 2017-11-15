@@ -40,10 +40,13 @@ void Info::update(float deltatime)
 {
 	_textLife->setPosition(GVector2(_iconLife->getPosition().x + GAP, _iconLife->getPosition().y + GAP / 1.4));
 
+	if (_lifeNumber <= 0)
+	{
+		_textLife->setString(" 00");
+	}
 	if (_lifeNumber > 0 && _lifeNumber < 10)
 	{
 		_textLife->setString(" 0" + to_string(_lifeNumber));
-
 	}
 	else if (_lifeNumber > 10 && _lifeNumber < 99)
 	{
@@ -51,11 +54,14 @@ void Info::update(float deltatime)
 	}
 
 	_textEnergy->setPosition(GVector2(_iconEnergy->getPosition().x + GAP, _iconEnergy->getPosition().y + GAP / 1.4));
-
+	
+	if (_energyNumber <= 0)
+	{
+		_textEnergy->setString(" 00");
+	}
 	if (_energyNumber > 0 && _energyNumber < 10)
 	{
 		_textEnergy->setString(" 0" + to_string(_energyNumber));
-
 	}
 	else if (_energyNumber > 10 && _energyNumber < 99)
 	{

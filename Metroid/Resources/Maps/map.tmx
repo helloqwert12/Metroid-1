@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="225">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="254">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -129625,12 +129625,12 @@
   <object id="25" name="Wall" type="20" x="384.667" y="3007.67" width="16" height="63.3333"/>
   <object id="26" name="Wall" type="20" x="368" y="2944" width="48" height="31.3333"/>
   <object id="29" name="Wall" type="20" x="384.667" y="2975.33" width="48" height="32"/>
-  <object id="31" name="Wall" type="20" x="401.333" y="3009.33" width="48" height="62"/>
+  <object id="31" name="Wall" type="20" x="401.333" y="3007.66" width="46" height="63.6667"/>
   <object id="34" name="Wall" type="20" x="528" y="3072" width="111.333" height="16"/>
-  <object id="36" name="Wall" type="20" x="528" y="2928.67" width="16" height="110.667"/>
-  <object id="37" name="Wall" type="20" x="543.333" y="2959.33" width="16" height="79.3333"/>
-  <object id="38" name="Wall" type="20" x="608" y="2960.67" width="16" height="79.3333"/>
-  <object id="39" name="Wall" type="20" x="623.333" y="2928" width="16" height="111.333"/>
+  <object id="36" name="Wall" type="20" x="528" y="2928.67" width="16" height="31.0003"/>
+  <object id="37" name="Wall" type="20" x="528.333" y="2959.33" width="31" height="80.3333"/>
+  <object id="38" name="Wall" type="20" x="608" y="2960.67" width="31.6667" height="79.3333"/>
+  <object id="39" name="Wall" type="20" x="623.333" y="2928" width="16" height="31.9997"/>
   <object id="42" name="Wall" type="20" x="544.667" y="2895.33" width="95.3333" height="16"/>
   <object id="43" name="Wall" type="20" x="576.667" y="2911.33" width="16" height="16"/>
   <object id="44" name="Wall" type="20" x="672.667" y="2896" width="95.3333" height="16"/>
@@ -129642,7 +129642,7 @@
   <object id="50" name="Wall" type="20" x="1057.33" y="2896" width="140" height="16"/>
   <object id="51" name="Wall" type="20" x="1184.67" y="2912" width="62" height="48"/>
   <object id="52" name="Wall" type="20" x="1120" y="3008.67" width="432" height="15.3333"/>
-  <object id="53" name="Wall" type="20" x="1184" y="3025.33" width="96" height="46.6667"/>
+  <object id="53" name="Wall" type="20" x="1184" y="3024.66" width="96" height="47.3334"/>
   <object id="55" name="Wall" type="20" x="1184.67" y="3071.33" width="62.6667" height="16"/>
   <object id="56" name="Wall" type="20" x="1280.67" y="2976.67" width="126" height="16"/>
   <object id="57" name="Wall" type="20" x="1231.33" y="2895.33" width="64" height="16"/>
@@ -129802,5 +129802,27 @@
   <object id="222" name="Wall" type="20" x="895.5" y="271.5" width="16" height="16"/>
   <object id="223" name="Wall" type="20" x="1455.33" y="958.667" width="16" height="240"/>
   <object id="224" name="Wall" type="20" x="721.333" y="462.667" width="222.667" height="16"/>
+  <object id="225" name="Ripper" type="51" x="736.061" y="3024.21" width="15.8182" height="15.4545"/>
+  <object id="226" name="Ripper" type="51" x="655.758" y="3008.48" width="15.8182" height="15.4545"/>
+  <object id="228" name="Ripper" type="51" x="448.788" y="2975.12" width="15.8182" height="10.1212"/>
+  <object id="229" name="Ripper" type="51" x="2528.42" y="2816.27" width="15.8182" height="15.4545"/>
+  <object id="230" name="Ripper" type="51" x="2528.09" y="2688.94" width="15.8182" height="15.4545"/>
+  <object id="231" name="Ripper" type="51" x="2528.42" y="2576.27" width="15.8182" height="15.4545"/>
+  <object id="232" name="Ripper" type="51" x="2656.76" y="2655.27" width="15.8182" height="15.4545"/>
+  <object id="233" name="Ripper" type="51" x="2672.42" y="2480.27" width="15.8182" height="15.4545"/>
+  <object id="234" name="Ripper" type="51" x="2624.42" y="2415.94" width="15.8182" height="15.4545"/>
+  <object id="235" name="Ripper" type="51" x="2559.42" y="2336.27" width="15.8182" height="15.4545"/>
+  <object id="236" name="Ripper" type="51" x="2672.09" y="2367.94" width="15.8182" height="15.4545"/>
+  <object id="237" name="Ripper" type="51" x="1136.09" y="3060.61" width="15.8182" height="8.12117"/>
+  <object id="238" name="Ripper" type="51" x="1104.42" y="3040.61" width="15.8182" height="15.4545"/>
+  <object id="240" name="Ripper" type="51" x="575.591" y="2964.44" width="16.1515" height="6.4545"/>
+  <object id="241" name="Ripper" type="51" x="576.258" y="2996.77" width="16.1515" height="6.4545"/>
+  <object id="242" name="Ripper" type="51" x="576.258" y="3027.77" width="16.1515" height="6.4545"/>
+  <object id="244" name="Ripper" type="51" x="479.924" y="2992.44" width="16.1515" height="8.78783"/>
+  <object id="248" name="Ripper" type="51" x="208.258" y="3057.94" width="16.1515" height="11.4545"/>
+  <object id="250" name="Ripper" type="51" x="960.758" y="2960.61" width="15.8182" height="15.4545"/>
+  <object id="251" name="Ripper" type="51" x="1296.76" y="2914.61" width="14.8182" height="9.12117"/>
+  <object id="252" name="Ripper" type="51" x="1328.26" y="2930.77" width="14.8182" height="9.12117"/>
+  <object id="253" name="Ripper" type="51" x="463.591" y="3074.94" width="16.1515" height="8.78783"/>
  </objectgroup>
 </map>
