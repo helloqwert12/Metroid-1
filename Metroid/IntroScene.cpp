@@ -18,23 +18,23 @@ bool IntroScene::init()
 	_background->setScale(2.0f);
 	_background->setPosition(256, 225);
 
-	_playOption = new TextSprite(eID::FONTFULL, "PRESS START KEY", GVector2(145, 255));
+	_playOption = new TextSprite(eID::FONT, "PRESS START KEY", GVector2(145, 255));
 	_playOption->init();
 	_playOption->setScale(2.0);
 
-	_thienAn = new TextSprite(eID::FONTFULL, "THIEN AN - 15520008", GVector2(165, 350));
+	_thienAn = new TextSprite(eID::FONT, "THIEN AN - 15520008", GVector2(165, 350));
 	_thienAn->init();
 	_thienAn->setScale(1.25f);
 
-	_huuDat = new TextSprite(eID::FONTFULL, "HUU DAT  - 15520104", GVector2(165, 375));
+	_huuDat = new TextSprite(eID::FONT, "HUU DAT  - 15520104", GVector2(165, 375));
 	_huuDat->init();
 	_huuDat->setScale(1.25f);
 
-	_siDat = new TextSprite(eID::FONTFULL, "SI DAT   - 15520105", GVector2(165, 400));
+	_siDat = new TextSprite(eID::FONT, "SI DAT   - 15520105", GVector2(165, 400));
 	_siDat->init();
 	_siDat->setScale(1.25f);
 
-	_leHuy = new TextSprite(eID::FONTFULL, "LE HUY   - 15520312", GVector2(165, 425));
+	_leHuy = new TextSprite(eID::FONT, "LE HUY   - 15520312", GVector2(165, 425));
 	_leHuy->init();
 	_leHuy->setScale(1.25f);
 

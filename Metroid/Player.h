@@ -9,7 +9,6 @@
 #include "BaseObject.h"
 #include "IComponent.h"
 #include "CollisionBody.h"
-#include <list>
 #include "Info.h"
 
 #define MOVE_SPEED 150
@@ -20,7 +19,7 @@
 class Player : public BaseObject, public IControlable
 {
 public:
-	Player(int life = 30);
+	Player(int life = 3);
 	~Player();
 
 	void init();
@@ -42,10 +41,11 @@ public:
 	void bomb();
 	void die();
 
-	float checkCollision(BaseObject* object, float dt);
 	void checkPosition();
+	float checkCollision(BaseObject* object, float dt);
 
-	void setLifeNumber(int number);
+	GVector2 getPosition();
+
 	int getLifeNumber();
 
 	void setStatus(eStatus status);
@@ -62,8 +62,6 @@ private:
 	StopWatch* _stopWatch;
 
 	eStatus _currentAnimateIndex;
-
-	int _lifeNum;
 
 	Info* _info;
 

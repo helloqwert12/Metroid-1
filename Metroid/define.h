@@ -29,11 +29,12 @@ enum eID
 {
 	PLAYER = 0,
 	INTRO = 1,
-	FONTFULL = 2,
+	FONT = 2,
 
 	LIFE_ICON = 3,
+	ENEGY_ICON = 4,
 
-	MAP_METROID = 4,
+	MAP_METROID = 5,
 
 	WALL = 20,
 };

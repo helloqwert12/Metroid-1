@@ -1,5 +1,6 @@
 ﻿#include "SpriteManager.h"
 #include "pugixml/pugixml.hpp"
+using namespace pugi;
 
 SpriteManager* SpriteManager::_instance = nullptr;
 
@@ -16,10 +17,10 @@ SpriteManager::SpriteManager()
 
 SpriteManager::~SpriteManager()
 {
-	for (auto spr = _listSprite.begin(); spr != _listSprite.end(); ++spr)
+	for (auto sprite = _listSprite.begin(); sprite != _listSprite.end(); ++sprite)
 	{
-		spr->second->release(); // release sprite's texture
-		delete spr->second; // delete sprite
+		sprite->second->release(); // release sprite's texture
+		delete sprite->second; // delete sprite
 	}
 
 	if (!_listSprite.empty())
@@ -28,32 +29,35 @@ SpriteManager::~SpriteManager()
 
 void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 {
-	Sprite* pSprite = NULL;
+	Sprite* sprite = NULL;
 
-	pSprite = new Sprite(spriteHandle, L"Resources//Images//intro.png");
-	this->_listSprite[eID::INTRO] = pSprite;
+	sprite = new Sprite(spriteHandle, L"Resources//Images//intro.png");
+	this->_listSprite[eID::INTRO] = sprite;
 
-	pSprite = new Sprite(spriteHandle, L"Resources//Images//font.png", 54, 6);
-	this->_listSprite[eID::FONTFULL] = pSprite;
+	sprite = new Sprite(spriteHandle, L"Resources//Images//font.png", 54, 6);
+	this->_listSprite[eID::FONT] = sprite;
 
-	pSprite = new Sprite(spriteHandle, L"Resources//Images//life.png");
-	this->_listSprite[eID::LIFE_ICON] = pSprite;
+	sprite = new Sprite(spriteHandle, L"Resources//Images//life.png");
+	this->_listSprite[eID::LIFE_ICON] = sprite;
 
-	pSprite = new Sprite(spriteHandle, L"Resources//Images//player.png");
-	this->_listSprite.insert(pair<eID, Sprite*>(eID::PLAYER, pSprite));
+	sprite = new Sprite(spriteHandle, L"Resources//Images//enegy.png");
+	this->_listSprite[eID::ENEGY_ICON] = sprite;
+
+	sprite = new Sprite(spriteHandle, L"Resources//Images//player.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::PLAYER, sprite));
 	this->loadSpriteInfo(eID::PLAYER, "Resources//Images//player.txt");
 
 	// Tileset
-	pSprite = loadXMLDoc(spriteHandle, L"Resources//Maps//map.tmx");
-	pSprite->setOrigin(VECTOR2ZERO);
-	pSprite->setScale(SCALE_FACTOR);
-	this->_listSprite[eID::MAP_METROID] = pSprite;
+	sprite = loadXMLDoc(spriteHandle, L"Resources//Maps//map.tmx");
+	sprite->setOrigin(VECTOR2ZERO);
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite[eID::MAP_METROID] = sprite;
 }
 
 Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spritehandle, LPWSTR path)
 {
-	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file(path, pugi::parse_default | pugi::parse_pi);
+	xml_document doc;
+	xml_parse_result result = doc.load_file(path, parse_default | parse_pi);
 	if (result == false)
 	{
 		OutputDebugString(L"Khong tim thay file");

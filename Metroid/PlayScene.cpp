@@ -46,6 +46,9 @@ bool PlayScene::init()
 	}
 
 	listObject->clear();
+
+	this->getPlayer()->resetValues();
+
 	return true;
 }
 
@@ -66,7 +69,10 @@ void PlayScene::update(float dt)
 	}
 
 	// Update viewport theo object tracker là Player
-	this->updateViewport(_player);
+	if (!_player->isInStatus(eStatus::DIE))
+	{
+		this->updateViewport(this->getPlayer());
+	}
 
 	// Lấy HCN bound của viewport
 	RECT viewportInTransform = _viewport->getBounding();
@@ -75,25 +81,29 @@ void PlayScene::update(float dt)
 
 	_activeObject.clear();
 	_activeObject = _root->retrieve(viewportInTransform);
-	_activeObject.push_back(_player);
 
-	for (auto obj : _activeObject)
+	// Kiểm tra va chạm player với các object
+	for (BaseObject* obj : _activeObject)
+		_player->checkCollision(obj, dt);
+
+	// Xét va chạm từng object với các object còn lại
+	int i = 0, j = 0;
+	while (i < _activeObject.size() - 1)
 	{
-		// Nếu object đã bị DESTROY hoặc object là Wall thì bỏ qua
-		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::WALL)
-			continue;
-
-		// Xét va chạm từng object với các object còn lại
-		for (BaseObject* passiveObj : _activeObject)
+		j = i + 1;
+		while (j < _activeObject.size())
 		{
-			// Nếu object đang xét là chính nó hoặc object đã bị DESTROY thì bỏ qua
-			if (passiveObj == nullptr || passiveObj == obj || passiveObj->isInStatus(eStatus::DESTROY))
-				continue;
-
-			// Kiểm tra va chạm
-			obj->checkCollision(passiveObj, dt);
+			if (_activeObject[i]->getId() == WALL) // Nếu là Wall thì xét va chạm object kia với Wall
+				_activeObject[j]->checkCollision(_activeObject[i], dt);
+			else // Nếu không phải là Wall thì xét va chạm bình thường
+				_activeObject[i]->checkCollision(_activeObject[j], dt);
+			j++;
 		}
+		i++;
 	}
+
+	// Update lại player và các object
+	_player->update(dt);
 
 	for (BaseObject* obj : _activeObject)
 	{
@@ -106,15 +116,15 @@ void PlayScene::updateViewport(BaseObject* objTracker)
 	GVector2 worldsize = this->_tileMap->getWorldSize();
 
 	//GVector2 new_position = GVector2(max(objTracker->getPositionX() - 260, 0), WINDOW_HEIGHT);
-	GVector2 new_position = GVector2(max(objTracker->getPositionX() - 260, 0), max(objTracker->getPositionY() + 400, 0));
+	GVector2 newPosition = GVector2(max(objTracker->getPositionX() - 260, 0), max(objTracker->getPositionY() + 400, 0));
 
 	// Không cho đi quá map.
-	if (new_position.x + WINDOW_WIDTH > worldsize.x)
+	if (newPosition.x + WINDOW_WIDTH > worldsize.x)
 	{
-		new_position.x = worldsize.x - WINDOW_WIDTH;
+		newPosition.x = worldsize.x - WINDOW_WIDTH;
 	}
 
-	_viewport->setPositionWorld(new_position);
+	_viewport->setPositionWorld(newPosition);
 }
 
 void PlayScene::draw(LPD3DXSPRITE spriteHandle)
@@ -125,6 +135,8 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	{
 		object->draw(spriteHandle, _viewport);
 	}
+
+	_player->draw(spriteHandle, _viewport);
 
 	_text->draw();
 }

@@ -2,15 +2,15 @@
 #define __INFO_H__
 
 #include "define.h"
-#include "EmptyObject.h"
+#include "BaseObject.h"
 #include "TextSprite.h"
 
 #define GAP 10
 
-class Info : public EmptyObject
+class Info : public BaseObject
 {
 public:
-	Info(GVector2 position, int number);
+	Info();
 	~Info();
 
 	virtual void init();
@@ -18,14 +18,23 @@ public:
 	virtual void draw(LPD3DXSPRITE, Viewport*);
 	virtual void release();
 
-	void setLifeNumber(int number);
-	int getLifeNumber();
+	void setLife(int number);
+	int getLife();
+
+	void setEnergy(int number);
+	int getEnergy();
+
 	void setDebugAttack(string str);
 
 private:
 	Sprite* _iconLife;
 	int _lifeNumber;
 	TextSprite* _textLife;
+
+	Sprite* _iconEnergy;
+	int _energyNumber;
+	TextSprite* _textEnergy;
+
 	TextSprite* _debugAttack;
 };
 

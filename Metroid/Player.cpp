@@ -3,7 +3,6 @@
 
 Player::Player(int life) : BaseObject(eID::PLAYER)
 {
-	_lifeNum = life;
 }
 
 Player::~Player()
@@ -46,6 +45,9 @@ void Player::init()
 
 	_animations[eStatus::ROLLING_DOWN] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::ROLLING_DOWN]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
+
+	_animations[eStatus::DIE] = new Animation(_sprite, 0.07f);
+	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "normal", NULL);
 
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "look_up", NULL);
@@ -92,15 +94,21 @@ void Player::init()
 	// Khởi tạo StopWatch
 	_stopWatch = new StopWatch();
 
-	this->resetValues();
+	this->_currentAnimateIndex = NORMAL;
 
 	// Info có tọa độ top-left
-	_info = new Info(GVector2(50, 50), this->getLifeNumber());
+	_info = new Info();
 	_info->init();
+	_info->setLife(3);
+	_info->setEnergy(30);
+
+	this->resetValues();
 }
 
 void Player::update(float deltatime)
 {
+	this->_info->update(deltatime);
+
 	this->checkPosition();
 	this->updateStatus(deltatime);
 	this->updateCurrentAnimateIndex();
@@ -122,7 +130,7 @@ void Player::updateStatus(float dt)
 {
 	if (this->isInStatus(eStatus::DIE))
 	{
-		if (_lifeNum < 0)
+		if (_info->getLife() < 0)
 		{
 			return;
 		}
@@ -457,14 +465,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 	}
 }
 
-void Player::setLifeNumber(int number)
+GVector2 Player::getPosition()
 {
-	_lifeNum = number;
+	return _sprite->getPosition();
 }
 
 int Player::getLifeNumber()
 {
-	return _lifeNum;
+	return _info->getLife();
 }
 
 void Player::setStatus(eStatus status)
