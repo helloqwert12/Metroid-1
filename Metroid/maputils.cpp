@@ -79,6 +79,10 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 		break;
 	case RIPPER:
 		return GetRipper(item, mapHeight);
+		break;
+	case WAVER:
+		return GetWaver(item, mapHeight);
+		break;
 	default:
 		return nullptr;
 	}
@@ -115,4 +119,20 @@ BaseObject* GetRipper(xml_node item, int mapHeight)
 	auto ripper = new Ripper(x, y, false);
 	ripper->init();
 	return ripper;
+}
+
+BaseObject* GetWaver(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	auto waver = new Waver(x, y, false);
+	waver->init();
+	return waver;
 }

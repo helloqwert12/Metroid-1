@@ -11,6 +11,7 @@
 #include "CollisionBody.h"
 #include "Info.h"
 #include "Ripper.h"
+#include "Waver.h"
 
 #define MOVE_SPEED 150
 #define JUMP_VELOCITY 510

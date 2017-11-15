@@ -553,6 +553,39 @@ float Player::checkCollision(BaseObject* object, float dt)
 			//	_info->AddScore(300);
 		}
 	}
+	else if (objectId == WAVER)
+	{
+		if (!((Waver*)object)->isActive())
+		{
+			auto objPos = object->getPosition();
+			auto pos = this->getPosition();
+			if (getDistance(objPos, pos) < 500 && abs(pos.x - objPos.x) < 500)
+			{
+				((Waver*)object)->active(pos.x > objPos.x);
+			}
+		}
+		if (!((Waver*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, false))
+			{
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+				beHit(direction);
+
+				_info->setEnergy(_info->getEnergy() - 8);
+			}
+
+			//if (this->weaponCheckCollision(object, direction, dt, false))
+			//{
+			//	((Waver*)object)->wasHit(1);
+			//}
+			//if (((Waver*)object)->isDead())
+			//	_info->AddScore(300);
+		}
+	}
 }
 
 GVector2 Player::getPosition()

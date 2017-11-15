@@ -179,6 +179,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Viewport.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Waver.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +222,7 @@
     <ClInclude Include="utils.h" />
     <ClInclude Include="Viewport.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Waver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

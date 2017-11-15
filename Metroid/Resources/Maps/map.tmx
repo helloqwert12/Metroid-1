@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="254">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="262">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -129818,11 +129818,19 @@
   <object id="240" name="Ripper" type="51" x="575.591" y="2964.44" width="16.1515" height="6.4545"/>
   <object id="241" name="Ripper" type="51" x="576.258" y="2996.77" width="16.1515" height="6.4545"/>
   <object id="242" name="Ripper" type="51" x="576.258" y="3027.77" width="16.1515" height="6.4545"/>
-  <object id="244" name="Ripper" type="51" x="479.924" y="2992.44" width="16.1515" height="8.78783"/>
+  <object id="244" name="Ripper" type="51" x="478.924" y="2949.44" width="16.1515" height="8.78783"/>
   <object id="248" name="Ripper" type="51" x="208.258" y="3057.94" width="16.1515" height="11.4545"/>
   <object id="250" name="Ripper" type="51" x="960.758" y="2960.61" width="15.8182" height="15.4545"/>
   <object id="251" name="Ripper" type="51" x="1296.76" y="2914.61" width="14.8182" height="9.12117"/>
   <object id="252" name="Ripper" type="51" x="1328.26" y="2930.77" width="14.8182" height="9.12117"/>
   <object id="253" name="Ripper" type="51" x="463.591" y="3074.94" width="16.1515" height="8.78783"/>
+  <object id="254" name="Waver" type="52" x="480.091" y="2992.27" width="15.8182" height="15.4545"/>
+  <object id="255" name="Waver" type="52" x="258.091" y="2990.27" width="15.8182" height="15.4545"/>
+  <object id="256" name="Waver" type="52" x="290.091" y="2944.27" width="15.8182" height="15.4545"/>
+  <object id="257" name="Waver" type="52" x="708.091" y="2990.27" width="15.8182" height="15.4545"/>
+  <object id="258" name="Waver" type="52" x="1294.09" y="2942.27" width="15.8182" height="15.4545"/>
+  <object id="259" name="Waver" type="52" x="1392.09" y="2944.27" width="15.8182" height="15.4545"/>
+  <object id="260" name="Waver" type="52" x="897.091" y="2992.27" width="15.8182" height="15.4545"/>
+  <object id="261" name="Waver" type="52" x="1038.09" y="2993.27" width="15.8182" height="15.4545"/>
  </objectgroup>
 </map>

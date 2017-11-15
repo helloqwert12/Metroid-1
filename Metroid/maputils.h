@@ -9,6 +9,7 @@
 
 #include "Wall.h"
 #include "Ripper.h"
+#include "Waver.h"
 
 using namespace pugi;
 
@@ -23,5 +24,6 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight);
 
 BaseObject* GetWall(xml_node item, int mapHeight);
 BaseObject* GetRipper(xml_node item, int mapHeight);
+BaseObject* GetWaver(xml_node item, int mapHeight);
 
 #endif //!__MAPUTIL_H__

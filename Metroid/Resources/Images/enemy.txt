@@ -4,3 +4,12 @@ p_ripper_01		440	46	456	54
 br_ripper_01		458	46	474	54
 o_ripper_01		476	46	492	54
 f_ripper_01		494	46	510	54
+gr_waver_01		42	60	58	76
+gr_waver_02		60	62	76	74
+gr_waver_03		78	64	94	72
+bl_waver_01		96	60	112	76
+bl_waver_02		114	62	130	74
+bl_waver_03		132	64	148	72
+f_waver_01		150	60	166	76
+f_waver_02		168	62	184	74
+f_waver_03		186	64	202	72

@@ -40,6 +40,7 @@ enum eID
 
 	ENEMY = 50,
 	RIPPER = 51,
+	WAVER = 52,
 };
 
 // Trạng thái của object
