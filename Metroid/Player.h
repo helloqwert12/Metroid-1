@@ -14,8 +14,8 @@
 #include "Waver.h"
 
 #define MOVE_SPEED 150
-#define JUMP_VELOCITY 510
-#define GRAVITY 800
+#define JUMP_VELOCITY 450
+#define GRAVITY 600
 #define PROTECT_TIME 2000
 
 class Player : public BaseObject, public IControlable

@@ -10,7 +10,7 @@
 #include "QuadtreeNode.h"
 #include <ctime>
 
-#define WAVER_MOVE_SPEED 120
+#define WAVER_MOVE_SPEED 80
 
 class Waver : public BaseObject
 {
@@ -27,6 +27,7 @@ public:
 	bool isDead();
 
 	void active(bool direct);
+	void deactive();
 	bool isActive();
 
 	float checkCollision(BaseObject* object, float dt);

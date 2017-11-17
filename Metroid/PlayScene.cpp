@@ -77,10 +77,15 @@ void PlayScene::update(float dt)
 	// Lấy HCN bound của viewport
 	RECT viewportInTransform = _viewport->getBounding();
 
-	//viewportInTransform.left -= WINDOW_WIDTH / 2;
-	//viewportInTransform.top +=  WINDOW_HEIGHT / 2;
-	//viewportInTransform.right += WINDOW_WIDTH / 2;
-	//viewportInTransform.bottom -= WINDOW_HEIGHT / 2;
+	viewportInTransform.left -= WINDOW_WIDTH / 2;
+	viewportInTransform.top +=  WINDOW_HEIGHT / 2;
+	viewportInTransform.right += WINDOW_WIDTH / 2;
+	viewportInTransform.bottom -= WINDOW_HEIGHT / 2;
+
+	//viewportInTransform.left -= WINDOW_WIDTH * 1.5;
+	//viewportInTransform.top +=  WINDOW_HEIGHT * 1.5;
+	//viewportInTransform.right += WINDOW_WIDTH * 1.5;
+	//viewportInTransform.bottom -= WINDOW_HEIGHT * 1.5;
 
 	_root->deleteObjects();
 

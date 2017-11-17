@@ -1,6 +1,5 @@
 ﻿#include "IComponent.h"
 
-#pragma region Movement
 Movement::Movement(GVector2 accelerate, GVector2 velocicty, Sprite* refSprite)
 {
 	this->_accelerate = accelerate;
@@ -39,10 +38,8 @@ GVector2 Movement::getVelocity()
 {
 	return this->_velocity;
 }
-#pragma endregion
 
 
-#pragma region Gravity
 Gravity::Gravity(GVector2 gravity, Movement* movement)
 {
 	this->_gravity = gravity;
@@ -81,48 +78,38 @@ void Gravity::setGravity(GVector2 gravity)
 {
 	this->_gravity = gravity;
 }
-#pragma endregion
 
 
-#pragma region SinMovement
 SinMovement::SinMovement(GVector2 amplitude, float frequency, Sprite* refsprite)
 {
 	this->_amplitude = amplitude;
+	this->_radian = 0.0f;
+	this->_radianVelocity =  2 * M_PI * frequency;
+	this->_linearVelocity = _amplitude * _radianVelocity * cos(_radian); // (A * ω * cos(φ))
 	this->_refSprite = refsprite;
-	_radianVeloc = frequency * 2 * M_PI;
-	_radian = 0.0f;
-	this->_linearVeloc = _amplitude * _radianVeloc; // (A * ω)
 }
 
 void SinMovement::update(float deltatime)
 {
-	/*
-	góc xoay được tính theo công thức
-	φ = ω * t
-	*/
-	_radian += _radianVeloc * deltatime / 1000;
+	// góc xoay φ = ω * t
+	this->_radian += _radianVelocity * deltatime / 1000;
 
-	/*
-	vận tốc tuyến tính được tính theo công thức
-	v = -A * ω * sin(ωt)
-	(_linearVeloc = A * ω)
-	*/
-	auto veloc = -_linearVeloc * sin(_radian);
+	// vận tốc tuyến tính v = A * ω * cos(ωt) (lấy đạo hàm)
+	this->_linearVelocity = _amplitude * _radianVelocity * cos(_radian);
 
-	auto pos = this->_refSprite->getPosition();
-	pos += veloc * deltatime / 1000;
-	this->_refSprite->setPosition(pos);
+	auto position = this->_refSprite->getPosition();
+	position += _linearVelocity * deltatime / 1000;
+	this->_refSprite->setPosition(position);
 }
 
 void SinMovement::setAmplitude(GVector2 amplitude)
 {
 	this->_amplitude = amplitude;
-	this->_linearVeloc = _amplitude * _radianVeloc;
+	this->_linearVelocity = _amplitude * _radianVelocity * cos(_radian);
 }
 
-void SinMovement::setFrequency(float freq)
+void SinMovement::setFrequency(float frequency)
 {
-	_radianVeloc = freq;
-	this->_linearVeloc = _amplitude * _radianVeloc;
+	this->_radianVelocity = 2 * M_PI * frequency;
+	this->_linearVelocity = _amplitude * _radianVelocity * cos(_radian);
 }
-#pragma endregion

@@ -15,7 +15,7 @@ public:
 
 
 /*
-	Hiệu ứng chuyển động theo gia tốc và vận tốc.
+	Chuyển động theo gia tốc và vận tốc.
 	Khi không chuyển động thì gia tốc và vận tốc bằng 0
 	Khi sử dụng:
 		Khởi tạo bên trong init của object.
@@ -63,34 +63,32 @@ private:
 	GVector2 _gravity;
 	GVector2 _additionalVelocity;
 	Movement* _refMovement;
-	Sprite* _refSprite;
 	eGravityStatus _status;
 };
 
 
-// chuyển động hình sin
+// Chuyển động hình sin
 class SinMovement : public IComponent
 {
 public:
 	/*
-	chuyển động hình sin
-		@amplitude :  biên độ
-		@frequency : tần số chuyển động
+		@amplitude: biên độ
+		@frequency: tần số
 	*/
 	SinMovement(GVector2 amplitude, float frequency, Sprite* refSprite);
 
 	void update(float deltatime);
 	void setAmplitude(GVector2 amplitude);
-	void setFrequency(float freq);
+	void setFrequency(float frequency);
 
 private:
+	float _radian; // góc xoay (φ) biến thiên theo thời gian
+	float _radianVelocity; // vận tốc góc (ω)
+
+	GVector2 _amplitude; // biên độ	(A)
+	GVector2 _linearVelocity; // vận tốc tuyến tính (Aω*cos(φ))
+
 	Sprite* _refSprite;
-
-	float _radianVeloc; // vận tốc góc (= ω)
-	float _radian; // góc xoay (= φ) biến thiên theo thời gian
-
-	GVector2 _amplitude; // biên độ		(= A)
-	GVector2 _linearVeloc; // vận tốc tuyến tính (= ωA)
 };
 
 #endif // !__ICOMPONENT_H__

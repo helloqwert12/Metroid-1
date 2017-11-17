@@ -100,7 +100,7 @@ void Player::init()
 	_info = new Info();
 	_info->init();
 	_info->setLife(3);
-	_info->setEnergy(30);
+	_info->setEnergy(99);
 
 	this->resetValues();
 }
@@ -557,13 +557,24 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((Waver*)object)->isActive())
 		{
-			auto objPos = object->getPosition();
-			auto pos = this->getPosition();
-			if (getDistance(objPos, pos) < 500 && abs(pos.x - objPos.x) < 500)
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (getDistance(objPosition, position) < WINDOW_WIDTH / 2 && abs(position.x - objPosition.x) < WINDOW_WIDTH / 2)
 			{
-				((Waver*)object)->active(pos.x > objPos.x);
+				((Waver*)object)->active(position.x > objPosition.x);
 			}
 		}
+
+		if (((Waver*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (getDistance(objPosition, position) > 150 && abs(position.x - objPosition.x) > WINDOW_WIDTH / 2)
+			{
+				((Waver*)object)->deactive();
+			}
+		}
+
 		if (!((Waver*)object)->isDead() && _protectTime <= 0)
 		{
 			if (collisionBody->checkCollision(object, direction, dt, false))

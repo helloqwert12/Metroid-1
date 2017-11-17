@@ -67,6 +67,11 @@ void Waver::update(float deltatime)
 				move->setVelocity(GVector2(0, 0));
 			}
 		}
+
+		for (auto it = _componentList.begin(); it != _componentList.end(); it++)
+		{
+			it->second->update(deltatime);
+		}
 	}
 	else
 	{
@@ -87,11 +92,6 @@ void Waver::update(float deltatime)
 		//		QuadTreeNode::getInstance()->insert(item);
 		//	}
 		//}
-	}
-
-	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		it->second->update(deltatime);
 	}
 }
 
@@ -122,11 +122,10 @@ void Waver::active(bool direct)
 {
 	_isActive = true;
 
-	auto movement = (Movement*)this->_componentList["Movement"];
-
-	SinMovement* sinmovement = new SinMovement(GVector2(0, 150), 0.5, _sprite);
+	auto sinmovement = new SinMovement(GVector2(0, 150), 0.5, _sprite);
 	this->_componentList["SinMovement"] = sinmovement;
 
+	auto movement = (Movement*)this->_componentList["Movement"];
 	if (direct)
 	{
 		_sprite->setScaleX(_sprite->getScale().x * -1);
@@ -136,6 +135,18 @@ void Waver::active(bool direct)
 	{
 		movement->setVelocity(GVector2(-WAVER_MOVE_SPEED, 0));
 	}
+}
+
+void Waver::deactive()
+{
+	_isActive = false;
+
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(0, 0));
+
+	auto sinMovement = (Movement*)this->_componentList["SinMovement"];
+	_componentList.erase("SinMovement");
+	delete sinMovement;
 }
 
 bool Waver::isActive()
