@@ -18,9 +18,9 @@ bool IntroScene::init()
 	_background->setScale(2.0f);
 	_background->setPosition(256, 225);
 
-	_playOption = new TextSprite(eID::FONT, "PRESS START KEY", GVector2(145, 255));
-	_playOption->init();
-	_playOption->setScale(2.0);
+	_pressStart = new TextSprite(eID::FONT, "PRESS START KEY", GVector2(145, 255));
+	_pressStart->init();
+	_pressStart->setScale(2.0);
 
 	_thienAn = new TextSprite(eID::FONT, "THIEN AN - 15520008", GVector2(165, 350));
 	_thienAn->init();
@@ -39,10 +39,10 @@ bool IntroScene::init()
 	_leHuy->setScale(1.25f);
 
 	_flash = new StopWatch();
-	_access = new StopWatch();
+	_startGame = new StopWatch();
 
-	_ok = false;
-	_draw = true;
+	_isPressed = false;
+	_isDrawText = false;
 
 	//SoundManager::getInstance()->PlayLoop(INTRO_SCENE);
 
@@ -55,21 +55,21 @@ void IntroScene::updateInput(float deltatime)
 
 void IntroScene::onKeyPressed(KeyEventArg* keyEvent)
 {
-	if (keyEvent->keycode == DIK_Z)
+	if (keyEvent->keyCode == DIK_Z)
 	{
-		_ok = true;
+		_isPressed = true;
 	}
 }
 
 void IntroScene::update(float dt)
 {
-	if (_ok)
+	if (_isPressed)
 	{
 		if (_flash->isTimeLoop(120))
 		{
-			_draw = !_draw;
+			_isDrawText = !_isDrawText;
 		}
-		if (_access->isStopWatch(600))
+		if (_startGame->isStopWatch(600))
 		{
 			SceneManager::getInstance()->replaceScene(new PlayScene());
 		}
@@ -80,15 +80,15 @@ void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 {
 	_background->render(spriteHandle);
 
-	if (!_ok)
+	if (!_isPressed)
 	{
-		_playOption->draw(spriteHandle);
+		_pressStart->draw(spriteHandle);
 	}
 	else
 	{
-		if (_draw)
+		if (_isDrawText)
 		{
-			_playOption->draw(spriteHandle);
+			_pressStart->draw(spriteHandle);
 		}
 	}
 
@@ -102,10 +102,10 @@ void IntroScene::release()
 {
 	//SoundManager::getInstance()->Stop(INTRO_SCENE);
 
-	SAFE_DELETE(_playOption);
+	SAFE_DELETE(_pressStart);
 	SAFE_DELETE(_background);
 	SAFE_DELETE(_flash);
-	SAFE_DELETE(_access);
+	SAFE_DELETE(_startGame);
 
 	//if (_input != nullptr)
 	//	__unhook(_input);

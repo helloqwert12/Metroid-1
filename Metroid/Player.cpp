@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 #include "SceneManager.h"
 
-Player::Player(int life) : BaseObject(eID::PLAYER)
+Player::Player() : BaseObject(eID::PLAYER)
 {
 }
 
@@ -46,8 +46,8 @@ void Player::init()
 	_animations[eStatus::ROLLING_DOWN] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::ROLLING_DOWN]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
 
-	_animations[eStatus::DIE] = new Animation(_sprite, 0.07f);
-	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "normal", NULL);
+	_animations[eStatus::DIE] = new Animation(_sprite, 0.5f, false);
+	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
 
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "look_up", NULL);
@@ -91,16 +91,14 @@ void Player::init()
 	this->setOrigin(GVector2(0.5f, 0.0f));
 	this->setStatus(eStatus::NORMAL);
 
-	// Khởi tạo StopWatch
-	_stopWatch = new StopWatch();
-
 	this->_currentAnimateIndex = NORMAL;
+	this->_isRevive = false;
 
 	// Info có tọa độ top-left
 	_info = new Info();
 	_info->init();
-	_info->setLife(3);
-	_info->setEnergy(99);
+	_info->setLife(2);
+	_info->setEnergy(10);
 
 	this->resetValues();
 }
@@ -109,7 +107,7 @@ void Player::update(float deltatime)
 {
 	if (_info->getEnergy() <= 0)
 	{
-		this->setStatus(DIE);
+		this->die();
 		_protectTime = 0;
 	}
 
@@ -134,18 +132,53 @@ void Player::update(float deltatime)
 
 void Player::updateInput(float dt)
 {
-	// Use event instead
+	// Dùng event
+}
+
+void Player::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
+{
+	if (_protectTime > 0)
+		_animations[_currentAnimateIndex]->enableFlashes(true);
+	else
+		_animations[_currentAnimateIndex]->enableFlashes(false);
+
+	_animations[_currentAnimateIndex]->draw(spriteHandle, viewport);
+	_info->draw(spriteHandle, viewport);
+}
+
+void Player::release()
+{
+	for (auto it = _animations.begin(); it != _animations.end(); it++)
+	{
+		SAFE_DELETE(it->second);
+	}
+	_animations.clear();
+
+	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		SAFE_DELETE(it->second);
+	}
+	_componentList.clear();
+
+	SAFE_DELETE(_sprite);
+	SAFE_DELETE(_info);
+
+	if (_input != nullptr)
+		__unhook(_input);
 }
 
 void Player::updateStatus(float dt)
 {
 	if (this->isInStatus(eStatus::DIE))
 	{
+		// Lưu lại vị trí chết để set vị trí hồi sinh
+		this->_revivePosition = GVector2(this->getPosition());
+
 		if (_info->getLife() < 0)
-		{
 			return;
-		}
-		return;
+
+		if (!_animations[eStatus::DIE]->isAnimate())
+			this->revive();
 	}
 
 	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT)
@@ -200,62 +233,12 @@ void Player::updateCurrentAnimateIndex()
 	}
 }
 
-void Player::resetValues()
-{
-	preWall = nullptr;
-
-	this->setScale(SCALE_FACTOR);
-	_movingSpeed = MOVE_SPEED;
-	_protectTime = PROTECT_TIME;
-
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(0, 0));
-
-	for (auto animate : _animations)
-	{
-		animate.second->setColorFlash(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-	}
-}
-
-void Player::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
-{
-	if (_protectTime > 0)
-		_animations[_currentAnimateIndex]->enableFlashes(true);
-	else
-		_animations[_currentAnimateIndex]->enableFlashes(false);
-	
-	_animations[_currentAnimateIndex]->draw(spriteHandle, viewport);
-	_info->draw(spriteHandle, viewport);
-}
-
-void Player::release()
-{
-	for (auto it = _animations.begin(); it != _animations.end(); it++)
-	{
-		SAFE_DELETE(it->second);
-	}
-	_animations.clear();
-
-	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		SAFE_DELETE(it->second);
-	}
-	_componentList.clear();
-
-	SAFE_DELETE(_sprite);
-	SAFE_DELETE(_stopWatch);
-	SAFE_DELETE(_info);
-
-	if (_input != nullptr)
-		__unhook(_input);
-}
-
 void Player::onKeyPressed(KeyEventArg* keyEvent)
 {
 	if (this->isInStatus(eStatus::DIE))
 		return;
 
-	switch (keyEvent->keycode)
+	switch (keyEvent->keyCode)
 	{
 	case DIK_LEFT:
 	{
@@ -311,7 +294,7 @@ void Player::onKeyReleased(KeyEventArg* keyEvent)
 	if (this->isInStatus(eStatus::DIE))
 		return;
 
-	switch (keyEvent->keycode)
+	switch (keyEvent->keyCode)
 	{
 	case DIK_LEFT:
 	{
@@ -346,6 +329,36 @@ void Player::onKeyReleased(KeyEventArg* keyEvent)
 	}
 	default:
 		break;
+	}
+}
+
+void Player::resetValues()
+{
+	preWall = nullptr;
+
+	this->setScale(SCALE_FACTOR);
+	_movingSpeed = MOVE_SPEED;
+	_protectTime = PROTECT_TIME;
+
+	if (_isRevive)
+	{
+		this->setStatus(eStatus::NORMAL);
+		_info->setLife(_info->getLife() - 1);
+		_info->setEnergy(30);
+
+		auto gravity = (Gravity*)this->_componentList["Gravity"];
+		gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+		this->setPosition(_revivePosition);
+		_isRevive = false;
+	}
+
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(0, 0));
+
+	for (auto animate : _animations)
+	{
+		animate.second->setColorFlash(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 }
 
@@ -459,12 +472,15 @@ void Player::die()
 {
 	if (!this->isInStatus(eStatus::DIE))
 		this->setStatus(eStatus::DIE);
+}
 
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(-MOVE_SPEED * (this->getScale().x / SCALE_FACTOR), JUMP_VELOCITY));
+void Player::revive()
+{
+	this->_isRevive = true;
+	this->resetValues();
+	_animations[eStatus::DIE]->restart();
 
-	auto gravity = (Gravity*)this->_componentList["Gravity"];
-	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+	this->jump();
 }
 
 void Player::checkPosition()
@@ -599,6 +615,11 @@ float Player::checkCollision(BaseObject* object, float dt)
 	}
 }
 
+void Player::setStatus(eStatus status)
+{
+	_status = status;
+}
+
 GVector2 Player::getPosition()
 {
 	return _sprite->getPosition();
@@ -607,11 +628,6 @@ GVector2 Player::getPosition()
 int Player::getLifeNumber()
 {
 	return _info->getLife();
-}
-
-void Player::setStatus(eStatus status)
-{
-	_status = status;
 }
 
 RECT Player::getBounding()

@@ -21,7 +21,7 @@
 class Player : public BaseObject, public IControlable
 {
 public:
-	Player(int life = 3);
+	Player();
 	~Player();
 
 	void init();
@@ -34,6 +34,8 @@ public:
 	void onKeyPressed(KeyEventArg* keyEvent);
 	void onKeyReleased(KeyEventArg* keyEvent);
 
+	void resetValues();
+
 	void standing();
 	void moveLeft();
 	void moveRight();
@@ -43,38 +45,38 @@ public:
 	void bomb();
 	void beHit(eDirection direction);
 	void die();
+	void revive();
 
 	void checkPosition();
 	float checkCollision(BaseObject* object, float dt);
+
+	void setStatus(eStatus status);
 
 	GVector2 getPosition();
 
 	int getLifeNumber();
 
-	void setStatus(eStatus status);
-
 	RECT getBounding();
-
-	void resetValues();
 
 private:
 	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
 
-	float _movingSpeed;
-	StopWatch* _stopWatch;
-
 	eStatus _currentAnimateIndex;
-
 	Info* _info;
+
+	float _movingSpeed;
 
 	float _protectTime;
 
-	GVector2 getVelocity();
+	bool _isRevive;
+	GVector2 _revivePosition;
 
 	void updateStatus(float dt);
 
 	void updateCurrentAnimateIndex();
+
+	GVector2 getVelocity();
 
 	// Dùng để xét đã rời khỏi Wall đụng trước đó hay chưa
 	BaseObject* preWall;

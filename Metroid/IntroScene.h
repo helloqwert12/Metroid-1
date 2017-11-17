@@ -18,28 +18,28 @@ public:
 	IntroScene();
 	~IntroScene();
 
-	bool init() override;
-	void updateInput(float deltatime) override;
-	void update(float dt) override;
-	void draw(LPD3DXSPRITE spriteHandle) override;
-	void release() override;
+	bool init();
+	void updateInput(float deltatime);
+	void update(float dt);
+	void draw(LPD3DXSPRITE spriteHandle);
+	void release();
 
 	void onKeyPressed(KeyEventArg* keyEvent);
 
 private:
 	Sprite* _background;
 
-	TextSprite* _playOption;
+	TextSprite* _pressStart;
 	TextSprite* _thienAn;
 	TextSprite* _huuDat;
 	TextSprite* _siDat;
 	TextSprite* _leHuy;
 
 	StopWatch* _flash;
-	StopWatch* _access;
+	StopWatch* _startGame;
 
-	bool _ok;
-	bool _draw;
+	bool _isPressed;
+	bool _isDrawText;
 };
 
 #endif // !__INTRO_SCENE__

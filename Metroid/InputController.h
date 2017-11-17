@@ -12,12 +12,12 @@
 class KeyEventArg : public EventArg
 {
 public:
-	KeyEventArg(int keycode) 
+	KeyEventArg(int keyCode) 
 	{ 
-		this->keycode = keycode; 
+		this->keyCode = keyCode;
 	}
 
-	int keycode;
+	int keyCode;
 };
 
 [event_source(native)]
