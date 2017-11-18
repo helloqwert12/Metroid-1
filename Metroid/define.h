@@ -1,5 +1,5 @@
-﻿#ifndef __FRAMEWORK__
-#define __FRAMEWORK__
+﻿#ifndef __FRAMEWORK_H__
+#define __FRAMEWORK_H__
 
 #define _USE_MATH_DEFINES
 
@@ -102,4 +102,4 @@ if(p) \
 
 #endif // !SAFE_DELETE
 
-#endif // !__FRAMEWORK__
+#endif // !__FRAMEWORK_H__

@@ -1,5 +1,5 @@
-﻿#ifndef __COLLISIONBODY__
-#define __COLLISIONBODY__
+﻿#ifndef __COLLISIONBODY_H__
+#define __COLLISIONBODY_H__
 
 #include "BaseObject.h"
 #include "IComponent.h"
@@ -55,4 +55,4 @@ private:
 	float _txEntry, _tyEntry, _txExit, _tyExit;
 };
 
-#endif // !__COLLISIONBODY__
+#endif // !__COLLISIONBODY_H__

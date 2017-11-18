@@ -1,5 +1,5 @@
-#ifndef __SCENE_MANAGER_H__
-#define __SCENE_MANAGER_H__
+#ifndef __SCENEMANAGER_H__
+#define __SCENEMANAGER_H__
 
 #include <vector>
 #include "define.h"
@@ -31,4 +31,4 @@ private:
 	vector<Scene*> _scenes;
 };
 
-#endif // !__SCENE_MANAGER_H__
+#endif // !__SCENEMANAGER_H__

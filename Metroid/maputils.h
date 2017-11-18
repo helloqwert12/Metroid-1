@@ -37,4 +37,4 @@ BaseObject* GetSkree(xml_node item, int mapHeight);
 // Item
 BaseObject* GetEnergyBall(xml_node item, int mapHeight);
 
-#endif //!__MAPUTIL_H__
+#endif // !__MAPUTIL_H__

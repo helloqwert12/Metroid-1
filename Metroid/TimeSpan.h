@@ -14,7 +14,7 @@ public:
 	TimeSpan(UINT64);
 	~TimeSpan();
 
-	float getMiliSeconds();		// Lấy thời gian (milisecond)
+	float getMiliSeconds();	// Lấy thời gian (milisecond)
 	UINT64 getTicks();
 
 	TimeSpan operator +(TimeSpan);

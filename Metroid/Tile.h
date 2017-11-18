@@ -1,8 +1,10 @@
-﻿#ifndef __TILE__
-#define __TILE__
+﻿#ifndef __TILE_H__
+#define __TILE_H__
 
 #include <string>
 #include "Sprite.h"
+
+// Dùng để lưu thông tin của 1 ô Tile (id và srcRect)
 
 class Tile
 {
@@ -10,7 +12,7 @@ private:
 	int _id;
 	RECT _srcRect;
 
-	// Reference tới TileSet, khi vẽ cắt bằng srcRect như Sprite
+	// Reference tới TileSet Image, khi vẽ cắt bằng srcRect như Sprite
 	Sprite* _refSprite;
 
 public:
@@ -22,4 +24,4 @@ public:
 	int getId() const;
 };
 
-#endif	//#ifndef __TILE__
+#endif // !__TILE_H__

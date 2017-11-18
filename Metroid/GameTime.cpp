@@ -2,7 +2,7 @@
 
 GameTime* GameTime::_instance = nullptr;
 
-GameTime::GameTime(void)
+GameTime::GameTime()
 {
 }
 
@@ -11,7 +11,7 @@ GameTime::GameTime(TimeSpan& elapsedGameTime)
 	this->_elapsedGameTime = elapsedGameTime;
 }
 
-GameTime::~GameTime(void)
+GameTime::~GameTime()
 {
 }
 
@@ -54,12 +54,12 @@ void GameTime::updateGameTime()
 	QueryPerformanceCounter(&_Query);
 	curTicks = _Query.QuadPart;
 
-	if ((UINT64)((float)(curTicks - lastTicks) / _freQuery) < TimeSpan::TicksPerMilisecond * 16)
+	if ((UINT64)((float)(curTicks - lastTicks) / _freQuery) < TimeSpan::TicksPerMilisecond * 16) // 1000/60 = 16 milisecond
 	{
 		return;
 	}
 
-	auto gameTime = ((float)(curTicks - lastTicks)) / _freQuery;	// đơn vị tick
+	auto gameTime = ((float)(curTicks - lastTicks)) / _freQuery; // đơn vị tick
 
 	this->setTotalGameTime(_totalGameTime + gameTime);
 	this->setElapsedGameTime(TimeSpan((UINT64)gameTime));

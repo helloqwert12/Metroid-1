@@ -1,20 +1,23 @@
-﻿#ifndef __TILESET__
-#define __TILESET__
+﻿#ifndef __TILESET_H__
+#define __TILESET_H__
 
 #include <string>
 #include <vector>
 #include <stdexcept>
 #include "Tile.h"
 #include "pugixml/pugixml.hpp"
+using namespace pugi;
+
+// Dùng để lưu thông tin TileSet
 
 class TileSet
 {
 private:
-	Sprite *_tileImage;
-	int _widthTile;  // width của 1 tile
-	int _heightTile; // height của 1 tile
+	Sprite *_tileImage; // Reference tới TileSet Image
+	int _widthTile;  // Width của 1 Tile
+	int _heightTile; // Height của 1 Tile
 
-	vector<Tile*> _listTiles;	// List chứa các tile
+	vector<Tile*> _listTiles; // List chứa các Tile
 
 public:
 	TileSet(eID spriteId);
@@ -25,12 +28,12 @@ public:
 	void setHeighttile(const int &value);
 
 	// Đọc TileSet từ file XML
-	void loadListTiles(pugi::xml_node& node);
+	void loadListTiles(xml_node& node);
 
-	Sprite* getSprite();
-
-	// Vẽ 1 ô tile tương ứng với id. Gọi hàm này trong TileMap
+	// Vẽ 1 ô Tile với id tương ứng. Gọi hàm này trong TileMap
 	void draw(LPD3DXSPRITE spriteHandle, int id, GVector2 position, Viewport *viewport);
+	
+	Sprite* getSprite();
 };
 
-#endif	//#ifndef __TILESET__
+#endif // !__TILESET_H__

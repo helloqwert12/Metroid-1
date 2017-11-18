@@ -60,11 +60,9 @@ public:
 	void release();
 
 private:
-	LPDIRECT3DTEXTURE9	_texture;		// Dùng để chứa ảnh load từ file
-	D3DXIMAGE_INFO		_imageInfo;		// Dùng để chứa thông tin file ảnh
-	D3DXCOLOR			_color;			// Back color, khi vẽ sẽ được bỏ qua.
+	LPDIRECT3DTEXTURE9	_texture;	// Dùng để chứa ảnh load từ file
+	D3DXIMAGE_INFO		_imageInfo;	// Dùng để chứa thông tin file ảnh
+	D3DXCOLOR			_color;		// Back color, khi vẽ sẽ được bỏ qua.
 };
-
-typedef Texture* pTexture;
 
 #endif // !__TEXTURE_H__

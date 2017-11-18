@@ -1,5 +1,5 @@
-﻿#ifndef _SKREE_H
-#define _SKREE_H
+﻿#ifndef __SKREE_H__
+#define __SKREE_H__
 
 #include "define.h"
 #include "BaseObject.h"
@@ -11,7 +11,7 @@
 #include <ctime>
 #include "EnergyBall.h"
 
-#define SKREE_MOVE_SPEED 325
+#define SKREE_MOVE_SPEED 300
 
 class Skree : public BaseObject
 {
@@ -47,4 +47,4 @@ protected:
 	bool _startHitStopWatch;
 };
 
-#endif // !_SKREE_H
+#endif // !__SKREE_H__

@@ -25,9 +25,12 @@ void TileSet::loadListTiles(pugi::xml_node& tileset)
 	Tile* tile = nullptr;
 	RECT srcRECT = { 0,0, tileWidth, tileHeight };
 
+	// Thêm từng Tile vào listTiles
 	while (tileCount--)
 	{
 		this->_listTiles.push_back(new Tile(this->_tileImage, srcRECT, firstTileId));
+
+		// Tính toán srcRect cho Tile
 		firstTileId++;
 		if (srcRECT.right + tileWidth > imageWidth)
 		{

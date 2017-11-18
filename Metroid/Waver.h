@@ -1,5 +1,5 @@
-﻿#ifndef _WAVER_H
-#define _WAVER_H
+﻿#ifndef __WAVER_H__
+#define __WAVER_H__
 
 #include "define.h"
 #include "BaseObject.h"
@@ -47,4 +47,4 @@ protected:
 	bool _startHitStopWatch;
 };
 
-#endif // !_WAVER_H
+#endif // !__WAVER_H__

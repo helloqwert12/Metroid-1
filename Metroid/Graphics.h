@@ -9,6 +9,7 @@ class Graphics
 public:
 	Graphics(HINSTANCE hInstance, LPWSTR name, int width, int height, int fps, int isFullScreen);
 	~Graphics();
+
 	void initWindow();
 
 	int isFullScreen();
@@ -30,11 +31,6 @@ protected:
 	int _fps;
 
 	static HRESULT CALLBACK winProc(HWND, UINT, WPARAM, LPARAM);
-	Graphics();
-
-private:
 };
-
-typedef Graphics* pGraphics;
 
 #endif // !__GRAPHICS_H__

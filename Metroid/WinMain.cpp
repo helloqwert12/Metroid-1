@@ -1,7 +1,6 @@
 #include <Windows.h>
 #include <iostream>
 #include "MetroidGame.h"
-
 using namespace std;
 
 #define APP_TITTLE L"Metroid"

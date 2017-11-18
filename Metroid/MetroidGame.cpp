@@ -1,6 +1,6 @@
 ﻿#include "MetroidGame.h"
 
-MetroidGame::MetroidGame(HINSTANCE hInstance, LPWSTR title) : Game(hInstance, title, WINDOW_WIDTH, WINDOW_HEIGHT)
+MetroidGame::MetroidGame(HINSTANCE hInstance, LPWSTR name) : Game(hInstance, name, WINDOW_WIDTH, WINDOW_HEIGHT)
 {
 }
 
@@ -43,7 +43,7 @@ void MetroidGame::draw()
 
 void MetroidGame::loadResource()
 {
-	// Game::init đã gọi hàm loadResource này rồi nên không cần gọi lại MetroidGame::loadResource()
+	// Game::init() đã gọi hàm loadResource này rồi nên không cần gọi lại MetroidGame::loadResource()
 	SpriteManager::getInstance()->loadResource(_spriteHandle);
 	SoundManager::getInstance()->loadSound(Game::hWindow->getWnd());
 }

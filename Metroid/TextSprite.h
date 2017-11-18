@@ -1,5 +1,5 @@
-#ifndef __TEXTSPRITE__
-#define __TEXTSPRITE__
+#ifndef __TEXTSPRITE_H__
+#define __TEXTSPRITE_H__
 
 #include "BaseObject.h"
 
@@ -30,4 +30,4 @@ private:
 	int _framewidth;
 };
 
-#endif // !__TEXTSPRITE__
+#endif // !__TEXTSPRITE_H__

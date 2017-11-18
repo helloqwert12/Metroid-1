@@ -1,5 +1,5 @@
-#ifndef __INTRO_SCENE__
-#define __INTRO_SCENE__
+#ifndef __INTROSCENE_H__
+#define __INTROSCENE_H__
 
 #include "Sprite.h"
 #include "SpriteManager.h"
@@ -42,4 +42,4 @@ private:
 	bool _isDrawText;
 };
 
-#endif // !__INTRO_SCENE__
+#endif // !__INTROSCENE_H__

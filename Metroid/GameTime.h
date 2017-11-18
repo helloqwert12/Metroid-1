@@ -7,7 +7,7 @@
 class GameTime
 {
 public:
-	~GameTime(void);
+	~GameTime();
 
 	static void release();
 	static GameTime* getInstance();
@@ -24,14 +24,14 @@ private:
 	TimeSpan _totalGameTime;
 	TimeSpan _elapsedGameTime;
 	LARGE_INTEGER _Query;
-	float _freQuery;
+	float _freQuery;	// Số giây trong 1 tick
 
 	LONGLONG startTicks;
 	LONGLONG lastTicks;
 	LONGLONG curTicks;
 
 	GameTime(TimeSpan& elapsedGameTime);
-	GameTime(void);
+	GameTime();
 
 	void setTotalGameTime(TimeSpan& totalGametime);
 	void setElapsedGameTime(TimeSpan& elapsedGametime);

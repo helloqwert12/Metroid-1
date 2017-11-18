@@ -1,5 +1,5 @@
-#ifndef __METROID_GAME_H__
-#define __METROID_GAME_H__
+#ifndef __METROIDGAME_H__
+#define __METROIDGAME_H__
 
 #include "Game.h"
 #include "define.h"
@@ -11,7 +11,7 @@
 class MetroidGame : public Game
 {
 public:
-	MetroidGame(HINSTANCE hInstance, LPWSTR title);
+	MetroidGame(HINSTANCE hInstance, LPWSTR name);
 	~MetroidGame();
 
 	void init();
@@ -23,4 +23,4 @@ public:
 	void loadResource();
 };
 
-#endif // !__METROID_GAME_H__
+#endif // !__METROIDGAME_H__

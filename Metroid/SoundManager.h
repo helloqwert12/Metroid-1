@@ -1,5 +1,5 @@
-#ifndef __SOUND_MANAGER__
-#define __SOUND_MANAGER__
+#ifndef __SOUNDMANAGER_H__
+#define __SOUNDMANAGER_H__
 
 #include "define.h"
 #include "dxaudio.h"
@@ -26,4 +26,4 @@ private:
 	float volume;
 };
 
-#endif // !__SOUND_MANAGER__
+#endif // !__SOUNDMANAGER_H__

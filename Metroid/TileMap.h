@@ -15,9 +15,6 @@ public:
 	// Tạo TileMap từ file XML (@spriteId: ID của TileMap)
 	static TileMap* LoadFromFile(const string path, eID spriteId);
 
-	// Lấy kich thước Map.
-	GVector2 getWorldSize();
-
 	TileMap();
 	~TileMap();
 
@@ -25,6 +22,9 @@ public:
 
 	int worldWidth();
 	int worldHeight();
+
+	// Lấy kich thước Map.
+	GVector2 getWorldSize();
 
 private:
 	int _frameWidth;	// độ rộng một frame (độ rộng của tile)

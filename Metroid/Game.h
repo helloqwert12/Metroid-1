@@ -10,11 +10,10 @@
 class Game
 {
 public:
-	virtual ~Game();
-
 	static int isExit;
 
 	Game(HINSTANCE, LPWSTR = L"Game", int width = 800, int height = 600, int fps = 60, int isFullScreen = 0);
+	~Game();
 
 	void virtual init();
 	void virtual release();
@@ -26,7 +25,7 @@ public:
 
 	void run();
 	void render();
-	static void exit();
+
 	static Graphics* getWindow();
 
 protected:
@@ -37,7 +36,7 @@ protected:
 	GameTime* _gameTime;
 
 private:
-	float _frameRate;	// Thời gian của 1 frame (milisecond)
+	float _frameRate; // Thời gian của 1 frame (milisecond)
 	float _oldTime;
 	float _deltaTime;
 };

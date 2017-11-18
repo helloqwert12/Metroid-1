@@ -1,13 +1,5 @@
 #include "Graphics.h"
 
-Graphics::Graphics()
-{
-}
-
-Graphics::~Graphics()
-{
-}
-
 Graphics::Graphics(HINSTANCE hInstance, LPWSTR wcName, int width, int height, int fps, int isFullScreen)
 {
 	this->_hInstance = hInstance;
@@ -18,6 +10,10 @@ Graphics::Graphics(HINSTANCE hInstance, LPWSTR wcName, int width, int height, in
 	this->_width = width;
 	this->_height = height;
 	this->_fps = fps;
+}
+
+Graphics::~Graphics()
+{
 }
 
 void Graphics::initWindow()

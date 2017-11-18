@@ -69,14 +69,15 @@ private:
 	Info* _info;
 
 	float _movingSpeed;
-
 	float _protectTime;
 
 	bool _isRevive;
 	GVector2 _revivePosition;
 
+	// Từ status để gọi hành động
 	void updateStatus(float dt);
 
+	// Từ status để chuyển animation
 	void updateCurrentAnimateIndex();
 
 	GVector2 getVelocity();

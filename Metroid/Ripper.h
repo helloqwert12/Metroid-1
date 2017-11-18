@@ -1,5 +1,5 @@
-﻿#ifndef _RIPPER_H
-#define _RIPPER_H
+﻿#ifndef __RIPPER_H__
+#define __RIPPER_H__
 
 #include "define.h"
 #include "BaseObject.h"
@@ -42,4 +42,4 @@ protected:
 	bool _startHitStopWatch;
 };
 
-#endif // !_RIPPER_H
+#endif // !__RIPPER_H__

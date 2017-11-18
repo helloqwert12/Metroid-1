@@ -23,12 +23,12 @@ UINT64 TimeSpan::getTicks()
 	return _ticks;
 }
 
-TimeSpan TimeSpan::operator+(TimeSpan ts)
+TimeSpan TimeSpan::operator+(TimeSpan timeSpan)
 {
-	return TimeSpan(this->_ticks + ts._ticks);
+	return TimeSpan(this->_ticks + timeSpan._ticks);
 }
 
-TimeSpan TimeSpan::operator+(UINT64 ts)
+TimeSpan TimeSpan::operator+(UINT64 timeSpan)
 {
-	return TimeSpan(*this + TimeSpan(ts));
+	return TimeSpan(*this + TimeSpan(timeSpan));
 }

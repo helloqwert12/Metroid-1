@@ -1,5 +1,5 @@
-#ifndef _ENERGYBALL_H_
-#define _ENERGYBALL_H_
+#ifndef __ENERGYBALL_H__
+#define __ENERGYBALL_H__
 
 #include "define.h"
 #include "BaseObject.h"
@@ -29,4 +29,4 @@ protected:
 	StopWatch* _destroyStopWatch;
 };
 
-#endif //!_ENERGYBALL_H_
+#endif // !__ENERGYBALL_H__

@@ -85,6 +85,7 @@ void Player::init()
 	_animations[eStatus::JUMPING | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::JUMPING | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "jump_attack", NULL);
 
+	// Animation DIE không lặp lại, để khi chạy hết animation này thì revive
 	_animations[eStatus::DIE] = new Animation(_sprite, 0.5f, false);
 	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
 
@@ -116,9 +117,10 @@ void Player::update(float deltatime)
 		_protectTime -= deltatime;
 	}
 
-	this->_info->update(deltatime);
-
+	// Từ status để gọi hành động
 	this->updateStatus(deltatime);
+
+	// Từ status để chuyển animation
 	this->updateCurrentAnimateIndex();
 
 	_animations[_currentAnimateIndex]->update(deltatime);
@@ -127,6 +129,8 @@ void Player::update(float deltatime)
 	{
 		it->second->update(deltatime);
 	}
+
+	this->_info->update(deltatime);
 }
 
 void Player::updateInput(float dt)
@@ -176,6 +180,7 @@ void Player::updateStatus(float dt)
 		if (_info->getLife() < 0)
 			return;
 
+		// Khi chạy hết DIE animation thì revive
 		if (!_animations[eStatus::DIE]->isAnimate())
 			this->revive();
 	}
@@ -220,6 +225,7 @@ void Player::updateCurrentAnimateIndex()
 		_currentAnimateIndex = eStatus::ROLLING_DOWN;
 	}
 
+	// Nếu đang trong status MOVING_LEFT hoặc MOVING_RIGHT thì xóa status đó, thay bằng RUNNING
 	if ((_currentAnimateIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT || ((_currentAnimateIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT))
 	{
 		_currentAnimateIndex = (eStatus)(_currentAnimateIndex & ~(eStatus::MOVING_LEFT | MOVING_RIGHT));
@@ -252,11 +258,13 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		break;
 	}
 	case DIK_UP:
-	{	if (!this->isInStatus(eStatus::ROLLING_DOWN) && !this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
+	{	
+		// Nếu đang trong status ROLLING_DOWN, JUMPING và FALLING thì ngắm hướng lên (LOOKING_UP)
+		if (!this->isInStatus(eStatus::ROLLING_DOWN) && !this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 		{
 			this->addStatus(eStatus::LOOKING_UP);
 		}
-		else
+		else // Nếu đang trong status ROLLING_DOWN thì đứng dậy (xóa status ROLLING_DOWN)
 		{
 			this->removeStatus(eStatus::ROLLING_DOWN);
 		}
@@ -273,6 +281,7 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		if (!this->isInStatus(eStatus::ROLLING_DOWN) && ((this->isInStatus(eStatus::NORMAL) || this->isInStatus(eStatus::MOVING_LEFT) || this->isInStatus(eStatus::MOVING_RIGHT))))
 			this->jump();
 
+		// Nếu đang trong status ROLLING_DOWN thì đứng dậy (xóa status ROLLING_DOWN)
 		if (this->isInStatus(eStatus::ROLLING_DOWN))
 			this->removeStatus(eStatus::ROLLING_DOWN);
 
@@ -348,6 +357,7 @@ void Player::resetValues()
 		auto gravity = (Gravity*)this->_componentList["Gravity"];
 		gravity->setStatus(eGravityStatus::FALLING_DOWN);
 
+		// Set position player tại vị trí hồi sinh
 		this->setPosition(_revivePosition);
 		_isRevive = false;
 	}
@@ -398,8 +408,7 @@ void Player::jump()
 	auto movement = (Movement*)this->_componentList["Movement"];
 	movement->setVelocity(GVector2(movement->getVelocity().x, JUMP_VELOCITY));
 
-	auto gravity = (Gravity*)this->_componentList["Gravity"];
-	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+	this->falling();
 }
 
 void Player::falling()
@@ -472,6 +481,8 @@ void Player::revive()
 {
 	this->_isRevive = true;
 	this->resetValues();
+
+	// Restart lại DIE animation do DIE animation không lặp lại
 	_animations[eStatus::DIE]->restart();
 
 	this->jump();
@@ -500,7 +511,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 			}
 
-			// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc lớn hơn 0
+			// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
 			// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
 			if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
 			{
@@ -517,6 +528,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 			auto gravity = (Gravity*)this->_componentList["Gravity"];
 			gravity->setStatus(eGravityStatus::FALLING_DOWN);
 			
+			// Thêm status FALLING để cho player rớt xuống
 			if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 				this->addStatus(eStatus::FALLING);
 		}
@@ -532,19 +544,15 @@ float Player::checkCollision(BaseObject* object, float dt)
 				{
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 				}
-				beHit(direction);
 
+				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
-
-			//if (this->weaponCheckCollision(object, direction, dt, false))
-			//{
-			//	((Ripper*)object)->wasHit(1);
-			//}
 		}
 	}
 	else if (objectId == WAVER)
 	{
+		// Lại gần thì active
 		if (!((Waver*)object)->isActive())
 		{
 			auto objPosition = object->getPosition();
@@ -555,6 +563,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 
+		// Ra xa một khoảng thì deactive
 		if (((Waver*)object)->isActive())
 		{
 			auto objPosition = object->getPosition();
@@ -574,24 +583,20 @@ float Player::checkCollision(BaseObject* object, float dt)
 				{
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 				}
-				beHit(direction);
 
+				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
-
-			//if (this->weaponCheckCollision(object, direction, dt, false))
-			//{
-			//	((Waver*)object)->wasHit(1);
-			//}
 		}
 	}
 	else if (objectId == SKREE)
 	{
+		// Lại gần thì active
 		if (!((Skree*)object)->isActive())
 		{
 			auto objPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) < 50)
+			if (abs(position.x - objPosition.x) < 40)
 			{
 				((Skree*)object)->active();
 			}
@@ -606,15 +611,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 				{
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 				}
-				beHit(direction);
 
+				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
-
-			//if (this->weaponCheckCollision(object, direction, dt, false))
-			//{
-			//	((Skree*)object)->wasHit(1);
-			//}
 		}
 	}
 	else if (objectId == ENERGY_BALL)

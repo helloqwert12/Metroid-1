@@ -93,19 +93,12 @@ void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	{
 		for (int col = colBegin; col < colEnd; col++)
 		{
+			// Tính toán vị trí vẽ Tile
 			position.x = col * _frameWidth;
 			position.y = (_mapSize.y - row - 1) * _frameHeight;
 			this->_tileSet->draw(spriteHandle, this->_mapIndex[row][col], position, viewport);
 		}
 	}
-}
-
-GVector2 TileMap::getWorldSize()
-{
-	GVector2 result;
-	result.x = this->_mapSize.x * this->_frameWidth;
-	result.y = this->_mapSize.y * this->_frameHeight;
-	return result;
 }
 
 int TileMap::worldHeight()
@@ -116,4 +109,12 @@ int TileMap::worldHeight()
 int TileMap::worldWidth()
 {
 	return _frameHeight * _mapSize.y;
+}
+
+GVector2 TileMap::getWorldSize()
+{
+	GVector2 result;
+	result.x = this->_frameWidth * this->_mapSize.x;
+	result.y = this->_frameHeight * this->_mapSize.y;
+	return result;
 }

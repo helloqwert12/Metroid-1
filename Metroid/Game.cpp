@@ -1,5 +1,5 @@
-﻿#include <string>
-#include "Game.h"
+﻿#include "Game.h"
+#include <string>
 #include <dinput.h>
 #include <d3dx9tex.h>
 using namespace std;
@@ -10,11 +10,6 @@ Graphics* Game::hWindow = NULL;
 Graphics* Game::getWindow()
 {
 	return hWindow;
-}
-
-void Game::exit()
-{
-	isExit = 1;
 }
 
 Game::~Game()
@@ -93,6 +88,7 @@ void Game::render()
 	if (time > this->_frameRate * 2)
 		time = _frameRate;
 
+	// Bắt đầu vẽ
 	if (device->getDevice()->BeginScene() != DI_OK)
 		return;
 
@@ -103,6 +99,7 @@ void Game::render()
 	update(time);
 	draw();
 
+	// Kết thúc vẽ
 	device->getDevice()->EndScene();
 
 	device->present();

@@ -133,7 +133,7 @@ void Skree::active()
 {
 	_isActive = true;
 
-	auto sinmovement = new SinMovement(GVector2(30, 0), 0.5, _sprite);
+	auto sinmovement = new SinMovement(GVector2(50, 0), 0.5, _sprite);
 	this->_componentList["SinMovement"] = sinmovement;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
