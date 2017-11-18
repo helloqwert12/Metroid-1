@@ -127,7 +127,7 @@ void PlayScene::updateViewport(BaseObject* objTracker)
 	GVector2 worldsize = this->_tileMap->getWorldSize();
 
 	//GVector2 newPosition = GVector2(max(objTracker->getPositionX() - 260, 0), WINDOW_HEIGHT);
-	GVector2 newPosition = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, 0), max(objTracker->getPositionY() + 400, 0));
+	GVector2 newPosition = GVector2(objTracker->getPositionX() - WINDOW_WIDTH / 2, objTracker->getPositionY() + 400);
 
 	_viewport->setPositionWorld(newPosition);
 }

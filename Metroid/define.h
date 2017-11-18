@@ -62,19 +62,18 @@ enum eStatus
 	LOOKING_UP = (1 << 5),
 	ROLLING_DOWN = (1 << 6),
 	ATTACKING = (1 << 7),
-	//BEING_HIT = (1 << 8),
-	DIE = (1 << 9),
-	DESTROY = (1 << 10),
+	DIE = (1 << 8),
+	DESTROY = (1 << 9),
 };
 
 // Hướng bị va chạm của object
 enum eDirection
 {
 	NONE = 0,
-	TOP = 1,
-	LEFT = 2,
-	RIGHT = 4,
-	BOTTOM = 8,
+	TOP = (1 << 0),
+	LEFT = (1 << 1),
+	RIGHT = (1 << 2),
+	BOTTOM = (1 << 3),
 	ALL = (TOP | BOTTOM | LEFT | RIGHT),
 };
 

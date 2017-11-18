@@ -118,7 +118,6 @@ void Player::update(float deltatime)
 
 	this->_info->update(deltatime);
 
-	this->checkPosition();
 	this->updateStatus(deltatime);
 	this->updateCurrentAnimateIndex();
 
@@ -353,8 +352,8 @@ void Player::resetValues()
 		_isRevive = false;
 	}
 
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(0, 0));
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(0, 0));
 
 	for (auto animate : _animations)
 	{
@@ -364,8 +363,8 @@ void Player::resetValues()
 
 void Player::standing()
 {
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(0, 0));
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(0, 0));
 
 	this->removeStatus(eStatus::JUMPING);
 	this->removeStatus(eStatus::FALLING);
@@ -376,8 +375,8 @@ void Player::moveLeft()
 	if (this->getScale().x > 0)
 		this->setScaleX(this->getScale().x * (-1));
 
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(-_movingSpeed, move->getVelocity().y));
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(-_movingSpeed, movement->getVelocity().y));
 }
 
 void Player::moveRight()
@@ -385,8 +384,8 @@ void Player::moveRight()
 	if (this->getScale().x < 0)
 		this->setScaleX(this->getScale().x * (-1));
 
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(_movingSpeed, move->getVelocity().y));
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(_movingSpeed, movement->getVelocity().y));
 }
 
 void Player::jump()
@@ -396,8 +395,8 @@ void Player::jump()
 
 	this->addStatus(eStatus::JUMPING);
 
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(move->getVelocity().x, JUMP_VELOCITY));
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(movement->getVelocity().x, JUMP_VELOCITY));
 
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
@@ -429,15 +428,10 @@ void Player::beHit(eDirection direction)
 		return;
 	}
 
-	//if (this->isInStatus(eStatus::BEING_HIT))
-	//	return;
-
-	//this->setStatus(eStatus::BEING_HIT);
-
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 
-	auto move = (Movement*)this->_componentList["Movement"];
+	auto movement = (Movement*)this->_componentList["Movement"];
 
 	switch (direction)
 	{
@@ -446,7 +440,7 @@ void Player::beHit(eDirection direction)
 		// Nếu va chạm RIGHT thì bị văng sang bên phải (player hướng sang trái)
 		if (this->getScale().x > 0)
 			this->setScaleX(this->getScale().x * (-1));
-		move->setVelocity(GVector2(MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+		movement->setVelocity(GVector2(MOVE_SPEED / 2, JUMP_VELOCITY / 2));
 		break;
 	}
 	case LEFT:
@@ -454,15 +448,15 @@ void Player::beHit(eDirection direction)
 		// Nếu va chạm LEFT thì bị văng sang bên trái (player hướng sang phải)
 		if (this->getScale().x < 0)
 			this->setScaleX(this->getScale().x * (-1));
-		move->setVelocity(GVector2(-MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+		movement->setVelocity(GVector2(-MOVE_SPEED / 2, JUMP_VELOCITY / 2));
 		break;
 	}
 	default:
 	{
 		if (this->getScale().x > 0)
-			move->setVelocity(GVector2(-MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+			movement->setVelocity(GVector2(-MOVE_SPEED / 2, JUMP_VELOCITY / 2));
 		else
-			move->setVelocity(GVector2(MOVE_SPEED / 2, JUMP_VELOCITY / 2));
+			movement->setVelocity(GVector2(MOVE_SPEED / 2, JUMP_VELOCITY / 2));
 		break;
 	}
 	}
@@ -481,24 +475,6 @@ void Player::revive()
 	_animations[eStatus::DIE]->restart();
 
 	this->jump();
-}
-
-void Player::checkPosition()
-{
-	if (this->isInStatus(eStatus::DIE))
-		return;
-
-	auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
-	GVector2 viewportPosition = viewport->getPositionWorld();
-
-	// Rớt xuống dưới viewport thì chết
-	if (this->getPositionY() < viewportPosition.y - WINDOW_HEIGHT)
-	{
-		if (_status != eStatus::DIE)
-			_status = eStatus::DIE;
-
-		this->die();
-	}
 }
 
 float Player::checkCollision(BaseObject* object, float dt)
@@ -696,6 +672,6 @@ RECT Player::getBounding()
 
 GVector2 Player::getVelocity()
 {
-	auto move = (Movement*)this->_componentList["Movement"];
-	return move->getVelocity();
+	auto movement = (Movement*)this->_componentList["Movement"];
+	return movement->getVelocity();
 }

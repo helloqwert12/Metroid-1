@@ -23,19 +23,19 @@ Graphics::Graphics(HINSTANCE hInstance, LPWSTR wcName, int width, int height, in
 void Graphics::initWindow()
 {
 	WNDCLASSEX wc;
-	wc.cbSize = sizeof(WNDCLASSEX);//
+	wc.cbSize = sizeof(WNDCLASSEX);
 
 	wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.hInstance = this->_hInstance;//
+	wc.hInstance = this->_hInstance;
 
-	wc.lpfnWndProc = Graphics::winProc;//
+	wc.lpfnWndProc = Graphics::winProc;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hIcon = NULL;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wc.lpszMenuName = NULL;
-	wc.lpszClassName = this->_wcName;//
+	wc.lpszClassName = this->_wcName;
 	wc.hIconSm = NULL;
 
 	RegisterClassEx(&wc);

@@ -51,7 +51,6 @@ public:
 	void die();
 	void revive();
 
-	void checkPosition();
 	float checkCollision(BaseObject* object, float dt);
 
 	void setStatus(eStatus status);

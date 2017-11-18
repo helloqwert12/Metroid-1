@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="301">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="306">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -129800,7 +129800,6 @@
   <object id="222" name="Wall" type="20" x="895.5" y="271.5" width="16" height="16"/>
   <object id="223" name="Wall" type="20" x="1455.33" y="958.667" width="16" height="240"/>
   <object id="224" name="Wall" type="20" x="721.333" y="462.667" width="222.667" height="16"/>
-  <object id="226" name="Ripper" type="51" x="657.091" y="3026.48" width="15.8182" height="8.12117"/>
   <object id="229" name="Ripper" type="51" x="2528.42" y="2816.27" width="15.8182" height="15.4545"/>
   <object id="230" name="Ripper" type="51" x="2528.09" y="2688.94" width="15.8182" height="15.4545"/>
   <object id="231" name="Ripper" type="51" x="2528.42" y="2576.27" width="15.8182" height="15.4545"/>
@@ -129809,17 +129808,12 @@
   <object id="234" name="Ripper" type="51" x="2624.42" y="2415.94" width="15.8182" height="15.4545"/>
   <object id="235" name="Ripper" type="51" x="2559.42" y="2336.27" width="15.8182" height="15.4545"/>
   <object id="236" name="Ripper" type="51" x="2672.09" y="2367.94" width="15.8182" height="15.4545"/>
-  <object id="237" name="Ripper" type="51" x="768.59" y="3076.11" width="15.8182" height="8.12117"/>
   <object id="241" name="Ripper" type="51" x="576.258" y="2947.44" width="16.1515" height="6.4545"/>
-  <object id="250" name="Ripper" type="51" x="960.091" y="2946.61" width="15.8182" height="9.4545"/>
   <object id="251" name="Ripper" type="51" x="1296.76" y="2914.61" width="14.8182" height="9.12117"/>
   <object id="252" name="Ripper" type="51" x="1328.26" y="2930.77" width="14.8182" height="9.12117"/>
-  <object id="253" name="Ripper" type="51" x="463.591" y="3074.94" width="16.1515" height="8.78783"/>
   <object id="254" name="Waver" type="52" x="480.758" y="2976.94" width="15.8182" height="15.4545"/>
-  <object id="256" name="Waver" type="52" x="290.091" y="2944.27" width="15.8182" height="15.4545"/>
+  <object id="256" name="Waver" type="52" x="272.091" y="2960.27" width="15.8182" height="15.4545"/>
   <object id="257" name="Waver" type="52" x="704.758" y="2990.94" width="15.8182" height="15.4545"/>
-  <object id="258" name="Waver" type="52" x="1294.59" y="2943.27" width="15.8182" height="15.4545"/>
-  <object id="259" name="Waver" type="52" x="1392.09" y="2944.27" width="15.8182" height="15.4545"/>
   <object id="260" name="Waver" type="52" x="832.591" y="2990.94" width="15.8182" height="15.4545"/>
   <object id="261" name="Waver" type="52" x="960.757" y="2991.44" width="15.8182" height="15.4545"/>
   <object id="262" name="Ripper" type="51" x="416.924" y="2913.61" width="16.1515" height="11.4545"/>
@@ -129837,9 +129831,13 @@
   <object id="276" name="Skree" type="53" x="1888.09" y="2912.94" width="15.8182" height="15.4545"/>
   <object id="277" name="Skree" type="53" x="2272.09" y="2912.27" width="15.8182" height="15.4545"/>
   <object id="278" name="Skree" type="53" x="2337.42" y="2912.27" width="15.8182" height="15.4545"/>
-  <object id="279" name="EnergyBall" type="81" x="657.091" y="3071.77" width="15.8182" height="15.4545"/>
-  <object id="280" name="EnergyBall" type="81" x="801.091" y="3072.27" width="15.8182" height="15.4545"/>
-  <object id="281" name="EnergyBall" type="81" x="736.591" y="3009.27" width="15.8182" height="15.4545"/>
-  <object id="282" name="EnergyBall" type="81" x="591.091" y="2992.27" width="15.8182" height="15.4545"/>
+  <object id="279" name="EnergyBall" type="81" x="670.091" y="3069.77" width="15.8182" height="15.4545"/>
+  <object id="280" name="EnergyBall" type="81" x="783.091" y="3072.27" width="15.8182" height="15.4545"/>
+  <object id="282" name="EnergyBall" type="81" x="624.091" y="3054.27" width="15.8182" height="15.4545"/>
+  <object id="301" name="Skree" type="53" x="672.424" y="2912.61" width="15.8182" height="15.4545"/>
+  <object id="302" name="Skree" type="53" x="800.424" y="2912.61" width="15.8182" height="15.4545"/>
+  <object id="303" name="Skree" type="53" x="928.091" y="2912.94" width="15.8182" height="15.4545"/>
+  <object id="304" name="Skree" type="53" x="1120.09" y="2911.61" width="15.8182" height="15.4545"/>
+  <object id="305" name="Waver" type="52" x="1057.42" y="2992.27" width="15.8182" height="15.4545"/>
  </objectgroup>
 </map>

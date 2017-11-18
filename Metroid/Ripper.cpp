@@ -11,7 +11,7 @@ Ripper::Ripper(int x, int y, bool direct) : BaseObject(RIPPER)
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
 	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_explosion_01"));
-	_effectAnimation = new Animation(_effect, 0.07);
+	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "n_explosion_01", "n_explosion_02", "n_explosion_03", NULL);
 
 	_hitPoint = 2;
