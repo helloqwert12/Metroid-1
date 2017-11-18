@@ -32,7 +32,7 @@ enum eID
 	FONT = 2,
 
 	LIFE_ICON = 3,
-	ENEGY_ICON = 4,
+	ENERGY_ICON = 4,
 
 	MAP_METROID = 5,
 
@@ -41,6 +41,13 @@ enum eID
 	ENEMY = 50,
 	RIPPER = 51,
 	WAVER = 52,
+	SKREE = 53,
+
+	ITEM = 80,
+	ENERGY_BALL = 81,
+
+	BULLET_EFFECT = 100,
+	EXPLOSION = 105
 };
 
 // Trạng thái của object

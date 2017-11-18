@@ -10,6 +10,7 @@ BaseObject::BaseObject(eID id)
 	this->_id = id;
 	this->_sprite = nullptr;
 	this->setStatus(eStatus::NORMAL);
+	this->setPhysicsBodySide(eDirection::ALL);
 }
 
 BaseObject::~BaseObject()

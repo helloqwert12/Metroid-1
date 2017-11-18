@@ -1,27 +1,27 @@
-﻿#include "Waver.h"
+﻿#include "Skree.h"
 
-Waver::Waver(int x, int y, bool direct) : BaseObject(WAVER)
+Skree::Skree(int x, int y) : BaseObject(SKREE)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "gr_waver_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "lg_skree_01"));
 	_sprite->setPosition(x, y);
 
-	_animation = new Animation(_sprite, 0.2f);
-	_animation->addFrameRect(eID::ENEMY, "gr_waver_01", "gr_waver_02", "gr_waver_03", NULL);
+	_animation = new Animation(_sprite, 0.07f);
+	_animation->addFrameRect(eID::ENEMY, "lg_skree_01", "lg_skree_02", NULL);
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
 	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_explosion_01"));
-	_effectAnimation = new Animation(_effect, 0.07);
+	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "n_explosion_01", "n_explosion_02", "n_explosion_03", NULL);
-
-	_hitPoint = 2;
+	
+	_hitPoint = 5;
 	_isActive = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
 }
 
-void Waver::init()
+void Skree::init()
 {
 	auto collisionBody = new CollisionBody(this);
 	_componentList["CollisionBody"] = collisionBody;
@@ -31,7 +31,7 @@ void Waver::init()
 	_startHitStopWatch = false;
 }
 
-void Waver::update(float deltatime)
+void Skree::update(float deltatime)
 {
 	if (_hitPoint > 0)
 	{
@@ -64,27 +64,40 @@ void Waver::update(float deltatime)
 		_effect->setPosition(this->getPosition());
 		_effectAnimation->update(deltatime);
 
-		if (_effectStopWatch->isStopWatch(600))
+		if (_effectStopWatch->isStopWatch(200))
 		{
 			this->setStatus(DESTROY);
+
+			srand(time(0));
+			auto random = rand() % 10;
+			BaseObject* item = nullptr;
+			if (random < 5)
+				item = new EnergyBall(this->getPositionX(), this->getPositionY());
+			if (item != nullptr)
+			{
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+			}
 		}
 	}
 }
 
-void Waver::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
+void Skree::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	if (_hitPoint > 0)
-		_animation->draw(spriteHandle, viewport);
-	else
-	{
 		if (_isActive)
 			_animation->draw(spriteHandle, viewport);
 		else
 			_sprite->render(spriteHandle, viewport);
+	else
+	{
+		_effectAnimation->draw(spriteHandle, viewport);
 	}
+
+	_effectAnimation->draw(spriteHandle, viewport);
 }
 
-void Waver::release()
+void Skree::release()
 {
 	SAFE_DELETE(_animation);
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -94,7 +107,7 @@ void Waver::release()
 	_componentList.clear();
 }
 
-void Waver::wasHit(int hitpoint)
+void Skree::wasHit(int hitpoint)
 {
 	if (!_startHitStopWatch)
 	{
@@ -108,35 +121,26 @@ void Waver::wasHit(int hitpoint)
 	{
 		auto move = (Movement*)this->_componentList["Movement"];
 		move->setVelocity(GVector2(0, 0));
-		_effectStopWatch->isTimeLoop(600);
 	}
 }
 
-bool Waver::isDead()
+bool Skree::isDead()
 {
 	return (_hitPoint <= 0);
 }
 
-void Waver::active(bool direct)
+void Skree::active()
 {
 	_isActive = true;
 
-	auto sinmovement = new SinMovement(GVector2(0, 150), 0.5, _sprite);
+	auto sinmovement = new SinMovement(GVector2(30, 0), 0.5, _sprite);
 	this->_componentList["SinMovement"] = sinmovement;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
-	if (direct)
-	{
-		_sprite->setScaleX(_sprite->getScale().x * -1);
-		movement->setVelocity(GVector2(WAVER_MOVE_SPEED, 0));
-	}
-	else
-	{
-		movement->setVelocity(GVector2(-WAVER_MOVE_SPEED, 0));
-	}
+	movement->setVelocity(GVector2(0, -SKREE_MOVE_SPEED));
 }
 
-void Waver::deactive()
+void Skree::deactive()
 {
 	_isActive = false;
 
@@ -148,12 +152,12 @@ void Waver::deactive()
 	delete sinMovement;
 }
 
-bool Waver::isActive()
+bool Skree::isActive()
 {
 	return _isActive;
 }
 
-float Waver::checkCollision(BaseObject* object, float dt)
+float Skree::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getId() == WALL)
 	{
@@ -161,26 +165,14 @@ float Waver::checkCollision(BaseObject* object, float dt)
 		eDirection direction;
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
-			if (direction == LEFT || direction == RIGHT)
+			if (direction == TOP)
 			{
 				float moveX, moveY;
 				if (collisionBody->isColliding(object, moveX, moveY, dt))
 				{
+					// Va chạm Wall TOP thì update lại vị trí (tránh không cho đi xuyên)
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-
-					// Va chạm Wall LEFT hoặc RIGHT thì đi ngược lại
-					auto movement = (Movement*)this->_componentList["Movement"];
-					movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
-					this->setScale(this->getScale() * -1);
-				}
-			}
-			else if (direction == TOP || direction == BOTTOM)
-			{
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					// Va chạm Wall TOP hoặc BOTTOM thì update lại vị trí (tránh không cho đi xuyên)
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+					this->wasHit(5);
 				}
 			}
 			return 1.0f;

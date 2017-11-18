@@ -10,13 +10,17 @@
 #include "IComponent.h"
 #include "CollisionBody.h"
 #include "Info.h"
+
 #include "Ripper.h"
 #include "Waver.h"
+#include "Skree.h"
+
+#include "EnergyBall.h"
 
 #define MOVE_SPEED 150
 #define JUMP_VELOCITY 450
 #define GRAVITY 600
-#define PROTECT_TIME 2000
+#define PROTECT_TIME 1500
 
 class Player : public BaseObject, public IControlable
 {

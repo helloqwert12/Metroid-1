@@ -40,6 +40,18 @@
     <Filter Include="Source Files\Tile">
       <UniqueIdentifier>{eb83b96c-c7a2-49ce-9cdf-3d42a6e8e020}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object\Enemy">
+      <UniqueIdentifier>{b44cbc9e-4140-451d-84e0-610c8f842c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\Item">
+      <UniqueIdentifier>{dbc7254d-d457-4bfd-ad0e-f55d3d7633c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Enemy">
+      <UniqueIdentifier>{86fa7f78-14b8-4e44-8380-d19ac7b926d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Item">
+      <UniqueIdentifier>{8bdb5a79-af6c-43a5-8738-34b9c2966ae2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -154,10 +166,16 @@
       <Filter>Source Files\Tile</Filter>
     </ClCompile>
     <ClCompile Include="Ripper.cpp">
-      <Filter>Source Files\Object</Filter>
+      <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Waver.cpp">
-      <Filter>Source Files\Object</Filter>
+      <Filter>Source Files\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Skree.cpp">
+      <Filter>Source Files\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnergyBall.cpp">
+      <Filter>Source Files\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,10 +294,16 @@
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
     <ClInclude Include="Ripper.h">
-      <Filter>Header Files\Object</Filter>
+      <Filter>Header Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Skree.h">
+      <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Waver.h">
-      <Filter>Header Files\Object</Filter>
+      <Filter>Header Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnergyBall.h">
+      <Filter>Header Files\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

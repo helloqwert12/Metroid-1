@@ -4,16 +4,15 @@ Ripper::Ripper(int x, int y, bool direct) : BaseObject(RIPPER)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "y_ripper_01"));
-	_sprite->setScale(SCALE_FACTOR);
 	_sprite->setPosition(x, y);
 
 	_animation = new Animation(_sprite, 0.2f);
 	_animation->addFrameRect(eID::ENEMY, "y_ripper_01", NULL);
 
-	//_effect = SpriteManager::getInstance()->getSprite(eID::EFFECT);
-	//_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::EFFECT, "hit_effect_1"));
-	//_effectAnimation = new Animation(_effect, 0.15f);
-	//_effectAnimation->addFrameRect(EFFECT, "hit_effect_1", "hit_effect_2", "hit_effect_3", NULL);
+	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
+	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_explosion_01"));
+	_effectAnimation = new Animation(_effect, 0.07);
+	_effectAnimation->addFrameRect(BULLET_EFFECT, "n_explosion_01", "n_explosion_02", "n_explosion_03", NULL);
 
 	_hitPoint = 2;
 
@@ -38,7 +37,45 @@ void Ripper::init()
 
 	_effectStopWatch = new StopWatch();
 	_hitStopWatch = new StopWatch();
-	_startHit = false;
+	_startHitStopWatch = false;
+}
+
+void Ripper::update(float deltatime)
+{
+	if (_hitPoint > 0)
+	{
+		_animation->update(deltatime);
+		auto movement = (Movement*)this->_componentList["Movement"];
+
+		if (_startHitStopWatch)
+		{
+			if (_hitStopWatch->isStopWatch(400))
+			{
+				_startHitStopWatch = false;
+				_hitStopWatch->restart();
+			}
+		}
+
+		if (_startHitStopWatch)
+		{
+			movement->setVelocity(GVector2(0, 0));
+		}
+	}
+	else
+	{
+		_effect->setPosition(this->getPosition());
+		_effectAnimation->update(deltatime);
+
+		if (_effectStopWatch->isStopWatch(200))
+		{
+			this->setStatus(DESTROY);
+		}
+	}
+
+	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		it->second->update(deltatime);
+	}
 }
 
 void Ripper::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
@@ -51,62 +88,24 @@ void Ripper::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	}
 }
 
-void Ripper::update(float deltatime)
+void Ripper::release()
 {
-	if (_hitPoint > 0)
-	{
-		_animation->update(deltatime);
-		auto move = (Movement*)this->_componentList["Movement"];
-
-		if (_startHit)
-		{
-			if (_hitStopWatch->isStopWatch(400))
-			{
-				_startHit = false;
-				_hitStopWatch->restart();
-			}
-		}
-
-		if (_startHit)
-		{
-			move->setVelocity(GVector2(0, 0));
-		}
-	}
-	else
-	{
-		//_effect->setPosition(this->getPosition());
-		//_effectAnimation->update(deltatime);
-
-		//if (_effectStopWatch->isStopWatch(600))
-		//{
-		//	this->setStatus(DESTROY);
-		//	srand(time(0));
-		//	auto ran = rand() % 10;
-		//	BaseObject* item = nullptr;
-		//	if (ran < 5)
-		//		item = new Enegy(this->getPositionX(), this->getPositionY());
-		//	if (item != nullptr)
-		//	{
-		//		item->init();
-		//		QuadTreeNode::getInstance()->insert(item);
-		//	}
-		//}
-	}
-
+	SAFE_DELETE(_animation);
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
 	{
-		it->second->update(deltatime);
+		SAFE_DELETE(it->second);
 	}
+	_componentList.clear();
 }
 
 void Ripper::wasHit(int hitpoint)
 {
-	if (!_startHit)
+	if (!_startHitStopWatch)
 	{
 		_hitPoint -= hitpoint;
 		_hitStopWatch->restart();
 		_hitStopWatch->isTimeLoop(400);
-		_startHit = true;
+		_startHitStopWatch = true;
 	}
 
 	if (_hitPoint <= 0)
@@ -148,14 +147,4 @@ float Ripper::checkCollision(BaseObject* object, float dt)
 bool Ripper::isDead()
 {
 	return (_hitPoint <= 0);
-}
-
-void Ripper::release()
-{
-	SAFE_DELETE(_animation);
-	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		SAFE_DELETE(it->second);
-	}
-	_componentList.clear();
 }

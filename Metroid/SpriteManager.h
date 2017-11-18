@@ -11,7 +11,7 @@ class SpriteManager
 public:
 	static SpriteManager* getInstance();
 
-	void loadResource(LPD3DXSPRITE spritehandle);
+	void loadResource(LPD3DXSPRITE spriteHandle);
 	Sprite* getSprite(eID id);
 
 	RECT getSourceRect(eID id, string name);
@@ -30,7 +30,7 @@ private:
 	map<eID, map<string, RECT>> _sourceRectList;
 
 	// Đọc file xml để tạo đối tượng sprite (tileset image)
-	Sprite* loadXMLDoc(LPD3DXSPRITE spritehandle, LPWSTR path);
+	Sprite* loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path);
 };
 
 #endif // !__SPRITEMANAGER_H__

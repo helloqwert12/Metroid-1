@@ -46,9 +46,6 @@ void Player::init()
 	_animations[eStatus::ROLLING_DOWN] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::ROLLING_DOWN]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
 
-	_animations[eStatus::DIE] = new Animation(_sprite, 0.5f, false);
-	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
-
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "look_up", NULL);
 
@@ -88,6 +85,9 @@ void Player::init()
 	_animations[eStatus::JUMPING | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::JUMPING | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "jump_attack", NULL);
 
+	_animations[eStatus::DIE] = new Animation(_sprite, 0.5f, false);
+	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
+
 	this->setOrigin(GVector2(0.5f, 0.0f));
 	this->setStatus(eStatus::NORMAL);
 
@@ -98,7 +98,7 @@ void Player::init()
 	_info = new Info();
 	_info->init();
 	_info->setLife(2);
-	_info->setEnergy(10);
+	_info->setEnergy(30);
 
 	this->resetValues();
 }
@@ -517,7 +517,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		// Kiểm tra va chạm
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
-			// Dời ra xa
+			// Nếu đang va chạm thì dời ra xa
 			float moveX, moveY;
 			if (collisionBody->isColliding(object, moveX, moveY, dt))
 			{
@@ -565,8 +565,6 @@ float Player::checkCollision(BaseObject* object, float dt)
 			//{
 			//	((Ripper*)object)->wasHit(1);
 			//}
-			//if (((Ripper*)object)->isDead())
-			//	_info->AddScore(300);
 		}
 	}
 	else if (objectId == WAVER)
@@ -609,8 +607,46 @@ float Player::checkCollision(BaseObject* object, float dt)
 			//{
 			//	((Waver*)object)->wasHit(1);
 			//}
-			//if (((Waver*)object)->isDead())
-			//	_info->AddScore(300);
+		}
+	}
+	else if (objectId == SKREE)
+	{
+		if (!((Skree*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objPosition.x) < 50)
+			{
+				((Skree*)object)->active();
+			}
+		}
+
+		if (!((Skree*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, false))
+			{
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+				beHit(direction);
+
+				_info->setEnergy(_info->getEnergy() - 8);
+			}
+
+			//if (this->weaponCheckCollision(object, direction, dt, false))
+			//{
+			//	((Skree*)object)->wasHit(1);
+			//}
+		}
+	}
+	else if (objectId == ENERGY_BALL)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setEnergy(_info->getEnergy() + 5);
+			object->setStatus(DESTROY);
 		}
 	}
 }

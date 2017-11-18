@@ -83,6 +83,12 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 	case WAVER:
 		return GetWaver(item, mapHeight);
 		break;
+	case SKREE:
+		return GetSkree(item, mapHeight);
+		break;
+	case ENERGY_BALL:
+		return GetEnergyBall(item, mapHeight);
+		break;
 	default:
 		return nullptr;
 	}
@@ -135,4 +141,39 @@ BaseObject* GetWaver(xml_node item, int mapHeight)
 	auto waver = new Waver(x, y, false);
 	waver->init();
 	return waver;
+}
+
+BaseObject* GetSkree(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	auto skree = new Skree(x, y);
+	skree->init();
+	return skree;
+}
+
+BaseObject* GetEnergyBall(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto energyBall = new EnergyBall(x, y);
+	energyBall->init();
+	return energyBall;
 }

@@ -19,8 +19,8 @@ SpriteManager::~SpriteManager()
 {
 	for (auto sprite = _listSprite.begin(); sprite != _listSprite.end(); ++sprite)
 	{
-		sprite->second->release(); // release sprite's texture
-		delete sprite->second; // delete sprite
+		sprite->second->release(); // release Sprite's texture
+		delete sprite->second; // delete Sprite
 	}
 
 	if (!_listSprite.empty())
@@ -32,33 +32,49 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	Sprite* sprite = NULL;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//intro.png");
+	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::INTRO] = sprite;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//font.png", 54, 6);
+	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::FONT] = sprite;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//life.png");
+	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::LIFE_ICON] = sprite;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//enegy.png");
-	this->_listSprite[eID::ENEGY_ICON] = sprite;
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite[eID::ENERGY_ICON] = sprite;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//player.png");
+	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::PLAYER, sprite));
 	this->loadSpriteInfo(eID::PLAYER, "Resources//Images//player.txt");
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//enemy.png");
+	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::ENEMY, sprite));
 	this->loadSpriteInfo(eID::ENEMY, "Resources//Images//enemy.txt");
+	
+	sprite = new Sprite(spriteHandle, L"Resources//Images//bullet_effect.png");
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::BULLET_EFFECT, sprite));
+	this->loadSpriteInfo(eID::BULLET_EFFECT, "Resources//Images//bullet_effect.txt");
 
-	// Tileset
+	sprite = new Sprite(spriteHandle, L"Resources//Images//item.png");
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::ITEM, sprite));
+	this->loadSpriteInfo(eID::ITEM, "Resources//Images//item.txt");
+
+	// Load TileSet
 	sprite = loadXMLDoc(spriteHandle, L"Resources//Maps//map.tmx");
 	sprite->setOrigin(VECTOR2ZERO);
 	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::MAP_METROID] = sprite;
 }
 
-Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spritehandle, LPWSTR path)
+Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path)
 {
 	xml_document doc;
 	xml_parse_result result = doc.load_file(path, parse_default | parse_pi);
@@ -83,7 +99,7 @@ Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spritehandle, LPWSTR path)
 	strpath = strpath.substr(0, index - 1);
 	strpath += L"//" + L_filename;									// nối chuỗi
 
-	return new Sprite(spritehandle, (LPWSTR)strpath.c_str(), tilecount, columns);
+	return new Sprite(spriteHandle, (LPWSTR)strpath.c_str(), tilecount, columns);
 }
 
 Sprite* SpriteManager::getSprite(eID id)

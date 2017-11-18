@@ -87,6 +87,7 @@ void PlayScene::update(float dt)
 	//viewportInTransform.right += WINDOW_WIDTH * 1.5;
 	//viewportInTransform.bottom -= WINDOW_HEIGHT * 1.5;
 
+	// Xóa các object đã bị DESTROY ra khỏi QuadTree
 	_root->deleteObjects();
 
 	_activeObject.clear();

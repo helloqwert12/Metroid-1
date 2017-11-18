@@ -8,8 +8,12 @@
 #include <ctime>
 
 #include "Wall.h"
+
 #include "Ripper.h"
 #include "Waver.h"
+#include "Skree.h"
+
+#include "EnergyBall.h"
 
 using namespace pugi;
 
@@ -22,8 +26,15 @@ map<string, string> GetObjectProperties(xml_node node);
 // Lấy object từ eID
 BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight);
 
+// Object
 BaseObject* GetWall(xml_node item, int mapHeight);
+
+// Enemy
 BaseObject* GetRipper(xml_node item, int mapHeight);
 BaseObject* GetWaver(xml_node item, int mapHeight);
+BaseObject* GetSkree(xml_node item, int mapHeight);
+
+// Item
+BaseObject* GetEnergyBall(xml_node item, int mapHeight);
 
 #endif //!__MAPUTIL_H__

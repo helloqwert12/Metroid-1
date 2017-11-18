@@ -46,7 +46,7 @@ TileMap* TileMap::LoadFromFile(const string path, eID spriteId)
 	// Đọc danh sách các Tile ID từ file XML
 	tileMap->getElementMatrixIndex(layer);
 
-	// Lưu lại frameWidth, frameHeight của mỗi tile. Để phụ vụ cho việc vẽ map.
+	// Lưu lại frameWidth, frameHeight của mỗi tile. Để phục vụ cho việc vẽ map.
 	tileMap->_frameWidth = tileMap->_tileSet->getSprite()->getFrameWidth();
 	tileMap->_frameHeight = tileMap->_tileSet->getSprite()->getFrameHeight();
 

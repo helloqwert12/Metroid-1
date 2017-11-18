@@ -16,21 +16,21 @@ bool StopWatch::isFinish()
 	return this->_isFinish;
 }
 
-// đơn vị milisecond
+// Đơn vị milisecond
 bool StopWatch::isTimeLoop(float time)
 {
-	float _totalgametime = GameTime::getInstance()->getTotalGameTime();
-	if (_isStart == false)
+	float totalGameTime = GameTime::getInstance()->getTotalGameTime();
+	if (!_isStart)
 	{
-		_stopWatch = time + _totalgametime;
+		_stopWatch = time + totalGameTime;
 		_isStart = true;
 		return false;
 	}
 
-	float delta = _stopWatch - _totalgametime;
+	float delta = _stopWatch - totalGameTime;
 	if (delta <= 0)
 	{
-		_stopWatch = time + delta + _totalgametime;
+		_stopWatch = time + delta + totalGameTime;
 		return true;
 	}
 
@@ -39,18 +39,18 @@ bool StopWatch::isTimeLoop(float time)
 
 bool StopWatch::isStopWatch(float time)
 {
-	if (_isFinish == true)
+	if (_isFinish)
 		return false;
 
-	float _totalgametime = GameTime::getInstance()->getTotalGameTime();
-	if (_isStart == false)
+	float totalGameTime = GameTime::getInstance()->getTotalGameTime();
+	if (!_isStart)
 	{
-		_stopWatch = time + _totalgametime;
+		_stopWatch = time + totalGameTime;
 		_isStart = true;
 		return false;
 	}
 
-	float delta = _stopWatch - _totalgametime;
+	float delta = _stopWatch - totalGameTime;
 	if (delta <= 0)
 	{
 		_isFinish = true;
@@ -66,9 +66,9 @@ void StopWatch::restart()
 	_isFinish = false;
 }
 
-void StopWatch::timeLoopAction(float milisecond, pFunction action)
+void StopWatch::timeLoopAction(float time, pFunction action)
 {
-	if (isTimeLoop(milisecond))
+	if (isTimeLoop(time))
 	{
 		(*action)();
 	}

@@ -5,26 +5,21 @@
 Info::Info() : BaseObject(eID::LIFE_ICON)
 {
 	_iconLife = SpriteManager::getInstance()->getSprite(eID::LIFE_ICON);
-	_iconLife->setScale(SCALE_FACTOR);
 	_iconLife->setPosition(50, 25);
 
 	_textLife = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_textLife->init();
-	_textLife->setScale(2.0);
 	_textLife->setOrigin(VECTOR2ZERO);
 
-	_iconEnergy = SpriteManager::getInstance()->getSprite(eID::ENEGY_ICON);
-	_iconEnergy->setScale(SCALE_FACTOR);
+	_iconEnergy = SpriteManager::getInstance()->getSprite(eID::ENERGY_ICON);
 	_iconEnergy->setPosition(50, 50);
 
 	_textEnergy = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_textEnergy->init();
-	_textEnergy->setScale(2.0);
 	_textEnergy->setOrigin(VECTOR2ZERO);
 
 	_debugAttack = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_debugAttack->init();
-	_debugAttack->setScale(2.0);
 	_debugAttack->setOrigin(VECTOR2ZERO);
 }
 
@@ -48,7 +43,7 @@ void Info::update(float deltatime)
 	{
 		_textLife->setString(" 0" + to_string(_lifeNumber));
 	}
-	else if (_lifeNumber >= 10 && _lifeNumber < 99)
+	else if (_lifeNumber >= 10 && _lifeNumber < 100)
 	{
 		_textLife->setString(" " + to_string(_lifeNumber));
 	}
@@ -63,7 +58,7 @@ void Info::update(float deltatime)
 	{
 		_textEnergy->setString(" 0" + to_string(_energyNumber));
 	}
-	else if (_energyNumber >= 10 && _energyNumber < 99)
+	else if (_energyNumber >= 10 && _energyNumber < 100)
 	{
 		_textEnergy->setString(" " + to_string(_energyNumber));
 	}
@@ -104,6 +99,9 @@ int Info::getLife()
 void Info::setEnergy(int number)
 {
 	_energyNumber = number;
+
+	if (_energyNumber >= 100)
+		_energyNumber = 99;
 }
 
 int Info::getEnergy()

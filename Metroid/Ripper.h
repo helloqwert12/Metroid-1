@@ -18,10 +18,10 @@ public:
 	// @direct: hướng của object. TRUE sang phải, FALSE sang trái
 	Ripper(int x, int y, bool direct);
 
-	void init() override;
-	void update(float deltatime) override;
-	void draw(LPD3DXSPRITE, Viewport*) override;
-	void release() override;
+	void init();
+	void update(float deltatime);
+	void draw(LPD3DXSPRITE, Viewport*);
+	void release();
 
 	void wasHit(int hitpoint);
 	bool isDead();
@@ -39,7 +39,7 @@ protected:
 	StopWatch* _effectStopWatch;
 
 	StopWatch* _hitStopWatch;
-	bool _startHit;
+	bool _startHitStopWatch;
 };
 
 #endif // !_RIPPER_H

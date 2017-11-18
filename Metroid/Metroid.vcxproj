@@ -147,6 +147,7 @@
     <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="dxaudio.cpp" />
+    <ClCompile Include="EnergyBall.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="QuadTreeNode.cpp" />
     <ClCompile Include="Ripper.cpp" />
+    <ClCompile Include="Skree.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="MetroidGame.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
@@ -189,6 +191,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="dxaudio.h" />
+    <ClInclude Include="EnergyBall.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTime.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="QuadTreeNode.h" />
     <ClInclude Include="Ripper.h" />
+    <ClInclude Include="Skree.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="MetroidGame.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />

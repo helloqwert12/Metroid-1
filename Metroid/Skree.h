@@ -1,5 +1,5 @@
-﻿#ifndef _WAVER_H
-#define _WAVER_H
+﻿#ifndef _SKREE_H
+#define _SKREE_H
 
 #include "define.h"
 #include "BaseObject.h"
@@ -9,14 +9,14 @@
 #include "StopWatch.h"
 #include "QuadtreeNode.h"
 #include <ctime>
+#include "EnergyBall.h"
 
-#define WAVER_MOVE_SPEED 80
+#define SKREE_MOVE_SPEED 325
 
-class Waver : public BaseObject
+class Skree : public BaseObject
 {
 public:
-	// @direct: hướng của object. TRUE sang phải, FALSE sang trái
-	Waver(int x, int y, bool direct);
+	Skree(int x, int y);
 
 	void init();
 	void update(float deltatime);
@@ -26,7 +26,7 @@ public:
 	void wasHit(int hitpoint);
 	bool isDead();
 
-	void active(bool direct);
+	void active();
 	void deactive();
 	bool isActive();
 
@@ -47,4 +47,4 @@ protected:
 	bool _startHitStopWatch;
 };
 
-#endif // !_WAVER_H
+#endif // !_SKREE_H
