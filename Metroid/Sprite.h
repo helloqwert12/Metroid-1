@@ -74,17 +74,17 @@ public:
 private:
 	Texture _texture;
 
-	float _opacity;			// từ 0.0f đến 1.0f
+	float _opacity;	// từ 0.0f đến 1.0f
 	D3DXCOLOR _color;
 
 	RECT _bound;
 
-	int _totalFrames;		// tổng số frame
-	int _columns;			// số cột
+	int _totalFrames; // tổng số frame
+	int _columns; // số cột
 	int _index;
-	GVector2 _currentFrame;	// frame hiện tại (cột, dòng)
+	GVector2 _currentFrame; // frame hiện tại (cột, dòng)
 
-	RECT _frameRect;		// HCN muốn vẽ
+	RECT _frameRect; // HCN muốn vẽ
 	int _frameWidth;
 	int _frameHeight;
 	int _textureWidth;

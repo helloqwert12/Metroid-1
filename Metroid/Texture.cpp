@@ -90,7 +90,7 @@ void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position
 	// Set ma trận đã được transform
 	spriteHandle->SetTransform(&matFinal);
 
-	// BEGIN
+	// Bắt đầu vẽ
 	spriteHandle->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE);
 
 	spriteHandle->Draw(
@@ -102,7 +102,7 @@ void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position
 
 	spriteHandle->SetTransform(&matOld);
 
-	// END
+	// Kết thúc vẽ
 	spriteHandle->End();
 }
 

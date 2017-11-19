@@ -12,15 +12,15 @@ class Animation : public IComponent
 {
 public:
 	/*
-	Tạo animation từ spritesheet
-		@spriteSheet: spritesheet animation
+	Tạo Animation từ spritesheet
+		@spriteSheet: spritesheet của animation
 		@timeAnimate: thời gian chuyển từng frame
 	Sau khi tạo bằng contructor này phải addFrameRect để có frame để chuyển động.
 	*/
 	Animation(Sprite* spriteSheet, float timeAnimate = 0.0f, bool loop = true);
 
 	/*
-	Tạo animation từ spritesheet có frame đều nhau
+	Tạo Animation từ spritesheet có frame đều nhau
 		@spriteSheet: spritesheet của animation
 		@totalFrames: tổng số frame
 		@cols: số cột
@@ -34,11 +34,11 @@ public:
 	// Chuyển qua frame kế tiếp
 	void nextFrame();
 
+	// Lấy giá trị frame index hiện tại
+	int getIndex();
+
 	// Set frame index cụ thể
 	void setIndex(int index);
-
-	// Lấy giá trị index hiện tại
-	int getIndex();
 
 	// Update animation
 	void update(float dt);
@@ -46,11 +46,11 @@ public:
 	// Vẽ animation
 	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
 
-	// Set thời gian chuyển frame (lưu ý: thời gian tính theo giây)
-	void setTimeAnimate(float time);
-	
 	// Lấy giá trị thời gian chuyển frame
 	float getTimeAnimate();
+
+	// Set thời gian chuyển frame (lưu ý: thời gian tính theo giây)
+	void setTimeAnimate(float time);
 
 	// Bắt đầu chuyển frame
 	void start();
@@ -62,10 +62,9 @@ public:
 	bool isAnimate();
 	void addFrameRect(RECT rect);
 	void addFrameRect(float left, float top, int width, int height);
-	void addFrameRect(float left, float top, float right, float bottom);
 
 	/*
-	Tạo nhiều frameRect liên tiếp nhau, không giới hạn tham số, kết thúc bằng tham số NULL
+	Add nhiều frameRect liên tiếp nhau, không giới hạn tham số, kết thúc bằng tham số NULL
 		@id: ID của sprite
 		@firstRectName,...: các tên của frameRect
 	*/
@@ -81,35 +80,35 @@ public:
 	Animate từ frame này đến frame khác cụ thể
 		@from: frame bắt đầu
 		@to: frame kết thúc
-		@loop: có lặp hay ko
+		@loop: có lặp hay không
 		Giá trị from/to là thứ tự của frame add vô, tính từ 0.
 	*/
 	void animateFromTo(int from, int to, bool loop = true);
 
-	// Tạo hiệu ứng chớp cho sprite, sau khi set enable = true, phải đặt giá trị thay đổi ở hàm setValueFlashes
+	// Tạo hiệu ứng chớp cho sprite, sau khi set enable = TRUE, phải đặt giá trị thay đổi ở hàm setValueFlashes
 	void enableFlashes(bool enable);
 
-	// Gán giá trị chớp tắt (@value: giá trị thay đổi để chớp, từ 0 đến < 1 (giá trị bình thường là 1))
+	// Set giá trị chớp tắt (@value: giá trị thay đổi để chớp, từ 0 đến < 1 (giá trị bình thường là 1))
 	void setValueFlashes(float value);
 
-	void setColorFlash(D3DXCOLOR color);
 	D3DXCOLOR getColorFlash();
+	void setColorFlash(D3DXCOLOR color);
 
 private:
 	int _startFrame;
 	int _endFrame;
 	int _totalFrames;
-	int _index;				// số thứ tự frame
+	int _index;	// số index của frame
 
-	float _timeAnimate;		// thời gian chuyển giữa các frame
+	float _timeAnimate;	// thời gian chuyển giữa các frame
 	float _timer;
 
 	bool _canAnimate;
 	bool _isLoop;
 
-	Sprite* _spriteSheet;	// reference đến sprite
-	vector<RECT> _frameRectList;	// danh sách các frameRect
-	RECT _currentRect;		// frameRect hiện tại
+	Sprite* _spriteSheet; // reference đến sprite
+	vector<RECT> _frameRectList; // danh sách các frameRect
+	RECT _currentRect; // frameRect hiện tại
 
 	bool _canFlashes;
 	float _valueFlashes;

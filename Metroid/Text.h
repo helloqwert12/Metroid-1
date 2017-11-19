@@ -25,15 +25,15 @@ public:
 	string getText();
 
 	// Set kích thước chữ
-	void setFontHeight(int fontheight);
+	void setFontHeight(int fontHeight);
 	int getFontHeight();
 	
 	// Set độ đậm chữ (@fontW: có thể sử dụng các mẫu FW_NORMAL, FW_BOLD, FW_LIGHT)
-	void setFontWeight(UINT fontW);
+	void setFontWeight(UINT fontWeight);
 	UINT getFontWeight();
 
 	// Set chữ có nghiêng hay không
-	void setItalic(bool i);
+	void setItalic(bool italic);
 	bool isItalic();
 
 	// Set canh lề cho chữ (@align: DT_LEFT, DT_CENTER, DT_RIGHT, DT_WORDBREAK,...)

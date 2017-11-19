@@ -148,8 +148,6 @@ void Sprite::setOrigin(GVector2 origin)
 		return;
 
 	_origin = origin;
-	_anchorPoint = GVector2(_bound.left + _frameWidth * _scale.x * _origin.x, _bound.bottom + _frameHeight * _scale.y * _origin.y);
-
 	this->updateBounding();
 }
 

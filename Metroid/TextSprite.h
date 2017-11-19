@@ -11,8 +11,8 @@ public:
 
 	void init();
 	void update(float deltatime);
-	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
 	void draw(LPD3DXSPRITE spriteHandle);
+	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
 	void release();
 
 	void setString(string text);

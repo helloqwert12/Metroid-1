@@ -169,11 +169,6 @@ D3DXCOLOR BaseObject::getColor()
 	return _sprite->getColor();
 }
 
-GVector2 BaseObject::getAnchorPoint()
-{
-	return _sprite->getAnchorPoint();
-}
-
 Sprite* BaseObject::getSprite()
 {
 	return _sprite;

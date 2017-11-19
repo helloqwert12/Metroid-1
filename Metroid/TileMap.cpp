@@ -2,14 +2,14 @@
 
 TileMap::TileMap()
 {
-	_mapIndex = NULL;
+	_tileMatrix = NULL;
 }
 
 TileMap::~TileMap()
 {
 }
 
-TileMap* TileMap::LoadFromFile(const string path, eID spriteId)
+TileMap* TileMap::LoadMapFromFile(const string path, eID spriteId)
 {
 	xml_document doc;
 
@@ -37,14 +37,14 @@ TileMap* TileMap::LoadFromFile(const string path, eID spriteId)
 	tileMap->_mapSize.y = layer.attribute("height").as_int();
 
 	// Khởi tạo mảng hai chiều.
-	tileMap->_mapIndex = new int*[int(tileMap->_mapSize.y)];
+	tileMap->_tileMatrix = new int*[int(tileMap->_mapSize.y)];
 	for (int i = 0; i < tileMap->_mapSize.y; i++)
 	{
-		tileMap->_mapIndex[i] = new int[(int)tileMap->_mapSize.x];
+		tileMap->_tileMatrix[i] = new int[(int)tileMap->_mapSize.x];
 	}
 
 	// Đọc danh sách các Tile ID từ file XML
-	tileMap->getElementMatrixIndex(layer);
+	tileMap->loadTileMatrix(layer);
 
 	// Lưu lại frameWidth, frameHeight của mỗi tile. Để phục vụ cho việc vẽ map.
 	tileMap->_frameWidth = tileMap->_tileSet->getSprite()->getFrameWidth();
@@ -53,14 +53,14 @@ TileMap* TileMap::LoadFromFile(const string path, eID spriteId)
 	return tileMap;
 }
 
-void TileMap::getElementMatrixIndex(xml_node& node)
+void TileMap::loadTileMatrix(xml_node& node)
 {
 	auto elements = node.child("data").children();
 	auto row = 0, col = 0;
 
 	for (auto element : elements)
 	{
-		this->_mapIndex[row][col] = element.attribute("gid").as_int();
+		this->_tileMatrix[row][col] = element.attribute("gid").as_int();
 		col++;
 		if (col >= this->_mapSize.x)
 		{
@@ -72,7 +72,7 @@ void TileMap::getElementMatrixIndex(xml_node& node)
 
 void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
-	// Duyệt từ 0 đến _width * _height có thể phát sinh đển hàng ngàn lần vẽ
+	// Duyệt hết cả map phát sinh đển hàng ngàn lần vẽ
 	// Nên ta kiểm tra toạ độ viewport để xác định cặp giá trị index i, j trước khi chạy vòng lặp for 2 lớp
 	RECT screenRect =
 	{
@@ -86,7 +86,7 @@ void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	int colEnd = min(screenRect.right / _frameWidth + 1, _mapSize.x);
 	int rowBegin = _mapSize.y - min(screenRect.top / _frameHeight + 1, _mapSize.y);
 	int rowEnd = _mapSize.y - max(screenRect.bottom / _frameHeight, 0);
-	// cộng thêm 1 vì cần có một Tile vẽ tràn một phần ra khỏi màn hình.
+	// cộng thêm 1 vì cần có thêm một Tile vẽ tràn một phần ra khỏi màn hình.
 
 	GVector2 position; // tọa độ world (x, y)
 	for (int row = rowBegin; row < rowEnd; row++)
@@ -95,8 +95,8 @@ void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		{
 			// Tính toán vị trí vẽ Tile
 			position.x = col * _frameWidth;
-			position.y = (_mapSize.y - row - 1) * _frameHeight;
-			this->_tileSet->draw(spriteHandle, this->_mapIndex[row][col], position, viewport);
+			position.y = (_mapSize.y - row - 1) * _frameHeight; // do row, col tính theo trục top-left
+			this->_tileSet->draw(spriteHandle, this->_tileMatrix[row][col], position, viewport);
 		}
 	}
 }

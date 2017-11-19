@@ -9,6 +9,10 @@ Wall::Wall(int x, int y, int width, int height) : BaseObject(eID::WALL)
 	this->setPhysicsBodySide(eDirection::ALL);
 }
 
+Wall::~Wall()
+{
+}
+
 void Wall::init()
 {
 	this->_sprite = nullptr;
@@ -35,7 +39,6 @@ void Wall::release()
 	{
 		SAFE_DELETE(it.second);
 	}
-
 	_listComponent.clear();
 }
 
@@ -85,42 +88,7 @@ void Wall::setPositionX(float x)
 
 void Wall::setPositionY(float y)
 {
-	_bound.right = y;
-}
-
-GVector2 Wall::getScale()
-{
-	return VECTOR2ONE;
-}
-
-void Wall::setScale(GVector2 scale)
-{
-	// do nothing.
-}
-
-void Wall::setScale(float scale)
-{
-	// do nothing.
-}
-
-void Wall::setScaleX(float sx)
-{
-	// do nothing.
-}
-
-void Wall::setScaleY(float sy)
-{
-	// do nothing.
-}
-
-GVector2 Wall::getOrigin()
-{
-	return VECTOR2ZERO;
-}
-
-void Wall::setOrigin(GVector2 origin)
-{
-	// do nothing.
+	_bound.top = y;
 }
 
 float Wall::getRotate()
@@ -128,31 +96,12 @@ float Wall::getRotate()
 	return 0.0f;
 }
 
-void Wall::setRotate(float degree)
-{
-	// do nothing.
-}
-
-void Wall::setZIndex(float z)
-{
-	// do nothing.
-}
-
 float Wall::getZIndex()
 {
 	return 1; // hard code
 }
 
-GVector2 Wall::getAnchorPoint()
-{
-	return GVector2(_bound.left, _bound.right);
-}
-
 RECT Wall::getBounding()
 {
 	return _bound;
-}
-
-Wall::~Wall()
-{
 }

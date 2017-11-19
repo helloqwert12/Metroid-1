@@ -49,10 +49,10 @@ string Text::getText()
 	return _text;
 }
 
-void Text::setFontHeight(int fontheight)
+void Text::setFontHeight(int fontHeight)
 {
-	if (fontheight != _fontHeight)
-		_fontHeight = fontheight;
+	if (_fontHeight != fontHeight)
+		_fontHeight = fontHeight;
 
 	this->updateFont();
 }
@@ -62,10 +62,10 @@ int Text::getFontHeight()
 	return _fontHeight;
 }
 
-void Text::setFontWeight(UINT fontW)
+void Text::setFontWeight(UINT fontWeight)
 {
-	if (fontW != _fontWeight)
-		_fontWeight = fontW;
+	if (_fontWeight != fontWeight)
+		_fontWeight = fontWeight;
 
 	this->updateFont();
 }
@@ -75,10 +75,10 @@ UINT Text::getFontWeight()
 	return _fontWeight;
 }
 
-void Text::setItalic(bool i)
+void Text::setItalic(bool italic)
 {
-	if (_italic != i)
-		_italic = i;
+	if (_italic != italic)
+		_italic = italic;
 
 	this->updateFont();
 }
@@ -123,17 +123,17 @@ void Text::updateFont()
 	}
 
 	D3DXCreateFont(
-		DeviceManager::getInstance()->getDevice(),		// device
-		_fontHeight,									// font height
-		0,												// font width
-		_fontWeight,									// font weight
-		1,												//
-		_italic,										// italic
+		DeviceManager::getInstance()->getDevice(),	// device
+		_fontHeight,								// font height
+		0,											// font width
+		_fontWeight,								// font weight
+		1,											
+		_italic,									// italic
 		DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS,
 		ANTIALIASED_QUALITY,
 		FF_DONTCARE,
-		_fontName,										// font face
-		&_font											// pointer font
+		_fontName,									// font name
+		&_font										// font pointer
 	);
 }

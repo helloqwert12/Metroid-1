@@ -16,14 +16,14 @@ bool PlayScene::init()
 {
 	auto player = new Player();
 	player->init();
-	player->setPosition(1170, 2550);
+	player->setPosition(1170, 2500);
 	player->getBounding();
 	this->_player = player;
 
 	_text = new Text(L"Arial", "", 10, 25);
 
 	// Tạo TileMap
-	_tileMap = TileMap::LoadFromFile("Resources//Maps//map.tmx", eID::MAP_METROID);
+	_tileMap = TileMap::LoadMapFromFile("Resources//Maps//map.tmx", eID::MAP_METROID);
 
 	// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
 	auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
@@ -37,14 +37,14 @@ bool PlayScene::init()
 	_root = new QuadTreeNode(rectMap);
 	QuadTreeNode::setInstance(_root);
 
+	// Đọc file để lấy list các object
 	auto listObject = GetListObjectFromFile("Resources//Maps//map.tmx");
 
 	// Insert tất cả các object vào QuadTree
-	for (auto obj : (*listObject))
+	for (auto object : (*listObject))
 	{
-		_root->insert(obj);
+		_root->insert(object);
 	}
-
 	listObject->clear();
 
 	this->getPlayer()->resetValues();
@@ -94,8 +94,8 @@ void PlayScene::update(float dt)
 	_activeObject = _root->retrieve(viewportInTransform);
 
 	// Kiểm tra va chạm player với các object
-	for (BaseObject* obj : _activeObject)
-		_player->checkCollision(obj, dt);
+	for (BaseObject* object : _activeObject)
+		_player->checkCollision(object, dt);
 
 	// Xét va chạm từng object với các object còn lại
 	int i = 0, j = 0;
@@ -116,15 +116,15 @@ void PlayScene::update(float dt)
 	// Update lại player và các object
 	_player->update(dt);
 
-	for (BaseObject* obj : _activeObject)
+	for (BaseObject* object : _activeObject)
 	{
-		obj->update(dt);
+		object->update(dt);
 	}
 }
 
-void PlayScene::updateViewport(BaseObject* objTracker)
+void PlayScene::updateViewport(BaseObject* objectTracker)
 {
-	GVector2 newPosition = GVector2(objTracker->getPositionX() - WINDOW_WIDTH / 2, objTracker->getPositionY() + 400);
+	GVector2 newPosition = GVector2(objectTracker->getPositionX() - WINDOW_WIDTH / 2, objectTracker->getPositionY() + 400);
 
 	_viewport->setPositionWorld(newPosition);
 }
@@ -140,7 +140,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 
 	_player->draw(spriteHandle, _viewport);
 
-	_text->draw();
+	//_text->draw();
 }
 
 void PlayScene::release()
@@ -154,8 +154,8 @@ bool PlayScene::checkEndGame()
 {
 	if (((Player*)_player)->getLifeNumber() < 0)
 	{
-		auto gameoverScene = new IntroScene();
-		SceneManager::getInstance()->replaceScene(gameoverScene);
+		auto overScene = new IntroScene();
+		SceneManager::getInstance()->replaceScene(overScene);
 		return true;
 	}
 

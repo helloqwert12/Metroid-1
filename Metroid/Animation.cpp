@@ -39,8 +39,8 @@ Animation::Animation(Sprite* spriteSheet, int totalFrames, int cols, float timeA
 
 	for (int i = 0; i < totalFrames; i++)
 	{
-		int x = i % cols;	// cột
-		int y = i / cols;	// dòng
+		int x = i % cols; // cột
+		int y = i / cols; // dòng
 
 		this->addFrameRect(x * frameW, y * frameH, frameW, frameH);
 	}
@@ -119,14 +119,14 @@ void Animation::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	_spriteSheet->render(spriteHandle, viewport);
 }
 
-void Animation::setTimeAnimate(float time)
-{
-	_timeAnimate = time;
-}
-
 float Animation::getTimeAnimate()
 {
 	return _timeAnimate;
+}
+
+void Animation::setTimeAnimate(float time)
+{
+	_timeAnimate = time;
 }
 
 void Animation::start()
@@ -162,6 +162,7 @@ void Animation::addFrameRect(RECT rect)
 
 	_frameRectList.push_back(rect);
 
+	// Cập nhật lại totalFrames và endFrame
 	_totalFrames = _frameRectList.size();
 	_endFrame = _totalFrames - 1;
 }
@@ -177,30 +178,19 @@ void Animation::addFrameRect(float left, float top, int width, int height)
 	this->addFrameRect(rect);
 }
 
-void Animation::addFrameRect(float left, float top, float right, float bottom)
-{
-	RECT rect;
-	rect.left = left;
-	rect.top = top;
-	rect.right = right;
-	rect.bottom = bottom;
-
-	this->addFrameRect(rect);
-}
-
 void Animation::addFrameRect(eID id, char* firstRectName, ...)
 {
 	va_list vl;
-	char* name;
+	char* rectName;
 
 	va_start(vl, firstRectName);
 
-	name = firstRectName;
+	rectName = firstRectName;
 
-	while (name != NULL)
+	while (rectName != NULL)
 	{
-		this->addFrameRect(SpriteManager::getInstance()->getSourceRect(id, name));
-		name = va_arg(vl, char*);
+		this->addFrameRect(SpriteManager::getInstance()->getSourceRect(id, rectName));
+		rectName = va_arg(vl, char*);
 	}
 
 	va_end(vl);
@@ -261,12 +251,12 @@ void Animation::setValueFlashes(float value)
 		_valueFlashes = value;
 }
 
-void Animation::setColorFlash(D3DXCOLOR color)
-{
-	_flashColor = color;
-}
-
 D3DXCOLOR Animation::getColorFlash()
 {
 	return _flashColor;
+}
+
+void Animation::setColorFlash(D3DXCOLOR color)
+{
+	_flashColor = color;
 }

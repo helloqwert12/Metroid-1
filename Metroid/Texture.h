@@ -11,26 +11,27 @@ public:
 	~Texture();
 
 	/*
-		Load ảnh từ file và lưu vào LPDIRECT3DTEXTURE9
+	Load ảnh từ file và lưu vào LPDIRECT3DTEXTURE9
 		@spriteHandle: DirectX sprite handle, dùng để load, vẽ sprite
 		@filePath: đường dẫn đến file ảnh
 		@color: back color
+		@colorkey: màu khi mà load hình nó sẽ bỏ qua thành trong suốt
 	*/
 	HRESULT loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCOLOR color = COLOR_WHITE, D3DXCOLOR colorkey = COLOR_KEY);
 
 	/*
-		Vẽ texture lên màn hình (thực chất là vẽ lên buffer)
+	Vẽ Texture lên màn hình (thực chất là vẽ lên buffer)
 		@spriteHandle: DirectX sprite handle, dùng để load, vẽ sprite
 		@rect: phần HCN muốn vẽ (left, top, right, bottom)
-		@center: center of frame to draw:
+		@center: center của frame:
 		- Nếu là NULL, top-left của ảnh sẽ được vẽ tại @position
 		- Nếu là (x, y), top-left của ảnh sẽ được vẽ tại  @position - (x ,y)
-		@postion: vị trí để vẽ
+		@postion: vị trí vẽ
 	*/
 	void render(LPD3DXSPRITE spriteHandle, const RECT* rect, const GVector3* center, const GVector3* position);
 
 	/*
-	render texture với các tham số tranform, top-left
+	Vẽ Texture với các tham số tranform, top-left
 		@position: vị trí
 		@scale: tỉ lệ scale
 		@rotate: góc xoay theo độ (0-360)
@@ -40,8 +41,8 @@ public:
 	void render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position, GVector2 scale, float rotate, GVector2 origin, float zIndex = 0);
 
 	/*
-	render texture với các tham số tranform, trong viewport
-		@viewport: 
+	Vẽ Texture với các tham số tranform, trong viewport
+		@viewport: viewport
 		@position: vị trí
 		@scale: tỉ lệ scale
 		@rotate: góc xoay theo độ (0-360)

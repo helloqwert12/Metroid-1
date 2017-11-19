@@ -78,11 +78,8 @@ Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path)
 {
 	xml_document doc;
 	xml_parse_result result = doc.load_file(path, parse_default | parse_pi);
-	if (result == false)
-	{
-		OutputDebugString(L"Khong tim thay file");
+	if (!result)
 		return nullptr;
-	}
 
 	auto tileset_node = doc.child("map").child("tileset");
 	int tilecount = tileset_node.attribute("tilecount").as_int();
@@ -90,7 +87,7 @@ Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path)
 	auto image = tileset_node.child("image");
 
 	// Tìm tên file.
-	// Cắt từ chuỗi path ra để tìm thư mục.
+	// Cắt từ chuỗi path ra để tìm path thư mục.
 	// Sau đó ghép với tên file ảnh được lấy từ file xml để load ảnh.
 	string filename = image.attribute("source").as_string();		// lấy filename từ xml node
 	wstring L_filename = wstring(filename.begin(), filename.end());	// convert to wstring.

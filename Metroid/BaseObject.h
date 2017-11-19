@@ -37,7 +37,6 @@ public:
 	virtual GVector2 getPosition();
 	virtual float getPositionX();
 	virtual float getPositionY();
-
 	virtual void setPosition(GVector3 vector);
 	virtual void setPosition(GVector2 position);
 	virtual void setPosition(float x, float y, float z);
@@ -66,15 +65,13 @@ public:
 	virtual void setColor(D3DXCOLOR color);
 	virtual D3DXCOLOR getColor();
 
-	virtual GVector2 getAnchorPoint();
-
 	Sprite* getSprite();
 
 	virtual RECT getBounding();
 
 	virtual float checkCollision(BaseObject* object, float dt);
 
-	// Object nào cũng có vận tốc, mặc định là đứng yên sẽ trả về 0
+	// Object nào cũng có vận tốc, mặc định là đứng yên sẽ trả về (0, 0)
 	// Nếu object có chuyển động phải override lại để lấy vận tốc.
 	virtual GVector2 getVelocity();
 
@@ -84,7 +81,7 @@ public:
 protected:
 	Sprite* _sprite;
 
-	eID _id;
+	eID _id; // ID của object
 	eStatus _status; // Trạng thái của object
 	eDirection _physicsSide; // Hướng bị va chạm của object
 };

@@ -16,7 +16,7 @@ public:
 
 	RECT getSourceRect(eID id, string name);
 
-	// đọc file để lấy danh sách sourceRect
+	// Đọc file text để lấy danh sách sourceRect
 	void loadSpriteInfo(eID id, const char* fileInfoPath);
 
 	static void release();

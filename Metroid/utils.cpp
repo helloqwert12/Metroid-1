@@ -1,5 +1,4 @@
 ﻿#include "utils.h"
-#include <sstream>
 
 // Hệ world (x, y)
 bool isIntersectedInGame(RECT rect1, RECT rect2)
@@ -14,14 +13,6 @@ bool isIntersectedInGame(RECT rect1, RECT rect2)
 		return true;
 
 	if (left > 0 && top < 0 && right < 0 && bottom > 0)
-		return true;
-
-	return false;
-}
-
-bool isContain(RECT rect, D3DXVECTOR2 point)
-{
-	if (point.x >= rect.left && point.x <= rect.right && point.y > rect.bottom && point.y < rect.top)
 		return true;
 
 	return false;

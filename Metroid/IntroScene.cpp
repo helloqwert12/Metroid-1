@@ -19,7 +19,6 @@ bool IntroScene::init()
 
 	_pressStart = new TextSprite(eID::FONT, "PRESS START KEY", GVector2(145, 255));
 	_pressStart->init();
-	_pressStart->setScale(2.0);
 
 	_thienAn = new TextSprite(eID::FONT, "THIEN AN - 15520008", GVector2(165, 350));
 	_thienAn->init();

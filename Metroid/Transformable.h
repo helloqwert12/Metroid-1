@@ -35,15 +35,12 @@ public:
 	virtual void setZIndex(float z);
 	virtual float getZIndex();
 
-	GVector2 getAnchorPoint();
-
 protected:
-	GVector2			_position;
-	GVector2			_scale;
-	float				_rotate;	// theo độ 0-360
-	GVector2			_origin;	// gốc của Transform, dùng để xoay, scale (anchor: điểm neo)
-	GVector2			_anchorPoint;
-	float				_zIndex;
+	GVector2	_position;
+	GVector2	_scale;
+	float		_rotate; // theo độ 0-360
+	GVector2	_origin; // gốc của Transform, dùng để xoay, scale
+	float		_zIndex;
 };
 
 #endif // !__TRANSFORMABLE_H__

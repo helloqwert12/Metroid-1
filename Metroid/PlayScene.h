@@ -35,12 +35,12 @@ private:
 
 	BaseObject* _player;
 
-	// List các object nằm trong vùng active.
+	// List chứa các object nằm trong vùng active.
 	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để draw.
 	vector<BaseObject*> _activeObject;
 
 	// Update tọa độ viewport theo 1 object
-	void updateViewport(BaseObject* objTracker);
+	void updateViewport(BaseObject* objectTracker);
 
 	bool checkEndGame();
 };

@@ -13,7 +13,7 @@ class TileMap
 {
 public:
 	// Tạo TileMap từ file XML (@spriteId: ID của TileMap)
-	static TileMap* LoadFromFile(const string path, eID spriteId);
+	static TileMap* LoadMapFromFile(const string path, eID spriteId);
 
 	TileMap();
 	~TileMap();
@@ -35,13 +35,13 @@ private:
 
 	// Ma trận Tile ID.
 	// ID trong ma trận này được so sánh với ID của Tile trong TileSet.listTiles
-	int** _mapIndex;
+	int** _tileMatrix;
 
 	// TileSet chứa listTiles.
 	TileSet* _tileSet;
 
 	// Đọc dữ liệu danh sách các Tile ID từ file XML
-	void getElementMatrixIndex(xml_node& node);
+	void loadTileMatrix(xml_node& node);
 };
 
 #endif // !__TILEMAP_H__
