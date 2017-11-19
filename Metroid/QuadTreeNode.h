@@ -12,7 +12,7 @@
 class QuadTreeNode
 {
 public:
-	QuadTreeNode(const RECT bound, short level = 0);
+	QuadTreeNode(const RECT bound, int level = 0);
 	~QuadTreeNode();
 
 	static QuadTreeNode* getInstance();
@@ -24,7 +24,7 @@ public:
 	// Lấy list các object có khả năng va chạm với viewport
 	vector<BaseObject*> retrieve(const RECT viewportBound);
 
-	// Kiểm tra các object nào đã bị DESTROY thì xóa
+	// Xóa các object đã bị DESTROY ra khỏi list object hiện tại
 	void deleteObjects();
 
 	void release();
@@ -32,14 +32,14 @@ public:
 protected:
 	static QuadTreeNode* _instance;
 
-	short _level;
+	int _level;
 	RECT _bound;
 
-	vector<QuadTreeNode*> _children;	// list chứa 4 Node con
-	vector<BaseObject*> _objects;		// list chứa các object của Node hiện tại
+	vector<QuadTreeNode*> _children; // list chứa 4 Node con
+	vector<BaseObject*> _objects;	 // list chứa các object của Node hiện tại
 
 	// Kiểm tra xem HCN đang xét thuộc về phần hình vuông index thứ mấy (0-3)
-	short getIndex(const RECT& bound);
+	int getIndex(const RECT& bound);
 
 	// Chia Node hiện tại thành 4 Node con
 	void split();

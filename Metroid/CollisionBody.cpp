@@ -13,9 +13,9 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 {
 	float time = isCollide(otherObject, direction, dt);
 
-	if (time < 1.0f) // Sẽ xảy ra va chạm
+	if (time < 1.0f) // Nếu sẽ xảy ra va chạm
 	{
-		// Hướng va chạm của otherObject trùng với hướng di chuyển có thể va chạm của nó
+		// Hướng va chạm của otherObject trùng với hướng có thể bị va chạm của nó
 		if (otherObject->getPhysicsBodySide() != eDirection::NONE && (direction & otherObject->getPhysicsBodySide()) == direction)
 		{
 			// Update tọa độ (cản lại)
@@ -24,7 +24,7 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 
 		return true;
 	}
-	else 
+	else // Kiểm tra tiếp xem có đang va chạm rồi hay không
 	{
 		// Dùng để tạo GVector2 move(moveX, moveY) dùng để update lại tọa độ
 		float moveX, moveY;
@@ -32,10 +32,11 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 		// Kiểm tra tiếp xem có đang va chạm rồi hay không
 		if (isColliding(otherObject, moveX, moveY, dt))
 		{
+			// Lấy hướng bị va chạm của otherObject
 			auto side = this->getSide(otherObject);
 			direction = side;
 
-			// Hướng va chạm của otherObject trùng với hướng di chuyển có thể va chạm của nó
+			// Hướng va chạm của otherObject trùng với hướng có thể bị va chạm của nó
 			if (otherObject->getPhysicsBodySide() != eDirection::NONE && (direction & otherObject->getPhysicsBodySide()) == direction)
 			{
 				// Update tọa độ (dịch chuyển ra xa)
@@ -67,14 +68,14 @@ float CollisionBody::isCollide(BaseObject* otherObject, eDirection& direction, f
 
 	// SweptAABB
 	// Vận tốc mỗi frame
-	GVector2 otherVeloc = GVector2(otherObject->getVelocity().x * dt / 1000, otherObject->getVelocity().y * dt / 1000);
+	GVector2 otherVelocity = GVector2(otherObject->getVelocity().x * dt / 1000, otherObject->getVelocity().y * dt / 1000);
 	GVector2 myVelocity = GVector2(_target->getVelocity().x * dt / 1000, _target->getVelocity().y * dt / 1000);
 	GVector2 velocity = myVelocity;
 
 	// Nếu other object chuyển động thì dời vector vận tốc để trở thành 1 chuyển động, 1 đứng yên
-	if (otherVeloc != GVector2(0, 0))
+	if (otherVelocity != GVector2(0, 0))
 	{
-		velocity = otherVeloc - myVelocity;
+		velocity = otherVelocity - myVelocity;
 	}
 
 	// Tính khoảng cách giữa cạnh gần nhất, xa nhất 2 object dx, dy
@@ -128,21 +129,21 @@ float CollisionBody::isCollide(BaseObject* otherObject, eDirection& direction, f
 	// Thời gian va chạm
 	// Xảy ra va chạm khi x và y cùng chạm => thời gian va chạm trễ nhất giữa x và y
 	float entryTime = max(_txEntry, _tyEntry);
-	// hết va chạm là 1 trong 2 x, y hết va chạm => thời gian sớm nhất để kết thúc va chạm
+	// Hết va chạm là 1 trong 2 x, y hết va chạm => thời gian sớm nhất để kết thúc va chạm
 	float exitTime = min(_txExit, _tyExit);
 
 	// Không xảy ra va chạm khi:
 	// thời gian bắt đầu va chạm lớn hơn thời gian kết thúc va chạm
-	// thời gian va chạm x, y nhỏ hơn 0 (2 object đang đi xa ra nhau)
+	// thời gian va chạm x, y nhỏ hơn 0 (2 object đang đi ra xa nhau)
 	// thời gian va chạm x, y lớn hơn 1 (còn xa quá chưa thể va chạm)
-	if (entryTime > exitTime || _txEntry < 0.0f && _tyEntry < 0.0f || _txEntry > 1.0f || _tyEntry > 1.0f)
+	if (entryTime > exitTime || (_txEntry < 0.0f && _tyEntry < 0.0f) || _txEntry > 1.0f || _tyEntry > 1.0f)
 	{
 		// không va chạm trả về 1 đi tiếp bình thường
 		direction = eDirection::NONE;
 		return 1.0f;
 	}
 
-	// Nếu thời gian va chạm x lơn hơn y
+	// Nếu thời gian va chạm x lớn hơn y
 	if (_txEntry > _tyEntry)
 	{
 		// Xét x
@@ -156,7 +157,7 @@ float CollisionBody::isCollide(BaseObject* otherObject, eDirection& direction, f
 			direction = eDirection::LEFT;
 		}
 	}
-	else
+	else // thời gian va chạm y lớn hơn x
 	{
 		// Xét y
 		// Khoảng cách gần nhất mà nhỏ hơn 0 nghĩa là object kia đang nằm bên dưới object này => va chạm bên trên nó
@@ -212,7 +213,7 @@ void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection dir
 {
 	if (withVelocity) // cản lại khi va chạm
 	{
-		// Hướng va chạm của otherObject trùng với hướng di chuyển có thể va chạm của nó
+		// Hướng va chạm của otherObject trùng với hướng có thể bị va chạm của nó
 		if (otherObject->getPhysicsBodySide() != eDirection::NONE || (direction & otherObject->getPhysicsBodySide()) == direction)
 		{
 			auto position = _target->getPosition();
@@ -274,7 +275,7 @@ RECT CollisionBody::getSweptBroadphaseRect(BaseObject* object, float dt)
 	RECT rect;
 	rect.left = velocity.x > 0 ? myRect.left : myRect.left + velocity.x;
 	rect.top = velocity.y > 0 ? myRect.top + velocity.y : myRect.top;
-	rect.right = velocity.y > 0 ? myRect.right + velocity.x : myRect.right;
+	rect.right = velocity.x > 0 ? myRect.right + velocity.x : myRect.right;
 	rect.bottom = velocity.y > 0 ? myRect.bottom : myRect.bottom + velocity.y;
 
 	return rect;

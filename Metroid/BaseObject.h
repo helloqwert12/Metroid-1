@@ -83,7 +83,7 @@ protected:
 
 	eID _id; // ID của object
 	eStatus _status; // Trạng thái của object
-	eDirection _physicsSide; // Hướng bị va chạm của object
+	eDirection _physicsSide; // Hướng có thể bị va chạm của object
 };
 
 #endif // !__BASEOBJECT_H__

@@ -13,23 +13,21 @@ public:
 	~CollisionBody();
 
 	/*
-	Kiểm tra va chạm với object khác lấy được hướng va chạm, không gọi event Begin, End.
+	Kiểm tra va chạm với object khác, lấy được hướng bị va chạm
 		@otherObject: object cần kiểm tra va chạm
 		@direction: lấy hướng bị va chạm của otherObject
 		@dt: deltatime của mỗi frame
-		@isUpdatePosition:	TRUE khi muốn CollisionBody sẽ cập nhật vị trí object lại nếu object chồng lắp lên object khác
+		@isUpdatePosition: TRUE khi muốn CollisionBody sẽ cập nhật vị trí object lại nếu object này đang chồng lắp lên object khác
 	*/
 	bool checkCollision(BaseObject* otherObject, eDirection& direction, float dt, bool isUpdatePosition = true);
 
-	void update(float dt);
-
-	// Kiểm tra va chạm và trả về thời gian bắt đầu va chạm và hướng va chạm (AABB)
+	// Kiểm tra va chạm và trả về thời gian bắt đầu va chạm và hướng va chạm (SweptAABB)
 	float isCollide(BaseObject* otherObject, eDirection& direction, float dt);
 
 	// Kiểm tra có đang va chạm rồi hay không, trả về khoảng chồng lắp nhỏ nhất
 	bool isColliding(BaseObject* otherObject, float& moveX, float& moveY, float dt);
 
-	// Kiểm tra 2 HCN có chồng lắp nhau hay không
+	// Kiểm tra 2 HCN có đang chồng lắp nhau hay không (AABB)
 	bool isColliding(RECT myRect, RECT otherRect);
 
 	// Lấy Broadphase rect để kiểm tra trước vùng tiếp theo có va chạm không
@@ -47,6 +45,8 @@ public:
 		@move: khoảng chồng lấp nhỏ nhất của 2 object, dùng làm vector vận tốc để dịch chuyển ra xa
 	*/
 	void updateTargetPosition(BaseObject* otherObject, eDirection direction, bool withVelocity, GVector2 move = GVector2(0, 0));
+
+	void update(float dt);
 
 private:
 	BaseObject* _target;

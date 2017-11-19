@@ -1,5 +1,4 @@
 ﻿#include "Player.h"
-#include "SceneManager.h"
 
 Player::Player() : BaseObject(eID::PLAYER)
 {
@@ -539,6 +538,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			if (collisionBody->checkCollision(object, direction, dt, false))
 			{
+				// Nếu đang va chạm thì dời ra xa
 				float moveX, moveY;
 				if (collisionBody->isColliding(object, moveX, moveY, dt))
 				{
@@ -578,6 +578,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			if (collisionBody->checkCollision(object, direction, dt, false))
 			{
+				// Nếu đang va chạm thì dời ra xa
 				float moveX, moveY;
 				if (collisionBody->isColliding(object, moveX, moveY, dt))
 				{
@@ -606,6 +607,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			if (collisionBody->checkCollision(object, direction, dt, false))
 			{
+				// Nếu đang va chạm thì dời ra xa
 				float moveX, moveY;
 				if (collisionBody->isColliding(object, moveX, moveY, dt))
 				{
