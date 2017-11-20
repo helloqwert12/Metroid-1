@@ -155,11 +155,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="IceBullet.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Info.cpp" />
     <ClCompile Include="maputils.cpp" />
+    <ClCompile Include="MissileRocket.cpp" />
+    <ClCompile Include="NormalBullet.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="QuadTreeNode.cpp" />
@@ -185,6 +188,7 @@
     <ClCompile Include="Viewport.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Waver.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,11 +203,14 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="IceBullet.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Info.h" />
     <ClInclude Include="maputils.h" />
+    <ClInclude Include="MissileRocket.h" />
+    <ClInclude Include="NormalBullet.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="QuadTreeNode.h" />
@@ -230,6 +237,7 @@
     <ClInclude Include="Viewport.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Waver.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

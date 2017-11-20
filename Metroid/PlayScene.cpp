@@ -140,7 +140,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 
 	_player->draw(spriteHandle, _viewport);
 
-	//_text->draw();
+	_text->draw();
 }
 
 void PlayScene::release()
