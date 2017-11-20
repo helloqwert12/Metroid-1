@@ -14,7 +14,7 @@
 class IceBullet : public Weapon
 {
 public:
-	IceBullet(int x, int y, bool direct);
+	IceBullet(int x, int y, eDirection direction);
 
 	void init();
 	void update(float deltatime);

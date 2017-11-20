@@ -18,6 +18,9 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 	_textEnergy->init();
 	_textEnergy->setOrigin(VECTOR2ZERO);
 
+	_weaponID = NORMAL_BULLET;
+	this->SetWeapon(_weaponID);
+
 	_debugAttack = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_debugAttack->init();
 	_debugAttack->setOrigin(VECTOR2ZERO);
@@ -74,6 +77,8 @@ void Info::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	_iconEnergy->render(spriteHandle);
 	_textEnergy->draw(spriteHandle);
 
+	_weaponSprite->render(spriteHandle);
+
 	_debugAttack->draw(spriteHandle);
 }
 
@@ -86,14 +91,19 @@ void Info::release()
 	SAFE_DELETE(_debugAttack);
 }
 
+int Info::getLife()
+{
+	return _lifeNumber;
+}
+
 void Info::setLife(int number)
 {
 	_lifeNumber = number;
 }
 
-int Info::getLife()
+int Info::getEnergy()
 {
-	return _lifeNumber;
+	return _energyNumber;
 }
 
 void Info::setEnergy(int number)
@@ -104,9 +114,42 @@ void Info::setEnergy(int number)
 		_energyNumber = 99;
 }
 
-int Info::getEnergy()
+eID Info::GetWeapon()
 {
-	return _energyNumber;
+	return _weaponID;
+}
+
+void Info::SetWeapon(eID id)
+{
+	_weaponID = id;
+
+	switch (_weaponID)
+	{
+	case NORMAL_BULLET:
+	{
+		_weaponSprite = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
+		_weaponSprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_bullet_01"));
+		_weaponSprite->setPosition(50, 75);
+		break;
+	}
+	case ICE_BULLET:
+	{
+		_weaponSprite = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
+		_weaponSprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "i_bullet_01"));
+		_weaponSprite->setPosition(50, 75);
+		break;
+	}
+	case MISSILE_ROCKET:
+	{
+		_weaponSprite = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
+		_weaponSprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "missile_01"));
+		_weaponSprite->setPosition(50, 75);
+		break;
+	}
+	default:
+		_weaponSprite = nullptr;
+		break;
+	}
 }
 
 void Info::setDebugAttack(string str)

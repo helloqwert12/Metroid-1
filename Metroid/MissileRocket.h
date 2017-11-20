@@ -14,7 +14,7 @@
 class MissileRocket : public Weapon
 {
 public:
-	MissileRocket(int x, int y, bool direct);
+	MissileRocket(int x, int y, eDirection direction);
 
 	void init();
 	void update(float deltatime);

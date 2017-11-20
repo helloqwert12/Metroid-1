@@ -14,7 +14,7 @@
 class NormalBullet : public Weapon
 {
 public:
-	NormalBullet(int x, int y, bool direct);
+	NormalBullet(int x, int y, eDirection direction);
 
 	void init() ;
 	void update(float deltatime) ;

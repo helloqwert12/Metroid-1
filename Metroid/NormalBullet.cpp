@@ -1,6 +1,6 @@
 #include "NormalBullet.h"
 
-NormalBullet::NormalBullet(int x, int y, bool direct) : Weapon(NORMAL_BULLET)
+NormalBullet::NormalBullet(int x, int y, eDirection direction) : Weapon(NORMAL_BULLET)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_bullet_01"));
@@ -9,14 +9,17 @@ NormalBullet::NormalBullet(int x, int y, bool direct) : Weapon(NORMAL_BULLET)
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
 
-	if (direct)
+	switch (direction)
 	{
+	case RIGHT:
 		movement->setVelocity(GVector2(NORMAL_BULLET_SPEED, 0));
-	}
-	else
-	{
-		_sprite->setScaleX(-1);
+		break;
+	case LEFT:
+		_sprite->setScaleX(_sprite->getScale().x * (-1));
 		movement->setVelocity(GVector2(-NORMAL_BULLET_SPEED, 0));
+		break;
+	default:
+		break;
 	}
 }
 

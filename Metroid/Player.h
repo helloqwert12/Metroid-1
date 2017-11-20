@@ -11,6 +11,10 @@
 #include "CollisionBody.h"
 #include "Info.h"
 
+#include "NormalBullet.h"
+#include "IceBullet.h"
+#include "MissileRocket.h"
+
 #include "Ripper.h"
 #include "Waver.h"
 #include "Skree.h"
@@ -21,6 +25,7 @@
 #define JUMP_VELOCITY 450
 #define GRAVITY 600
 #define PROTECT_TIME 1500
+#define ATTACK_TIME 400
 
 class Player : public BaseObject, public IControlable
 {
@@ -71,8 +76,15 @@ private:
 	float _movingSpeed;
 	float _protectTime;
 
+	StopWatch* _weaponStopWatch;
+
+	vector<Weapon*> _listWeapon;
+
 	bool _isRevive;
 	GVector2 _revivePosition;
+
+	// 
+	void updateAttackStatus(float dt);
 
 	// Từ status để gọi hành động
 	void updateStatus(float dt);

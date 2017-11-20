@@ -18,11 +18,14 @@ public:
 	virtual void draw(LPD3DXSPRITE, Viewport*);
 	virtual void release();
 
-	void setLife(int number);
 	int getLife();
+	void setLife(int number);
 
-	void setEnergy(int number);
 	int getEnergy();
+	void setEnergy(int number);
+
+	eID GetWeapon();
+	void SetWeapon(eID id);
 
 	void setDebugAttack(string str);
 
@@ -34,6 +37,9 @@ private:
 	Sprite* _iconEnergy;
 	int _energyNumber;
 	TextSprite* _textEnergy;
+
+	eID _weaponID;
+	Sprite* _weaponSprite;
 
 	TextSprite* _debugAttack;
 };

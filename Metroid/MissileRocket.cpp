@@ -1,6 +1,6 @@
 #include "MissileRocket.h"
 
-MissileRocket::MissileRocket(int x, int y, bool direct) : Weapon(MISSILE_ROCKET)
+MissileRocket::MissileRocket(int x, int y, eDirection direction) : Weapon(MISSILE_ROCKET)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "missile_01"));
@@ -9,14 +9,17 @@ MissileRocket::MissileRocket(int x, int y, bool direct) : Weapon(MISSILE_ROCKET)
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
 
-	if (direct)
+	switch (direction)
 	{
+	case RIGHT:
 		movement->setVelocity(GVector2(MISSILE_ROCKET_SPEED, 0));
-	}
-	else
-	{
-		_sprite->setScaleX(-1);
+		break;
+	case LEFT:
+		_sprite->setScaleX(_sprite->getScale().x * (-1));
 		movement->setVelocity(GVector2(-MISSILE_ROCKET_SPEED, 0));
+		break;
+	default:
+		break;
 	}
 }
 

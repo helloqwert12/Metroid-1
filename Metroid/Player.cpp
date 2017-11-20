@@ -1,4 +1,5 @@
 ﻿#include "Player.h"
+#include "SceneManager.h"
 
 Player::Player() : BaseObject(eID::PLAYER)
 {
@@ -88,6 +89,10 @@ void Player::init()
 	_animations[eStatus::DIE] = new Animation(_sprite, 0.5f, false);
 	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
 
+	// Khởi tạo StopWatch
+	_weaponStopWatch = new StopWatch();
+
+	// Set origin của nhân vật ở giữa, phía dưới
 	this->setOrigin(GVector2(0.5f, 0.0f));
 	this->setStatus(eStatus::NORMAL);
 
@@ -119,6 +124,9 @@ void Player::update(float deltatime)
 	// Từ status để gọi hành động
 	this->updateStatus(deltatime);
 
+	// Từ status để gọi attack
+	this->updateAttackStatus(deltatime);
+
 	// Từ status để chuyển animation
 	this->updateCurrentAnimateIndex();
 
@@ -127,6 +135,11 @@ void Player::update(float deltatime)
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
 	{
 		it->second->update(deltatime);
+	}
+
+	for (auto weapon : _listWeapon)
+	{
+		weapon->update(deltatime);
 	}
 
 	this->_info->update(deltatime);
@@ -145,6 +158,12 @@ void Player::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		_animations[_currentAnimateIndex]->enableFlashes(false);
 
 	_animations[_currentAnimateIndex]->draw(spriteHandle, viewport);
+
+	for (auto weapon : _listWeapon)
+	{
+		weapon->draw(spriteHandle, viewport);
+	}
+
 	_info->draw(spriteHandle, viewport);
 }
 
@@ -167,6 +186,76 @@ void Player::release()
 
 	if (_input != nullptr)
 		__unhook(_input);
+}
+
+void Player::updateAttackStatus(float dt)
+{
+	if (this->isInStatus(eStatus::ATTACKING))
+	{
+		if (_weaponStopWatch->isTimeLoop(ATTACK_TIME))
+		{
+			Weapon* weapon = nullptr;
+			switch (_info->GetWeapon())
+			{
+			case NORMAL_BULLET:
+			{
+				if (this->getScale().x > 0)
+					weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+				else
+					weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+
+				break;
+			}
+			case ICE_BULLET:
+			{
+				if (this->getScale().x > 0)
+					weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+				else
+					weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+
+				break;
+			}
+			case MISSILE_ROCKET:
+			{
+				if (this->getScale().x > 0)
+					weapon = new MissileRocket(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+				else
+					weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+
+				break;
+			}
+			default:
+				break;
+			}
+
+			if (weapon != nullptr)
+			{
+				weapon->init();
+				_listWeapon.push_back(weapon);
+			}
+		}
+	}
+
+	if (!_listWeapon.empty())
+	{
+		auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+		RECT viewportBounding = viewport->getBounding();
+
+		auto i = 0;
+		while (i < _listWeapon.size())
+		{
+			auto object = _listWeapon[i];
+			
+			if (!isIntersectedInGame(viewportBounding, _listWeapon[i]->getBounding()) && _listWeapon[i]->getBounding().top < viewportBounding.top)
+			{
+				_listWeapon.erase(_listWeapon.begin() + i);
+				object->release();
+				delete object;
+			}
+			else
+				i++;
+		}
+	}
 }
 
 void Player::updateStatus(float dt)
@@ -258,7 +347,7 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 	}
 	case DIK_UP:
 	{	
-		// Nếu đang trong status ROLLING_DOWN, JUMPING và FALLING thì ngắm hướng lên (LOOKING_UP)
+		// Nếu đang không trong status ROLLING_DOWN, JUMPING và FALLING thì ngắm hướng lên (LOOKING_UP)
 		if (!this->isInStatus(eStatus::ROLLING_DOWN) && !this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 		{
 			this->addStatus(eStatus::LOOKING_UP);
@@ -341,6 +430,7 @@ void Player::onKeyReleased(KeyEventArg* keyEvent)
 
 void Player::resetValues()
 {
+	_listWeapon.clear();
 	preWall = nullptr;
 
 	this->setScale(SCALE_FACTOR);
@@ -419,11 +509,13 @@ void Player::falling()
 void Player::shoot()
 {
 	_info->setDebugAttack("SHOOT");
+	_info->SetWeapon(eID::NORMAL_BULLET);
 }
 
 void Player::bomb()
 {
 	_info->setDebugAttack("BOMB");
+	_info->SetWeapon(eID::MISSILE_ROCKET);
 }
 
 void Player::beHit(eDirection direction)
