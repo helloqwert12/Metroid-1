@@ -24,10 +24,11 @@ public:
 	int getEnergy();
 	void setEnergy(int number);
 
-	eID GetWeapon();
-	void SetWeapon(eID id);
+	eID getWeapon();
+	void setWeapon(eID id);
 
-	void setDebugAttack(string str);
+	int getMissileRocket();
+	void setMissileRocke(int number);
 
 private:
 	Sprite* _iconLife;
@@ -39,9 +40,10 @@ private:
 	TextSprite* _textEnergy;
 
 	eID _weaponID;
-	Sprite* _weaponSprite;
 
-	TextSprite* _debugAttack;
+	Sprite* _iconMissileRocket;
+	int _missileRocketNumber;
+	TextSprite* _textMissileRocket;
 };
 
 #endif // !__INFO_H__

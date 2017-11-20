@@ -96,8 +96,8 @@ void Player::init()
 	this->setOrigin(GVector2(0.5f, 0.0f));
 	this->setStatus(eStatus::NORMAL);
 
-	this->_currentAnimateIndex = NORMAL;
-	this->_isRevive = false;
+	_currentAnimateIndex = NORMAL;
+	_isRevive = false;
 
 	// Info có tọa độ top-left
 	_info = new Info();
@@ -188,76 +188,6 @@ void Player::release()
 		__unhook(_input);
 }
 
-void Player::updateAttackStatus(float dt)
-{
-	if (this->isInStatus(eStatus::ATTACKING))
-	{
-		if (_weaponStopWatch->isTimeLoop(ATTACK_TIME))
-		{
-			Weapon* weapon = nullptr;
-			switch (_info->GetWeapon())
-			{
-			case NORMAL_BULLET:
-			{
-				if (this->getScale().x > 0)
-					weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
-				else
-					weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
-
-				break;
-			}
-			case ICE_BULLET:
-			{
-				if (this->getScale().x > 0)
-					weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
-				else
-					weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
-
-				break;
-			}
-			case MISSILE_ROCKET:
-			{
-				if (this->getScale().x > 0)
-					weapon = new MissileRocket(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
-				else
-					weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
-
-				break;
-			}
-			default:
-				break;
-			}
-
-			if (weapon != nullptr)
-			{
-				weapon->init();
-				_listWeapon.push_back(weapon);
-			}
-		}
-	}
-
-	if (!_listWeapon.empty())
-	{
-		auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
-		RECT viewportBounding = viewport->getBounding();
-
-		auto i = 0;
-		while (i < _listWeapon.size())
-		{
-			auto object = _listWeapon[i];
-			
-			if (!isIntersectedInGame(viewportBounding, _listWeapon[i]->getBounding()) && _listWeapon[i]->getBounding().top < viewportBounding.top)
-			{
-				_listWeapon.erase(_listWeapon.begin() + i);
-				object->release();
-				delete object;
-			}
-			else
-				i++;
-		}
-	}
-}
-
 void Player::updateStatus(float dt)
 {
 	if (this->isInStatus(eStatus::DIE))
@@ -289,13 +219,88 @@ void Player::updateStatus(float dt)
 	{
 		this->standing();
 	}
-	
+
 	if ((this->getStatus() & eStatus::ATTACKING) == eStatus::ATTACKING)
 	{
+		// Nếu đang ROLLING_DOWN thì đổi thành BOMB, còn lại giữ nguyên BULLET
 		if ((this->getStatus() & eStatus::ROLLING_DOWN) == eStatus::ROLLING_DOWN)
-			this->bomb();
-		else
-			this->shoot();
+			_info->setWeapon(eID::ICE_BULLET);
+	}
+}
+
+void Player::updateAttackStatus(float dt)
+{
+	if (this->isInStatus(eStatus::ATTACKING))
+	{
+		if (_weaponStopWatch->isStopWatch(ATTACK_TIME))
+		{
+			Weapon* weapon = nullptr;
+			switch (_info->getWeapon())
+			{
+			case NORMAL_BULLET:
+			{
+				if (this->getScale().x > 0)
+					weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+				else
+					weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+
+				break;
+			}
+			case ICE_BULLET:
+			{
+				if (this->getScale().x > 0)
+					weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+				else
+					weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+
+				break;
+			}
+			case MISSILE_ROCKET:
+			{
+				if (this->getScale().x > 0)
+					weapon = new MissileRocket(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+				else
+					weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+				
+				// Nếu hết Rocket thì set về đạn thường
+				_info->setMissileRocke(_info->getMissileRocket() - 1);
+				if (_info->getMissileRocket() <= 0)
+					_info->setWeapon(eID::NORMAL_BULLET);
+				break;
+			}
+			default:
+				break;
+			}
+
+			if (weapon != nullptr)
+			{
+				weapon->init();
+				_listWeapon.push_back(weapon);
+			}
+
+			_weaponStopWatch->restart();
+		}
+	}
+
+	if (!_listWeapon.empty())
+	{
+		auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+		RECT viewportBounding = viewport->getBounding();
+
+		auto i = 0;
+		while (i < _listWeapon.size())
+		{
+			auto object = _listWeapon[i];
+			
+			if (!isIntersectedInGame(viewportBounding, _listWeapon[i]->getBounding()) && _listWeapon[i]->getBounding().top < viewportBounding.top)
+			{
+				_listWeapon.erase(_listWeapon.begin() + i);
+				object->release();
+				delete object;
+			}
+			else
+				i++;
+		}
 	}
 }
 
@@ -355,6 +360,7 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		else // Nếu đang trong status ROLLING_DOWN thì đứng dậy (xóa status ROLLING_DOWN)
 		{
 			this->removeStatus(eStatus::ROLLING_DOWN);
+			_info->setWeapon(eID::NORMAL_BULLET);
 		}
 		break;
 	}
@@ -371,8 +377,10 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 
 		// Nếu đang trong status ROLLING_DOWN thì đứng dậy (xóa status ROLLING_DOWN)
 		if (this->isInStatus(eStatus::ROLLING_DOWN))
+		{
 			this->removeStatus(eStatus::ROLLING_DOWN);
-
+			_info->setWeapon(eID::NORMAL_BULLET);
+		}
 		break;
 	}
 	case DIK_Z:
@@ -380,6 +388,16 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		this->addStatus(eStatus::ATTACKING);
 		break;
 	}
+	case DIK_SPACE:
+		// Chuyển Rocket, nếu đang ROLLING_DOWN thì không cho chuyển
+		if ((_info->getMissileRocket() > 0) && ((this->getStatus() & eStatus::ROLLING_DOWN) != eStatus::ROLLING_DOWN))
+		{
+			if (_info->getWeapon() != eID::MISSILE_ROCKET)
+				_info->setWeapon(eID::MISSILE_ROCKET);
+			else
+				_info->setWeapon(eID::NORMAL_BULLET);
+		}
+		break;
 	default:
 		break;
 	}
@@ -420,7 +438,6 @@ void Player::onKeyReleased(KeyEventArg* keyEvent)
 	case DIK_Z:
 	{
 		this->removeStatus(eStatus::ATTACKING);
-		_info->setDebugAttack("");
 		break;
 	}
 	default:
@@ -437,6 +454,7 @@ void Player::resetValues()
 	_movingSpeed = MOVE_SPEED;
 	_protectTime = PROTECT_TIME;
 
+	// Set các giá trị khi hồi sinh (life, energy,...)
 	if (_isRevive)
 	{
 		this->setStatus(eStatus::NORMAL);
@@ -504,18 +522,6 @@ void Player::falling()
 {
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
-}
-
-void Player::shoot()
-{
-	_info->setDebugAttack("SHOOT");
-	_info->SetWeapon(eID::NORMAL_BULLET);
-}
-
-void Player::bomb()
-{
-	_info->setDebugAttack("BOMB");
-	_info->SetWeapon(eID::MISSILE_ROCKET);
 }
 
 void Player::beHit(eDirection direction)

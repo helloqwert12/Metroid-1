@@ -25,7 +25,7 @@
 #define JUMP_VELOCITY 450
 #define GRAVITY 600
 #define PROTECT_TIME 1500
-#define ATTACK_TIME 400
+#define ATTACK_TIME 300
 
 class Player : public BaseObject, public IControlable
 {
@@ -50,8 +50,6 @@ public:
 	void moveRight();
 	void jump();
 	void falling();
-	void shoot();
-	void bomb();
 	void beHit(eDirection direction);
 	void die();
 	void revive();
@@ -83,11 +81,11 @@ private:
 	bool _isRevive;
 	GVector2 _revivePosition;
 
-	// 
-	void updateAttackStatus(float dt);
-
 	// Từ status để gọi hành động
 	void updateStatus(float dt);
+
+	// Từ status để gọi attack
+	void updateAttackStatus(float dt);
 
 	// Từ status để chuyển animation
 	void updateCurrentAnimateIndex();

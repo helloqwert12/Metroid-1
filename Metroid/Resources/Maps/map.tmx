@@ -129608,7 +129608,7 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="1" name="Wall" type="20" x="192" y="3087.33" width="1054.67" height="16"/>
+  <object id="1" name="Wall" type="20" x="192" y="3088.12" width="1054.67" height="15.8485"/>
   <object id="9" name="Wall" type="20" x="176" y="2913.33" width="16" height="190"/>
   <object id="10" name="Wall" type="20" x="288.5" y="3041" width="15" height="47"/>
   <object id="11" name="Wall" type="20" x="240" y="3056" width="16" height="30.6667"/>
@@ -129832,7 +129832,7 @@
   <object id="277" name="Skree" type="53" x="2272.09" y="2912.27" width="15.8182" height="15.4545"/>
   <object id="278" name="Skree" type="53" x="2337.42" y="2912.27" width="15.8182" height="15.4545"/>
   <object id="279" name="EnergyBall" type="81" x="672.758" y="3071.1" width="15.8182" height="15.4545"/>
-  <object id="280" name="EnergyBall" type="81" x="783.091" y="3072.27" width="15.8182" height="15.4545"/>
+  <object id="280" name="EnergyBall" type="81" x="784.091" y="3072.27" width="15.8182" height="15.4545"/>
   <object id="282" name="EnergyBall" type="81" x="624.091" y="3054.27" width="15.8182" height="15.4545"/>
   <object id="301" name="Skree" type="53" x="672.424" y="2912.61" width="15.8182" height="15.4545"/>
   <object id="302" name="Skree" type="53" x="800.424" y="2912.61" width="15.8182" height="15.4545"/>
