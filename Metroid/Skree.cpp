@@ -14,7 +14,7 @@ Skree::Skree(int x, int y) : BaseObject(SKREE)
 	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 	
-	_hitPoint = 5;
+	_hitPoint = 2;
 	_isActive = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
@@ -35,23 +35,22 @@ void Skree::update(float deltatime)
 {
 	if (_hitPoint > 0)
 	{
-		if (_isActive) {
-			_animation->update(deltatime);
-			auto movement = (Movement*)this->_componentList["Movement"];
+		_animation->update(deltatime);
+		auto movement = (Movement*)this->_componentList["Movement"];
 
-			if (_startHitStopWatch)
+		if (_startHitStopWatch)
+		{
+			if (_hitStopWatch->isStopWatch(400))
 			{
-				if (_hitStopWatch->isStopWatch(400))
-				{
-					_startHitStopWatch = false;
-					_hitStopWatch->restart();
-				}
+				_startHitStopWatch = false;
+				_hitStopWatch->restart();
+				this->active();
 			}
+		}
 
-			if (_startHitStopWatch)
-			{
-				movement->setVelocity(GVector2(0, 0));
-			}
+		if (_startHitStopWatch)
+		{
+			this->deactive();
 		}
 
 		for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -85,16 +84,9 @@ void Skree::update(float deltatime)
 void Skree::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	if (_hitPoint > 0)
-		if (_isActive)
-			_animation->draw(spriteHandle, viewport);
-		else
-			_sprite->render(spriteHandle, viewport);
+		_animation->draw(spriteHandle, viewport);
 	else
-	{
 		_effectAnimation->draw(spriteHandle, viewport);
-	}
-
-	_effectAnimation->draw(spriteHandle, viewport);
 }
 
 void Skree::release()
@@ -113,7 +105,6 @@ void Skree::wasHit(int hitPoint)
 	{
 		_hitPoint -= hitPoint;
 		_hitStopWatch->restart();
-		_hitStopWatch->isTimeLoop(400);
 		_startHitStopWatch = true;
 	}
 
@@ -133,7 +124,7 @@ void Skree::active()
 {
 	_isActive = true;
 
-	auto sinmovement = new SinMovement(GVector2(50, 0), 0.5, _sprite);
+	auto sinmovement = new SinMovement(GVector2(30, 0), 0.5, _sprite);
 	this->_componentList["SinMovement"] = sinmovement;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
@@ -172,7 +163,7 @@ float Skree::checkCollision(BaseObject* object, float dt)
 				{
 					// Va chạm Wall TOP thì update lại vị trí (tránh không cho đi xuyên)
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-					this->wasHit(5);
+					this->wasHit(2);
 				}
 			}
 			return 1.0f;

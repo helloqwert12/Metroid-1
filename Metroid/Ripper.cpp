@@ -14,7 +14,7 @@ Ripper::Ripper(int x, int y, bool direction) : BaseObject(RIPPER)
 	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
-	_hitPoint = 2;
+	_hitPoint = 1;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
@@ -82,9 +82,7 @@ void Ripper::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	if (_hitPoint > 0)
 		_animation->draw(spriteHandle, viewport);
 	else
-	{
 		_effectAnimation->draw(spriteHandle, viewport);
-	}
 }
 
 void Ripper::release()
@@ -103,7 +101,6 @@ void Ripper::wasHit(int hitPoint)
 	{
 		_hitPoint -= hitPoint;
 		_hitStopWatch->restart();
-		_hitStopWatch->isTimeLoop(400);
 		_startHitStopWatch = true;
 	}
 
@@ -111,7 +108,6 @@ void Ripper::wasHit(int hitPoint)
 	{
 		auto move = (Movement*)this->_componentList["Movement"];
 		move->setVelocity(GVector2(0, 0));
-		_effectStopWatch->isTimeLoop(600);
 	}
 }
 

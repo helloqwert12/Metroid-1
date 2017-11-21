@@ -19,7 +19,9 @@ public:
 	void init();
 	void update(float deltatime);
 	void draw(LPD3DXSPRITE, Viewport*);
-	void release();
+	void release(); 
+	
+	CollisionBody* getCollisionBody();
 
 protected:
 	Animation* _animation;

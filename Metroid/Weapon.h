@@ -9,6 +9,7 @@ class Weapon : public BaseObject
 {
 public:
 	Weapon(eID);
+	virtual CollisionBody* getCollisionBody();
 };
 
 #endif // !__WEAPON_H__

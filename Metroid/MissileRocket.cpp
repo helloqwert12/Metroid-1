@@ -60,3 +60,8 @@ void MissileRocket::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 void MissileRocket::release()
 {
 }
+
+CollisionBody* MissileRocket::getCollisionBody()
+{
+	return (CollisionBody*)_componentList["CollisionBody"];
+}

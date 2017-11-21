@@ -27,7 +27,7 @@
 #define GRAVITY 600
 
 #define PROTECT_TIME 1500
-#define ATTACK_TIME 200
+#define ATTACK_TIME 150
 
 class Player : public BaseObject, public IControlable
 {
@@ -89,6 +89,9 @@ private:
 
 	// Từ status để chuyển animation
 	void updateCurrentAnimateIndex();
+
+	// Kiểm tra va chạm đạn, bomb
+	bool checkWeaponCollision(BaseObject* object, eDirection & direction, float dt);
 
 	GVector2 getVelocity();
 

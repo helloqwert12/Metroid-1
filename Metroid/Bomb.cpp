@@ -70,6 +70,11 @@ void Bomb::release()
 {
 }
 
+CollisionBody* Bomb::getCollisionBody()
+{
+	return (CollisionBody*)_componentList["CollisionBody"];
+}
+
 void Bomb::explode()
 {
 	_isExploded = true;

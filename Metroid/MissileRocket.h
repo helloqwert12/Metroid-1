@@ -21,6 +21,8 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
 
+	CollisionBody* getCollisionBody();
+
 protected:
 	map<string, IComponent*> _componentList;
 };

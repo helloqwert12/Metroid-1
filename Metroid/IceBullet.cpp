@@ -57,3 +57,8 @@ void IceBullet::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 void IceBullet::release()
 {
 }
+
+CollisionBody* IceBullet::getCollisionBody()
+{
+	return (CollisionBody*)_componentList["CollisionBody"];
+}

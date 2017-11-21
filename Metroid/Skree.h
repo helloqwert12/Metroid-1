@@ -11,7 +11,7 @@
 #include <ctime>
 #include "EnergyBall.h"
 
-#define SKREE_MOVE_SPEED 300
+#define SKREE_MOVE_SPEED 200
 
 class Skree : public BaseObject
 {

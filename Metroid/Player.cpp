@@ -365,6 +365,31 @@ void Player::updateCurrentAnimateIndex()
 	}
 }
 
+bool Player::checkWeaponCollision(BaseObject* object, eDirection& direction, float dt)
+{
+	if (!_listWeapon.empty())
+	{
+		auto i = 0;
+		while (i < _listWeapon.size())
+		{
+			// Nếu có va chạm với object (là enemy) đang xét thì xóa đạn, bomb đang xét ra khỏi list
+			// đồng thời return TRUE
+			auto weaponCollision = _listWeapon[i]->getCollisionBody();
+			if (weaponCollision->checkCollision(object, direction, dt, false))
+			{
+				auto object = _listWeapon[i];
+				_listWeapon.erase(_listWeapon.begin() + i);
+				object->release();
+				delete object;
+				
+				return true;
+			}
+			i++;
+		}
+	}
+	return false;
+}
+
 void Player::onKeyPressed(KeyEventArg* keyEvent)
 {
 	if (this->isInStatus(eStatus::DIE))
@@ -680,6 +705,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
+			if (this->checkWeaponCollision(object, direction, dt))
+			{
+				((Ripper*)object)->wasHit(1);
+			}
 		}
 	}
 	else if (objectId == WAVER)
@@ -708,7 +737,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (!((Waver*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt, false))
+			if (collisionBody->checkCollision(object, direction, dt))
 			{
 				// Nếu đang va chạm thì dời ra xa
 				float moveX, moveY;
@@ -719,6 +748,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
+			}
+			if (this->checkWeaponCollision(object, direction, dt))
+			{
+				((Waver*)object)->wasHit(1);
 			}
 		}
 	}
@@ -748,6 +781,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
+			}
+			if (this->checkWeaponCollision(object, direction, dt))
+			{
+				((Skree*)object)->wasHit(1);
 			}
 		}
 	}

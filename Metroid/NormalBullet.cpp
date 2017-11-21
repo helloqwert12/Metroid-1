@@ -57,3 +57,8 @@ void NormalBullet::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 void NormalBullet::release()
 {
 }
+
+CollisionBody* NormalBullet::getCollisionBody()
+{
+	return (CollisionBody*)_componentList["CollisionBody"];
+}

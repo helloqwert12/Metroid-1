@@ -14,7 +14,7 @@ Waver::Waver(int x, int y, bool direction) : BaseObject(WAVER)
 	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
-	_hitPoint = 2;
+	_hitPoint = 5;
 	_isActive = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
@@ -40,23 +40,23 @@ void Waver::update(float deltatime)
 {
 	if (_hitPoint > 0)
 	{
-		if (_isActive) {
-			_animation->update(deltatime);
-			auto movement = (Movement*)this->_componentList["Movement"];
+		_animation->update(deltatime);
+		auto movement = (Movement*)this->_componentList["Movement"];
 
-			if (_startHitStopWatch)
+		if (_startHitStopWatch)
+		{
+			if (_hitStopWatch->isStopWatch(400))
 			{
-				if (_hitStopWatch->isStopWatch(400))
-				{
-					_startHitStopWatch = false;
-					_hitStopWatch->restart();
-				}
+				_startHitStopWatch = false;
+				_hitStopWatch->restart();
+				// Do đã có điều kiện active bên Player nên không cần active lại
+				//this->active();
 			}
+		}
 
-			if (_startHitStopWatch)
-			{
-				movement->setVelocity(GVector2(0, 0));
-			}
+		if (_startHitStopWatch)
+		{
+			this->deactive();
 		}
 
 		for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -81,12 +81,7 @@ void Waver::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	if (_hitPoint > 0)
 		_animation->draw(spriteHandle, viewport);
 	else
-	{
-		if (_isActive)
-			_animation->draw(spriteHandle, viewport);
-		else
-			_sprite->render(spriteHandle, viewport);
-	}
+		_effectAnimation->draw(spriteHandle, viewport);
 }
 
 void Waver::release()
@@ -105,7 +100,6 @@ void Waver::wasHit(int hitPoint)
 	{
 		_hitPoint -= hitPoint;
 		_hitStopWatch->restart();
-		_hitStopWatch->isTimeLoop(400);
 		_startHitStopWatch = true;
 	}
 
@@ -113,7 +107,6 @@ void Waver::wasHit(int hitPoint)
 	{
 		auto move = (Movement*)this->_componentList["Movement"];
 		move->setVelocity(GVector2(0, 0));
-		_effectStopWatch->isTimeLoop(600);
 	}
 }
 
