@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Object\Item">
       <UniqueIdentifier>{8bdb5a79-af6c-43a5-8738-34b9c2966ae2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object\Weapon">
+      <UniqueIdentifier>{794078e9-5bd7-43f5-aa27-8d364093dec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Weapon">
+      <UniqueIdentifier>{162749ef-72e8-4488-9c74-ae3bbc082b9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -177,17 +183,20 @@
     <ClCompile Include="EnergyBall.cpp">
       <Filter>Source Files\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalBullet.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Source Files\Object\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="IceBullet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Object\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="MissileRocket.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalBullet.cpp">
+      <Filter>Source Files\Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Object\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,17 +326,20 @@
     <ClInclude Include="EnergyBall.h">
       <Filter>Header Files\Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalBullet.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Bomb.h">
+      <Filter>Header Files\Object\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="IceBullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Object\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="MissileRocket.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalBullet.h">
+      <Filter>Header Files\Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Object\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

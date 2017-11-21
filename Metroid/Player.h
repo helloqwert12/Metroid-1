@@ -14,6 +14,7 @@
 #include "NormalBullet.h"
 #include "IceBullet.h"
 #include "MissileRocket.h"
+#include "Bomb.h"
 
 #include "Ripper.h"
 #include "Waver.h"

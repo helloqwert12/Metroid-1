@@ -224,7 +224,7 @@ void Player::updateStatus(float dt)
 	{
 		// Nếu đang ROLLING_DOWN thì đổi thành BOMB, còn lại giữ nguyên BULLET
 		if ((this->getStatus() & eStatus::ROLLING_DOWN) == eStatus::ROLLING_DOWN)
-			_info->setWeapon(eID::ICE_BULLET);
+			_info->setWeapon(eID::BOMB);
 	}
 }
 
@@ -268,6 +268,11 @@ void Player::updateAttackStatus(float dt)
 					_info->setWeapon(eID::NORMAL_BULLET);
 				break;
 			}
+			case BOMB:
+				// Nếu đang nhảy thì không cho đặt bomb
+				if (!this->isInStatus(eStatus::FALLING))
+					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 5);
+				break;
 			default:
 				break;
 			}

@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="dxaudio.cpp" />
@@ -194,6 +195,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
