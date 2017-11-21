@@ -13,8 +13,6 @@ public:
 	virtual float getPositionX();
 	virtual float getPositionY();
 
-	virtual void setPosition(GVector3 vector);
-	virtual void setPosition(float x, float y, float z);
 	virtual void setPosition(GVector2 position);
 	virtual void setPosition(float x, float y);
 	virtual void setPositionX(float x);
@@ -23,8 +21,8 @@ public:
 	virtual GVector2 getScale();
 	virtual void setScale(GVector2 scale);
 	virtual void setScale(float scale);
-	virtual void setScaleX(float sx);
-	virtual void setScaleY(float sy);
+	virtual void setScaleX(float scaleX);
+	virtual void setScaleY(float scaleY);
 
 	virtual float getRotate();
 	virtual void setRotate(float degree);
@@ -32,7 +30,7 @@ public:
 	virtual GVector2 getOrigin();
 	virtual void setOrigin(GVector2 origin);
 
-	virtual void setZIndex(float z);
+	virtual void setZIndex(float zIndex);
 	virtual float getZIndex();
 
 protected:

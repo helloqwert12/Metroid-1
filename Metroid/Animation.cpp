@@ -21,36 +21,6 @@ Animation::Animation(Sprite* spriteSheet, float timeAnimate, bool loop)
 	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-Animation::Animation(Sprite* spriteSheet, int totalFrames, int cols, float timeAnimate)
-{
-	_spriteSheet = spriteSheet;
-	_timeAnimate = timeAnimate;
-	_canAnimate = true;
-	_totalFrames = totalFrames;
-
-	_index = 0;
-	_timer = 0;
-
-	_startFrame = 0;
-	_endFrame = _totalFrames - 1;
-
-	int frameW = spriteSheet->getTextureWidth() / cols;
-	int frameH = spriteSheet->getTextureHeight() * cols / totalFrames;
-
-	for (int i = 0; i < totalFrames; i++)
-	{
-		int x = i % cols; // cột
-		int y = i / cols; // dòng
-
-		this->addFrameRect(x * frameW, y * frameH, frameW, frameH);
-	}
-
-	_currentRect = _frameRectList[_index];
-
-	_valueFlashes = 0.5f;
-	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-}
-
 Animation::~Animation()
 {
 }
@@ -167,17 +137,6 @@ void Animation::addFrameRect(RECT rect)
 	_endFrame = _totalFrames - 1;
 }
 
-void Animation::addFrameRect(float left, float top, int width, int height)
-{
-	RECT rect;
-	rect.left = left;
-	rect.top = top;
-	rect.right = left + width;
-	rect.bottom = top + height;
-
-	this->addFrameRect(rect);
-}
-
 void Animation::addFrameRect(eID id, char* firstRectName, ...)
 {
 	va_list vl;
@@ -210,27 +169,6 @@ bool Animation::isLoop()
 void Animation::restart(int from)
 {
 	setIndex(from);
-
-	if (_canAnimate == false)
-		_canAnimate = true;
-}
-
-void Animation::animateFromTo(int from, int to, bool loop)
-{
-	if (from <= to)
-	{
-		_startFrame = from;
-		_endFrame = to;
-	}
-	else
-	{
-		_startFrame = to;
-		_endFrame = from;
-	}
-
-	this->setIndex(from);
-	_isLoop = loop;
-	_timer = 0.0f;
 
 	if (_canAnimate == false)
 		_canAnimate = true;

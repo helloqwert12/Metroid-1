@@ -45,6 +45,11 @@ void Waver::update(float deltatime)
 
 		if (_startHitStopWatch)
 		{
+			// Nếu đang trong thời gian protect thì deactive
+			this->deactive();
+
+			// Check để sau khi hết khoảng thời gian protect thì tắt hitStopWatch
+			// Active lại
 			if (_hitStopWatch->isStopWatch(400))
 			{
 				_startHitStopWatch = false;
@@ -52,11 +57,6 @@ void Waver::update(float deltatime)
 				// Do đã có điều kiện active bên Player nên không cần active lại
 				//this->active();
 			}
-		}
-
-		if (_startHitStopWatch)
-		{
-			this->deactive();
 		}
 
 		for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -96,6 +96,8 @@ void Waver::release()
 
 void Waver::wasHit(int hitPoint)
 {
+	// Nếu không trong khoảng thời gian protect thì trừ HP và bật hitStopWatch
+	// Nếu đang trong khoảng thời gian protect thì không trừ HP
 	if (!_startHitStopWatch)
 	{
 		_hitPoint -= hitPoint;
@@ -164,12 +166,13 @@ float Waver::checkCollision(BaseObject* object, float dt)
 				float moveX, moveY;
 				if (collisionBody->isColliding(object, moveX, moveY, dt))
 				{
+					// Update lại vị trí (tránh không cho đi xuyên)
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 
 					// Va chạm Wall LEFT hoặc RIGHT thì đi ngược lại
 					auto movement = (Movement*)this->_componentList["Movement"];
 					movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
-					this->setScale(this->getScale() * -1);
+					this->setScaleX(this->getScale().x * -1);
 				}
 			}
 			else if (direction == TOP || direction == BOTTOM)

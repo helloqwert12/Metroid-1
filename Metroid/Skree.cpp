@@ -40,17 +40,17 @@ void Skree::update(float deltatime)
 
 		if (_startHitStopWatch)
 		{
+			// Nếu đang trong thời gian protect thì deactive
+			this->deactive();
+
+			// Check để sau khi hết khoảng thời gian protect thì tắt hitStopWatch
+			// Active lại
 			if (_hitStopWatch->isStopWatch(400))
 			{
 				_startHitStopWatch = false;
 				_hitStopWatch->restart();
 				this->active();
 			}
-		}
-
-		if (_startHitStopWatch)
-		{
-			this->deactive();
 		}
 
 		for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -101,6 +101,8 @@ void Skree::release()
 
 void Skree::wasHit(int hitPoint)
 {
+	// Nếu không trong khoảng thời gian protect thì trừ HP và bật hitStopWatch
+	// Nếu đang trong khoảng thời gian protect thì không trừ HP
 	if (!_startHitStopWatch)
 	{
 		_hitPoint -= hitPoint;

@@ -17,22 +17,26 @@ bool IntroScene::init()
 	_background = SpriteManager::getInstance()->getSprite(eID::INTRO);
 	_background->setPosition(256, 225);
 
-	_pressStart = new TextSprite(eID::FONT, "PRESS START KEY", GVector2(145, 255));
+	_pressStart = new TextSprite("PRESS START KEY", GVector2(145, 255));
 	_pressStart->init();
 
-	_thienAn = new TextSprite(eID::FONT, "THIEN AN - 15520008", GVector2(165, 350));
+	_lecturer = new TextSprite("LECTURER: DINH NGUYEN ANH DUNG", GVector2(50, 50));
+	_lecturer->init();
+	_lecturer->setScale(1.75f);
+
+	_thienAn = new TextSprite("THIEN AN - 15520008", GVector2(165, 350));
 	_thienAn->init();
 	_thienAn->setScale(1.25f);
 
-	_huuDat = new TextSprite(eID::FONT, "HUU DAT  - 15520104", GVector2(165, 375));
+	_huuDat = new TextSprite("HUU DAT  - 15520104", GVector2(165, 375));
 	_huuDat->init();
 	_huuDat->setScale(1.25f);
 
-	_siDat = new TextSprite(eID::FONT, "SI DAT   - 15520105", GVector2(165, 400));
+	_siDat = new TextSprite( "SI DAT   - 15520105", GVector2(165, 400));
 	_siDat->init();
 	_siDat->setScale(1.25f);
 
-	_leHuy = new TextSprite(eID::FONT, "LE HUY   - 15520312", GVector2(165, 425));
+	_leHuy = new TextSprite("LE HUY   - 15520312", GVector2(165, 425));
 	_leHuy->init();
 	_leHuy->setScale(1.25f);
 
@@ -90,6 +94,7 @@ void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 		}
 	}
 
+	_lecturer->draw(spriteHandle);
 	_thienAn->draw(spriteHandle);
 	_huuDat->draw(spriteHandle);
 	_siDat->draw(spriteHandle);
@@ -100,8 +105,13 @@ void IntroScene::release()
 {
 	//SoundManager::getInstance()->Stop(INTRO_SCENE);
 
-	SAFE_DELETE(_pressStart);
 	SAFE_DELETE(_background);
+	SAFE_DELETE(_pressStart);
+	SAFE_DELETE(_lecturer);
+	SAFE_DELETE(_thienAn);
+	SAFE_DELETE(_huuDat);
+	SAFE_DELETE(_siDat);
+	SAFE_DELETE(_leHuy);
 	SAFE_DELETE(_flash);
 	SAFE_DELETE(_startGame);
 

@@ -1,19 +1,20 @@
-#include "Info.h"
+﻿#include "Info.h"
 #include "TextSprite.h"
 #include <string>
 
 Info::Info() : BaseObject(eID::LIFE_ICON)
 {
+	// Info dùng tọa độ top-left
 	_iconLife = SpriteManager::getInstance()->getSprite(eID::LIFE_ICON);
 	_iconLife->setPosition(50, 25);
 
-	_textLife = new TextSprite(eID::FONT, "", GVector2(0, 280));
+	_textLife = new TextSprite("", GVector2(0, 0));
 	_textLife->init();
 
 	_iconEnergy = SpriteManager::getInstance()->getSprite(eID::ENERGY_ICON);
 	_iconEnergy->setPosition(50, 50);
 
-	_textEnergy = new TextSprite(eID::FONT, "", GVector2(0, 280));
+	_textEnergy = new TextSprite("", GVector2(0, 0));
 	_textEnergy->init();
 
 	_missileRocketNumber = 20;
@@ -21,7 +22,7 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 	_iconMissileRocket->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "missile_rocket_01"));
 	_iconMissileRocket->setPosition(50, 75);
 
-	_textMissileRocket = new TextSprite(eID::FONT, "", GVector2(0, 280));
+	_textMissileRocket = new TextSprite("", GVector2(0, 0));
 	_textMissileRocket->init();
 
 	_weaponID = NORMAL_BULLET;

@@ -1,4 +1,4 @@
-#ifndef __TEXTSPRITE_H__
+﻿#ifndef __TEXTSPRITE_H__
 #define __TEXTSPRITE_H__
 
 #include "BaseObject.h"
@@ -6,7 +6,7 @@
 class TextSprite : public BaseObject
 {
 public:
-	TextSprite(eID type, string text, GVector2 position);
+	TextSprite(string text, GVector2 position);
 	~TextSprite();
 
 	void init();
@@ -21,13 +21,8 @@ public:
 	void setPosition(GVector2 position);
 
 private:
-	eID _type;
 	string _text;
-	GVector2 _position;
-
-	int _columns;
-	int rows;
-	int _framewidth;
+	GVector2 _position; // tọa độ top-left
 };
 
 #endif // !__TEXTSPRITE_H__

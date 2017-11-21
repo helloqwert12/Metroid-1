@@ -1,6 +1,6 @@
 ﻿#include "Ripper.h"
 
-Ripper::Ripper(int x, int y, bool direction) : BaseObject(RIPPER)
+Ripper::Ripper(int x, int y) : BaseObject(RIPPER)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "yellow_ripper_01"));
@@ -14,19 +14,13 @@ Ripper::Ripper(int x, int y, bool direction) : BaseObject(RIPPER)
 	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
-	_hitPoint = 1;
+	_hitPoint = 5;
+	_isActive = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
 
-	if (direction)
-	{
-		movement->setVelocity(GVector2(RIPPER_MOVE_SPEED, 0));
-	}
-	else
-	{
-		movement->setVelocity(GVector2(-RIPPER_MOVE_SPEED, 0));
-	}
+	movement->setVelocity(GVector2(-RIPPER_MOVE_SPEED, 0));
 }
 
 void Ripper::init()
@@ -48,16 +42,22 @@ void Ripper::update(float deltatime)
 
 		if (_startHitStopWatch)
 		{
+			// Nếu đang trong thời gian protect thì deactive
+			this->deactive();
+
+			// Check để sau khi hết khoảng thời gian protect thì tắt hitStopWatch
+			// Active lại
 			if (_hitStopWatch->isStopWatch(400))
 			{
 				_startHitStopWatch = false;
 				_hitStopWatch->restart();
+				this->active();
 			}
 		}
 
-		if (_startHitStopWatch)
+		for (auto it = _componentList.begin(); it != _componentList.end(); it++)
 		{
-			movement->setVelocity(GVector2(0, 0));
+			it->second->update(deltatime);
 		}
 	}
 	else
@@ -69,11 +69,6 @@ void Ripper::update(float deltatime)
 		{
 			this->setStatus(DESTROY);
 		}
-	}
-
-	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		it->second->update(deltatime);
 	}
 }
 
@@ -97,6 +92,8 @@ void Ripper::release()
 
 void Ripper::wasHit(int hitPoint)
 {
+	// Nếu không trong khoảng thời gian protect thì trừ HP và bật hitStopWatch
+	// Nếu đang trong khoảng thời gian protect thì không trừ HP
 	if (!_startHitStopWatch)
 	{
 		_hitPoint -= hitPoint;
@@ -109,6 +106,36 @@ void Ripper::wasHit(int hitPoint)
 		auto move = (Movement*)this->_componentList["Movement"];
 		move->setVelocity(GVector2(0, 0));
 	}
+}
+
+bool Ripper::isDead()
+{
+	return (_hitPoint <= 0);
+}
+
+void Ripper::active()
+{
+	_isActive = true;
+
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(-RIPPER_MOVE_SPEED, 0));
+}
+
+void Ripper::deactive()
+{
+	_isActive = false;
+
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(0, 0));
+
+	auto sinMovement = (Movement*)this->_componentList["SinMovement"];
+	_componentList.erase("SinMovement");
+	delete sinMovement;
+}
+
+bool Ripper::isActive()
+{
+	return _isActive;
 }
 
 float Ripper::checkCollision(BaseObject* object, float dt)
@@ -125,10 +152,11 @@ float Ripper::checkCollision(BaseObject* object, float dt)
 				if (collisionBody->isColliding(object, moveX, moveY, dt))
 				{
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-					
+
 					// Đụng tường thì đi ngược lại
 					auto movement = (Movement*)this->_componentList["Movement"];
 					movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
+					this->setScaleX(this->getScale().x * -1);
 				}
 			}
 
@@ -137,9 +165,4 @@ float Ripper::checkCollision(BaseObject* object, float dt)
 	}
 
 	return 0;
-}
-
-bool Ripper::isDead()
-{
-	return (_hitPoint <= 0);
 }

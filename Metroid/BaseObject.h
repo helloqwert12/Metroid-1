@@ -20,7 +20,7 @@ class BaseObject
 {
 public:
 	BaseObject(eID id);
-	virtual ~BaseObject();
+	~BaseObject();
 
 	virtual void init() = 0;
 	virtual void update(float deltatime) = 0;
@@ -37,9 +37,7 @@ public:
 	virtual GVector2 getPosition();
 	virtual float getPositionX();
 	virtual float getPositionY();
-	virtual void setPosition(GVector3 vector);
 	virtual void setPosition(GVector2 position);
-	virtual void setPosition(float x, float y, float z);
 	virtual void setPosition(float x, float y);
 	virtual void setPositionX(float x);
 	virtual void setPositionY(float y);
@@ -47,8 +45,8 @@ public:
 	virtual GVector2 getScale();
 	virtual void setScale(GVector2 scale);
 	virtual void setScale(float scale);
-	virtual void setScaleX(float sx);
-	virtual void setScaleY(float sy);
+	virtual void setScaleX(float scaleX);
+	virtual void setScaleY(float scaleY);
 
 	virtual float getRotate();
 	virtual void setRotate(float degree);
@@ -64,8 +62,6 @@ public:
 
 	virtual void setColor(D3DXCOLOR color);
 	virtual D3DXCOLOR getColor();
-
-	Sprite* getSprite();
 
 	virtual RECT getBounding();
 

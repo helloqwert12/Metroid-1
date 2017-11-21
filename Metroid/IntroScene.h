@@ -30,6 +30,7 @@ private:
 	Sprite* _background;
 
 	TextSprite* _pressStart;
+	TextSprite* _lecturer;
 	TextSprite* _thienAn;
 	TextSprite* _huuDat;
 	TextSprite* _siDat;

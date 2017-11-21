@@ -24,17 +24,6 @@ float Transformable::getPositionY()
 	return _position.y;
 }
 
-void Transformable::setPosition(float x, float y, float z)
-{
-	GVector3 v(x, y, z);
-	this->setPosition(v);
-}
-
-void Transformable::setPosition(GVector3 vector)
-{
-	this->_position = GVector2(vector.x, vector.y);
-}
-
 void Transformable::setPosition(GVector2 position)
 {
 	this->_position = GVector2(position.x, position.y);
@@ -48,13 +37,13 @@ void Transformable::setPosition(float x, float y)
 
 void Transformable::setPositionX(float x)
 {
-	if (x != _position.x)
+	if (_position.x != x)
 		_position.x = x;
 }
 
 void Transformable::setPositionY(float y)
 {
-	if (y != _position.y)
+	if (_position.y != y)
 		_position.y = y;
 }
 
@@ -65,31 +54,29 @@ GVector2 Transformable::getScale()
 
 void Transformable::setScale(GVector2 scale)
 {
-	if (scale == _scale)
-		return;
-
-	_scale = scale;
+	if (_scale != scale)
+		_scale = scale;
 }
 
 void Transformable::setScale(float scale)
 {
-	if (scale != _scale.x || scale != _scale.y)
+	if (_scale.x != scale || _scale.y != scale)
 	{
 		_scale.x = scale;
 		_scale.y = scale;
 	}
 }
 
-void Transformable::setScaleX(float sx)
+void Transformable::setScaleX(float scaleX)
 {
-	if (sx != _scale.x)
-		_scale.x = sx;
+	if (_scale.x != scaleX)
+		_scale.x = scaleX;
 }
 
-void Transformable::setScaleY(float sy)
+void Transformable::setScaleY(float scaleY)
 {
-	if (sy != _scale.y)
-		_scale.y = sy;
+	if (_scale.y != scaleY)
+		_scale.y = scaleY;
 }
 
 float Transformable::getRotate()
@@ -99,10 +86,8 @@ float Transformable::getRotate()
 
 void Transformable::setRotate(float degree)
 {
-	if (degree == _rotate)
-		return;
-
-	_rotate = degree;
+	if (_rotate != degree)
+		_rotate = degree;
 }
 
 GVector2 Transformable::getOrigin()
@@ -112,14 +97,14 @@ GVector2 Transformable::getOrigin()
 
 void Transformable::setOrigin(GVector2 origin)
 {
-	if (origin != _origin)
+	if (_origin != origin)
 		_origin = origin;
 }
 
-void Transformable::setZIndex(float z)
+void Transformable::setZIndex(float zIndex)
 {
-	if (z != _zIndex)
-		_zIndex = z;
+	if (_zIndex != zIndex)
+		_zIndex = zIndex;
 }
 
 float Transformable::getZIndex()

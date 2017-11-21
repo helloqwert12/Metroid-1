@@ -60,16 +60,10 @@ void Sprite::render(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	);
 }
 
-void Sprite::setPosition(float x, float y, float z)
+void Sprite::setPosition(float x, float y)
 {
-	GVector3 v(x, y, z);
-	this->setPosition(v);
-}
-
-void Sprite::setPosition(GVector3 vector)
-{
-	this->_position = GVector2(vector.x, vector.y);
-	this->updateBounding();
+	GVector2 vector = GVector2(x, y);
+	this->setPosition(vector);
 }
 
 void Sprite::setPosition(GVector2 position)
@@ -80,34 +74,31 @@ void Sprite::setPosition(GVector2 position)
 
 void Sprite::setPositionX(float x)
 {
-	if (x == _position.x)
-		return;
+	if (_position.x != x)
+		_position.x = x;
 
-	_position.x = x;
 	this->updateBounding();
 }
 
 void Sprite::setPositionY(float y)
 {
-	if (y == _position.y)
-		return;
-
-	_position.y = y;
+	if (_position.y != y)
+		_position.y = y;
+	
 	this->updateBounding();
 }
 
 void Sprite::setScale(GVector2 scale)
 {
-	if (scale == _scale)
-		return;
+	if (_scale != scale)
+		_scale = scale;
 
-	_scale = scale;
 	this->updateBounding();
 }
 
 void Sprite::setScale(float scale)
 {
-	if (scale != _scale.x || scale != _scale.y)
+	if (_scale.x != scale || _scale.y != scale)
 	{
 		_scale.x = scale;
 		_scale.y = scale;
@@ -115,46 +106,42 @@ void Sprite::setScale(float scale)
 	}
 }
 
-void Sprite::setScaleX(float sx)
+void Sprite::setScaleX(float scaleX)
 {
-	if (sx == _scale.x)
-		return;
-
-	_scale.x = sx;
+	if (_scale.x != scaleX)
+		_scale.x = scaleX;
+	
 	this->updateBounding();
 }
 
-void Sprite::setScaleY(float sy)
+void Sprite::setScaleY(float scaleY)
 {
-	if (sy == _scale.y)
-		return;
-
-	_scale.y = sy;
+	if (_scale.y != scaleY)
+		_scale.y = scaleY;
+	
 	this->updateBounding();
 }
 
 void Sprite::setRotate(float degree)
 {
-	if (degree == _rotate)
-		return;
-
-	_rotate = degree;
+	if (_rotate != degree)
+		_rotate = degree;
+	
 	this->updateBounding();
 }
 
 void Sprite::setOrigin(GVector2 origin)
 {
-	if (origin == _origin)
-		return;
+	if (_origin != origin)
+		_origin = origin;
 
-	_origin = origin;
 	this->updateBounding();
 }
 
-void Sprite::setZIndex(float z)
+void Sprite::setZIndex(float zIndex)
 {
-	if (z != _zIndex)
-		_zIndex = z;
+	if (_zIndex != zIndex )
+		_zIndex = zIndex;
 }
 
 RECT Sprite::getBounding()
@@ -172,50 +159,9 @@ void Sprite::setFrameRect(RECT rect)
 	this->updateBounding();
 }
 
-void Sprite::setFrameRect(float top, float right, float bottom, float left)
-{
-	_frameRect.top = top;
-	_frameRect.right = right;
-	_frameRect.left = left;
-	_frameRect.bottom = bottom;
-
-	_frameWidth = abs(_frameRect.left - _frameRect.right);
-	_frameHeight = abs(_frameRect.top - _frameRect.bottom);
-
-	this->updateBounding();
-}
-
-void Sprite::setFrameRect(float x, float y, int width, int height)
-{
-	_frameRect.top = y;
-	_frameRect.right = x + width;
-	_frameRect.left = x;
-	_frameRect.bottom = y + height;
-
-	_frameWidth = width;
-	_frameHeight = height;
-
-	this->updateBounding();
-}
-
 RECT Sprite::getFrameRect()
 {
 	return _frameRect;
-}
-
-RECT Sprite::getFrameRectByIndex(int index)
-{
-	index = index % _totalFrames;
-
-	this->setIndex(index);
-
-	RECT rect;
-	rect.left = (long)_currentFrame.x * _frameWidth;
-	rect.right = _frameRect.left + _frameWidth;
-	rect.top = (long)_currentFrame.y * _frameHeight;
-	rect.bottom = _frameRect.top + _frameHeight;
-
-	return rect;
 }
 
 int Sprite::getFrameWidth()
@@ -240,11 +186,11 @@ int Sprite::getTextureHeight()
 
 void Sprite::setOpacity(float opacity)
 {
-	if (_opacity == opacity)
-		return;
-
-	_opacity = opacity;
-	_texture.setColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, _opacity));
+	if (_opacity != opacity)
+	{
+		_opacity = opacity;
+		_texture.setColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, _opacity));
+	}
 }
 
 float Sprite::getOpacity()
@@ -261,14 +207,6 @@ void Sprite::setColor(D3DXCOLOR color)
 D3DXCOLOR Sprite::getColor()
 {
 	return _color;
-}
-
-void Sprite::nextFrame()
-{
-	if (_totalFrames <= 1)
-		return;
-
-	this->setIndex(_index + 1);
 }
 
 void Sprite::setIndex(int index)

@@ -1,10 +1,10 @@
 ﻿#include "TextSprite.h"
 
-TextSprite::TextSprite(eID type, string text, GVector2 position) : BaseObject(type)
+TextSprite::TextSprite(string text, GVector2 position) : BaseObject(FONT)
 {
-	this->_type = type;
-	this->_text = text;
+	_sprite = SpriteManager::getInstance()->getSprite(FONT);
 	_position = position;
+	_text = text;
 }
 
 TextSprite::~TextSprite()
@@ -13,10 +13,6 @@ TextSprite::~TextSprite()
 
 void TextSprite::init()
 {
-	this->_sprite = SpriteManager::getInstance()->getSprite(_type);
-	this->rows = _sprite->getTextureHeight() / _sprite->getFrameHeight();
-	this->_columns = _sprite->getTextureWidth() / _sprite->getFrameWidth();
-	this->_framewidth = _sprite->getFrameWidth();
 }
 
 void TextSprite::update(float deltatime)
@@ -67,17 +63,12 @@ void TextSprite::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 			index = 53;
 		}
 
+		// Set index để lấy frame rect tương ứng muốn vẽ
 		_sprite->setIndex(index);
 		_sprite->setPosition(GVector2(_position.x + _sprite->getFrameWidth() * i, _position.y));
 
-		if (viewport == nullptr)
-		{
-			_sprite->render(spriteHandle);
-		}
-		else
-		{
-			_sprite->render(spriteHandle, viewport);
-		}
+		// Render tọa độ top-left
+		_sprite->render(spriteHandle);
 
 		i++;
 	}

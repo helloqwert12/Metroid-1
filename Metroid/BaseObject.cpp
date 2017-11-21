@@ -63,16 +63,6 @@ float BaseObject::getPositionY()
 	return _sprite->getPositionY();
 }
 
-void BaseObject::setPosition(GVector3 vector)
-{
-	_sprite->setPosition(vector);
-}
-
-void BaseObject::setPosition(float x, float y, float z)
-{
-	_sprite->setPosition(x, y, z);
-}
-
 void BaseObject::setPosition(GVector2 position)
 {
 	_sprite->setPosition(position);
@@ -108,14 +98,14 @@ void BaseObject::setScale(float scale)
 	_sprite->setScale(scale);
 }
 
-void BaseObject::setScaleX(float sx)
+void BaseObject::setScaleX(float scaleX)
 {
-	_sprite->setScaleX(sx);
+	_sprite->setScaleX(scaleX);
 }
 
-void BaseObject::setScaleY(float sy)
+void BaseObject::setScaleY(float scaleY)
 {
-	_sprite->setScaleY(sy);
+	_sprite->setScaleY(scaleY);
 }
 
 GVector2 BaseObject::getOrigin()
@@ -169,11 +159,6 @@ D3DXCOLOR BaseObject::getColor()
 	return _sprite->getColor();
 }
 
-Sprite* BaseObject::getSprite()
-{
-	return _sprite;
-}
-
 RECT BaseObject::getBounding()
 {
 	return _sprite->getBounding();
@@ -191,7 +176,7 @@ GVector2 BaseObject::getVelocity()
 
 void BaseObject::setPhysicsBodySide(eDirection side)
 {
-	if (side != _physicsSide)
+	if (_physicsSide != side)
 		_physicsSide = side;
 }
 

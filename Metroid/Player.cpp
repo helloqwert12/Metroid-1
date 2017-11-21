@@ -99,7 +99,7 @@ void Player::init()
 	_currentAnimateIndex = NORMAL;
 	_isRevive = false;
 
-	// Info có tọa độ top-left
+	// Info dùng tọa độ top-left
 	_info = new Info();
 	_info->init();
 	_info->setLife(2);

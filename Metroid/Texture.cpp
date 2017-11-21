@@ -50,16 +50,6 @@ void Texture::release()
 	this->_texture->Release();
 }
 
-void Texture::render(LPD3DXSPRITE spriteHandle, const RECT* rect, const GVector3* center, const GVector3* position)
-{
-	spriteHandle->Draw(
-		this->_texture,
-		rect,
-		center,
-		position,
-		_color);
-}
-
 void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position, GVector2 scale, float rotate, GVector2 origin, float zIndex)
 {
 	D3DXMATRIX matFinal;

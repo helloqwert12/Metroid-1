@@ -16,8 +16,8 @@ public:
 		@filePath: đường dẫn hình ảnh
 		@totalFrames: số frame ảnh trên một file
 		@cols: số frame trên một dòng
-	Nếu không truyền số frame, số cột (=1) sẽ vẽ hết hình.
-	Để vẽ một vị trí cụ thể trên hình thì dùng setFrameRect().
+	Nếu không truyền số frame, số cột (mặc định = 1) thì sẽ vẽ hết hình.
+	Để vẽ một vị trí cụ thể trên hình thì dùng hàm setFrameRect().
 	*/
 	Sprite(LPD3DXSPRITE spriteHandle, LPWSTR filePath, int totalFrames = 1, int cols = 1);
 
@@ -27,28 +27,24 @@ public:
 	void render(LPD3DXSPRITE spriteHandle);
 	void render(LPD3DXSPRITE spriteHandle, Viewport* viewport);
 
-	void setPosition(float x, float y, float z = 1);
-	void setPosition(GVector3 vector);
+	void setPosition(float x, float y);
 	void setPosition(GVector2 position);
 	void setPositionX(float x);
 	void setPositionY(float y);
 
 	void setScale(GVector2 scale);
 	void setScale(float scale);
-	void setScaleX(float sx);
-	void setScaleY(float sy);
+	void setScaleX(float scaleX);
+	void setScaleY(float scaleY);
 
 	void setRotate(float degree);
 	void setOrigin(GVector2 origin);
-	void setZIndex(float z);
+	void setZIndex(float zIndex);
 
 	RECT getBounding();
 
 	void setFrameRect(RECT rect);
-	void setFrameRect(float top, float right, float bottom, float left);
-	void setFrameRect(float x, float y, int width, int height);
 	RECT getFrameRect();
-	RECT getFrameRectByIndex(int index);
 
 	// Lấy width, height của frame
 	int getFrameWidth();
@@ -64,9 +60,6 @@ public:
 	// Màu vẽ sprite
 	void setColor(D3DXCOLOR color);
 	D3DXCOLOR getColor();
-
-	// Chuyển qua frame kế tiếp
-	void nextFrame();
 
 	// Set index frame cụ thể
 	void setIndex(int index);

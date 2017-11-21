@@ -15,8 +15,7 @@
 class Ripper : public BaseObject
 {
 public:
-	// @direction: hướng của object. TRUE sang phải, FALSE sang trái
-	Ripper(int x, int y, bool direction);
+	Ripper(int x, int y);
 
 	void init();
 	void update(float deltatime);
@@ -26,6 +25,10 @@ public:
 	void wasHit(int hitPoint);
 	bool isDead();
 
+	void active();
+	void deactive();
+	bool isActive();
+
 	float checkCollision(BaseObject* object, float dt);
 
 protected:
@@ -33,6 +36,7 @@ protected:
 	map<string, IComponent*> _componentList;
 
 	int _hitPoint;
+	bool _isActive;
 
 	Sprite* _effect;
 	Animation* _effectAnimation;

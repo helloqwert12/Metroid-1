@@ -125,7 +125,7 @@ BaseObject* GetRipper(xml_node item, int mapHeight)
 	x = x + width / 2;
 	y = y + height / 2;
 
-	auto ripper = new Ripper(x, y, false);
+	auto ripper = new Ripper(x, y);
 	ripper->init();
 	return ripper;
 }

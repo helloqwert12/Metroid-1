@@ -18,17 +18,6 @@ public:
 	Sau khi tạo bằng contructor này phải addFrameRect để có frame để chuyển động.
 	*/
 	Animation(Sprite* spriteSheet, float timeAnimate = 0.0f, bool loop = true);
-
-	/*
-	Tạo Animation từ spritesheet có frame đều nhau
-		@spriteSheet: spritesheet của animation
-		@totalFrames: tổng số frame
-		@cols: số cột
-		@timeAnimate: thời gian chuyển từng frame
-	Sau khi tạo bằng contructor này, danh sách frameRect sẽ tự động được add
-	*/
-	Animation(Sprite* spriteSheet, int totalFrames, int cols, float timeAnimate = 0.0f);
-
 	~Animation();
 
 	// Chuyển qua frame kế tiếp
@@ -61,7 +50,6 @@ public:
 	void canAnimate(bool can);
 	bool isAnimate();
 	void addFrameRect(RECT rect);
-	void addFrameRect(float left, float top, int width, int height);
 
 	/*
 	Add nhiều frameRect liên tiếp nhau, không giới hạn tham số, kết thúc bằng tham số NULL
@@ -75,15 +63,6 @@ public:
 
 	// Chạy lại animation (@from: index frame muốn bắt đầu)
 	void restart(int from = 0);
-
-	/*
-	Animate từ frame này đến frame khác cụ thể
-		@from: frame bắt đầu
-		@to: frame kết thúc
-		@loop: có lặp hay không
-		Giá trị from/to là thứ tự của frame add vô, tính từ 0.
-	*/
-	void animateFromTo(int from, int to, bool loop = true);
 
 	// Tạo hiệu ứng chớp cho sprite, sau khi set enable = TRUE, phải đặt giá trị thay đổi ở hàm setValueFlashes
 	void enableFlashes(bool enable);
