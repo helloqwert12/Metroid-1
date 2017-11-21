@@ -1,4 +1,5 @@
-#include "MissileRocket.h"
+﻿#include "MissileRocket.h"
+#include "SceneManager.h"
 
 MissileRocket::MissileRocket(int x, int y, eDirection direction) : Weapon(MISSILE_ROCKET)
 {
@@ -31,6 +32,16 @@ void MissileRocket::init()
 
 void MissileRocket::update(float deltatime)
 {
+	// Lấy bound của Viewport
+	auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+	RECT viewportBounding = viewport->getBounding();
+
+	// Nếu rocket ra khỏi viewport thì bị DESTROY
+	if (!isIntersectedInGame(viewportBounding, this->getBounding()))
+	{
+		this->setStatus(eStatus::DESTROY);
+	}
+
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
 	{
 		it->second->update(deltatime);

@@ -1,4 +1,4 @@
-#ifndef __ICEBULLET_H__
+﻿#ifndef __ICEBULLET_H__
 #define __ICEBULLET_H__
 
 #include "define.h"
@@ -14,7 +14,7 @@
 class IceBullet : public Weapon
 {
 public:
-	IceBullet(int x, int y, eDirection direction);
+	IceBullet(int x, int y, eDirection direction, int bulletRange);
 
 	void init();
 	void update(float deltatime);
@@ -23,6 +23,12 @@ public:
 
 protected:
 	map<string, IComponent*> _componentList;
+
+	// Khoảng bắn của viên đạn
+	int _bulletRange;
+
+	// Vị trí ban đầu của weapon
+	GVector2 _initPosition;
 };
 
 #endif // !__ICEBULLET_H__

@@ -90,7 +90,7 @@ void Player::init()
 	_animations[eStatus::DIE]->addFrameRect(eID::PLAYER, "roll_down_01", "roll_down_02", "roll_down_03", "roll_down_04", NULL);
 
 	// Khởi tạo StopWatch
-	_weaponStopWatch = new StopWatch();
+	_attackStopWatch = new StopWatch();
 
 	// Set origin của nhân vật ở giữa, phía dưới
 	this->setOrigin(GVector2(0.5f, 0.0f));
@@ -132,11 +132,13 @@ void Player::update(float deltatime)
 
 	_animations[_currentAnimateIndex]->update(deltatime);
 
+	// Update các component
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
 	{
 		it->second->update(deltatime);
 	}
 
+	// Update các viên đạn, bomb
 	for (auto weapon : _listWeapon)
 	{
 		weapon->update(deltatime);
@@ -182,6 +184,7 @@ void Player::release()
 	_componentList.clear();
 
 	SAFE_DELETE(_sprite);
+	SAFE_DELETE(_attackStopWatch);
 	SAFE_DELETE(_info);
 
 	if (_input != nullptr)
@@ -232,7 +235,7 @@ void Player::updateAttackStatus(float dt)
 {
 	if (this->isInStatus(eStatus::ATTACKING))
 	{
-		if (_weaponStopWatch->isStopWatch(ATTACK_TIME))
+		if (_attackStopWatch->isStopWatch(ATTACK_TIME))
 		{
 			Weapon* weapon = nullptr;
 			switch (_info->getWeapon())
@@ -240,18 +243,18 @@ void Player::updateAttackStatus(float dt)
 			case NORMAL_BULLET:
 			{
 				if (this->getScale().x > 0)
-					weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+					weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
 				else
-					weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+					weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
 
 				break;
 			}
 			case ICE_BULLET:
 			{
 				if (this->getScale().x > 0)
-					weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+					weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
 				else
-					weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+					weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
 
 				break;
 			}
@@ -283,21 +286,19 @@ void Player::updateAttackStatus(float dt)
 				_listWeapon.push_back(weapon);
 			}
 
-			_weaponStopWatch->restart();
+			_attackStopWatch->restart();
 		}
 	}
 
+	// Xóa các viên đạn, bomb đã bị DESTROY
 	if (!_listWeapon.empty())
 	{
-		auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
-		RECT viewportBounding = viewport->getBounding();
-
 		auto i = 0;
 		while (i < _listWeapon.size())
 		{
 			auto object = _listWeapon[i];
 			
-			if (!isIntersectedInGame(viewportBounding, _listWeapon[i]->getBounding()) && _listWeapon[i]->getBounding().top < viewportBounding.top)
+			if (_listWeapon[i]->isInStatus(DESTROY))
 			{
 				_listWeapon.erase(_listWeapon.begin() + i);
 				object->release();
@@ -749,26 +750,24 @@ int Player::getLifeNumber()
 
 RECT Player::getBounding()
 {
-	int offset = 10;
-
 	RECT bound = _sprite->getBounding();
 	
 	if ((_currentAnimateIndex & LOOKING_UP) == LOOKING_UP)
 	{
-		bound.top -= offset * 0.6f;
+		bound.top -= 6;
 	}
 
 	if ((_currentAnimateIndex & NORMAL) == NORMAL)
 	{
 		if (this->getScale().x > 0)
 		{
-			bound.right -= offset * 0.3f;
-			bound.left += offset * 0.3f;
+			bound.right -= 3;
+			bound.left += 3;
 		}
 		else if (this->getScale().x < 0)
 		{
-			bound.left += offset * 0.3f;
-			bound.right -= offset * 0.3f;
+			bound.left += 3;
+			bound.right -= 3;
 		}
 	}
 

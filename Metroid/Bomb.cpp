@@ -23,6 +23,8 @@ void Bomb::init()
 	auto collisionBody = new CollisionBody(this);
 	_componentList["CollisionBody"] = collisionBody;
 
+	_effectStopWatch = new StopWatch();
+
 	_isExploded = false;
 	_explodeStopWatch = new StopWatch();
 }
@@ -43,6 +45,11 @@ void Bomb::update(float deltatime)
 	{
 		_effect->setPosition(this->getPosition());
 		_effectAnimation->update(deltatime);
+
+		if (_effectStopWatch->isStopWatch(200))
+		{
+			this->setStatus(eStatus::DESTROY);
+		}
 	}
 
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)

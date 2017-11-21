@@ -27,7 +27,7 @@
 #define GRAVITY 600
 
 #define PROTECT_TIME 1500
-#define ATTACK_TIME 300
+#define ATTACK_TIME 200
 
 class Player : public BaseObject, public IControlable
 {
@@ -76,8 +76,6 @@ private:
 	float _movingSpeed;
 	float _protectTime;
 
-	StopWatch* _weaponStopWatch;
-
 	vector<Weapon*> _listWeapon;
 
 	bool _isRevive;
@@ -96,6 +94,9 @@ private:
 
 	// Dùng để xét đã rời khỏi Wall đụng trước đó hay chưa
 	BaseObject* preWall;
+
+	// Dùng để giới hạn thời gian giữa 2 lần bắn đạn hoặc đặt bomb
+	StopWatch* _attackStopWatch;
 };
 
 #endif // !__PLAYER_H__

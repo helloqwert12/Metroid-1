@@ -26,6 +26,8 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 
 	_weaponID = NORMAL_BULLET;
 	this->setWeapon(_weaponID);
+
+	_bulletRange = BULLET_RANGE;
 }
 
 Info::~Info()
@@ -149,4 +151,14 @@ int Info::getMissileRocket()
 void Info::setMissileRocke(int number)
 {
 	_missileRocketNumber = number;
+}
+
+int Info::getBulletRange()
+{
+	return _bulletRange;
+}
+
+void Info::setBulletRange(int number)
+{
+	_bulletRange = number;
 }

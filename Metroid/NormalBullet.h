@@ -1,4 +1,4 @@
-#ifndef __NORMALBULLET_H__
+﻿#ifndef __NORMALBULLET_H__
 #define __NORMALBULLET_H__
 
 #include "define.h"
@@ -14,7 +14,7 @@
 class NormalBullet : public Weapon
 {
 public:
-	NormalBullet(int x, int y, eDirection direction);
+	NormalBullet(int x, int y, eDirection direction, int bulletRange);
 
 	void init() ;
 	void update(float deltatime) ;
@@ -23,6 +23,12 @@ public:
 
 protected:
 	map<string, IComponent*> _componentList;
+
+	// Khoảng bắn của viên đạn
+	int _bulletRange;
+
+	// Vị trí ban đầu của weapon
+	GVector2 _initPosition;
 };
 
 #endif // !__NORMALBULLET_H__
