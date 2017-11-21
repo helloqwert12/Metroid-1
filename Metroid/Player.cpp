@@ -242,29 +242,57 @@ void Player::updateAttackStatus(float dt)
 			{
 			case NORMAL_BULLET:
 			{
-				if (this->getScale().x > 0)
-					weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
+				if (this->isInStatus(eStatus::LOOKING_UP))
+				{
+					if (this->getScale().x > 0)
+						weapon = new NormalBullet(this->getPositionX() + 6, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+					else
+						weapon = new NormalBullet(this->getPositionX() - 4, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+				}
 				else
-					weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
-
+				{
+					if (this->getScale().x > 0)
+						weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
+					else
+						weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
+				}
 				break;
 			}
 			case ICE_BULLET:
 			{
-				if (this->getScale().x > 0)
-					weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
+				if (this->isInStatus(eStatus::LOOKING_UP))
+				{
+					if (this->getScale().x > 0)
+						weapon = new IceBullet(this->getPositionX() + 6, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+					else
+						weapon = new IceBullet(this->getPositionX() - 4, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+				}
 				else
-					weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
-
+				{
+					if (this->getScale().x > 0)
+						weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
+					else
+						weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
+				}
 				break;
 			}
 			case MISSILE_ROCKET:
 			{
-				if (this->getScale().x > 0)
-					weapon = new MissileRocket(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+				if (this->isInStatus(eStatus::LOOKING_UP))
+				{
+					if (this->getScale().x > 0)
+						weapon = new MissileRocket(this->getPositionX() + 6, this->getPositionY() + 70, eDirection::TOP);
+					else
+						weapon = new MissileRocket(this->getPositionX() - 4, this->getPositionY() + 70, eDirection::TOP);
+				}
 				else
-					weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
-				
+				{
+					if (this->getScale().x > 0)
+						weapon = new MissileRocket(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+					else
+						weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+				}
+
 				// Nếu hết Rocket thì set về đạn thường
 				_info->setMissileRocke(_info->getMissileRocket() - 1);
 				if (_info->getMissileRocket() <= 0)

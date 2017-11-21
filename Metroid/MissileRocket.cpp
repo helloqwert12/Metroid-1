@@ -12,6 +12,10 @@ MissileRocket::MissileRocket(int x, int y, eDirection direction) : Weapon(MISSIL
 
 	switch (direction)
 	{
+	case TOP:
+		_sprite->setRotate(-90);
+		movement->setVelocity(GVector2(0, MISSILE_ROCKET_SPEED));
+		break;
 	case RIGHT:
 		movement->setVelocity(GVector2(MISSILE_ROCKET_SPEED, 0));
 		break;

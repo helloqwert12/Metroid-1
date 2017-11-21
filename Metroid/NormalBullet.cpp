@@ -14,6 +14,10 @@ NormalBullet::NormalBullet(int x, int y, eDirection direction, int bulletRange) 
 
 	switch (direction)
 	{
+	case TOP:
+		_sprite->setRotate(-90);
+		movement->setVelocity(GVector2(0, NORMAL_BULLET_SPEED));
+		break;
 	case RIGHT:
 		movement->setVelocity(GVector2(NORMAL_BULLET_SPEED, 0));
 		break;

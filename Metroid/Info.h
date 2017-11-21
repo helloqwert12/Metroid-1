@@ -13,10 +13,10 @@ public:
 	Info();
 	~Info();
 
-	virtual void init();
-	virtual void update(float deltatime);
-	virtual void draw(LPD3DXSPRITE, Viewport*);
-	virtual void release();
+	void init();
+	void update(float deltatime);
+	void draw(LPD3DXSPRITE, Viewport*);
+	void release();
 
 	int getLife();
 	void setLife(int number);

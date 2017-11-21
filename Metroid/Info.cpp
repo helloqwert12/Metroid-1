@@ -16,7 +16,7 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 	_textEnergy = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_textEnergy->init();
 
-	_missileRocketNumber = 10;
+	_missileRocketNumber = 20;
 	_iconMissileRocket = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
 	_iconMissileRocket->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "missile_rocket_01"));
 	_iconMissileRocket->setPosition(50, 75);

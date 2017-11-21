@@ -14,6 +14,10 @@ IceBullet::IceBullet(int x, int y, eDirection direction, int bulletRange) : Weap
 
 	switch (direction)
 	{
+	case TOP:
+		_sprite->setRotate(-90);
+		movement->setVelocity(GVector2(0, ICE_BULLET_SPEED));
+		break;
 	case RIGHT:
 		movement->setVelocity(GVector2(ICE_BULLET_SPEED, 0));
 		break;
