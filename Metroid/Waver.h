@@ -15,18 +15,18 @@
 class Waver : public BaseObject
 {
 public:
-	// @direct: hướng của object. TRUE sang phải, FALSE sang trái
-	Waver(int x, int y, bool direct);
+	// @direction: hướng của object. TRUE sang phải, FALSE sang trái
+	Waver(int x, int y, bool direction);
 
 	void init();
 	void update(float deltatime);
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
 
-	void wasHit(int hitpoint);
+	void wasHit(int hitPoint);
 	bool isDead();
 
-	void active(bool direct);
+	void active(bool direction);
 	void deactive();
 	bool isActive();
 

@@ -3,27 +3,27 @@
 list<BaseObject*>* GetListObjectFromFile(const string path)
 {
 	xml_document doc;
-	list<BaseObject*>* listObj = new list<BaseObject*>();
+	list<BaseObject*>* listObject = new list<BaseObject*>();
 
 	auto result = doc.load_file(path.data(), pugi::parse_default | pugi::parse_pi);
 	if (result == false)
-		return listObj;
+		return listObject;
 
 	auto map = doc.child("map");
 	if (map == NULL)
-		return listObj;
+		return listObject;
 
 	auto mapHeight = 2 * map.attribute("tileheight").as_int() * map.attribute("height").as_int();
 
 	xml_node objectGroup = map.child("objectgroup");
 	if (objectGroup == NULL)
-		return listObj;
+		return listObject;
 
 	auto objects = objectGroup.children();
-	for (auto obj : objects)
+	for (auto object : objects)
 	{
-		int id = obj.attribute("id").as_int();
-		auto type = obj.attribute("type").as_int();
+		int id = object.attribute("id").as_int();
+		auto type = object.attribute("type").as_int();
 
 		eID enumID;
 		try
@@ -35,14 +35,14 @@ list<BaseObject*>* GetListObjectFromFile(const string path)
 			continue;
 		}
 
-		auto baseObj = GetObjectByType(obj, enumID, mapHeight);
-		if (baseObj != nullptr)
+		auto baseObject = GetObjectByType(object, enumID, mapHeight);
+		if (baseObject != nullptr)
 		{
-			listObj->push_back(baseObj);
+			listObject->push_back(baseObject);
 		}
 	}
 
-	return listObj;
+	return listObject;
 }
 
 map<string, string> GetObjectProperties(xml_node node)
@@ -121,6 +121,9 @@ BaseObject* GetRipper(xml_node item, int mapHeight)
 	auto height = 2 * stoi(properties["height"]);
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
 
 	auto ripper = new Ripper(x, y, false);
 	ripper->init();

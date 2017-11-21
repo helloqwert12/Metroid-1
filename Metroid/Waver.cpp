@@ -1,24 +1,29 @@
 ﻿#include "Waver.h"
 
-Waver::Waver(int x, int y, bool direct) : BaseObject(WAVER)
+Waver::Waver(int x, int y, bool direction) : BaseObject(WAVER)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "gr_waver_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "green_waver_01"));
 	_sprite->setPosition(x, y);
 
 	_animation = new Animation(_sprite, 0.2f);
-	_animation->addFrameRect(eID::ENEMY, "gr_waver_01", "gr_waver_02", "gr_waver_03", NULL);
+	_animation->addFrameRect(eID::ENEMY, "green_waver_01", "green_waver_02", "green_waver_03", NULL);
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
-	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_explosion_01"));
+	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_01"));
 	_effectAnimation = new Animation(_effect, 0.1);
-	_effectAnimation->addFrameRect(BULLET_EFFECT, "n_explosion_01", "n_explosion_02", "n_explosion_03", NULL);
+	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
 	_hitPoint = 2;
 	_isActive = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
+
+	if (!direction)
+	{
+		_sprite->setScaleX(_sprite->getScale().x * (-1));
+	}
 }
 
 void Waver::init()
@@ -94,11 +99,11 @@ void Waver::release()
 	_componentList.clear();
 }
 
-void Waver::wasHit(int hitpoint)
+void Waver::wasHit(int hitPoint)
 {
 	if (!_startHitStopWatch)
 	{
-		_hitPoint -= hitpoint;
+		_hitPoint -= hitPoint;
 		_hitStopWatch->restart();
 		_hitStopWatch->isTimeLoop(400);
 		_startHitStopWatch = true;
@@ -117,7 +122,7 @@ bool Waver::isDead()
 	return (_hitPoint <= 0);
 }
 
-void Waver::active(bool direct)
+void Waver::active(bool direction)
 {
 	_isActive = true;
 
@@ -125,13 +130,13 @@ void Waver::active(bool direct)
 	this->_componentList["SinMovement"] = sinmovement;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
-	if (direct)
+	if (direction)
 	{
-		_sprite->setScaleX(_sprite->getScale().x * -1);
 		movement->setVelocity(GVector2(WAVER_MOVE_SPEED, 0));
 	}
 	else
 	{
+		_sprite->setScaleX(_sprite->getScale().x * -1);
 		movement->setVelocity(GVector2(-WAVER_MOVE_SPEED, 0));
 	}
 }

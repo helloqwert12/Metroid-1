@@ -5,8 +5,6 @@
 #include "BaseObject.h"
 #include "TextSprite.h"
 
-#define GAP 10
-
 class Info : public BaseObject
 {
 public:

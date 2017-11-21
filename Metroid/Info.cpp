@@ -9,23 +9,20 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 
 	_textLife = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_textLife->init();
-	_textLife->setOrigin(VECTOR2ZERO);
 
 	_iconEnergy = SpriteManager::getInstance()->getSprite(eID::ENERGY_ICON);
 	_iconEnergy->setPosition(50, 50);
 
 	_textEnergy = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_textEnergy->init();
-	_textEnergy->setOrigin(VECTOR2ZERO);
 
 	_missileRocketNumber = 10;
 	_iconMissileRocket = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
-	_iconMissileRocket->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "missile_01"));
+	_iconMissileRocket->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "missile_rocket_01"));
 	_iconMissileRocket->setPosition(50, 75);
 
 	_textMissileRocket = new TextSprite(eID::FONT, "", GVector2(0, 280));
 	_textMissileRocket->init();
-	_textMissileRocket->setOrigin(VECTOR2ZERO);
 
 	_weaponID = NORMAL_BULLET;
 	this->setWeapon(_weaponID);
@@ -41,37 +38,37 @@ void Info::init()
 
 void Info::update(float deltatime)
 {
-	_textLife->setPosition(GVector2(_iconLife->getPosition().x + GAP, _iconLife->getPosition().y + GAP / 1.4));
+	_textLife->setPosition(GVector2(_iconLife->getPosition().x + 35, _iconLife->getPosition().y));
 
 	if (_lifeNumber < 0)
 	{
-		_textLife->setString(" 00");
+		_textLife->setString("00");
 	}
 	if (_lifeNumber >= 0 && _lifeNumber < 10)
 	{
-		_textLife->setString(" 0" + to_string(_lifeNumber));
+		_textLife->setString("0" + to_string(_lifeNumber));
 	}
 	else if (_lifeNumber >= 10 && _lifeNumber < 100)
 	{
-		_textLife->setString(" " + to_string(_lifeNumber));
+		_textLife->setString("" + to_string(_lifeNumber));
 	}
 
-	_textEnergy->setPosition(GVector2(_iconEnergy->getPosition().x + GAP, _iconEnergy->getPosition().y + GAP / 1.4));
+	_textEnergy->setPosition(GVector2(_iconEnergy->getPosition().x + 35, _iconEnergy->getPosition().y));
 	
 	if (_energyNumber < 0)
 	{
-		_textEnergy->setString(" 00");
+		_textEnergy->setString("00");
 	}
 	if (_energyNumber >= 0 && _energyNumber < 10)
 	{
-		_textEnergy->setString(" 0" + to_string(_energyNumber));
+		_textEnergy->setString("0" + to_string(_energyNumber));
 	}
 	else if (_energyNumber >= 10 && _energyNumber < 100)
 	{
-		_textEnergy->setString(" " + to_string(_energyNumber));
+		_textEnergy->setString("" + to_string(_energyNumber));
 	}
 
-	_textMissileRocket->setPosition(GVector2(_iconMissileRocket->getPosition().x + GAP, _iconMissileRocket->getPosition().y + GAP / 1.4));
+	_textMissileRocket->setPosition(GVector2(_iconMissileRocket->getPosition().x + 35, _iconMissileRocket->getPosition().y));
 
 	if (_missileRocketNumber < 0)
 	{
@@ -79,11 +76,11 @@ void Info::update(float deltatime)
 	}
 	if (_missileRocketNumber >= 0 && _missileRocketNumber < 10)
 	{
-		_textMissileRocket->setString(" 0" + to_string(_missileRocketNumber));
+		_textMissileRocket->setString("0" + to_string(_missileRocketNumber));
 	}
 	else if (_missileRocketNumber >= 10 && _missileRocketNumber < 100)
 	{
-		_textMissileRocket->setString(" " + to_string(_missileRocketNumber));
+		_textMissileRocket->setString("" + to_string(_missileRocketNumber));
 	}
 }
 

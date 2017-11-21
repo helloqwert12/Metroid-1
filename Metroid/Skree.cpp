@@ -3,16 +3,16 @@
 Skree::Skree(int x, int y) : BaseObject(SKREE)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "lg_skree_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "yellow_skree_01"));
 	_sprite->setPosition(x, y);
 
 	_animation = new Animation(_sprite, 0.07f);
-	_animation->addFrameRect(eID::ENEMY, "lg_skree_01", "lg_skree_02", NULL);
+	_animation->addFrameRect(eID::ENEMY, "yellow_skree_01", "yellow_skree_02", NULL);
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
-	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_explosion_01"));
+	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_01"));
 	_effectAnimation = new Animation(_effect, 0.1);
-	_effectAnimation->addFrameRect(BULLET_EFFECT, "n_explosion_01", "n_explosion_02", "n_explosion_03", NULL);
+	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 	
 	_hitPoint = 5;
 	_isActive = false;
@@ -107,11 +107,11 @@ void Skree::release()
 	_componentList.clear();
 }
 
-void Skree::wasHit(int hitpoint)
+void Skree::wasHit(int hitPoint)
 {
 	if (!_startHitStopWatch)
 	{
-		_hitPoint -= hitpoint;
+		_hitPoint -= hitPoint;
 		_hitStopWatch->restart();
 		_hitStopWatch->isTimeLoop(400);
 		_startHitStopWatch = true;

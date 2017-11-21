@@ -23,7 +23,7 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
 
-	void wasHit(int hitpoint);
+	void wasHit(int hitPoint);
 	bool isDead();
 
 	void active();

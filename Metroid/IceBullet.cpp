@@ -3,7 +3,7 @@
 IceBullet::IceBullet(int x, int y, eDirection direction) : Weapon(ICE_BULLET)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "i_bullet_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "ice_bullet_01"));
 	_sprite->setPosition(x, y);
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);

@@ -15,15 +15,15 @@
 class Ripper : public BaseObject
 {
 public:
-	// @direct: hướng của object. TRUE sang phải, FALSE sang trái
-	Ripper(int x, int y, bool direct);
+	// @direction: hướng của object. TRUE sang phải, FALSE sang trái
+	Ripper(int x, int y, bool direction);
 
 	void init();
 	void update(float deltatime);
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
 
-	void wasHit(int hitpoint);
+	void wasHit(int hitPoint);
 	bool isDead();
 
 	float checkCollision(BaseObject* object, float dt);

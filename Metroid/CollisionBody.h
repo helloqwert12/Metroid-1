@@ -49,7 +49,7 @@ public:
 	void update(float dt);
 
 private:
-	BaseObject* _target;
+	BaseObject* _target; // Reference tới object chứa CollisionBody này
 
 	float _dxEntry, _dyEntry, _dxExit, _dyExit;
 	float _txEntry, _tyEntry, _txExit, _tyExit;

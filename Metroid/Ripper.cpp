@@ -1,27 +1,26 @@
 ﻿#include "Ripper.h"
 
-Ripper::Ripper(int x, int y, bool direct) : BaseObject(RIPPER)
+Ripper::Ripper(int x, int y, bool direction) : BaseObject(RIPPER)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "y_ripper_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "yellow_ripper_01"));
 	_sprite->setPosition(x, y);
 
 	_animation = new Animation(_sprite, 0.2f);
-	_animation->addFrameRect(eID::ENEMY, "y_ripper_01", NULL);
+	_animation->addFrameRect(eID::ENEMY, "yellow_ripper_01", NULL);
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
-	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "n_explosion_01"));
+	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_01"));
 	_effectAnimation = new Animation(_effect, 0.1);
-	_effectAnimation->addFrameRect(BULLET_EFFECT, "n_explosion_01", "n_explosion_02", "n_explosion_03", NULL);
+	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
 	_hitPoint = 2;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
 
-	if (direct)
+	if (direction)
 	{
-		_sprite->setScaleX(-1);
 		movement->setVelocity(GVector2(RIPPER_MOVE_SPEED, 0));
 	}
 	else
@@ -98,11 +97,11 @@ void Ripper::release()
 	_componentList.clear();
 }
 
-void Ripper::wasHit(int hitpoint)
+void Ripper::wasHit(int hitPoint)
 {
 	if (!_startHitStopWatch)
 	{
-		_hitPoint -= hitpoint;
+		_hitPoint -= hitPoint;
 		_hitStopWatch->restart();
 		_hitStopWatch->isTimeLoop(400);
 		_startHitStopWatch = true;

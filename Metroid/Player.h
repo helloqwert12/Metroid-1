@@ -24,6 +24,7 @@
 #define MOVE_SPEED 150
 #define JUMP_VELOCITY 450
 #define GRAVITY 600
+
 #define PROTECT_TIME 1500
 #define ATTACK_TIME 300
 
