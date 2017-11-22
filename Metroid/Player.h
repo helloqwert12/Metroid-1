@@ -21,6 +21,7 @@
 #include "Skree.h"
 
 #include "EnergyBall.h"
+#include "MaruMari.h"
 #include "LongBeam.h"
 #include "IceBeam.h"
 #include "MissileRocketBall.h"

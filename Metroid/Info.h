@@ -36,6 +36,9 @@ public:
 	eID getBullet();
 	void setBullet(eID id);
 
+	bool hasMaruMari();
+	void setMaruMari(bool flag);
+
 private:
 	Sprite* _iconLife;
 	int _lifeNumber;
@@ -57,6 +60,8 @@ private:
 
 	// Bullet hiện tại
 	eID _bulletId;
+
+	bool _hasMaruMari;
 };
 
 #endif // !__INFO_H__

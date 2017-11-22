@@ -428,8 +428,12 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 	}
 	case DIK_DOWN:
 	{
-		if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING)) 
-			this->addStatus(eStatus::ROLLING_DOWN);
+		if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
+		{
+			// Nếu có MaruMari mới được ROLLING_DOWN
+			if (_info->hasMaruMari())
+				this->addStatus(eStatus::ROLLING_DOWN);
+		}
 		break;
 	}
 	case DIK_X:
@@ -816,6 +820,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
 			_info->setEnergy(_info->getEnergy() + 5);
+			object->setStatus(DESTROY);
+		}
+	}
+	else if (objectId == MARU_MARI)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setMaruMari(true);
 			object->setStatus(DESTROY);
 		}
 	}

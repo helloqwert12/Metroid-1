@@ -7,10 +7,10 @@ missile_rocket_01		75	4	91	20
 missile_rocket_02		93	4	109	20
 missile_rocket_03		111	4	127	20
 missile_rocket_04		129	4	145	20
-mari_maru_01		3	25	15	38
-mari_maru_02		17	25	29	38
-mari_maru_03		31	25	43	38
-mari_maru_04		45	25	57	38
+maru_mari_01		3	25	15	38
+maru_mari_02		17	25	29	38
+maru_mari_03		31	25	43	38
+maru_mari_04		45	25	57	38
 bomb_01		59	22	73	38
 bomb_02		75	22	89	38
 bomb_03		91	22	105	38

@@ -30,6 +30,8 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 
 	this->setWeapon(_weaponId);
 	_bulletRange = BULLET_RANGE;
+
+	_hasMaruMari = false;
 }
 
 Info::~Info()
@@ -173,4 +175,14 @@ eID Info::getBullet()
 void Info::setBullet(eID id)
 {
 	_bulletId = id;
+}
+
+bool Info::hasMaruMari()
+{
+	return _hasMaruMari;
+}
+
+void Info::setMaruMari(bool flag)
+{
+	_hasMaruMari = flag;
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="349">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="350">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -129610,11 +129610,11 @@
  <objectgroup name="Object Layer 1">
   <object id="1" name="Wall" type="20" x="192" y="3088.12" width="1054.67" height="15.8485"/>
   <object id="9" name="Wall" type="20" x="176" y="2913.33" width="16" height="190"/>
-  <object id="10" name="Wall" type="20" x="288.5" y="3041" width="15" height="47"/>
-  <object id="11" name="Wall" type="20" x="240" y="3056" width="16" height="30.6667"/>
-  <object id="12" name="Wall" type="20" x="256.667" y="3072" width="14.5" height="16"/>
-  <object id="13" name="Wall" type="20" x="320.667" y="3071.33" width="16" height="16"/>
-  <object id="14" name="Wall" type="20" x="336.333" y="3055.75" width="14.75" height="32"/>
+  <object id="10" name="Wall" type="20" x="287.875" y="3040.08" width="16" height="47.9205"/>
+  <object id="11" name="Wall" type="20" x="240" y="3056" width="16" height="32.2917"/>
+  <object id="12" name="Wall" type="20" x="256.167" y="3072.25" width="15.75" height="16"/>
+  <object id="13" name="Wall" type="20" x="320.042" y="3071.95" width="16" height="16"/>
+  <object id="14" name="Wall" type="20" x="336.083" y="3055.75" width="15.5" height="32"/>
   <object id="15" name="Wall" type="20" x="192.667" y="2912.67" width="16" height="16"/>
   <object id="16" name="Wall" type="20" x="193.333" y="2896" width="62" height="16"/>
   <object id="17" name="Wall" type="20" x="241.333" y="2878.67" width="2254" height="16"/>
@@ -129878,8 +129878,9 @@
   <object id="343" name="Ripper" type="51" x="2624.76" y="3007.61" width="15.8182" height="15.4545"/>
   <object id="344" name="Ripper" type="51" x="2542.76" y="3056.27" width="15.8182" height="15.4545"/>
   <object id="345" name="Ripper" type="51" x="2671.42" y="3056.27" width="15.8182" height="15.4545"/>
-  <object id="346" name="LongBeam" type="82" x="1136.76" y="3071.61" width="15.8182" height="15.4545"/>
-  <object id="347" name="IceBeam" type="83" x="912.091" y="3072.77" width="15.8182" height="15.4545"/>
-  <object id="348" name="MissileRocketBall" type="84" x="1024.21" y="3072.27" width="15.8182" height="15.4545"/>
+  <object id="346" name="LongBeam" type="83" x="1136.76" y="3071.61" width="15.8182" height="15.4545"/>
+  <object id="347" name="IceBeam" type="84" x="912.091" y="3072.77" width="15.8182" height="15.4545"/>
+  <object id="348" name="MissileRocketBall" type="85" x="1024.21" y="3072.27" width="15.8182" height="15.4545"/>
+  <object id="349" name="MaruMari" type="82" x="288.333" y="3024.27" width="15.3182" height="15.4545"/>
  </objectgroup>
 </map>

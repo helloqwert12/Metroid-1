@@ -14,6 +14,7 @@
 #include "Skree.h"
 
 #include "EnergyBall.h"
+#include "MaruMari.h"
 #include "LongBeam.h"
 #include "IceBeam.h"
 #include "MissileRocketBall.h"
@@ -39,6 +40,7 @@ BaseObject* GetSkree(xml_node item, int mapHeight);
 
 // Item
 BaseObject* GetEnergyBall(xml_node item, int mapHeight);
+BaseObject* GetMaruMari(xml_node item, int mapHeight);
 BaseObject* GetLongBeam(xml_node item, int mapHeight);
 BaseObject* GetIceBeam(xml_node item, int mapHeight);
 BaseObject* GetMissileRocketBall(xml_node item, int mapHeight);
