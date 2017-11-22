@@ -227,7 +227,11 @@ void Player::updateStatus(float dt)
 	{
 		// Nếu đang ROLLING_DOWN thì đổi thành BOMB, còn lại giữ nguyên BULLET
 		if ((this->getStatus() & eStatus::ROLLING_DOWN) == eStatus::ROLLING_DOWN)
-			_info->setWeapon(eID::BOMB);
+		{
+			// Nếu có Bomb thì mới được đặt bomb
+			if (_info->hasBomb())
+				_info->setWeapon(eID::BOMB);
+		}
 	}
 }
 
@@ -300,9 +304,7 @@ void Player::updateAttackStatus(float dt)
 				break;
 			}
 			case BOMB:
-				// Nếu đang nhảy thì không cho đặt bomb
-				if (!this->isInStatus(eStatus::FALLING))
-					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
+				weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
 				break;
 			default:
 				break;
@@ -451,7 +453,9 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 	}
 	case DIK_Z:
 	{
-		this->addStatus(eStatus::ATTACKING);
+		// Nếu đang ROLLING_DOWN mà không có Bomb thì không cho attack
+		if (!(this->isInStatus(eStatus::ROLLING_DOWN) && !_info->hasBomb()))
+			this->addStatus(eStatus::ATTACKING);
 		break;
 	}
 	case DIK_SPACE:
@@ -858,6 +862,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
 			_info->setMissileRocket(_info->getMissileRocket() + 5);
+			object->setStatus(DESTROY);
+		}
+	}
+	else if (objectId == BOMB_BALL)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setBomb(true);
 			object->setStatus(DESTROY);
 		}
 	}

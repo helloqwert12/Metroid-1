@@ -32,6 +32,7 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 	_bulletRange = BULLET_RANGE;
 
 	_hasMaruMari = false;
+	_hasBomb = false;
 }
 
 Info::~Info()
@@ -185,4 +186,14 @@ bool Info::hasMaruMari()
 void Info::setMaruMari(bool flag)
 {
 	_hasMaruMari = flag;
+}
+
+bool Info::hasBomb()
+{
+	return _hasBomb;
+}
+
+void Info::setBomb(bool flag)
+{
+	_hasBomb = flag;
 }

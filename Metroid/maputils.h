@@ -18,6 +18,7 @@
 #include "LongBeam.h"
 #include "IceBeam.h"
 #include "MissileRocketBall.h"
+#include "BombBall.h"
 
 using namespace pugi;
 
@@ -44,5 +45,6 @@ BaseObject* GetMaruMari(xml_node item, int mapHeight);
 BaseObject* GetLongBeam(xml_node item, int mapHeight);
 BaseObject* GetIceBeam(xml_node item, int mapHeight);
 BaseObject* GetMissileRocketBall(xml_node item, int mapHeight);
+BaseObject* GetBombBall(xml_node item, int mapHeight);
 
 #endif // !__MAPUTIL_H__

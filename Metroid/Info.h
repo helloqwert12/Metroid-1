@@ -38,6 +38,8 @@ public:
 
 	bool hasMaruMari();
 	void setMaruMari(bool flag);
+	bool hasBomb();
+	void setBomb(bool flag);
 
 private:
 	Sprite* _iconLife;
@@ -62,6 +64,7 @@ private:
 	eID _bulletId;
 
 	bool _hasMaruMari;
+	bool _hasBomb;
 };
 
 #endif // !__INFO_H__
