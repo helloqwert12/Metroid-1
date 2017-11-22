@@ -6,7 +6,7 @@ EnergyBall::EnergyBall(int x, int y) : BaseObject(ENERGY_BALL)
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "enegy_ball_01"));
 	_sprite->setPosition(x, y);
 
-	_animation = new Animation(_sprite, 0.07f);
+	_animation = new Animation(_sprite, 0.05f);
 	_animation->addFrameRect(eID::ITEM, "enegy_ball_01", "enegy_ball_02", NULL);
 }
 

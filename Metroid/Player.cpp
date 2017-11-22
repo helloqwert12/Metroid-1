@@ -302,7 +302,7 @@ void Player::updateAttackStatus(float dt)
 			case BOMB:
 				// Nếu đang nhảy thì không cho đặt bomb
 				if (!this->isInStatus(eStatus::FALLING))
-					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 5);
+					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
 				break;
 			default:
 				break;
@@ -365,18 +365,21 @@ void Player::updateCurrentAnimateIndex()
 	}
 }
 
-bool Player::checkWeaponCollision(BaseObject* object, eDirection& direction, float dt)
+bool Player::checkWeaponCollision(BaseObject* object, eDirection& direction, eID& weaponID, float dt)
 {
 	if (!_listWeapon.empty())
 	{
 		auto i = 0;
 		while (i < _listWeapon.size())
 		{
-			// Nếu có va chạm với object (là enemy) đang xét thì xóa đạn, bomb đang xét ra khỏi list
+			// Nếu có va chạm với object (là enemy, hoặc wall) đang xét thì xóa đạn, bomb đang xét ra khỏi list
 			// đồng thời return TRUE
 			auto weaponCollision = _listWeapon[i]->getCollisionBody();
 			if (weaponCollision->checkCollision(object, direction, dt, false))
 			{
+				// Lưu lại weaponID để xét loại weapon sau này
+				weaponID = _listWeapon[i]->getId();
+
 				auto object = _listWeapon[i];
 				_listWeapon.erase(_listWeapon.begin() + i);
 				object->release();
@@ -519,6 +522,7 @@ void Player::resetValues()
 		this->setStatus(eStatus::NORMAL);
 		_info->setLife(_info->getLife() - 1);
 		_info->setEnergy(30);
+		_info->setWeapon(eID::NORMAL_BULLET);
 
 		auto gravity = (Gravity*)this->_componentList["Gravity"];
 		gravity->setStatus(eGravityStatus::FALLING_DOWN);
@@ -688,6 +692,12 @@ float Player::checkCollision(BaseObject* object, float dt)
 			if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 				this->addStatus(eStatus::FALLING);
 		}
+
+		eID weaponID;
+		if (this->checkWeaponCollision(object, direction, weaponID, dt))
+		{
+			// Xét va chạm để khi đạn trúng tường thì bị DESTROY
+		}
 	}
 	else if (objectId == RIPPER)
 	{
@@ -705,9 +715,12 @@ float Player::checkCollision(BaseObject* object, float dt)
 				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
-			if (this->checkWeaponCollision(object, direction, dt))
+
+			eID weaponID;
+			if (this->checkWeaponCollision(object, direction, weaponID, dt))
 			{
-				((Ripper*)object)->wasHit(1);
+				if (weaponID == eID::MISSILE_ROCKET)
+					((Ripper*)object)->wasHit(5);
 			}
 		}
 	}
@@ -749,9 +762,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
-			if (this->checkWeaponCollision(object, direction, dt))
+
+			eID weaponID;
+			if (this->checkWeaponCollision(object, direction, weaponID, dt))
 			{
-				((Waver*)object)->wasHit(1);
+				if (weaponID == eID::MISSILE_ROCKET)
+					((Waver*)object)->wasHit(5);
+				else
+					((Waver*)object)->wasHit(1);
 			}
 		}
 	}
@@ -782,9 +800,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 				beHit(direction);
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
-			if (this->checkWeaponCollision(object, direction, dt))
+
+			eID weaponID;
+			if (this->checkWeaponCollision(object, direction, weaponID, dt))
 			{
-				((Skree*)object)->wasHit(1);
+				if (weaponID == eID::MISSILE_ROCKET)
+					((Skree*)object)->wasHit(5);
+				else
+					((Skree*)object)->wasHit(1);
 			}
 		}
 	}

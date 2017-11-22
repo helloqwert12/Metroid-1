@@ -1,4 +1,4 @@
-#include "NormalBullet.h"
+﻿#include "NormalBullet.h"
 
 NormalBullet::NormalBullet(int x, int y, eDirection direction, int bulletRange) : Weapon(NORMAL_BULLET)
 {
@@ -38,6 +38,7 @@ void NormalBullet::init()
 
 void NormalBullet::update(float deltatime)
 {
+	// Nếu bullet ra khỏi khoảng bulletRange thì bị DESTROY
 	if (getDistance(this->getPosition(), _initPosition) > _bulletRange)
 	{
 		this->setStatus(eStatus::DESTROY);

@@ -28,7 +28,7 @@ using namespace std;
 enum eID
 {
 	PLAYER = 0,
-	INTRO = 1,
+	INTRO_BACKGROUND = 1,
 	FONT = 2,
 
 	LIFE_ICON = 3,

@@ -12,8 +12,8 @@ public:
 	static SpriteManager* getInstance();
 
 	void loadResource(LPD3DXSPRITE spriteHandle);
-	Sprite* getSprite(eID id);
 
+	Sprite* getSprite(eID id);
 	RECT getSourceRect(eID id, string name);
 
 	// Đọc file text để lấy danh sách sourceRect

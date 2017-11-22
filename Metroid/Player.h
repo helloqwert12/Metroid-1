@@ -90,8 +90,8 @@ private:
 	// Từ status để chuyển animation
 	void updateCurrentAnimateIndex();
 
-	// Kiểm tra va chạm đạn, bomb
-	bool checkWeaponCollision(BaseObject* object, eDirection & direction, float dt);
+	// Kiểm tra va chạm weapon (đạn, bomb)
+	bool checkWeaponCollision(BaseObject* object, eDirection& direction, eID& weaponID, float dt);
 
 	GVector2 getVelocity();
 

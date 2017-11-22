@@ -1,4 +1,4 @@
-#include "IceBullet.h"
+﻿#include "IceBullet.h"
 
 IceBullet::IceBullet(int x, int y, eDirection direction, int bulletRange) : Weapon(ICE_BULLET)
 {
@@ -38,6 +38,7 @@ void IceBullet::init()
 
 void IceBullet::update(float deltatime)
 {
+	// Nếu bullet ra khỏi khoảng bulletRange thì bị DESTROY
 	if (getDistance(this->getPosition(), _initPosition) > _bulletRange)
 	{
 		this->setStatus(eStatus::DESTROY);

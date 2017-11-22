@@ -15,25 +15,13 @@ SpriteManager::SpriteManager()
 {
 }
 
-SpriteManager::~SpriteManager()
-{
-	for (auto sprite = _listSprite.begin(); sprite != _listSprite.end(); ++sprite)
-	{
-		sprite->second->release(); // release Sprite's texture
-		delete sprite->second; // delete Sprite
-	}
-
-	if (!_listSprite.empty())
-		_listSprite.clear(); // Xóa hết con trỏ Sprite khỏi map
-}
-
 void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 {
 	Sprite* sprite = NULL;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//intro.png");
 	sprite->setScale(SCALE_FACTOR);
-	this->_listSprite[eID::INTRO] = sprite;
+	this->_listSprite[eID::INTRO_BACKGROUND] = sprite;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//font.png", 54, 6);
 	sprite->setScale(SCALE_FACTOR);
@@ -136,4 +124,16 @@ void SpriteManager::release()
 {
 	delete _instance;
 	_instance = nullptr;
+}
+
+SpriteManager::~SpriteManager()
+{
+	for (auto sprite = _listSprite.begin(); sprite != _listSprite.end(); ++sprite)
+	{
+		sprite->second->release(); // release Sprite's texture
+		delete sprite->second; // delete Sprite
+	}
+
+	if (!_listSprite.empty())
+		_listSprite.clear(); // Xóa hết con trỏ Sprite khỏi map
 }

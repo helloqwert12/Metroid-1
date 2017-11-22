@@ -8,7 +8,7 @@
 class Weapon : public BaseObject
 {
 public:
-	Weapon(eID);
+	Weapon(eID id);
 	virtual CollisionBody* getCollisionBody();
 };
 

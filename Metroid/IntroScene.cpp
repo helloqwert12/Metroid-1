@@ -14,7 +14,7 @@ bool IntroScene::init()
 {
 	__hook(&InputController::__eventkeyPressed, _input, &IntroScene::onKeyPressed);
 
-	_background = SpriteManager::getInstance()->getSprite(eID::INTRO);
+	_background = SpriteManager::getInstance()->getSprite(eID::INTRO_BACKGROUND);
 	_background->setPosition(256, 225);
 
 	_pressStart = new TextSprite("PRESS START KEY", GVector2(145, 255));
