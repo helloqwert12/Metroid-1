@@ -95,6 +95,9 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 	case ICE_BEAM:
 		return GetIceBeam(item, mapHeight);
 		break;
+	case MISSILE_ROCKET_BALL:
+		return GetMissileRocketBall(item, mapHeight);
+		break;
 	default:
 		return nullptr;
 	}
@@ -223,4 +226,23 @@ BaseObject* GetIceBeam(xml_node item, int mapHeight)
 	auto iceBeam = new IceBeam(x, y);
 	iceBeam->init();
 	return iceBeam;
+}
+
+BaseObject* GetMissileRocketBall(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto missileRocketBall = new MissileRocketBall(x, y);
+	missileRocketBall->init();
+	return missileRocketBall;
 }

@@ -25,7 +25,7 @@ public:
 	void setEnergy(int number);
 
 	int getMissileRocket();
-	void setMissileRocke(int number);
+	void setMissileRocket(int number);
 
 	int getBulletRange();
 	void setBulletRange(int number);

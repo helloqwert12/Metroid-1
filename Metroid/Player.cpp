@@ -294,7 +294,7 @@ void Player::updateAttackStatus(float dt)
 				}
 
 				// Nếu hết Rocket thì set về Bullet
-				_info->setMissileRocke(_info->getMissileRocket() - 1);
+				_info->setMissileRocket(_info->getMissileRocket() - 1);
 				if (_info->getMissileRocket() <= 0)
 					_info->setWeapon(_info->getBullet());
 				break;
@@ -838,6 +838,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 			if (_info->getWeapon() != eID::MISSILE_ROCKET && _info->getWeapon() != eID::BOMB)
 				_info->setWeapon(_info->getBullet());
 
+			object->setStatus(DESTROY);
+		}
+	}
+	else if (objectId == MISSILE_ROCKET_BALL)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setMissileRocket(_info->getMissileRocket() + 5);
 			object->setStatus(DESTROY);
 		}
 	}

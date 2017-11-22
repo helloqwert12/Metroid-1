@@ -140,7 +140,7 @@ int Info::getMissileRocket()
 	return _missileRocketNumber;
 }
 
-void Info::setMissileRocke(int number)
+void Info::setMissileRocket(int number)
 {
 	_missileRocketNumber = number;
 }

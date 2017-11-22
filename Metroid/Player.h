@@ -22,6 +22,8 @@
 
 #include "EnergyBall.h"
 #include "LongBeam.h"
+#include "IceBeam.h"
+#include "MissileRocketBall.h"
 
 #define MOVE_SPEED 150
 #define JUMP_VELOCITY 450
