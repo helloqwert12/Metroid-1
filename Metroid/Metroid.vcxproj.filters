@@ -220,7 +220,10 @@
       <Filter>Source Files\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Varia.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Rio.cpp">
+      <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,7 +390,10 @@
       <Filter>Header Files\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Varia.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Rio.h">
+      <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

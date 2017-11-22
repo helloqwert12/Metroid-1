@@ -13,6 +13,7 @@
 #include "Waver.h"
 #include "Skree.h"
 #include "Mellow.h"
+#include "Rio.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
@@ -41,6 +42,7 @@ BaseObject* GetRipper(xml_node item, int mapHeight);
 BaseObject* GetWaver(xml_node item, int mapHeight);
 BaseObject* GetSkree(xml_node item, int mapHeight);
 BaseObject* GetMellow(xml_node item, int mapHeight);
+BaseObject* GetRio(xml_node item, int mapHeight);
 
 // Item
 BaseObject* GetEnergyTank(xml_node item, int mapHeight);

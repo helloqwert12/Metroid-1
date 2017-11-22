@@ -747,7 +747,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			auto objPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (getDistance(objPosition, position) < WINDOW_WIDTH / 2 && abs(position.x - objPosition.x) < WINDOW_WIDTH / 2)
+			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 + 25)
 			{
 				((Waver*)object)->active(position.x > objPosition.x);
 			}
@@ -758,7 +758,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			auto objPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (getDistance(objPosition, position) > 150 && abs(position.x - objPosition.x) > WINDOW_WIDTH / 2)
+			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 + 25)
 			{
 				((Waver*)object)->deactive();
 			}
@@ -834,7 +834,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			auto objPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (getDistance(objPosition, position) < WINDOW_WIDTH / 2 && abs(position.x - objPosition.x) < WINDOW_WIDTH / 2)
+			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 + 25)
 			{
 				((Mellow*)object)->active(position.x > objPosition.x);
 			}
@@ -845,7 +845,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			auto objPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (getDistance(objPosition, position) > 150 && abs(position.x - objPosition.x) > WINDOW_WIDTH / 2)
+			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 + 25)
 			{
 				((Mellow*)object)->deactive();
 			}
@@ -873,6 +873,55 @@ float Player::checkCollision(BaseObject* object, float dt)
 					((Mellow*)object)->wasHit(5);
 				else
 					((Mellow*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == RIO)
+	{
+		// Lại gần thì active
+		if (!((Rio*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 + 25)
+			{
+				((Rio*)object)->active(position.x > objPosition.x);
+			}
+		}
+
+		// Ra xa một khoảng thì deactive
+		if (((Rio*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 + 25)
+			{
+				((Rio*)object)->deactive();
+			}
+		}
+
+		if (!((Mellow*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+
+				beHit(direction);
+				takeDamage(8);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((Rio*)object)->wasHit(5);
+				else
+					((Rio*)object)->wasHit(1);
 			}
 		}
 	}

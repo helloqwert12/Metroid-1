@@ -1,13 +1,13 @@
-﻿#include "Waver.h"
+﻿#include "Rio.h"
 
-Waver::Waver(int x, int y, bool direction) : BaseObject(WAVER)
+Rio::Rio(int x, int y, bool direction) : BaseObject(RIO)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "green_waver_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "yellow_rio_01"));
 	_sprite->setPosition(x, y);
 
 	_animation = new Animation(_sprite, 0.2f);
-	_animation->addFrameRect(eID::ENEMY, "green_waver_01", "green_waver_02", "green_waver_03", NULL);
+	_animation->addFrameRect(eID::ENEMY, "yellow_rio_01", "yellow_rio_02", NULL);
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
 	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_01"));
@@ -26,7 +26,7 @@ Waver::Waver(int x, int y, bool direction) : BaseObject(WAVER)
 	}
 }
 
-void Waver::init()
+void Rio::init()
 {
 	auto collisionBody = new CollisionBody(this);
 	_componentList["CollisionBody"] = collisionBody;
@@ -36,7 +36,7 @@ void Waver::init()
 	_startHitStopWatch = false;
 }
 
-void Waver::update(float deltatime)
+void Rio::update(float deltatime)
 {
 	if (_hitPoint > 0)
 	{
@@ -72,11 +72,22 @@ void Waver::update(float deltatime)
 		if (_effectStopWatch->isStopWatch(200))
 		{
 			this->setStatus(DESTROY);
+
+			srand(time(0));
+			auto random = rand() % 10;
+			BaseObject* item = nullptr;
+			if (random < 5)
+				item = new EnergyBall(this->getPositionX(), this->getPositionY());
+			if (item != nullptr)
+			{
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+			}
 		}
 	}
 }
 
-void Waver::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
+void Rio::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	if (_hitPoint > 0)
 		_animation->draw(spriteHandle, viewport);
@@ -84,7 +95,7 @@ void Waver::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		_effectAnimation->draw(spriteHandle, viewport);
 }
 
-void Waver::release()
+void Rio::release()
 {
 	SAFE_DELETE(_animation);
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -94,7 +105,7 @@ void Waver::release()
 	_componentList.clear();
 }
 
-void Waver::wasHit(int hitPoint)
+void Rio::wasHit(int hitPoint)
 {
 	// Nếu không trong khoảng thời gian protect thì trừ HP và bật hitStopWatch
 	// Nếu đang trong khoảng thời gian protect thì không trừ HP
@@ -112,31 +123,31 @@ void Waver::wasHit(int hitPoint)
 	}
 }
 
-bool Waver::isDead()
+bool Rio::isDead()
 {
 	return (_hitPoint <= 0);
 }
 
-void Waver::active(bool direction)
+void Rio::active(bool direction)
 {
 	_isActive = true;
 
-	auto sinMovement = new SinMovement(GVector2(0, 150), 0.5, _sprite);
+	auto sinMovement = new SinMovement(GVector2(0, 200), 0.5, _sprite);
 	this->_componentList["SinMovement"] = sinMovement;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
 	if (direction)
 	{
-		movement->setVelocity(GVector2(WAVER_MOVE_SPEED, 0));
+		movement->setVelocity(GVector2(RIO_MOVE_SPEED, 0));
 	}
 	else
 	{
 		_sprite->setScaleX(_sprite->getScale().x * -1);
-		movement->setVelocity(GVector2(-WAVER_MOVE_SPEED, 0));
+		movement->setVelocity(GVector2(-RIO_MOVE_SPEED, 0));
 	}
 }
 
-void Waver::deactive()
+void Rio::deactive()
 {
 	_isActive = false;
 
@@ -148,12 +159,12 @@ void Waver::deactive()
 	delete sinMovement;
 }
 
-bool Waver::isActive()
+bool Rio::isActive()
 {
 	return _isActive;
 }
 
-float Waver::checkCollision(BaseObject* object, float dt)
+float Rio::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getId() == WALL)
 	{

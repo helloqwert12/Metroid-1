@@ -89,6 +89,9 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 	case MELLOW:
 		return GetMellow(item, mapHeight);
 		break;
+	case RIO:
+		return GetRio(item, mapHeight);
+		break;
 	case ENERGY_TANK:
 		return GetEnergyTank(item, mapHeight);
 		break;
@@ -200,9 +203,25 @@ BaseObject* GetMellow(xml_node item, int mapHeight)
 	x = x + width / 2;
 	y = y + height / 2;
 
-	auto mellow = new Mellow(x, y, true);
+	auto mellow = new Mellow(x, y, false);
 	mellow->init();
 	return mellow;
+}
+
+BaseObject* GetRio(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	auto rio = new Rio(x, y, false);
+	rio->init();
+	return rio;
 }
 
 BaseObject* GetEnergyTank(xml_node item, int mapHeight)

@@ -20,6 +20,7 @@
 #include "Waver.h"
 #include "Skree.h"
 #include "Mellow.h"
+#include "Rio.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"

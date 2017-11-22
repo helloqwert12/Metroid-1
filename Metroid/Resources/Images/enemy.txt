@@ -17,3 +17,9 @@ yellow_skree_01		15	30	31	54
 yellow_skree_02		33	30	51	54
 mellow_01		512	46	528	54
 mellow_02		530	46	546	54
+yellow_rio_01		214	35	238	54
+yellow_rio_02		240	38	264	54
+red_rio_01		318	35	342	54
+red_rio_02		344	38	368	54
+frozen_rio_01		370	35	394	54
+frozen_rio_02		396	38	420	54
