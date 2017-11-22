@@ -201,6 +201,9 @@
     <ClCompile Include="LongBeam.cpp">
       <Filter>Source Files\Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="IceBeam.cpp">
+      <Filter>Source Files\Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -345,6 +348,9 @@
       <Filter>Header Files\Object\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="LongBeam.h">
+      <Filter>Header Files\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="IceBeam.h">
       <Filter>Header Files\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

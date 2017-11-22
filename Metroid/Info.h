@@ -24,14 +24,17 @@ public:
 	int getEnergy();
 	void setEnergy(int number);
 
-	eID getWeapon();
-	void setWeapon(eID id);
-
 	int getMissileRocket();
 	void setMissileRocke(int number);
 
 	int getBulletRange();
 	void setBulletRange(int number);
+
+	eID getWeapon();
+	void setWeapon(eID id);
+
+	eID getBullet();
+	void setBullet(eID id);
 
 private:
 	Sprite* _iconLife;
@@ -46,11 +49,14 @@ private:
 	int _missileRocketNumber;
 	TextSprite* _textMissileRocket;
 
-	// Weapon hiện tại
-	eID _weaponID;
-
 	// Khoảng bắn của viên đạn
 	int _bulletRange;
+
+	// Weapon hiện tại
+	eID _weaponId;
+
+	// Bullet hiện tại
+	eID _bulletId;
 };
 
 #endif // !__INFO_H__

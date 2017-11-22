@@ -293,10 +293,10 @@ void Player::updateAttackStatus(float dt)
 						weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
 				}
 
-				// Nếu hết Rocket thì set về đạn thường
+				// Nếu hết Rocket thì set về Bullet
 				_info->setMissileRocke(_info->getMissileRocket() - 1);
 				if (_info->getMissileRocket() <= 0)
-					_info->setWeapon(eID::NORMAL_BULLET);
+					_info->setWeapon(_info->getBullet());
 				break;
 			}
 			case BOMB:
@@ -422,7 +422,7 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		else // Nếu đang trong status ROLLING_DOWN thì đứng dậy (xóa status ROLLING_DOWN)
 		{
 			this->removeStatus(eStatus::ROLLING_DOWN);
-			_info->setWeapon(eID::NORMAL_BULLET);
+			_info->setWeapon(_info->getBullet());
 		}
 		break;
 	}
@@ -441,7 +441,7 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		if (this->isInStatus(eStatus::ROLLING_DOWN))
 		{
 			this->removeStatus(eStatus::ROLLING_DOWN);
-			_info->setWeapon(eID::NORMAL_BULLET);
+			_info->setWeapon(_info->getBullet());
 		}
 		break;
 	}
@@ -451,13 +451,13 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		break;
 	}
 	case DIK_SPACE:
-		// Chuyển Rocket, nếu đang ROLLING_DOWN thì không cho chuyển
+		// Chuyển giữa Rocket và Bullet, nếu đang ROLLING_DOWN thì không cho chuyển
 		if ((_info->getMissileRocket() > 0) && ((this->getStatus() & eStatus::ROLLING_DOWN) != eStatus::ROLLING_DOWN))
 		{
 			if (_info->getWeapon() != eID::MISSILE_ROCKET)
 				_info->setWeapon(eID::MISSILE_ROCKET);
 			else
-				_info->setWeapon(eID::NORMAL_BULLET);
+				_info->setWeapon(_info->getBullet());
 		}
 		break;
 	default:
@@ -522,7 +522,7 @@ void Player::resetValues()
 		this->setStatus(eStatus::NORMAL);
 		_info->setLife(_info->getLife() - 1);
 		_info->setEnergy(30);
-		_info->setWeapon(eID::NORMAL_BULLET);
+		_info->setWeapon(_info->getBullet());
 
 		auto gravity = (Gravity*)this->_componentList["Gravity"];
 		gravity->setStatus(eGravityStatus::FALLING_DOWN);
@@ -824,6 +824,20 @@ float Player::checkCollision(BaseObject* object, float dt)
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
 			_info->setBulletRange(_info->getBulletRange() * 2);
+			object->setStatus(DESTROY);
+		}
+	}
+	else if (objectId == ICE_BEAM)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setBullet(eID::ICE_BULLET);
+
+			// Nếu weapon đang là Bullet thì chuyển sang Ice Bullet
+			// Còn nếu đang là Rocket hoặc Bomb thì không chuyển
+			if (_info->getWeapon() != eID::MISSILE_ROCKET && _info->getWeapon() != eID::BOMB)
+				_info->setWeapon(_info->getBullet());
+
 			object->setStatus(DESTROY);
 		}
 	}

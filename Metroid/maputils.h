@@ -15,6 +15,7 @@
 
 #include "EnergyBall.h"
 #include "LongBeam.h"
+#include "IceBeam.h"
 
 using namespace pugi;
 
@@ -38,5 +39,6 @@ BaseObject* GetSkree(xml_node item, int mapHeight);
 // Item
 BaseObject* GetEnergyBall(xml_node item, int mapHeight);
 BaseObject* GetLongBeam(xml_node item, int mapHeight);
+BaseObject* GetIceBeam(xml_node item, int mapHeight);
 
 #endif // !__MAPUTIL_H__

@@ -156,6 +156,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="IceBeam.cpp" />
     <ClCompile Include="IceBullet.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="IceBeam.h" />
     <ClInclude Include="IceBullet.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />

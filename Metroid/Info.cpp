@@ -25,9 +25,10 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 	_textMissileRocket = new TextSprite("", GVector2(0, 0));
 	_textMissileRocket->init();
 
-	_weaponID = NORMAL_BULLET;
-	this->setWeapon(_weaponID);
+	_weaponId = NORMAL_BULLET;
+	_bulletId = NORMAL_BULLET;
 
+	this->setWeapon(_weaponId);
 	_bulletRange = BULLET_RANGE;
 }
 
@@ -134,16 +135,6 @@ void Info::setEnergy(int number)
 		_energyNumber = 99;
 }
 
-eID Info::getWeapon()
-{
-	return _weaponID;
-}
-
-void Info::setWeapon(eID id)
-{
-	_weaponID = id;
-}
-
 int Info::getMissileRocket()
 {
 	return _missileRocketNumber;
@@ -162,4 +153,24 @@ int Info::getBulletRange()
 void Info::setBulletRange(int number)
 {
 	_bulletRange = number;
+}
+
+eID Info::getWeapon()
+{
+	return _weaponId;
+}
+
+void Info::setWeapon(eID id)
+{
+	_weaponId = id;
+}
+
+eID Info::getBullet()
+{
+	return _bulletId;
+}
+
+void Info::setBullet(eID id)
+{
+	_bulletId = id;
 }
