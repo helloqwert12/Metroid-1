@@ -602,10 +602,7 @@ void Player::beHit(eDirection direction)
 	_protectTime = PROTECT_TIME;
 
 	if (direction == NONE)
-	{
-		_info->setEnergy(_info->getEnergy() - 2);
 		return;
-	}
 
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
@@ -639,6 +636,15 @@ void Player::beHit(eDirection direction)
 		break;
 	}
 	}
+}
+
+void Player::takeDamage(int number)
+{
+	// Nếu có VARIA thì chỉ nhận nửa số damage
+	if (_info->hasVaria())
+		_info->setEnergy(_info->getEnergy() - number / 2);
+	else
+		_info->setEnergy(_info->getEnergy() - number);
 }
 
 void Player::die()
@@ -723,7 +729,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 				}
 
 				beHit(direction);
-				_info->setEnergy(_info->getEnergy() - 8);
+				takeDamage(8);
 			}
 
 			eID weaponId;
@@ -770,7 +776,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 				}
 
 				beHit(direction);
-				_info->setEnergy(_info->getEnergy() - 8);
+				takeDamage(8);
 			}
 
 			eID weaponId;
@@ -808,7 +814,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 				}
 
 				beHit(direction);
-				_info->setEnergy(_info->getEnergy() - 8);
+				takeDamage(8);
 			}
 
 			eID weaponId;
@@ -857,7 +863,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 				}
 
 				beHit(direction);
-				_info->setEnergy(_info->getEnergy() - 8);
+				takeDamage(8);
 			}
 
 			eID weaponId;
@@ -929,6 +935,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
 			_info->setBomb(true);
+			object->setStatus(DESTROY);
+		}
+	}
+	else if (objectId == VARIA)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setVaria(true);
 			object->setStatus(DESTROY);
 		}
 	}

@@ -21,7 +21,7 @@
 #include "IceBeam.h"
 #include "MissileRocketBall.h"
 #include "BombBall.h"
-
+#include "Varia.h"
 using namespace pugi;
 
 // Đọc danh sách các object từ file XML
@@ -50,5 +50,6 @@ BaseObject* GetLongBeam(xml_node item, int mapHeight);
 BaseObject* GetIceBeam(xml_node item, int mapHeight);
 BaseObject* GetMissileRocketBall(xml_node item, int mapHeight);
 BaseObject* GetBombBall(xml_node item, int mapHeight);
+BaseObject* GetVaria(xml_node item, int mapHeight);
 
 #endif // !__MAPUTIL_H__

@@ -193,6 +193,7 @@
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="Varia.cpp" />
     <ClCompile Include="Viewport.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Waver.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="Varia.h" />
     <ClInclude Include="Viewport.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Waver.h" />

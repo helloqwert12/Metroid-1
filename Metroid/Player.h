@@ -28,6 +28,7 @@
 #include "IceBeam.h"
 #include "MissileRocketBall.h"
 #include "BombBall.h"
+#include "Varia.h"
 
 #define MOVE_SPEED 150
 #define JUMP_VELOCITY 450
@@ -60,6 +61,7 @@ public:
 	void jump();
 	void falling();
 	void beHit(eDirection direction);
+	void takeDamage(int number);
 	void die();
 	void revive();
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="362">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="363">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -129891,5 +129891,6 @@
   <object id="359" name="Mellow" type="54" x="1968.59" y="2976.27" width="15.8182" height="15.4545"/>
   <object id="360" name="Skree" type="53" x="735.591" y="2911.77" width="15.8182" height="15.4545"/>
   <object id="361" name="EnergyTank" type="81" x="849.424" y="3072.27" width="15.8182" height="15.4545"/>
+  <object id="362" name="Varia" type="88" x="1072.27" y="3072.27" width="15.8182" height="15.4545"/>
  </objectgroup>
 </map>

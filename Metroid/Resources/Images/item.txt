@@ -39,10 +39,10 @@ enegy_ball_01		76	110	84	118
 enegy_ball_02		86	110	94	118
 missile_01		96	106	104	118
 missile_02		106	106	114	118
-varia_01		74	84	92	100
-varia_02		94	84	110	100
-varia_03		112	84	128	100
-varia_04		130	84	146	100
+varia_01		76	84	91	100
+varia_02		94	84	109	100
+varia_03		112	84	127	100
+varia_04		130	84	145	100
 crew_attack_01		4	103	20	119
 crew_attack_02		22	103	38	119
 crew_attack_03		40	103	56	119

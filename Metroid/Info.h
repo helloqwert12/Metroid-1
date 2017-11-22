@@ -40,6 +40,8 @@ public:
 	void setMaruMari(bool flag);
 	bool hasBomb();
 	void setBomb(bool flag);
+	bool hasVaria();
+	void setVaria(bool flag);
 
 private:
 	Sprite* _iconLife;
@@ -65,6 +67,7 @@ private:
 
 	bool _hasMaruMari;
 	bool _hasBomb;
+	bool _hasVaria;
 };
 
 #endif // !__INFO_H__

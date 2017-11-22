@@ -2,7 +2,7 @@
 #include "TextSprite.h"
 #include <string>
 
-Info::Info() : BaseObject(eID::LIFE_ICON)
+Info::Info() : BaseObject(eID::INFO)
 {
 	// Info dùng tọa độ top-left
 	_iconLife = SpriteManager::getInstance()->getSprite(eID::LIFE_ICON);
@@ -24,15 +24,6 @@ Info::Info() : BaseObject(eID::LIFE_ICON)
 
 	_textMissileRocket = new TextSprite("", GVector2(0, 0));
 	_textMissileRocket->init();
-
-	_weaponId = NORMAL_BULLET;
-	_bulletId = NORMAL_BULLET;
-
-	this->setWeapon(_weaponId);
-	_bulletRange = BULLET_RANGE;
-
-	_hasMaruMari = false;
-	_hasBomb = false;
 }
 
 Info::~Info()
@@ -41,6 +32,15 @@ Info::~Info()
 
 void Info::init()
 {
+	_weaponId = NORMAL_BULLET;
+	_bulletId = NORMAL_BULLET;
+
+	this->setWeapon(_weaponId);
+	_bulletRange = BULLET_RANGE;
+
+	_hasMaruMari = false;
+	_hasBomb = false;
+	_hasVaria = false;
 }
 
 void Info::update(float deltatime)
@@ -196,4 +196,14 @@ bool Info::hasBomb()
 void Info::setBomb(bool flag)
 {
 	_hasBomb = flag;
+}
+
+bool Info::hasVaria()
+{
+	return _hasVaria;
+}
+
+void Info::setVaria(bool flag)
+{
+	_hasVaria = flag;
 }
