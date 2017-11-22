@@ -14,6 +14,7 @@
 #include "Skree.h"
 #include "Mellow.h"
 
+#include "EnergyTank.h"
 #include "EnergyBall.h"
 #include "MaruMari.h"
 #include "LongBeam.h"
@@ -42,6 +43,7 @@ BaseObject* GetSkree(xml_node item, int mapHeight);
 BaseObject* GetMellow(xml_node item, int mapHeight);
 
 // Item
+BaseObject* GetEnergyTank(xml_node item, int mapHeight);
 BaseObject* GetEnergyBall(xml_node item, int mapHeight);
 BaseObject* GetMaruMari(xml_node item, int mapHeight);
 BaseObject* GetLongBeam(xml_node item, int mapHeight);

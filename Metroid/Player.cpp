@@ -304,7 +304,9 @@ void Player::updateAttackStatus(float dt)
 				break;
 			}
 			case BOMB:
-				weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
+				// Nếu đang FALLING thì không được đặt bomb
+				if (!this->isInStatus(eStatus::FALLING))
+					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
 				break;
 			default:
 				break;
@@ -866,6 +868,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 				else
 					((Mellow*)object)->wasHit(1);
 			}
+		}
+	}
+	else if (objectId == ENERGY_TANK)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setLife(_info->getLife() + 1);
+			object->setStatus(DESTROY);
 		}
 	}
 	else if (objectId == ENERGY_BALL)

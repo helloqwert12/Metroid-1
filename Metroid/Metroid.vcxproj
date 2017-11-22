@@ -153,6 +153,7 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="dxaudio.cpp" />
     <ClCompile Include="EnergyBall.cpp" />
+    <ClCompile Include="EnergyTank.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="dxaudio.h" />
     <ClInclude Include="EnergyBall.h" />
+    <ClInclude Include="EnergyTank.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTime.h" />

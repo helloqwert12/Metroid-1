@@ -1,5 +1,5 @@
-#ifndef __ICEBEAM_H__
-#define __ICEBEAM_H__
+#ifndef __ENERGYTANK_H__
+#define __ENERGYTANK_H__
 
 #include "define.h"
 #include "BaseObject.h"
@@ -8,10 +8,10 @@
 #include "Animation.h"
 #include "StopWatch.h"
 
-class IceBeam : public BaseObject
+class EnergyTank : public BaseObject
 {
 public:
-	IceBeam(int x, int y);
+	EnergyTank(int x, int y);
 
 	void init();
 	void update(float deltatime);
@@ -25,4 +25,4 @@ protected:
 	map<string, IComponent*> _componentList;
 };
 
-#endif // !__ICEBEAM_H__
+#endif // !__ENERGYTANK_H__
