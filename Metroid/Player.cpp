@@ -819,6 +819,55 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 	}
+	else if (objectId == MELLOW)
+	{
+		// Lại gần thì active
+		if (!((Mellow*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (getDistance(objPosition, position) < WINDOW_WIDTH / 2 && abs(position.x - objPosition.x) < WINDOW_WIDTH / 2)
+			{
+				((Mellow*)object)->active(position.x > objPosition.x);
+			}
+		}
+
+		// Ra xa một khoảng thì deactive
+		if (((Mellow*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (getDistance(objPosition, position) > 150 && abs(position.x - objPosition.x) > WINDOW_WIDTH / 2)
+			{
+				((Mellow*)object)->deactive();
+			}
+		}
+
+		if (!((Mellow*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+
+				beHit(direction);
+				_info->setEnergy(_info->getEnergy() - 8);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((Mellow*)object)->wasHit(5);
+				else
+					((Mellow*)object)->wasHit(1);
+			}
+		}
+	}
 	else if (objectId == ENERGY_BALL)
 	{
 		if (collisionBody->checkCollision(object, direction, dt, false))

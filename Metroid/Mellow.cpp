@@ -1,27 +1,32 @@
-﻿#include "Skree.h"
+﻿#include "Mellow.h"
 
-Skree::Skree(int x, int y) : BaseObject(SKREE)
+Mellow::Mellow(int x, int y, bool direction) : BaseObject(MELLOW)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "yellow_skree_01"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "mellow_01"));
 	_sprite->setPosition(x, y);
 
-	_animation = new Animation(_sprite, 0.07f);
-	_animation->addFrameRect(eID::ENEMY, "yellow_skree_01", "yellow_skree_02", NULL);
+	_animation = new Animation(_sprite, 0.1f);
+	_animation->addFrameRect(eID::ENEMY, "mellow_01", "mellow_02", NULL);
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
 	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_01"));
 	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
-	
+
 	_hitPoint = 2;
 	_isActive = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
+
+	if (!direction)
+	{
+		_sprite->setScaleX(_sprite->getScale().x * (-1));
+	}
 }
 
-void Skree::init()
+void Mellow::init()
 {
 	auto collisionBody = new CollisionBody(this);
 	_componentList["CollisionBody"] = collisionBody;
@@ -31,7 +36,7 @@ void Skree::init()
 	_startHitStopWatch = false;
 }
 
-void Skree::update(float deltatime)
+void Mellow::update(float deltatime)
 {
 	if (_hitPoint > 0)
 	{
@@ -49,7 +54,8 @@ void Skree::update(float deltatime)
 			{
 				_startHitStopWatch = false;
 				_hitStopWatch->restart();
-				this->active();
+				// Do đã có điều kiện active bên Player nên không cần active lại
+				//this->active();
 			}
 		}
 
@@ -66,22 +72,11 @@ void Skree::update(float deltatime)
 		if (_effectStopWatch->isStopWatch(200))
 		{
 			this->setStatus(DESTROY);
-
-			srand(time(0));
-			auto random = rand() % 10;
-			BaseObject* item = nullptr;
-			if (random < 5)
-				item = new EnergyBall(this->getPositionX(), this->getPositionY());
-			if (item != nullptr)
-			{
-				item->init();
-				QuadTreeNode::getInstance()->insert(item);
-			}
 		}
 	}
 }
 
-void Skree::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
+void Mellow::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	if (_hitPoint > 0)
 		_animation->draw(spriteHandle, viewport);
@@ -89,7 +84,7 @@ void Skree::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		_effectAnimation->draw(spriteHandle, viewport);
 }
 
-void Skree::release()
+void Mellow::release()
 {
 	SAFE_DELETE(_animation);
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -99,7 +94,7 @@ void Skree::release()
 	_componentList.clear();
 }
 
-void Skree::wasHit(int hitPoint)
+void Mellow::wasHit(int hitPoint)
 {
 	// Nếu không trong khoảng thời gian protect thì trừ HP và bật hitStopWatch
 	// Nếu đang trong khoảng thời gian protect thì không trừ HP
@@ -117,40 +112,41 @@ void Skree::wasHit(int hitPoint)
 	}
 }
 
-bool Skree::isDead()
+bool Mellow::isDead()
 {
 	return (_hitPoint <= 0);
 }
 
-void Skree::active()
+void Mellow::active(bool direction)
 {
 	_isActive = true;
 
-	auto sinmovement = new SinMovement(GVector2(30, 0), 0.5, _sprite);
-	this->_componentList["SinMovement"] = sinmovement;
-
 	auto movement = (Movement*)this->_componentList["Movement"];
-	movement->setVelocity(GVector2(0, -SKREE_MOVE_SPEED));
+	if (direction)
+	{
+		movement->setVelocity(GVector2(MELLOW_MOVE_SPEED, -250));
+	}
+	else
+	{
+		_sprite->setScaleX(_sprite->getScale().x * -1);
+		movement->setVelocity(GVector2(-MELLOW_MOVE_SPEED, -250));
+	}
 }
 
-void Skree::deactive()
+void Mellow::deactive()
 {
 	_isActive = false;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
 	movement->setVelocity(GVector2(0, 0));
-
-	auto sinMovement = (Movement*)this->_componentList["SinMovement"];
-	_componentList.erase("SinMovement");
-	delete sinMovement;
 }
 
-bool Skree::isActive()
+bool Mellow::isActive()
 {
 	return _isActive;
 }
 
-float Skree::checkCollision(BaseObject* object, float dt)
+float Mellow::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getId() == WALL)
 	{
@@ -164,10 +160,12 @@ float Skree::checkCollision(BaseObject* object, float dt)
 				// Update lại vị trí (tránh không cho đi xuyên)
 				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 
-				// Va chạm Wall TOP thì chết
-				if (direction == TOP)
+				// Va chạm Wall TOP hoặc BOTTOM thì đi chéo ngược lại
+				if (direction == TOP || direction == BOTTOM)
 				{
-					this->wasHit(2);
+					auto movement = (Movement*)this->_componentList["Movement"];
+					movement->setVelocity(GVector2(movement->getVelocity().x, -movement->getVelocity().y));
+					this->setScaleX(this->getScale().x * -1);
 				}
 			}
 			return 1.0f;

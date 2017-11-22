@@ -166,6 +166,7 @@
     <ClCompile Include="LongBeam.cpp" />
     <ClCompile Include="maputils.cpp" />
     <ClCompile Include="MaruMari.cpp" />
+    <ClCompile Include="Mellow.cpp" />
     <ClCompile Include="MissileRocket.cpp" />
     <ClCompile Include="MissileRocketBall.cpp" />
     <ClCompile Include="NormalBullet.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="LongBeam.h" />
     <ClInclude Include="maputils.h" />
     <ClInclude Include="MaruMari.h" />
+    <ClInclude Include="Mellow.h" />
     <ClInclude Include="MissileRocket.h" />
     <ClInclude Include="MissileRocketBall.h" />
     <ClInclude Include="NormalBullet.h" />

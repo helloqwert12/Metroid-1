@@ -42,6 +42,10 @@ enum eID
 	RIPPER = 51,
 	WAVER = 52,
 	SKREE = 53,
+	MELLOW = 54,
+	RIO = 55,
+	ZEB = 56,
+	ZOMMER = 57,
 
 	ITEM = 80,
 	ENERGY_BALL = 81,

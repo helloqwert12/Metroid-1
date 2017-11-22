@@ -146,23 +146,22 @@ float Ripper::checkCollision(BaseObject* object, float dt)
 		eDirection direction;
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
-			if (direction == LEFT || direction == RIGHT)
+			float moveX, moveY;
+			if (collisionBody->isColliding(object, moveX, moveY, dt))
 			{
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				// Update lại vị trí (tránh không cho đi xuyên)
+				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 
-					// Đụng tường thì đi ngược lại
+				// Va chạm Wall LEFT hoặc RIGHT thì đi ngược lại
+				if (direction == LEFT || direction == RIGHT)
+				{
 					auto movement = (Movement*)this->_componentList["Movement"];
 					movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
 					this->setScaleX(this->getScale().x * -1);
 				}
 			}
-
 			return 1.0f;
 		}
 	}
-
 	return 0;
 }

@@ -12,6 +12,7 @@
 #include "Ripper.h"
 #include "Waver.h"
 #include "Skree.h"
+#include "Mellow.h"
 
 #include "EnergyBall.h"
 #include "MaruMari.h"
@@ -38,6 +39,7 @@ BaseObject* GetWall(xml_node item, int mapHeight);
 BaseObject* GetRipper(xml_node item, int mapHeight);
 BaseObject* GetWaver(xml_node item, int mapHeight);
 BaseObject* GetSkree(xml_node item, int mapHeight);
+BaseObject* GetMellow(xml_node item, int mapHeight);
 
 // Item
 BaseObject* GetEnergyBall(xml_node item, int mapHeight);

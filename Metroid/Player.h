@@ -19,6 +19,7 @@
 #include "Ripper.h"
 #include "Waver.h"
 #include "Skree.h"
+#include "Mellow.h"
 
 #include "EnergyBall.h"
 #include "MaruMari.h"

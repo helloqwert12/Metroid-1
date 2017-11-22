@@ -213,6 +213,9 @@
     <ClCompile Include="BombBall.cpp">
       <Filter>Source Files\Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Mellow.cpp">
+      <Filter>Source Files\Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -370,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="BombBall.h">
       <Filter>Header Files\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Mellow.h">
+      <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
