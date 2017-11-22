@@ -693,8 +693,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 				this->addStatus(eStatus::FALLING);
 		}
 
-		eID weaponID;
-		if (this->checkWeaponCollision(object, direction, weaponID, dt))
+		eID weaponId;
+		if (this->checkWeaponCollision(object, direction, weaponId, dt))
 		{
 			// Xét va chạm để khi đạn trúng tường thì bị DESTROY
 		}
@@ -716,10 +716,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
 
-			eID weaponID;
-			if (this->checkWeaponCollision(object, direction, weaponID, dt))
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
-				if (weaponID == eID::MISSILE_ROCKET)
+				if (weaponId == eID::MISSILE_ROCKET)
 					((Ripper*)object)->wasHit(5);
 			}
 		}
@@ -763,10 +763,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
 
-			eID weaponID;
-			if (this->checkWeaponCollision(object, direction, weaponID, dt))
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
-				if (weaponID == eID::MISSILE_ROCKET)
+				if (weaponId == eID::MISSILE_ROCKET)
 					((Waver*)object)->wasHit(5);
 				else
 					((Waver*)object)->wasHit(1);
@@ -801,10 +801,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 				_info->setEnergy(_info->getEnergy() - 8);
 			}
 
-			eID weaponID;
-			if (this->checkWeaponCollision(object, direction, weaponID, dt))
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
-				if (weaponID == eID::MISSILE_ROCKET)
+				if (weaponId == eID::MISSILE_ROCKET)
 					((Skree*)object)->wasHit(5);
 				else
 					((Skree*)object)->wasHit(1);
@@ -816,6 +816,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
 			_info->setEnergy(_info->getEnergy() + 5);
+			object->setStatus(DESTROY);
+		}
+	}
+	else if (objectId == LONG_BEAM)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setBulletRange(_info->getBulletRange() * 2);
 			object->setStatus(DESTROY);
 		}
 	}

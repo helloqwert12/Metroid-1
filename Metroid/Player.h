@@ -21,6 +21,7 @@
 #include "Skree.h"
 
 #include "EnergyBall.h"
+#include "LongBeam.h"
 
 #define MOVE_SPEED 150
 #define JUMP_VELOCITY 450

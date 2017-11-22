@@ -89,6 +89,9 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 	case ENERGY_BALL:
 		return GetEnergyBall(item, mapHeight);
 		break;
+	case LONG_BEAM:
+		return GetLongBeam(item, mapHeight);
+		break;
 	default:
 		return nullptr;
 	}
@@ -179,4 +182,23 @@ BaseObject* GetEnergyBall(xml_node item, int mapHeight)
 	auto energyBall = new EnergyBall(x, y);
 	energyBall->init();
 	return energyBall;
+}
+
+BaseObject* GetLongBeam(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto longBeam = new LongBeam(x, y);
+	longBeam->init();
+	return longBeam;
 }
