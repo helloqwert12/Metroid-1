@@ -1,4 +1,4 @@
-#ifndef __WALL_H__
+﻿#ifndef __WALL_H__
 #define __WALL_H__
 
 #include "define.h"
@@ -22,20 +22,10 @@ public:
 
 	RECT getBounding();
 
-	float getPositionX();
-	float getPositionY();
-	void setPosition(GVector3 vector);
-	void setPosition(float x, float y, float z);
-	void setPosition(float x, float y);
-	void setPositionX(float x);
-	void setPositionY(float y);
-
-	float getRotate();
-	float getZIndex();
-
 private:
 	map<string, Component*> _listComponent;
 
+	// Do là empty object nên cần xác định bound thay vì lấy bound của Sprite
 	RECT _bound;
 };
 

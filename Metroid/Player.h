@@ -21,6 +21,8 @@
 #include "Skree.h"
 #include "Mellow.h"
 #include "Rio.h"
+#include "Zeb.h"
+#include "ZebPipe.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"

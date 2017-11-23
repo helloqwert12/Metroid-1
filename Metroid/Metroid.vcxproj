@@ -200,6 +200,8 @@
     <ClCompile Include="Waver.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Zeb.cpp" />
+    <ClCompile Include="ZebPipe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -258,6 +260,8 @@
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Waver.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="Zeb.h" />
+    <ClInclude Include="ZebPipe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

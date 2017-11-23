@@ -92,6 +92,9 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 	case RIO:
 		return GetRio(item, mapHeight);
 		break;
+	case ZEB_PIPE:
+		return GetZebPipe(item, mapHeight);
+		break;
 	case ENERGY_TANK:
 		return GetEnergyTank(item, mapHeight);
 		break;
@@ -222,6 +225,22 @@ BaseObject* GetRio(xml_node item, int mapHeight)
 	auto rio = new Rio(x, y, false);
 	rio->init();
 	return rio;
+}
+
+BaseObject* GetZebPipe(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	auto zebPipe = new ZebPipe(x, y, width, height);
+	zebPipe->init();
+	return zebPipe;
 }
 
 BaseObject* GetEnergyTank(xml_node item, int mapHeight)

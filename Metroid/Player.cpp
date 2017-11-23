@@ -900,7 +900,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 
-		if (!((Mellow*)object)->isDead() && _protectTime <= 0)
+		if (!((Rio*)object)->isDead() && _protectTime <= 0)
 		{
 			if (collisionBody->checkCollision(object, direction, dt))
 			{
@@ -922,6 +922,68 @@ float Player::checkCollision(BaseObject* object, float dt)
 					((Rio*)object)->wasHit(5);
 				else
 					((Rio*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == ZEB)
+	{
+		// Ra xa một khoảng thì DESTROY
+		if (((Zeb*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.y - objPosition.y) > WINDOW_HEIGHT / 2)
+			{
+				((Zeb*)object)->setStatus(DESTROY);
+			}
+		}
+
+		if (!((Zeb*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+
+				beHit(direction);
+				takeDamage(8);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((Zeb*)object)->wasHit(5);
+				else
+					((Zeb*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == ZEB_PIPE)
+	{
+		// Lại gần thì active
+		if (!((ZebPipe*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 - 25)
+			{
+				((ZebPipe*)object)->active();
+			}
+		}
+
+		// Ra xa một khoảng thì deactive
+		if (((ZebPipe*)object)->isActive())
+		{
+			auto objPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 - 25)
+			{
+				((ZebPipe*)object)->deactive();
 			}
 		}
 	}

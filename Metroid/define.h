@@ -45,7 +45,7 @@ enum eID
 	MELLOW = 54,
 	RIO = 55,
 	ZEB = 56,
-	ZEB_RANGE = 57,
+	ZEB_PIPE = 57,
 	ZOMMER = 58,
 
 	ITEM = 80,
