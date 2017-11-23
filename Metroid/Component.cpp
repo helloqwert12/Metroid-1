@@ -1,4 +1,4 @@
-﻿#include "IComponent.h"
+﻿#include "Component.h"
 
 Movement::Movement(GVector2 accelerate, GVector2 velocicty, Sprite* refSprite)
 {

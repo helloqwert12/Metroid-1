@@ -1,10 +1,5 @@
 #include "BaseObject.h"
 
-IControlable::IControlable()
-{
-	_input = InputController::getInstance();
-}
-
 BaseObject::BaseObject(eID id)
 {
 	this->_id = id;
@@ -183,4 +178,9 @@ void BaseObject::setPhysicsBodySide(eDirection side)
 eDirection BaseObject::getPhysicsBodySide()
 {
 	return _physicsSide;
+}
+
+Controlable::Controlable()
+{
+	_input = InputController::getInstance();
 }

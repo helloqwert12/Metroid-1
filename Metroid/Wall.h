@@ -3,7 +3,7 @@
 
 #include "define.h"
 #include "BaseObject.h"
-#include "IComponent.h"
+#include "Component.h"
 #include "CollisionBody.h"
 
 class Wall : public BaseObject
@@ -34,7 +34,7 @@ public:
 	float getZIndex();
 
 private:
-	map<string, IComponent*> _listComponent;
+	map<string, Component*> _listComponent;
 
 	RECT _bound;
 };

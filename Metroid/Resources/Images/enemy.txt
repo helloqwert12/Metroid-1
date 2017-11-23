@@ -23,3 +23,9 @@ red_rio_01		318	35	342	54
 red_rio_02		344	38	368	54
 frozen_rio_01		370	35	394	54
 frozen_rio_02		396	38	420	54
+yellow_zeb_01		204	60	220	76
+yellow_zeb_02		222	60	238	76
+red_zeb_01		276	60	292	76
+red_zeb_02		294	60	310	76
+frozen_zeb_01		312	60	327	76
+frozen_zeb_02		329	60	345	76

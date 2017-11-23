@@ -16,7 +16,7 @@ public:
 		@x, y: tọa độ để vẽ
 	Sau khi tạo gọi hàm draw() để vẽ.
 	*/
-	Text(LPCWSTR fontName, string text, float x = 0, float y = 0, int fontSize = 21);
+	Text(LPCWSTR fontName, string text, float x = 0, float y = 0, int fontSize = 20);
 	~Text();
 
 	void draw();

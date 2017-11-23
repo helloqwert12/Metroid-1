@@ -3,7 +3,7 @@
 
 #include "define.h"
 #include "BaseObject.h"
-#include "IComponent.h"
+#include "Component.h"
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
@@ -24,7 +24,7 @@ public:
 	CollisionBody* getCollisionBody();
 
 protected:
-	map<string, IComponent*> _componentList;
+	map<string, Component*> _componentList;
 
 	// Khoảng bắn của viên đạn
 	int _bulletRange;

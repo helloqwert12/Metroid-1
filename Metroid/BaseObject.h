@@ -7,15 +7,6 @@
 #include "InputController.h"
 #include "Viewport.h"
 
-class IControlable
-{
-public:
-	IControlable();
-	virtual void updateInput(float deltatime) = 0;
-protected:
-	InputController* _input;
-};
-
 class BaseObject
 {
 public:
@@ -75,11 +66,21 @@ public:
 	virtual eDirection getPhysicsBodySide();
 
 protected:
-	Sprite* _sprite;
+	Sprite* _sprite; // Reference đến Sprite
 
 	eID _id; // ID của object
 	eStatus _status; // Trạng thái của object
 	eDirection _physicsSide; // Hướng có thể bị va chạm của object
+};
+
+
+class Controlable
+{
+public:
+	Controlable();
+	virtual void updateInput(float deltatime) = 0;
+protected:
+	InputController* _input;
 };
 
 #endif // !__BASEOBJECT_H__

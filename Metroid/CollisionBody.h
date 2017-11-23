@@ -2,11 +2,11 @@
 #define __COLLISIONBODY_H__
 
 #include "BaseObject.h"
-#include "IComponent.h"
+#include "Component.h"
 #include "Event.h"
 
 // HỆ TỌA ĐỘ WOLRD (X, Y)
-class CollisionBody : public IComponent
+class CollisionBody : public Component
 {
 public:
 	CollisionBody(BaseObject* target);

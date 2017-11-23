@@ -7,12 +7,12 @@
 #include "SceneManager.h"
 #include "InputController.h"
 #include "StopWatch.h"
-#include "IComponent.h"
+#include "Component.h"
 #include "BaseObject.h"
 #include "TextSprite.h"
 
 [event_receiver(native)]
-class IntroScene : public Scene, public IControlable
+class IntroScene : public Scene, public Controlable
 {
 public:
 	IntroScene();

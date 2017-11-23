@@ -5,10 +5,10 @@
 #include <stdarg.h>
 #include "define.h"
 #include "Sprite.h"
-#include "IComponent.h"
+#include "Component.h"
 #include "SpriteManager.h"
 
-class Animation : public IComponent
+class Animation : public Component
 {
 public:
 	/*

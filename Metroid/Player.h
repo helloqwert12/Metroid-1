@@ -7,7 +7,7 @@
 #include "Viewport.h"
 #include "StopWatch.h"
 #include "BaseObject.h"
-#include "IComponent.h"
+#include "Component.h"
 #include "CollisionBody.h"
 #include "Info.h"
 
@@ -38,7 +38,7 @@
 #define PROTECT_TIME 1500
 #define ATTACK_TIME 150
 
-class Player : public BaseObject, public IControlable
+class Player : public BaseObject, public Controlable
 {
 public:
 	Player();
@@ -78,7 +78,7 @@ public:
 
 private:
 	map<int, Animation*> _animations;
-	map<string, IComponent*> _componentList;
+	map<string, Component*> _componentList;
 
 	eStatus _currentAnimateIndex;
 	Info* _info;

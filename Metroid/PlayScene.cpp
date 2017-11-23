@@ -20,7 +20,7 @@ bool PlayScene::init()
 	player->getBounding();
 	this->_player = player;
 
-	_text = new Text(L"Arial", "", 10, 25);
+	_text = new Text(L"Tahoma", "", 445, 445, 22);
 
 	// Tạo TileMap
 	_tileMap = TileMap::LoadMapFromFile("Resources//Maps//map.tmx", eID::MAP_METROID);
@@ -59,8 +59,8 @@ void PlayScene::updateInput(float dt)
 
 void PlayScene::update(float dt)
 {
-	char str[100];
-	sprintf(str, "Delta Time: %0.2f", dt);
+	char str[50];
+	sprintf(str, "FPS: %.0f", 1000 / dt);
 	_text->setText(str);
 
 	if (this->checkEndGame())

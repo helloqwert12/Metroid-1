@@ -160,7 +160,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="IceBeam.cpp" />
     <ClCompile Include="IceBullet.cpp" />
-    <ClCompile Include="IComponent.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Info.cpp" />
@@ -218,7 +218,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="IceBeam.h" />
     <ClInclude Include="IceBullet.h" />
-    <ClInclude Include="IComponent.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Info.h" />

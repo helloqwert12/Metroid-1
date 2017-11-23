@@ -9,7 +9,7 @@ Sprite::Sprite(LPD3DXSPRITE spriteHandle, LPWSTR filePath, int totalFrames, int 
 
 	auto rs = _texture.loadFromFile(spriteHandle, filePath);
 	if (rs != D3D_OK)
-		throw;
+		return;
 
 	_totalFrames = totalFrames;
 	_columns = cols;

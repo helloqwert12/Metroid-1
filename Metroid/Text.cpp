@@ -123,17 +123,17 @@ void Text::updateFont()
 	}
 
 	D3DXCreateFont(
-		DeviceManager::getInstance()->getDevice(),	// device
-		_fontHeight,								// font height
-		0,											// font width
-		_fontWeight,								// font weight
+		DeviceManager::getInstance()->getDevice(), // device
+		_fontHeight,		// font height
+		0,					// font width
+		_fontWeight,		// font weight
 		1,											
-		_italic,									// italic
+		_italic,			// italic
 		DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS,
 		ANTIALIASED_QUALITY,
 		FF_DONTCARE,
-		_fontName,									// font name
-		&_font										// font pointer
+		_fontName,			// font name
+		&_font				// font pointer
 	);
 }

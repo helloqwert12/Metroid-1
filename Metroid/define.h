@@ -7,7 +7,6 @@
 #include <d3dx9.h>
 #include <dinput.h>
 #include <dsound.h>
-
 #include <windows.h>
 #include <exception>
 #include <math.h>
@@ -21,8 +20,8 @@ using namespace std;
 #define WINDOW_HEIGHT 450
 #define SCALE_FACTOR 2.0f
 
-#define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)	// màu trắng
-#define COLOR_KEY D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f)		// màu khi mà load hình nó sẽ bỏ qua thành trong suốt
+#define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f) // màu trắng
+#define COLOR_KEY D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f) // màu khi mà load hình nó sẽ bỏ qua thành trong suốt
 
 // ID của object
 enum eID
@@ -46,7 +45,8 @@ enum eID
 	MELLOW = 54,
 	RIO = 55,
 	ZEB = 56,
-	ZOMMER = 57,
+	ZEB_RANGE = 57,
+	ZOMMER = 58,
 
 	ITEM = 80,
 	ENERGY_TANK = 81,
@@ -84,6 +84,7 @@ enum eStatus
 };
 
 // Hướng bị va chạm của object
+// Hướng đạn
 enum eDirection
 {
 	NONE = 0,

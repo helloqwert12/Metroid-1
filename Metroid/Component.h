@@ -7,7 +7,7 @@
 #include <map>
 using namespace std;
 
-class IComponent
+class Component
 {
 public:
 	virtual void update(float deltatime) = 0;
@@ -21,7 +21,7 @@ public:
 		Khởi tạo bên trong init của object.
 		Truyền refSprite = Sprite của object đó.
 */
-class Movement : public IComponent
+class Movement : public Component
 {
 public:
 	Movement(GVector2 accelerate, GVector2 velocicty, Sprite* refSprite);
@@ -45,7 +45,7 @@ enum eGravityStatus
 	SHALLOWED
 };
 
-class Gravity : public IComponent
+class Gravity : public Component
 {
 public:
 	/* 
@@ -68,7 +68,7 @@ private:
 
 
 // Chuyển động hình sin
-class SinMovement : public IComponent
+class SinMovement : public Component
 {
 public:
 	/*

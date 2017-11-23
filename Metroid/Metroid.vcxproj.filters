@@ -129,9 +129,6 @@
     <ClCompile Include="StopWatch.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="IComponent.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
     <ClCompile Include="pugixml\pugixml.cpp">
       <Filter>pugixml</Filter>
     </ClCompile>
@@ -225,6 +222,9 @@
     <ClCompile Include="Rio.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -289,9 +289,6 @@
     </ClInclude>
     <ClInclude Include="IntroScene.h">
       <Filter>Header Files\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="TextSprite.h">
       <Filter>Header Files\Object</Filter>
@@ -394,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="Rio.h">
       <Filter>Header Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

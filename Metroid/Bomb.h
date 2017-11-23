@@ -3,7 +3,7 @@
 
 #include "define.h"
 #include "BaseObject.h"
-#include "IComponent.h"
+#include "Component.h"
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
@@ -25,7 +25,7 @@ public:
 
 protected:
 	Animation* _animation;
-	map<string, IComponent*> _componentList;
+	map<string, Component*> _componentList;
 
 	Sprite* _effect;
 	Animation* _effectAnimation;
