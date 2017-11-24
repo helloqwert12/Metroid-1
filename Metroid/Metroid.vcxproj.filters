@@ -58,6 +58,12 @@
     <Filter Include="Source Files\Object\Weapon">
       <UniqueIdentifier>{162749ef-72e8-4488-9c74-ae3bbc082b9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object\EmptyObject">
+      <UniqueIdentifier>{9f0cfee7-3c95-4a79-b21b-e99ea256548b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\EmptyObject">
+      <UniqueIdentifier>{c44971b5-7eb2-4acd-895c-5db8cc7a2a3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -159,9 +165,6 @@
     <ClCompile Include="QuadTreeNode.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
     <ClCompile Include="PlayScene.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
@@ -234,8 +237,11 @@
     <ClCompile Include="Zoomer.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Source Files\Object\EmptyObject</Filter>
+    </ClCompile>
     <ClCompile Include="ChangeMapDirection.cpp">
-      <Filter>Source Files\Object</Filter>
+      <Filter>Source Files\Object\EmptyObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,9 +302,6 @@
     <ClInclude Include="SpriteManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="BaseObject.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
     <ClInclude Include="IntroScene.h">
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
@@ -342,9 +345,6 @@
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
     <ClInclude Include="QuadTreeNode.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="maputils.h">
@@ -416,8 +416,14 @@
     <ClInclude Include="Zoomer.h">
       <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeMapDirection.h">
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files\Object\EmptyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObject.h">
       <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeMapDirection.h">
+      <Filter>Header Files\Object\EmptyObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

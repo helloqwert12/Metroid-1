@@ -133,7 +133,7 @@ void PlayScene::updateViewport(BaseObject* objectTracker)
 	if (_mapDirection == eMapDirection::HORIZONTAL) // hướng ngang
 		newPosition = GVector2(objectTracker->getPositionX() - WINDOW_WIDTH / 2, _playerMapCheckpoint.y + 400);
 	else if (_mapDirection == eMapDirection::VERTICAL) // hướng dọc
-		newPosition = GVector2(_playerMapCheckpoint.x - 110, objectTracker->getPositionY() + 400);
+		newPosition = GVector2(_playerMapCheckpoint.x - 90, objectTracker->getPositionY() + 400);
 
 	_viewport->setPositionWorld(newPosition);
 }

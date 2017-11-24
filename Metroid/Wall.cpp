@@ -9,10 +9,6 @@ Wall::Wall(int x, int y, int width, int height) : BaseObject(eID::WALL)
 	this->setPhysicsBodySide(eDirection::ALL);
 }
 
-Wall::~Wall()
-{
-}
-
 void Wall::init()
 {
 	this->_sprite = nullptr;

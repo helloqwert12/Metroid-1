@@ -10,7 +10,6 @@ class Wall : public BaseObject
 {
 public:
 	Wall(int x, int y, int width, int height);
-	~Wall();
 
 	void init();
 	void update(float deltatime);

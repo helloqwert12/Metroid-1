@@ -129896,7 +129896,7 @@
     <property name="direction" value="1"/>
    </properties>
   </object>
-  <object id="397" name="ChangeMapDirection" type="30" x="384.591" y="3071.77" width="15.8182" height="15.4545">
+  <object id="397" name="ChangeMapDirection" type="30" x="400.591" y="3071.77" width="15.8182" height="15.4545">
    <properties>
     <property name="direction" value="1"/>
    </properties>

@@ -3,8 +3,6 @@
 
 #include "GameTime.h"
 
-typedef void(*pFunction)();
-
 class StopWatch
 {
 public:
@@ -12,9 +10,8 @@ public:
 	~StopWatch();
 
 	// Đơn vị milisecond
-	bool isTimeLoop(float time);
 	bool isStopWatch(float time);
-	void timeLoopAction(float time, pFunction action);
+	bool isTimeLoop(float time);
 	void restart();
 
 private:
