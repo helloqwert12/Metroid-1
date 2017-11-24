@@ -1,6 +1,6 @@
 ﻿#include "Zeb.h"
 
-Zeb::Zeb(int x, int y) : BaseObject(ZEB)
+Zeb::Zeb(int x, int y, GVector2 playerPosition) : BaseObject(ZEB)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ENEMY);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ENEMY, "red_zeb_01"));
@@ -21,6 +21,17 @@ Zeb::Zeb(int x, int y) : BaseObject(ZEB)
 	_componentList["Movement"] = movement;
 
 	movement->setVelocity(GVector2(0, ZEB_MOVE_SPEED));
+
+	_playerPosition = playerPosition;
+	if (_playerPosition.x > this->getPosition().x)
+	{
+		_direction = true; // sang phải
+	}
+	else 
+	{
+		_sprite->setScaleX(_sprite->getScale().x * (-1));
+		_direction = false; // sang trái
+	}
 }
 
 void Zeb::init()
@@ -53,6 +64,15 @@ void Zeb::update(float deltatime)
 				_hitStopWatch->restart();
 				this->active();
 			}
+		}
+
+		// Bay lên tới vị trí y của Player thì đổi hướng bay về phía Player
+		if (this->getPosition().y > _playerPosition.y + 35)
+		{
+			if (_direction)
+				movement->setVelocity(GVector2(ZEB_MOVE_SPEED, 0));
+			else
+				movement->setVelocity(GVector2(-ZEB_MOVE_SPEED, 0));
 		}
 
 		for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -118,7 +138,10 @@ void Zeb::active()
 	_isActive = true;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
-	movement->setVelocity(GVector2(0, ZEB_MOVE_SPEED));
+	if (_direction)
+		movement->setVelocity(GVector2(ZEB_MOVE_SPEED, 0));
+	else
+		movement->setVelocity(GVector2(-ZEB_MOVE_SPEED, 0));
 }
 
 void Zeb::deactive()

@@ -745,20 +745,20 @@ float Player::checkCollision(BaseObject* object, float dt)
 		// Lại gần thì active
 		if (!((Waver*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 + 25)
+			if (abs(position.x - objectPosition.x) < WINDOW_WIDTH / 2 + 25)
 			{
-				((Waver*)object)->active(position.x > objPosition.x);
+				((Waver*)object)->active(position.x > objectPosition.x);
 			}
 		}
 
 		// Ra xa một khoảng thì deactive
 		if (((Waver*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 + 25)
+			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 + 25)
 			{
 				((Waver*)object)->deactive();
 			}
@@ -794,9 +794,9 @@ float Player::checkCollision(BaseObject* object, float dt)
 		// Lại gần thì active
 		if (!((Skree*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) < 40)
+			if (abs(position.x - objectPosition.x) < 40)
 			{
 				((Skree*)object)->active();
 			}
@@ -832,20 +832,20 @@ float Player::checkCollision(BaseObject* object, float dt)
 		// Lại gần thì active
 		if (!((Mellow*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 + 25)
+			if (abs(position.x - objectPosition.x) < WINDOW_WIDTH / 2 + 25)
 			{
-				((Mellow*)object)->active(position.x > objPosition.x);
+				((Mellow*)object)->active(position.x > objectPosition.x);
 			}
 		}
 
 		// Ra xa một khoảng thì deactive
 		if (((Mellow*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 + 25)
+			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 + 25)
 			{
 				((Mellow*)object)->deactive();
 			}
@@ -881,20 +881,20 @@ float Player::checkCollision(BaseObject* object, float dt)
 		// Lại gần thì active
 		if (!((Rio*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 + 25)
+			if (abs(position.x - objectPosition.x) < WINDOW_WIDTH / 2 + 25)
 			{
-				((Rio*)object)->active(position.x > objPosition.x);
+				((Rio*)object)->active(position.x > objectPosition.x);
 			}
 		}
 
 		// Ra xa một khoảng thì deactive
 		if (((Rio*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 + 25)
+			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 + 25)
 			{
 				((Rio*)object)->deactive();
 			}
@@ -927,12 +927,14 @@ float Player::checkCollision(BaseObject* object, float dt)
 	}
 	else if (objectId == ZEB)
 	{
-		// Ra xa một khoảng thì DESTROY
-		if (((Zeb*)object)->isActive())
+		// Ra khỏi viewport thì DESTROY
+		if (((Waver*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
-			auto position = this->getPosition();
-			if (abs(position.y - objPosition.y) > WINDOW_HEIGHT / 2)
+			auto objectPosition = object->getPosition();
+			auto objectVelocity = object->getVelocity();
+			auto viewportBound = SceneManager::getInstance()->getCurrentScene()->getViewport()->getBounding();
+
+			if ((objectVelocity.x > 0 && objectPosition.x > viewportBound.right) || (objectVelocity.x < 0 && objectPosition.x < viewportBound.left))
 			{
 				((Zeb*)object)->setStatus(DESTROY);
 			}
@@ -968,9 +970,9 @@ float Player::checkCollision(BaseObject* object, float dt)
 		// Lại gần thì active
 		if (!((ZebPipe*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) < WINDOW_WIDTH / 2 - 25)
+			if (abs(position.x - objectPosition.x) < WINDOW_WIDTH / 2 - 50)
 			{
 				((ZebPipe*)object)->active();
 			}
@@ -979,9 +981,9 @@ float Player::checkCollision(BaseObject* object, float dt)
 		// Ra xa một khoảng thì deactive
 		if (((ZebPipe*)object)->isActive())
 		{
-			auto objPosition = object->getPosition();
+			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
-			if (abs(position.x - objPosition.x) > WINDOW_WIDTH / 2 - 25)
+			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 - 50)
 			{
 				((ZebPipe*)object)->deactive();
 			}

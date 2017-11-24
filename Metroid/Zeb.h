@@ -1,4 +1,4 @@
-#ifndef __ZEB_H__
+﻿#ifndef __ZEB_H__
 #define __ZEB_H__
 
 #include "define.h"
@@ -15,7 +15,7 @@
 class Zeb : public BaseObject
 {
 public:
-	Zeb(int x, int y);
+	Zeb(int x, int y, GVector2 playerPosition);
 
 	void init();
 	void update(float deltatime);
@@ -37,6 +37,13 @@ protected:
 
 	int _hitPoint;
 	bool _isActive;
+
+	// Vị trí của Player, dùng để xác định thời điểm chuyển hướng
+	GVector2 _playerPosition; 
+	
+	// Hướng bay về phía player
+	// TRUE sang phải, FALSE sang trái
+	bool _direction; 
 
 	Sprite* _effect;
 	Animation* _effectAnimation;

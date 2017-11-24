@@ -1,4 +1,6 @@
-#include "ZebPipe.h"
+﻿#include "ZebPipe.h"
+#include "SceneManager.h"
+#include "PlayScene.h"
 
 ZebPipe::ZebPipe(int x, int y, int width, int height) : BaseObject(ZEB_PIPE)
 {
@@ -26,11 +28,14 @@ void ZebPipe::update(float deltatime)
 	{
 		if (_zebAppearStopWatch->isStopWatch(ZEB_APPEAR_TIME))
 		{
-			Zeb* zeb;
-			zeb = new Zeb(_bound.left, _bound.top);
+			// Lấy vị trí của Player
+			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
+			auto playerPosition = playScene->getPlayer()->getPosition();
+
+			Zeb* zeb = new Zeb((_bound.left + _bound.right) / 2, (_bound.top + _bound.bottom) / 2, playerPosition);
 			zeb->init();
 			QuadTreeNode::getInstance()->insert(zeb);
-			zeb = nullptr;
+			//zeb = nullptr;
 			_zebAppearStopWatch->restart();
 		}
 	}
