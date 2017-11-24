@@ -46,7 +46,7 @@ enum eID
 	RIO = 55,
 	ZEB = 56,
 	ZEB_PIPE = 57,
-	ZOMMER = 58,
+	ZOOMER = 58,
 
 	ITEM = 80,
 	ENERGY_TANK = 81,

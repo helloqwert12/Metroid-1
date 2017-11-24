@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="384">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="393">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -89327,9 +89327,9 @@
    <tile gid="1"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -89807,9 +89807,9 @@
    <tile gid="9"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -90287,9 +90287,9 @@
    <tile gid="9"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -129873,11 +129873,13 @@
   <object id="372" name="Rio" type="55" x="2288.59" y="2944.27" width="15.8182" height="15.4545"/>
   <object id="376" name="MissileRocketBall" type="86" x="1552.59" y="3070.77" width="15.8182" height="15.4545"/>
   <object id="377" name="MissileRocketBall" type="86" x="1696.42" y="3071.6" width="15.8182" height="15.4545"/>
-  <object id="378" name="MissileRocketBall" type="86" x="1360.59" y="2993.77" width="15.8182" height="15.4545"/>
   <object id="379" name="ZebPipe" type="57" x="920.091" y="3072.27" width="15.8182" height="15.4545"/>
-  <object id="380" name="MissileRocketBall" type="86" x="1312.76" y="2992.94" width="15.8182" height="15.4545"/>
   <object id="381" name="MissileRocketBall" type="86" x="1936.09" y="3070.94" width="15.8182" height="15.4545"/>
   <object id="382" name="MissileRocketBall" type="86" x="2240.09" y="3071.27" width="15.8182" height="15.4545"/>
   <object id="383" name="MissileRocketBall" type="86" x="2367.59" y="3071.27" width="15.8182" height="15.4545"/>
+  <object id="384" name="Zoomer" type="58" x="528.174" y="2912.44" width="15.8182" height="15.4545"/>
+  <object id="386" name="Zoomer" type="58" x="623.841" y="2911.86" width="15.8182" height="15.4545"/>
+  <object id="391" name="Wall" type="20" x="672.333" y="2977" width="47.833" height="46.5"/>
+  <object id="392" name="Zoomer" type="58" x="687.591" y="2960.27" width="15.8182" height="15.4545"/>
  </objectgroup>
 </map>

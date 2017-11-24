@@ -29,3 +29,5 @@ red_zeb_01		276	60	292	76
 red_zeb_02		294	60	310	76
 frozen_zeb_01		312	60	327	76
 frozen_zeb_02		329	60	345	76
+orange_zoomer_01		9	7	25	20
+orange_zoomer_02		27	7	43	20

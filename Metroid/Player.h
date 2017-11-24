@@ -23,6 +23,7 @@
 #include "Rio.h"
 #include "Zeb.h"
 #include "ZebPipe.h"
+#include "Zoomer.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
