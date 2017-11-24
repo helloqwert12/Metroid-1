@@ -77,6 +77,9 @@ BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
 	case WALL:
 		return GetWall(item, mapHeight);
 		break;
+	case CHANGE_MAP_DIRECTION:
+		return GetChangeMapDirection(item, mapHeight);
+		break;
 	case RIPPER:
 		return GetRipper(item, mapHeight);
 		break;
@@ -142,6 +145,24 @@ BaseObject* GetWall(xml_node item, int mapHeight)
 	auto wall = new Wall(x, y, width, height);
 	wall->init();
 	return wall;
+}
+
+BaseObject* GetChangeMapDirection(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	// Do tọa độ được tạo từ Tiled Map Editor là top-left, nên ta chuyển về tọa độ world (x, y)
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+	auto mapDirection = (eMapDirection)stoi(properties["direction"]);
+
+	auto changeMapDirection = new ChangeMapDirection(x, y, width, height, mapDirection);
+	changeMapDirection->init();
+	return changeMapDirection;
 }
 
 BaseObject* GetRipper(xml_node item, int mapHeight)

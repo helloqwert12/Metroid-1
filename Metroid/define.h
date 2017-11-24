@@ -38,6 +38,8 @@ enum eID
 
 	WALL = 20,
 
+	CHANGE_MAP_DIRECTION = 30,
+
 	ENEMY = 50,
 	RIPPER = 51,
 	WAVER = 52,
@@ -93,6 +95,12 @@ enum eDirection
 	RIGHT = (1 << 2),
 	BOTTOM = (1 << 3),
 	ALL = (TOP | BOTTOM | LEFT | RIGHT),
+};
+
+enum eMapDirection
+{
+	VERTICAL = 0,
+	HORIZONTAL = 1
 };
 
 // ID của Sound

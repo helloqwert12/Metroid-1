@@ -11,6 +11,8 @@
 #include "CollisionBody.h"
 #include "Info.h"
 
+#include "ChangeMapDirection.h"
+
 #include "NormalBullet.h"
 #include "IceBullet.h"
 #include "MissileRocket.h"

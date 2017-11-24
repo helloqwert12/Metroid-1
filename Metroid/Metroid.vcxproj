@@ -149,6 +149,7 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BombBall.cpp" />
+    <ClCompile Include="ChangeMapDirection.cpp" />
     <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="dxaudio.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombBall.h" />
+    <ClInclude Include="ChangeMapDirection.h" />
     <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />

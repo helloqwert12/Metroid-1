@@ -1,5 +1,6 @@
 ﻿#include "Player.h"
 #include "SceneManager.h"
+#include "PlayScene.h"
 
 Player::Player() : BaseObject(eID::PLAYER)
 {
@@ -713,6 +714,15 @@ float Player::checkCollision(BaseObject* object, float dt)
 		if (this->checkWeaponCollision(object, direction, weaponId, dt))
 		{
 			// Xét va chạm để khi đạn trúng tường thì bị DESTROY
+		}
+	}
+	else if (objectId == CHANGE_MAP_DIRECTION)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
+			playScene->setMapDirection(((ChangeMapDirection*)object)->getMapDirection(), this->getPosition());
+			//object->setStatus(DESTROY);
 		}
 	}
 	else if (objectId == RIPPER)

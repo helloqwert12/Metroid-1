@@ -26,14 +26,18 @@ public:
 
 	Player* getPlayer();
 
+	eMapDirection getMapDirection();
+	void setMapDirection(eMapDirection mapDirection, GVector2 playerMapCheckpoint);
+
 private:
 	Text* _text;
-
 	TileMap* _tileMap;
-
 	QuadTreeNode* _root;
-
 	BaseObject* _player;
+
+	// Hướng Map
+	eMapDirection _mapDirection;
+	GVector2 _playerMapCheckpoint;
 
 	// List chứa các object nằm trong vùng active.
 	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để draw.
