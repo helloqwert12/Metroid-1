@@ -64,6 +64,12 @@
     <Filter Include="Source Files\Object\EmptyObject">
       <UniqueIdentifier>{c44971b5-7eb2-4acd-895c-5db8cc7a2a3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object\Component">
+      <UniqueIdentifier>{feb7308c-6606-4e74-8667-fbe67d1f3744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Component">
+      <UniqueIdentifier>{7b539416-9e07-410a-8dff-4c199fc46098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -144,9 +150,6 @@
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionBody.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
     <ClCompile Include="TileSet.cpp">
       <Filter>Source Files\Tile</Filter>
     </ClCompile>
@@ -225,9 +228,6 @@
     <ClCompile Include="Rio.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
     <ClCompile Include="ZebPipe.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
@@ -242,6 +242,12 @@
     </ClCompile>
     <ClCompile Include="ChangeMapDirection.cpp">
       <Filter>Source Files\Object\EmptyObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBody.cpp">
+      <Filter>Source Files\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Object\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,9 +329,6 @@
     <ClInclude Include="Text.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionBody.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
@@ -404,9 +407,6 @@
     <ClInclude Include="Rio.h">
       <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="ZebPipe.h">
       <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
@@ -424,6 +424,12 @@
     </ClInclude>
     <ClInclude Include="ChangeMapDirection.h">
       <Filter>Header Files\Object\EmptyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBody.h">
+      <Filter>Header Files\Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

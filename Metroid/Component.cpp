@@ -19,24 +19,24 @@ void Movement::update(float deltatime)
 	this->_refSprite->setPosition(position);
 }
 
-void Movement::setAccelerate(GVector2 accelerate)
-{
-	this->_accelerate = accelerate;
-}
-
-void Movement::setVelocity(GVector2 velocicty)
-{
-	this->_velocity = velocicty;
-}
-
 GVector2 Movement::getAccelerate()
 {
 	return this->_accelerate;
 }
 
+void Movement::setAccelerate(GVector2 accelerate)
+{
+	this->_accelerate = accelerate;
+}
+
 GVector2 Movement::getVelocity()
 {
 	return this->_velocity;
+}
+
+void Movement::setVelocity(GVector2 velocicty)
+{
+	this->_velocity = velocicty;
 }
 
 
@@ -64,14 +64,14 @@ void Gravity::update(float deltatime)
 	this->_refMovement->setVelocity(velocity + _additionalVelocity);
 }
 
-void Gravity::setStatus(eGravityStatus status)
-{
-	this->_status = status;
-}
-
 eGravityStatus Gravity::getStatus()
 {
 	return _status;
+}
+
+void Gravity::setStatus(eGravityStatus status)
+{
+	this->_status = status;
 }
 
 void Gravity::setGravity(GVector2 gravity)

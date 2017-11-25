@@ -1,10 +1,9 @@
-﻿#ifndef __ICOMPONENT_H__
-#define __ICOMPONENT_H__
+﻿#ifndef __COMPONENT_H__
+#define __COMPONENT_H__
 
 #include "define.h"
 #include "Sprite.h"
 #include <numeric>
-#include <map>
 using namespace std;
 
 class Component
@@ -14,23 +13,22 @@ public:
 };
 
 
-/*
-	Chuyển động theo gia tốc và vận tốc.
-	Khi không chuyển động thì gia tốc và vận tốc bằng 0
-	Khi sử dụng:
-		Khởi tạo bên trong init của object.
-		Truyền refSprite = Sprite của object đó.
-*/
+// Chuyển động theo gia tốc và vận tốc.
 class Movement : public Component
 {
 public:
+	/*
+		@accelerate: gia tốc
+		@velocity: vận tốc
+		@refSprite: reference đến Sprite (để dùng hàm setPosition)
+	*/
 	Movement(GVector2 accelerate, GVector2 velocicty, Sprite* refSprite);
 	void update(float deltatime);
 
-	void setAccelerate(GVector2 accelerate);
-	void setVelocity(GVector2 velocicty);
 	GVector2 getAccelerate();
+	void setAccelerate(GVector2 accelerate);
 	GVector2 getVelocity();
+	void setVelocity(GVector2 velocicty);
 
 private:
 	GVector2 _accelerate;
@@ -39,24 +37,26 @@ private:
 };
 
 
+// Trạng thái của Gravity
 enum eGravityStatus
 {
 	FALLING_DOWN,
 	SHALLOWED
 };
 
+// Trọng lực của object, reference đến Movement component của object
 class Gravity : public Component
 {
 public:
-	/* 
-	Khởi tạo trọng lực của object, tham chiếu đến movement conponent của object
+	/*
 		@gravity: vector trọng lực của object, sẽ không đổi theo thời gian
-		@movement: tham chiếu đến movement của object
+		@movement: reference đến Movement của object (để dùng hàm setVelocity)
 	*/
 	Gravity(GVector2 gravity, Movement* movement);
-	void setStatus(eGravityStatus status);
-	eGravityStatus getStatus();
 	void update(float deltatime);
+
+	eGravityStatus getStatus();
+	void setStatus(eGravityStatus status);
 	void setGravity(GVector2 gravity);
 
 private:
@@ -67,7 +67,7 @@ private:
 };
 
 
-// Chuyển động hình sin
+// Chuyển động theo hàm Sin
 class SinMovement : public Component
 {
 public:
@@ -76,8 +76,8 @@ public:
 		@frequency: tần số
 	*/
 	SinMovement(GVector2 amplitude, float frequency, Sprite* refSprite);
-
 	void update(float deltatime);
+
 	void setAmplitude(GVector2 amplitude);
 	void setFrequency(float frequency);
 
@@ -86,9 +86,9 @@ private:
 	float _radianVelocity; // vận tốc góc (ω)
 
 	GVector2 _amplitude; // biên độ	(A)
-	GVector2 _linearVelocity; // vận tốc tuyến tính (Aω*cos(φ))
+	GVector2 _linearVelocity; // vận tốc tuyến tính (A * ω * cos(φ))
 
 	Sprite* _refSprite;
 };
 
-#endif // !__ICOMPONENT_H__
+#endif // !__COMPONENT_H__

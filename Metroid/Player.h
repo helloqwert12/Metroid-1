@@ -76,9 +76,7 @@ public:
 	void setStatus(eStatus status);
 
 	GVector2 getPosition();
-
 	int getLifeNumber();
-
 	RECT getBounding();
 
 private:
