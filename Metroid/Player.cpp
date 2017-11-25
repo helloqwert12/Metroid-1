@@ -471,6 +471,15 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 				_info->setWeapon(_info->getBullet());
 		}
 		break;
+	case DIK_1:
+		_info->setMissileRocket(_info->getMissileRocket() + 20);
+		break;
+	case DIK_2:
+		_info->setEnergy(_info->getEnergy() + 20);
+		break;
+	case DIK_3:
+		_info->setLife(_info->getLife() + 1);
+		break;
 	default:
 		break;
 	}

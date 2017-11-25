@@ -123,6 +123,9 @@ int Info::getLife()
 void Info::setLife(int number)
 {
 	_lifeNumber = number;
+
+	if (_lifeNumber >= 100)
+		_lifeNumber = 99;
 }
 
 int Info::getEnergy()
@@ -146,6 +149,9 @@ int Info::getMissileRocket()
 void Info::setMissileRocket(int number)
 {
 	_missileRocketNumber = number;
+
+	if (_missileRocketNumber >= 100)
+		_missileRocketNumber = 99;
 }
 
 int Info::getBulletRange()
