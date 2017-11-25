@@ -158,9 +158,13 @@ BaseObject* GetChangeMapDirection(xml_node item, int mapHeight)
 	auto height = 2 * stoi(properties["height"]);
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
-	auto mapDirection = (eMapDirection)stoi(properties["direction"]);
 
-	auto changeMapDirection = new ChangeMapDirection(x, y, width, height, mapDirection);
+	auto mapDirection = (eMapDirection)stoi(properties["direction"]);
+	auto anchorPointX = 2 * stoi(properties["anchorpointx"]);
+	auto anchorPointY = mapHeight - 2 * stoi(properties["anchorpointy"]) - height;
+	auto mapDirectionAnchorPoint = GVector2(anchorPointX, anchorPointY);
+
+	auto changeMapDirection = new ChangeMapDirection(x, y, width, height, mapDirection, mapDirectionAnchorPoint);
 	changeMapDirection->init();
 	return changeMapDirection;
 }

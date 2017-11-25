@@ -1,6 +1,6 @@
 #include "ChangeMapDirection.h"
 
-ChangeMapDirection::ChangeMapDirection(int x, int y, int width, int height, eMapDirection mapDirection) : BaseObject(eID::CHANGE_MAP_DIRECTION)
+ChangeMapDirection::ChangeMapDirection(int x, int y, int width, int height, eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint) : BaseObject(eID::CHANGE_MAP_DIRECTION)
 {
 	this->_bound.left = x;
 	this->_bound.bottom = y;
@@ -9,6 +9,7 @@ ChangeMapDirection::ChangeMapDirection(int x, int y, int width, int height, eMap
 	this->setPhysicsBodySide(eDirection::ALL);
 
 	this->_mapDirection = mapDirection;
+	this->_mapDirectionAnchorPoint = mapDirectionAnchorPoint;
 }
 
 void ChangeMapDirection::init()
@@ -58,4 +59,9 @@ RECT ChangeMapDirection::getBounding()
 eMapDirection ChangeMapDirection::getMapDirection()
 {
 	return _mapDirection;
+}
+
+GVector2 ChangeMapDirection::getMapDirectionAnchorPoint()
+{
+	return _mapDirectionAnchorPoint;
 }

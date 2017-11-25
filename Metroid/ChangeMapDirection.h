@@ -9,7 +9,7 @@
 class ChangeMapDirection : public BaseObject
 {
 public:
-	ChangeMapDirection(int x, int y, int width, int height, eMapDirection mapDirection);
+	ChangeMapDirection(int x, int y, int width, int height, eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint);
 
 	void init();
 	void update(float deltatime);
@@ -21,6 +21,7 @@ public:
 
 	RECT getBounding();
 	eMapDirection getMapDirection();
+	GVector2 getMapDirectionAnchorPoint();
 
 private:
 	map<string, Component*> _listComponent;
@@ -29,6 +30,7 @@ private:
 	RECT _bound;
 
 	eMapDirection _mapDirection;
+	GVector2 _mapDirectionAnchorPoint;
 };
 
 #endif // !__CHANGEMAPDIRECTION_H__

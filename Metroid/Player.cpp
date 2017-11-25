@@ -730,7 +730,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
 			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
-			playScene->setMapDirection(((ChangeMapDirection*)object)->getMapDirection(), this->getPosition());
+			playScene->setMapDirection(((ChangeMapDirection*)object)->getMapDirection(), ((ChangeMapDirection*)object)->getMapDirectionAnchorPoint());
 			//object->setStatus(DESTROY);
 		}
 	}

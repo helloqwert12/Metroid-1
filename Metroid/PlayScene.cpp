@@ -6,8 +6,8 @@ PlayScene::PlayScene()
 	_viewport = new Viewport(0, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT);
 	_mapDirection = eMapDirection::HORIZONTAL;
 
-	// Vị trí checkpoint ban đầu
-	_playerMapCheckpoint = GVector2(896, 2468);
+	// Vị trí neo của viewport ban đầu
+	_mapDirectionAnchorPoint = GVector2(896, 2468);
 }
 
 PlayScene::~PlayScene()
@@ -131,9 +131,9 @@ void PlayScene::updateViewport(BaseObject* objectTracker)
 	// Update tọa độ viewport theo vị trí Player và hướng Map
 	GVector2 newPosition;
 	if (_mapDirection == eMapDirection::HORIZONTAL) // hướng ngang
-		newPosition = GVector2(objectTracker->getPositionX() - WINDOW_WIDTH / 2, _playerMapCheckpoint.y + 400);
+		newPosition = GVector2(objectTracker->getPositionX() - WINDOW_WIDTH / 2, _mapDirectionAnchorPoint.y + 400);
 	else if (_mapDirection == eMapDirection::VERTICAL) // hướng dọc
-		newPosition = GVector2(_playerMapCheckpoint.x - 90, objectTracker->getPositionY() + 400);
+		newPosition = GVector2(_mapDirectionAnchorPoint.x - 64, objectTracker->getPositionY() + 400);
 
 	_viewport->setPositionWorld(newPosition);
 }
@@ -181,8 +181,8 @@ eMapDirection PlayScene::getMapDirection()
 	return _mapDirection;
 }
 
-void PlayScene::setMapDirection(eMapDirection mapDirection, GVector2 playerMapCheckpoint)
+void PlayScene::setMapDirection(eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint)
 {
 	_mapDirection = mapDirection;
-	_playerMapCheckpoint = playerMapCheckpoint;
+	_mapDirectionAnchorPoint = mapDirectionAnchorPoint;
 }

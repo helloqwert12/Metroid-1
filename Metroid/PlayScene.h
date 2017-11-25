@@ -27,7 +27,7 @@ public:
 	Player* getPlayer();
 
 	eMapDirection getMapDirection();
-	void setMapDirection(eMapDirection mapDirection, GVector2 playerMapCheckpoint);
+	void setMapDirection(eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint);
 
 private:
 	Text* _text;
@@ -37,7 +37,7 @@ private:
 
 	// Hướng Map
 	eMapDirection _mapDirection;
-	GVector2 _playerMapCheckpoint;
+	GVector2 _mapDirectionAnchorPoint;
 
 	// List chứa các object nằm trong vùng active.
 	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để draw.
