@@ -9,16 +9,14 @@ TileMap::~TileMap()
 {
 }
 
-TileMap* TileMap::LoadMapFromFile(const string path, eID spriteId)
+TileMap* TileMap::loadMapFromFile(const string path, eID spriteId)
 {
 	xml_document doc;
 
 	// Mở file và đọc
 	xml_parse_result result = doc.load_file(path.data(), parse_default | parse_pi);
 	if (result == false)
-	{
 		return nullptr;
-	}
 
 	TileMap* tileMap = new TileMap();
 
@@ -27,9 +25,9 @@ TileMap* TileMap::LoadMapFromFile(const string path, eID spriteId)
 		return nullptr;
 
 	// Đọc và tạo TileSet từ file XML
-	xml_node tileset = map.child("tileset");
+	xml_node tileSet = map.child("tileset");
 	tileMap->_tileSet = new TileSet(spriteId);
-	tileMap->_tileSet->loadListTiles(tileset);
+	tileMap->_tileSet->loadListTiles(tileSet);
 
 	// Lấy mapSize (kích thước Map tính theo số ô Tile (cột, dòng))
 	xml_node layer = map.child("layer");
@@ -95,7 +93,7 @@ void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		{
 			// Tính toán vị trí vẽ Tile
 			position.x = col * _frameWidth;
-			position.y = (_mapSize.y - row - 1) * _frameHeight; // do row, col tính theo trục top-left
+			position.y = (_mapSize.y - 1 - row) * _frameHeight; // do row, col tính theo trục top-left
 			this->_tileSet->draw(spriteHandle, this->_tileMatrix[row][col], position, viewport);
 		}
 	}
@@ -109,12 +107,4 @@ int TileMap::worldHeight()
 int TileMap::worldWidth()
 {
 	return _frameHeight * _mapSize.y;
-}
-
-GVector2 TileMap::getWorldSize()
-{
-	GVector2 result;
-	result.x = this->_frameWidth * this->_mapSize.x;
-	result.y = this->_frameHeight * this->_mapSize.y;
-	return result;
 }

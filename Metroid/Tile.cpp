@@ -10,24 +10,14 @@ Tile::Tile(Sprite *refSprite, RECT srcRect, int id)
 void Tile::draw(LPD3DXSPRITE spriteHandle, GVector2 position, Viewport *viewport)
 {
 	if (_refSprite == NULL)
-	{
 		return;
-	}
 
 	_refSprite->setPosition(position);
 	_refSprite->setFrameRect(this->_srcRect);
-
-	if (viewport == NULL)
-	{
-		_refSprite->render(spriteHandle);
-	}
-	else
-	{
-		_refSprite->render(spriteHandle, viewport);
-	}
+	_refSprite->render(spriteHandle, viewport);
 }
 
-int Tile::getId() const
+int Tile::getId()
 {
 	return this->_id;
 }

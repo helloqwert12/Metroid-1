@@ -27,7 +27,7 @@ bool PlayScene::init()
 	_text = new Text(L"Tahoma", "", 445, 445, 22);
 
 	// Tạo TileMap
-	_tileMap = TileMap::LoadMapFromFile("Resources//Maps//map.tmx", eID::MAP_METROID);
+	_tileMap = TileMap::loadMapFromFile("Resources//Maps//map.tmx", eID::MAP_METROID);
 
 	// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
 	auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();

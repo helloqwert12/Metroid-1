@@ -5,7 +5,6 @@
 #include "Sprite.h"
 
 // Dùng để lưu thông tin của 1 ô Tile (id và srcRect)
-
 class Tile
 {
 private:
@@ -18,10 +17,10 @@ private:
 public:
 	Tile(Sprite *refSprite, RECT srcRect, int id);
 
-	void draw(LPD3DXSPRITE spriteHandle, GVector2 position, Viewport *viewport = NULL);
+	void draw(LPD3DXSPRITE spriteHandle, GVector2 position, Viewport *viewport);
 
 	// Lấy id của Tile
-	int getId() const;
+	int getId();
 };
 
 #endif // !__TILE_H__

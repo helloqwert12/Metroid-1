@@ -13,7 +13,7 @@ class TileMap
 {
 public:
 	// Tạo TileMap từ file XML (@spriteId: ID của TileMap)
-	static TileMap* LoadMapFromFile(const string path, eID spriteId);
+	static TileMap* loadMapFromFile(const string path, eID spriteId);
 
 	TileMap();
 	~TileMap();
@@ -23,12 +23,9 @@ public:
 	int worldWidth();
 	int worldHeight();
 
-	// Lấy kich thước Map.
-	GVector2 getWorldSize();
-
 private:
-	int _frameWidth;	// độ rộng một frame (độ rộng của tile)
-	int _frameHeight;	// độ cao một frame (độ cao của tile)
+	int _frameWidth;	// độ rộng một frame (độ rộng của 1 Tile)
+	int _frameHeight;	// độ cao một frame (độ cao của 1 Tile)
 
 	// Kích thước Map tính theo số ô Tile (cột, dòng)
 	GVector2 _mapSize;
