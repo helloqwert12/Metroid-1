@@ -32,13 +32,14 @@ public:
 	bool init(HWND, HINSTANCE); // Gọi hàm này trong Game::init()
 	void update(); // Gọi hàm này trong game loop để update
 
-	int isKeyDown(int keycode); // Kiểm tra phím có được nhấn không
+	int isKeyDown(int keyCode); // Kiểm tra phím có được nhấn không
 
 	// Events
 	__event void __eventkeyPressed(KeyEventArg* e);
 	__event void __eventkeyReleased(KeyEventArg* e);
 
 private:
+	InputController();
 	static InputController* _instance;
 	
 	LPDIRECTINPUT _input;
@@ -48,8 +49,6 @@ private:
 
 	// Buffered keyboard data
 	DIDEVICEOBJECTDATA _keyEvents[KEYBOARD_BUFFER_SIZE];
-
-	InputController();
 };
 
 #endif // !__INPUTCONTROLLER_H__

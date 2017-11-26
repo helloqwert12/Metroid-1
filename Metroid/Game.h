@@ -10,7 +10,7 @@
 class Game
 {
 public:
-	static int isExit;
+	static bool isExit;
 
 	Game(HINSTANCE, LPWSTR = L"Game", int width = 800, int height = 600, int fps = 60, int isFullScreen = 0);
 	~Game();
@@ -26,17 +26,15 @@ public:
 	void run();
 	void render();
 
-	static Graphics* getWindow();
-
 protected:
-	static Graphics *hWindow;
+	static Graphics* _hWindow;
 	DeviceManager* _deviceManager;
 	InputController* _input;
 	LPD3DXSPRITE _spriteHandle;
 	GameTime* _gameTime;
 
 private:
-	float _frameRate; // Thời gian của 1 frame (milisecond)
+	float _frameTime; // Thời gian của 1 frame (milisecond)
 	float _oldTime;
 	float _deltaTime;
 };

@@ -79,23 +79,23 @@ void PlayScene::update(float dt)
 	}
 
 	// Lấy HCN bound của viewport
-	RECT viewportInTransform = _viewport->getBounding();
+	RECT viewportBounding = _viewport->getBounding();
 
-	viewportInTransform.left -= WINDOW_WIDTH / 2;
-	viewportInTransform.top +=  WINDOW_HEIGHT / 2;
-	viewportInTransform.right += WINDOW_WIDTH / 2;
-	viewportInTransform.bottom -= WINDOW_HEIGHT / 2;
+	viewportBounding.left -= WINDOW_WIDTH / 2;
+	viewportBounding.top +=  WINDOW_HEIGHT / 2;
+	viewportBounding.right += WINDOW_WIDTH / 2;
+	viewportBounding.bottom -= WINDOW_HEIGHT / 2;
 
-	//viewportInTransform.left -= WINDOW_WIDTH * 1.5;
-	//viewportInTransform.top +=  WINDOW_HEIGHT * 1.5;
-	//viewportInTransform.right += WINDOW_WIDTH * 1.5;
-	//viewportInTransform.bottom -= WINDOW_HEIGHT * 1.5;
+	//viewportBounding.left -= WINDOW_WIDTH * 1.5;
+	//viewportBounding.top +=  WINDOW_HEIGHT * 1.5;
+	//viewportBounding.right += WINDOW_WIDTH * 1.5;
+	//viewportBounding.bottom -= WINDOW_HEIGHT * 1.5;
 
 	// Xóa các object đã bị DESTROY ra khỏi QuadTree
 	_root->deleteObjects();
 
 	_activeObject.clear();
-	_activeObject = _root->retrieve(viewportInTransform);
+	_activeObject = _root->retrieve(viewportBounding);
 
 	// Kiểm tra va chạm player với các object
 	for (BaseObject* object : _activeObject)

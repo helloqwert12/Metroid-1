@@ -63,7 +63,7 @@ void TextSprite::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 			index = 53;
 		}
 
-		// Set index để lấy frame rect tương ứng muốn vẽ
+		// Set index để lấy frameRect tương ứng muốn vẽ
 		_sprite->setIndex(index);
 		_sprite->setPosition(GVector2(_position.x + _sprite->getFrameWidth() * i, _position.y));
 
@@ -78,11 +78,6 @@ void TextSprite::release()
 {
 }
 
-void TextSprite::setString(string text)
-{
-	this->_text = text;
-}
-
 GVector2 TextSprite::getPosition()
 {
 	return _position;
@@ -91,4 +86,9 @@ GVector2 TextSprite::getPosition()
 void TextSprite::setPosition(GVector2 position)
 {
 	_position = position;
+}
+
+void TextSprite::setText(string text)
+{
+	_text = text;
 }

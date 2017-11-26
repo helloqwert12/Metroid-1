@@ -4,13 +4,8 @@
 #include <d3dx9tex.h>
 using namespace std;
 
-int Game::isExit = 0;
-Graphics* Game::hWindow = NULL;
-
-Graphics* Game::getWindow()
-{
-	return hWindow;
-}
+bool Game::isExit = false;
+Graphics* Game::_hWindow = NULL;
 
 Game::~Game()
 {
@@ -18,7 +13,7 @@ Game::~Game()
 
 Game::Game(HINSTANCE hInstance, LPWSTR name, int width, int height, int fps, int isFullScreen)
 {
-	hWindow = new Graphics(hInstance, name, width, height, fps, isFullScreen);
+	_hWindow = new Graphics(hInstance, name, width, height, fps, isFullScreen);
 	_deviceManager = DeviceManager::getInstance();
 	_input = InputController::getInstance();
 	_spriteHandle = NULL;
@@ -27,15 +22,15 @@ Game::Game(HINSTANCE hInstance, LPWSTR name, int width, int height, int fps, int
 
 void Game::init()
 {
-	if (hWindow == NULL)
+	if (_hWindow == NULL)
 		throw;
 
-	hWindow->initWindow();
+	_hWindow->initWindow();
 	_gameTime->init();
-	_deviceManager->Init(*hWindow);
-	_input->init(hWindow->getWnd(), hWindow->gethInstance());
+	_deviceManager->init(*_hWindow);
+	_input->init(_hWindow->getWnd(), _hWindow->gethInstance());
 
-	this->_frameRate = 1000.0f / hWindow->getFrameRate(); // 1000/60 = 16 milisecond
+	this->_frameTime = 1000.0f / _hWindow->getFrameRate(); // 1000/60 = 16 milisecond
 
 	// Tạo srpite handle
 	D3DXCreateSprite(_deviceManager->getDevice(), &this->_spriteHandle);
@@ -49,12 +44,12 @@ void Game::init()
 void Game::run()
 {
 	MSG msg;
-	while (isExit == 0)
+	while (!isExit)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			if (msg.message == WM_QUIT)
-				isExit = 1;
+				isExit = true;
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
@@ -62,21 +57,21 @@ void Game::run()
 		_gameTime->updateGameTime(); // update thời gian
 		_deltaTime = _gameTime->getTotalGameTime() - _oldTime;
 
-		if (_deltaTime >= _frameRate) // _frameRate 1000/60 = 16 milisecond
+		if (_deltaTime >= _frameTime) // _frameRate 1000/60 = 16 milisecond
 		{
-			_oldTime += _frameRate;
+			_oldTime += _frameTime;
 			_input->update();
 			this->render();
 		}
 		else
-			Sleep(_frameRate - _deltaTime);
+			Sleep(_frameTime - _deltaTime);
 	}
 }
 
 void Game::render()
 {
 	// Kiểm tra nếu cửa sổ không được focus thì không update
-	if (GetActiveWindow() != hWindow->getWnd())
+	if (GetActiveWindow() != _hWindow->getWnd())
 		return;
 
 	auto device = _deviceManager->getInstance();
@@ -84,9 +79,9 @@ void Game::render()
 	// Lấy tổng thời gian trôi qua kể từ lần cuối gọi hàm updateGameTime
 	float time = _gameTime->getElapsedGameTime();
 
-	// Xử lý kéo cửa sổ không bị dồn frame
-	if (time > this->_frameRate * 2)
-		time = _frameRate;
+	// Xử lý để kéo, resize cửa sổ không bị dồn frame
+	if (time > this->_frameTime * 2)
+		time = _frameTime;
 
 	// Bắt đầu vẽ
 	if (device->getDevice()->BeginScene() != DI_OK)
@@ -124,6 +119,6 @@ void Game::loadResource()
 void Game::release()
 {
 	_deviceManager->release();
-	_gameTime->release();
 	_input->release();
+	_gameTime->release();
 }

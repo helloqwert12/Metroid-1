@@ -15,10 +15,10 @@ public:
 	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
 	void release();
 
-	void setString(string text);
-
 	GVector2 getPosition();
 	void setPosition(GVector2 position);
+
+	void setText(string text);
 
 private:
 	string _text;

@@ -29,7 +29,7 @@ private:
 	map<eID, Sprite*> _listSprite;
 	map<eID, map<string, RECT>> _sourceRectList;
 
-	// Đọc file xml để tạo đối tượng sprite (tileset image)
+	// Đọc file xml để tạo đối tượng Sprite (là TileSet Image)
 	Sprite* loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path);
 };
 

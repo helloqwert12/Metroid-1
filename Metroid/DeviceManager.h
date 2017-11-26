@@ -9,7 +9,7 @@ class DeviceManager
 public:
 	static DeviceManager* getInstance();
 
-	void Init(Graphics);
+	void init(Graphics);
 
 	void clearScreen();
 	void present();

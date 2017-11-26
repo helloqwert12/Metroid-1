@@ -30,7 +30,7 @@ Sprite::~Sprite()
 
 void Sprite::release()
 {
-	this->_texture.release();
+	_texture.release();
 }
 
 void Sprite::render(LPD3DXSPRITE spriteHandle)
@@ -68,7 +68,7 @@ void Sprite::setPosition(float x, float y)
 
 void Sprite::setPosition(GVector2 position)
 {
-	this->_position = GVector2(position.x, position.y);
+	_position = GVector2(position.x, position.y);
 	this->updateBounding();
 }
 
@@ -140,7 +140,7 @@ void Sprite::setOrigin(GVector2 origin)
 
 void Sprite::setZIndex(float zIndex)
 {
-	if (_zIndex != zIndex )
+	if (_zIndex != zIndex)
 		_zIndex = zIndex;
 }
 
@@ -219,6 +219,7 @@ void Sprite::setIndex(int index)
 
 void Sprite::setCurrentFrame()
 {
+	// Từ index để tính toán ra frame hiện tại (cột, dòng)
 	if (_index >= _totalFrames)
 		_index = _index % _totalFrames;
 
@@ -230,6 +231,7 @@ void Sprite::setCurrentFrame()
 
 void Sprite::setFrameRect()
 {
+	// Từ frame hiện tại (cột, dòng) để tính toán ra frameRect
 	this->_frameRect.left = (long)_currentFrame.x * _frameWidth;
 	this->_frameRect.right = _frameRect.left + _frameWidth;
 	this->_frameRect.top = (long)_currentFrame.y * _frameHeight;

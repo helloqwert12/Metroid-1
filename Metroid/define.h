@@ -23,7 +23,7 @@ using namespace std;
 #define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f) // màu trắng
 #define COLOR_KEY D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f) // màu khi mà load hình nó sẽ bỏ qua thành trong suốt
 
-// ID của object
+// ID của Sprite, object
 enum eID
 {
 	PLAYER = 0,
@@ -115,7 +115,6 @@ typedef D3DXVECTOR3 GVector3;
 typedef D3DXVECTOR2 GVector2;
 
 #define VECTOR2ZERO GVector2(0.0f, 0.0f)
-#define VECTOR2ONE  GVector2(1.0f, 1.0f)
 
 #ifndef SAFE_DELETE
 

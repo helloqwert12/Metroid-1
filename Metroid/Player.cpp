@@ -472,10 +472,10 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		}
 		break;
 	case DIK_1:
-		_info->setMissileRocket(_info->getMissileRocket() + 20);
+		_info->setMissileRocket(_info->getMissileRocket() + 10);
 		break;
 	case DIK_2:
-		_info->setEnergy(_info->getEnergy() + 20);
+		_info->setEnergy(_info->getEnergy() + 10);
 		break;
 	case DIK_3:
 		_info->setLife(_info->getLife() + 1);
@@ -951,9 +951,9 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			auto objectPosition = object->getPosition();
 			auto objectVelocity = object->getVelocity();
-			auto viewportBound = SceneManager::getInstance()->getCurrentScene()->getViewport()->getBounding();
+			auto viewportBounding = SceneManager::getInstance()->getCurrentScene()->getViewport()->getBounding();
 
-			if ((objectVelocity.x > 0 && objectPosition.x > viewportBound.right) || (objectVelocity.x < 0 && objectPosition.x < viewportBound.left))
+			if ((objectVelocity.x > 0 && objectPosition.x > viewportBounding.right) || (objectVelocity.x < 0 && objectPosition.x < viewportBounding.left))
 			{
 				((Zeb*)object)->setStatus(DESTROY);
 			}

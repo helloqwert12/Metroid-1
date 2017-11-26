@@ -9,7 +9,7 @@ DeviceManager::DeviceManager()
 	_surface = NULL;
 }
 
-void DeviceManager::Init(Graphics windows)
+void DeviceManager::init(Graphics windows)
 {
 	_pD3d = Direct3DCreate9(D3D_SDK_VERSION);
 	D3DPRESENT_PARAMETERS l_preParameter;

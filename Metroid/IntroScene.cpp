@@ -114,7 +114,4 @@ void IntroScene::release()
 	SAFE_DELETE(_leHuy);
 	SAFE_DELETE(_flash);
 	SAFE_DELETE(_startGame);
-
-	//if (_input != nullptr)
-	//	__unhook(_input);
 }

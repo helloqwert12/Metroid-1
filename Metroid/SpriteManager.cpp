@@ -79,12 +79,12 @@ Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path)
 	// Sau đó ghép với tên file ảnh được lấy từ file xml để load ảnh.
 	string filename = image.attribute("source").as_string();		// lấy filename từ xml node
 	wstring L_filename = wstring(filename.begin(), filename.end());	// convert to wstring.
-	wstring strpath = wstring(path);								// convert to wstring.
-	int index = strpath.find_last_of(L'//');						// cắt chuỗi để tìm path thư mục
-	strpath = strpath.substr(0, index - 1);
-	strpath += L"//" + L_filename;									// nối chuỗi
+	wstring strPath = wstring(path);								// convert to wstring.
+	int index = strPath.find_last_of(L'//');						// cắt chuỗi để tìm path thư mục
+	strPath = strPath.substr(0, index - 1);
+	strPath += L"//" + L_filename;									// nối chuỗi
 
-	return new Sprite(spriteHandle, (LPWSTR)strpath.c_str(), tilecount, columns);
+	return new Sprite(spriteHandle, (LPWSTR)strPath.c_str(), tilecount, columns);
 }
 
 Sprite* SpriteManager::getSprite(eID id)

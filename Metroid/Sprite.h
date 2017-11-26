@@ -16,8 +16,8 @@ public:
 		@filePath: đường dẫn hình ảnh
 		@totalFrames: số frame ảnh trên một file
 		@cols: số frame trên một dòng
-	Nếu không truyền số frame, số cột (mặc định = 1) thì sẽ vẽ hết hình.
-	Để vẽ một vị trí cụ thể trên hình thì dùng hàm setFrameRect().
+	Nếu không truyền số frame, số cột (mặc định = 1) thì sẽ vẽ hết hình
+	Để vẽ một vị trí cụ thể trên hình thì dùng hàm setFrameRect()
 	*/
 	Sprite(LPD3DXSPRITE spriteHandle, LPWSTR filePath, int totalFrames = 1, int cols = 1);
 

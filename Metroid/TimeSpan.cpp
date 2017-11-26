@@ -10,7 +10,7 @@ TimeSpan::~TimeSpan()
 
 TimeSpan::TimeSpan(UINT64 ticks)
 {
-	this->_ticks = ticks;
+	_ticks = ticks;
 }
 
 float TimeSpan::getMiliSeconds()
@@ -25,7 +25,7 @@ UINT64 TimeSpan::getTicks()
 
 TimeSpan TimeSpan::operator+(TimeSpan timeSpan)
 {
-	return TimeSpan(this->_ticks + timeSpan._ticks);
+	return TimeSpan(_ticks + timeSpan._ticks);
 }
 
 TimeSpan TimeSpan::operator+(UINT64 timeSpan)

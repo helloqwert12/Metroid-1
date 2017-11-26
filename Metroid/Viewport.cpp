@@ -1,15 +1,5 @@
 #include "Viewport.h"
 
-Viewport::Viewport()
-{
-}
-
-Viewport::Viewport(float x, float y)
-{
-	_positionWorld.x = x;
-	_positionWorld.y = y;
-}
-
 Viewport::Viewport(float x, float y, float width, float height)
 {
 	_positionWorld.x = x;
@@ -45,30 +35,17 @@ float Viewport::getHeight()
 
 GVector3 Viewport::getPositionInViewport(GVector3* position)
 {
-	D3DXMATRIX mt;
-	D3DXVECTOR4 posViewport;
+	D3DXMATRIX matrix;
+	D3DXVECTOR4 positionInViewport;
 
-	D3DXMatrixIdentity(&mt);
-	mt._22 = -1.0f;
-	mt._41 = (-1) * _positionWorld.x;
-	mt._42 = _positionWorld.y;
+	D3DXMatrixIdentity(&matrix);
+	matrix._22 = -1.0f;
+	matrix._41 = (-1) * _positionWorld.x;
+	matrix._42 = _positionWorld.y;
 
-	D3DXVec3Transform(&posViewport, position, &mt);
+	D3DXVec3Transform(&positionInViewport, position, &matrix);
 
-	return GVector3(posViewport.x, posViewport.y, posViewport.z);
-}
-
-bool Viewport::isContains(const RECT& rect)
-{
-	if (rect.right < _positionWorld.x)
-		return false;
-	if (rect.bottom > _positionWorld.y)
-		return false;
-	if (rect.left > _positionWorld.x + _width)
-		return false;
-	if (rect.top < _positionWorld.y - _height)
-		return false;
-	return true;
+	return GVector3(positionInViewport.x, positionInViewport.y, positionInViewport.z);
 }
 
 RECT Viewport::getBounding()

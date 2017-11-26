@@ -30,7 +30,7 @@ protected:
 	int _height;
 	int _fps;
 
-	static HRESULT CALLBACK winProc(HWND, UINT, WPARAM, LPARAM);
+	static HRESULT CALLBACK winProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };
 
 #endif // !__GRAPHICS_H__

@@ -93,27 +93,27 @@ void InputController::update()
 	HRESULT rs = _keyboard->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), _keyEvents, &dw, 0);
 
 	// Kiểm tra từng phím xem phím có được nhấn hoặc thả
-	int keycode, keystate;
+	int keyCode, keyState;
 	for (DWORD i = 0; i < dw; i++)
 	{
-		keycode = _keyEvents[i].dwOfs;
-		keystate = _keyEvents[i].dwData;
-		if ((keystate & 0x80) > 0)
+		keyCode = _keyEvents[i].dwOfs;
+		keyState = _keyEvents[i].dwData;
+		if ((keyState & 0x80) > 0)
 		{
-			KeyEventArg* arg = new KeyEventArg(keycode);
+			KeyEventArg* arg = new KeyEventArg(keyCode);
 			__raise __eventkeyPressed(arg);
 			delete arg;
 		}
 		else
 		{
-			KeyEventArg* arg = new KeyEventArg(keycode);
+			KeyEventArg* arg = new KeyEventArg(keyCode);
 			__raise __eventkeyReleased(arg);
 			delete arg;
 		}
 	}
 }
 
-int InputController::isKeyDown(int keycode)
+int InputController::isKeyDown(int keyCode)
 {
-	return ((_keyBuffer[keycode] & 0x80) > 0);
+	return ((_keyBuffer[keyCode] & 0x80) > 0);
 }

@@ -65,15 +65,15 @@ void Graphics::initWindow()
 	UpdateWindow(this->_hWnd);
 }
 
-HRESULT CALLBACK Graphics::winProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+HRESULT CALLBACK Graphics::winProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	switch (msg)
+	switch (message)
 	{
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
 	default:
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 }
 

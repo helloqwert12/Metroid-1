@@ -17,7 +17,7 @@ Info::Info() : BaseObject(eID::INFO)
 	_textEnergy = new TextSprite("", GVector2(0, 0));
 	_textEnergy->init();
 
-	_missileRocketNumber = 20;
+	_missileRocketNumber = 5;
 	_iconMissileRocket = SpriteManager::getInstance()->getSprite(BULLET_EFFECT);
 	_iconMissileRocket->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "missile_rocket_01"));
 	_iconMissileRocket->setPosition(50, 75);
@@ -49,45 +49,45 @@ void Info::update(float deltatime)
 
 	if (_lifeNumber < 0)
 	{
-		_textLife->setString("00");
+		_textLife->setText("00");
 	}
 	if (_lifeNumber >= 0 && _lifeNumber < 10)
 	{
-		_textLife->setString("0" + to_string(_lifeNumber));
+		_textLife->setText("0" + to_string(_lifeNumber));
 	}
 	else if (_lifeNumber >= 10 && _lifeNumber < 100)
 	{
-		_textLife->setString("" + to_string(_lifeNumber));
+		_textLife->setText("" + to_string(_lifeNumber));
 	}
 
 	_textEnergy->setPosition(GVector2(_iconEnergy->getPosition().x + 35, _iconEnergy->getPosition().y));
 	
 	if (_energyNumber < 0)
 	{
-		_textEnergy->setString("00");
+		_textEnergy->setText("00");
 	}
 	if (_energyNumber >= 0 && _energyNumber < 10)
 	{
-		_textEnergy->setString("0" + to_string(_energyNumber));
+		_textEnergy->setText("0" + to_string(_energyNumber));
 	}
 	else if (_energyNumber >= 10 && _energyNumber < 100)
 	{
-		_textEnergy->setString("" + to_string(_energyNumber));
+		_textEnergy->setText("" + to_string(_energyNumber));
 	}
 
 	_textMissileRocket->setPosition(GVector2(_iconMissileRocket->getPosition().x + 35, _iconMissileRocket->getPosition().y));
 
 	if (_missileRocketNumber < 0)
 	{
-		_textMissileRocket->setString(" 00");
+		_textMissileRocket->setText(" 00");
 	}
 	if (_missileRocketNumber >= 0 && _missileRocketNumber < 10)
 	{
-		_textMissileRocket->setString("0" + to_string(_missileRocketNumber));
+		_textMissileRocket->setText("0" + to_string(_missileRocketNumber));
 	}
 	else if (_missileRocketNumber >= 10 && _missileRocketNumber < 100)
 	{
-		_textMissileRocket->setString("" + to_string(_missileRocketNumber));
+		_textMissileRocket->setText("" + to_string(_missileRocketNumber));
 	}
 }
 

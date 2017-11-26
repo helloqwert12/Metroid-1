@@ -1,12 +1,11 @@
 ﻿#ifndef __UTILS_H__
 #define __UTILS_H__
 
-#include <d3dx9.h>
 #include "define.h"
 using namespace std;
 
-// Kiểm tra 2 HCN có chồng lên nhau không.
 // Dùng trong hệ world (x, y)
+// Kiểm tra 2 HCN có chồng lên nhau không.
 bool isIntersectedInGame(RECT rect1, RECT rect2);
 
 // Tính khoảng cách giữa 2 điểm

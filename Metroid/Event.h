@@ -5,7 +5,7 @@ class EventArg
 {
 public:
 	EventArg();
-	virtual ~EventArg();
+	~EventArg();
 };
 
 #endif // !__EVENT_H__

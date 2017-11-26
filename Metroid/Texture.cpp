@@ -105,7 +105,7 @@ void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, Viewport viewport
 
 void Texture::setColor(D3DXCOLOR color)
 {
-	this->_color = color;
+	_color = color;
 }
 
 D3DXCOLOR Texture::getColor()

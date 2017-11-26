@@ -1,9 +1,9 @@
 #ifndef __SCENEMANAGER_H__
 #define __SCENEMANAGER_H__
 
-#include <vector>
 #include "define.h"
 #include "Scene.h"
+#include <vector>
 
 class SceneManager
 {
@@ -25,7 +25,6 @@ public:
 
 private:
 	SceneManager();
-
 	static SceneManager* _instance;
 
 	vector<Scene*> _scenes;

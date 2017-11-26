@@ -8,14 +8,14 @@
 #include "Component.h"
 #include "SpriteManager.h"
 
-class Animation : public Component
+class Animation
 {
 public:
 	/*
 	Tạo Animation từ spritesheet
 		@spriteSheet: spritesheet của animation
 		@timeAnimate: thời gian chuyển từng frame
-	Sau khi tạo bằng contructor này phải addFrameRect để có frame để chuyển động.
+	Sau khi tạo bằng constructor này phải addFrameRect để có frame để chuyển động.
 	*/
 	Animation(Sprite* spriteSheet, float timeAnimate = 0.0f, bool loop = true);
 	~Animation();
@@ -64,7 +64,7 @@ public:
 	// Chạy lại animation (@from: index frame muốn bắt đầu)
 	void restart(int from = 0);
 
-	// Tạo hiệu ứng chớp cho sprite, sau khi set enable = TRUE, phải đặt giá trị thay đổi ở hàm setValueFlashes
+	// Tạo hiệu ứng chớp tắt cho sprite, sau khi set enable = TRUE, phải đặt giá trị thay đổi ở hàm setValueFlashes
 	void enableFlashes(bool enable);
 
 	// Set giá trị chớp tắt (@value: giá trị thay đổi để chớp, từ 0 đến < 1 (giá trị bình thường là 1))

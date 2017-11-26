@@ -45,5 +45,5 @@ void MetroidGame::loadResource()
 {
 	// Game::init() đã gọi hàm loadResource này rồi nên không cần gọi lại MetroidGame::loadResource()
 	SpriteManager::getInstance()->loadResource(_spriteHandle);
-	SoundManager::getInstance()->loadSound(Game::hWindow->getWnd());
+	SoundManager::getInstance()->loadSound(Game::_hWindow->getWnd());
 }

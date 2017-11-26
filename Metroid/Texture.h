@@ -20,13 +20,13 @@ public:
 	HRESULT loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCOLOR color = COLOR_WHITE, D3DXCOLOR colorkey = COLOR_KEY);
 
 	/*
-	Vẽ Texture Vẽ Texture lên màn hình (thực chất là vẽ lên buffer) với các tham số tranform, top-left
+	Vẽ Texture Vẽ Texture lên màn hình (thực chất là vẽ lên buffer) với các tham số tranform (top-left)
 		@spriteHandle: DirectX sprite handle, dùng để load, vẽ sprite
 		@srcRect: phần HCN muốn vẽ (left, top, right, bottom)
-		@position: vị trí vẽ
+		@position: vị trí
 		@scale: tỉ lệ scale
-		@rotate: góc xoay theo độ (0-360)
-		@origin: điểm neo để transform (gốc để transform)
+		@rotate: góc xoay, đơn vị độ (0-360)
+		@origin: điểm neo để transform (gốc để transform), mặc định là (0.5, 0.5) => ở giữa
 		@zIndex: độ sâu
 	*/
 	void render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position, GVector2 scale, float rotate, GVector2 origin, float zIndex = 0);
@@ -36,8 +36,8 @@ public:
 		@viewport: viewport
 		@position: vị trí
 		@scale: tỉ lệ scale
-		@rotate: góc xoay theo độ (0-360)
-		@origin: điểm neo để transform (gốc để transform)
+		@rotate: góc xoay, đơn vị độ (0-360)
+		@origin: điểm neo để transform (gốc để transform), mặc định là (0.5, 0.5) => ở giữa
 		@zIndex: độ sâu
 	*/
 	void render(LPD3DXSPRITE spriteHandle, RECT* srcRect, Viewport viewport, GVector2 position, GVector2 scale, float rotate, GVector2 origin, float zIndex = 0);
