@@ -129621,7 +129621,7 @@
   <object id="18" name="Wall" type="20" x="288" y="2894.67" width="224.667" height="16"/>
   <object id="20" name="Wall" type="20" x="448.667" y="2911.33" width="16" height="16"/>
   <object id="21" name="Wall" type="20" x="352" y="2944" width="64.5" height="63.3333"/>
-  <object id="24" name="Wall" type="20" x="369.333" y="2975.67" width="62" height="63.3333"/>
+  <object id="24" name="Wall" type="20" x="368.333" y="2975.67" width="63" height="64"/>
   <object id="25" name="Wall" type="20" x="384.667" y="3007.67" width="62.5" height="63.3333"/>
   <object id="34" name="Wall" type="20" x="528" y="3072" width="111.333" height="16"/>
   <object id="36" name="Wall" type="20" x="528" y="2928.67" width="16" height="110.167"/>
@@ -129812,7 +129812,7 @@
   <object id="346" name="LongBeam" type="84" x="1119.76" y="3071.94" width="15.8182" height="15.4545"/>
   <object id="347" name="IceBeam" type="85" x="1024.09" y="3072.94" width="15.8182" height="15.4545"/>
   <object id="348" name="MissileRocketBall" type="86" x="720.21" y="3071.6" width="15.8182" height="15.4545"/>
-  <object id="349" name="MaruMari" type="83" x="288.333" y="3024.27" width="15.3182" height="15.4545"/>
+  <object id="349" name="MaruMari" type="83" x="288.776" y="3024.9" width="15.8807" height="15.892"/>
   <object id="351" name="BombBall" type="87" x="1167.42" y="3072.27" width="15.8182" height="15.4545"/>
   <object id="353" name="Mellow" type="54" x="847.841" y="2992.02" width="15.8182" height="15.4545"/>
   <object id="360" name="Skree" type="53" x="767.591" y="2895.44" width="15.8182" height="15.4545"/>

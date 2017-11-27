@@ -21,7 +21,7 @@ using namespace std;
 #define SCALE_FACTOR 2.0f
 
 #define COLOR_WHITE D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f) // màu trắng
-#define COLOR_KEY D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f) // màu đen, màu khi mà load hình nó sẽ bỏ qua thành trong suốt
+#define COLOR_KEY D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f) // màu đen, màu mà khi load hình nó sẽ bỏ qua thành trong suốt
 
 // ID của Sprite, object
 enum eID
