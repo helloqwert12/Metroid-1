@@ -249,6 +249,15 @@
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Gravity.cpp">
+      <Filter>Source Files\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Source Files\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SinMovement.cpp">
+      <Filter>Source Files\Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -429,6 +438,15 @@
       <Filter>Header Files\Object\Component</Filter>
     </ClInclude>
     <ClInclude Include="CollisionBody.h">
+      <Filter>Header Files\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h">
+      <Filter>Header Files\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Header Files\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SinMovement.h">
       <Filter>Header Files\Object\Component</Filter>
     </ClInclude>
   </ItemGroup>

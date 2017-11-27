@@ -4,6 +4,7 @@
 #include "define.h"
 #include "BaseObject.h"
 #include "Component.h"
+#include "Movement.h"
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"

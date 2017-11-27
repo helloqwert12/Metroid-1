@@ -129879,20 +129879,6 @@
   <object id="383" name="MissileRocketBall" type="86" x="2367.59" y="3071.27" width="15.8182" height="15.4545"/>
   <object id="391" name="Wall" type="20" x="672.06" y="2976" width="47.833" height="47.9545"/>
   <object id="392" name="Zoomer" type="58" x="656.591" y="2992.77" width="15.8182" height="15.4545"/>
-  <object id="393" name="ChangeMapDirection" type="30" x="192.091" y="3071.27" width="15.8182" height="15.4545">
-   <properties>
-    <property name="anchorpointx" value="192.09"/>
-    <property name="anchorpointy" value="3071.27"/>
-    <property name="direction" value="0"/>
-   </properties>
-  </object>
-  <object id="400" name="ChangeMapDirection" type="30" x="400.591" y="3072.27" width="15.8182" height="15.4545">
-   <properties>
-    <property name="anchorpointx" value="400.59"/>
-    <property name="anchorpointy" value="3072.27"/>
-    <property name="direction" value="1"/>
-   </properties>
-  </object>
   <object id="401" name="ChangeMapDirection" type="30" x="2528.09" y="2991.77" width="15.8182" height="15.4545">
    <properties>
     <property name="anchorpointx" value="2528.09"/>

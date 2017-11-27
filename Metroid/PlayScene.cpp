@@ -86,11 +86,6 @@ void PlayScene::update(float dt)
 	viewportBounding.right += WINDOW_WIDTH / 2;
 	viewportBounding.bottom -= WINDOW_HEIGHT / 2;
 
-	//viewportBounding.left -= WINDOW_WIDTH * 1.5;
-	//viewportBounding.top +=  WINDOW_HEIGHT * 1.5;
-	//viewportBounding.right += WINDOW_WIDTH * 1.5;
-	//viewportBounding.bottom -= WINDOW_HEIGHT * 1.5;
-
 	// Xóa các object đã bị DESTROY ra khỏi QuadTree
 	_root->deleteObjects();
 

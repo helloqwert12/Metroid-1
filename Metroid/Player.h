@@ -8,6 +8,8 @@
 #include "StopWatch.h"
 #include "BaseObject.h"
 #include "Component.h"
+#include "Movement.h"
+#include "Gravity.h"
 #include "CollisionBody.h"
 #include "Info.h"
 
