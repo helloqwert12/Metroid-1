@@ -67,7 +67,7 @@ void Zeb::update(float deltatime)
 		}
 
 		// Bay lên tới vị trí y của Player thì đổi hướng bay về phía Player
-		if (this->getPosition().y > _playerPosition.y + 35)
+		if (this->getPosition().y > _playerPosition.y)
 		{
 			if (_direction)
 				movement->setVelocity(GVector2(ZEB_MOVE_SPEED, 0));

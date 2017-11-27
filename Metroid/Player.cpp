@@ -93,10 +93,8 @@ void Player::init()
 	// Khởi tạo StopWatch
 	_attackStopWatch = new StopWatch();
 
-	// Set origin của nhân vật ở giữa, phía dưới
-	this->setOrigin(GVector2(0.5f, 0.0f));
+	//this->setOrigin(GVector2(0.5f, 0.0f));
 	this->setStatus(eStatus::NORMAL);
-
 	_currentAnimateIndex = NORMAL;
 	_isRevive = false;
 
@@ -105,6 +103,7 @@ void Player::init()
 	_info->init();
 	_info->setLife(2);
 	_info->setEnergy(30);
+	_info->setMissileRocket(5);
 
 	this->resetValues();
 }
@@ -250,16 +249,16 @@ void Player::updateAttackStatus(float dt)
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
 					if (this->getScale().x > 0)
-						weapon = new NormalBullet(this->getPositionX() + 6, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+						weapon = new NormalBullet(this->getPositionX() + 6, this->getPositionY() + 35, eDirection::TOP, _info->getBulletRange());
 					else
-						weapon = new NormalBullet(this->getPositionX() - 4, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+						weapon = new NormalBullet(this->getPositionX() - 4, this->getPositionY() + 35, eDirection::TOP, _info->getBulletRange());
 				}
 				else
 				{
 					if (this->getScale().x > 0)
-						weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
+						weapon = new NormalBullet(this->getPositionX() + 16, this->getPositionY() + 5, eDirection::RIGHT, _info->getBulletRange());
 					else
-						weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
+						weapon = new NormalBullet(this->getPositionX() - 16, this->getPositionY() + 5, eDirection::LEFT, _info->getBulletRange());
 				}
 				break;
 			}
@@ -268,16 +267,16 @@ void Player::updateAttackStatus(float dt)
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
 					if (this->getScale().x > 0)
-						weapon = new IceBullet(this->getPositionX() + 6, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+						weapon = new IceBullet(this->getPositionX() + 6, this->getPositionY() + 35, eDirection::TOP, _info->getBulletRange());
 					else
-						weapon = new IceBullet(this->getPositionX() - 4, this->getPositionY() + 70, eDirection::TOP, _info->getBulletRange());
+						weapon = new IceBullet(this->getPositionX() - 4, this->getPositionY() + 35, eDirection::TOP, _info->getBulletRange());
 				}
 				else
 				{
 					if (this->getScale().x > 0)
-						weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT, _info->getBulletRange());
+						weapon = new IceBullet(this->getPositionX() + 16, this->getPositionY() + 5, eDirection::RIGHT, _info->getBulletRange());
 					else
-						weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT, _info->getBulletRange());
+						weapon = new IceBullet(this->getPositionX() - 16, this->getPositionY() + 5, eDirection::LEFT, _info->getBulletRange());
 				}
 				break;
 			}
@@ -286,16 +285,16 @@ void Player::updateAttackStatus(float dt)
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
 					if (this->getScale().x > 0)
-						weapon = new MissileRocket(this->getPositionX() + 6, this->getPositionY() + 70, eDirection::TOP);
+						weapon = new MissileRocket(this->getPositionX() + 6, this->getPositionY() + 35, eDirection::TOP);
 					else
-						weapon = new MissileRocket(this->getPositionX() - 4, this->getPositionY() + 70, eDirection::TOP);
+						weapon = new MissileRocket(this->getPositionX() - 4, this->getPositionY() + 35, eDirection::TOP);
 				}
 				else
 				{
 					if (this->getScale().x > 0)
-						weapon = new MissileRocket(this->getPositionX() + 16, this->getPositionY() + 40, eDirection::RIGHT);
+						weapon = new MissileRocket(this->getPositionX() + 16, this->getPositionY() + 5, eDirection::RIGHT);
 					else
-						weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 40, eDirection::LEFT);
+						weapon = new MissileRocket(this->getPositionX() - 16, this->getPositionY() + 5, eDirection::LEFT);
 				}
 
 				// Nếu hết Rocket thì set về Bullet
@@ -307,7 +306,7 @@ void Player::updateAttackStatus(float dt)
 			case BOMB:
 				// Nếu đang FALLING thì không được đặt bomb
 				if (!this->isInStatus(eStatus::FALLING))
-					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
+					weapon = new Bomb(this->getPositionX(), this->getPositionY() - 4);
 				break;
 			default:
 				break;
@@ -1148,7 +1147,7 @@ RECT Player::getBounding()
 {
 	RECT bound = _sprite->getBounding();
 	
-	if ((_currentAnimateIndex & LOOKING_UP) == LOOKING_UP)
+	if ((_currentAnimateIndex & NORMAL) == NORMAL || (_currentAnimateIndex & RUNNING) == RUNNING || (_currentAnimateIndex & LOOKING_UP) == LOOKING_UP)
 	{
 		bound.top -= 6;
 	}

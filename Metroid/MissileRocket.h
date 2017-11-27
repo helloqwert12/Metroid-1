@@ -10,7 +10,7 @@
 #include "StopWatch.h"
 #include "Weapon.h"
 
-#define MISSILE_ROCKET_SPEED 250
+#define MISSILE_ROCKET_SPEED 300
 
 class MissileRocket : public Weapon
 {
