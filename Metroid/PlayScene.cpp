@@ -27,7 +27,7 @@ bool PlayScene::init()
 	_text = new Text(L"Tahoma", "", 445, 445, 22);
 
 	// Tạo TileMap
-	_tileMap = TileMap::loadMapFromFile("Resources//Maps//map.tmx", eID::MAP_METROID);
+	_tileMap = TileMap::loadMapFromFile("Resources//Maps//map.tmx", eID::TILESET_METROID);
 
 	// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
 	auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
@@ -42,7 +42,7 @@ bool PlayScene::init()
 	QuadTreeNode::setInstance(_root);
 
 	// Đọc file để lấy list các object
-	auto listObject = GetListObjectFromFile("Resources//Maps//map.tmx");
+	auto listObject = GetListObjectFromXML("Resources//Maps//map.tmx");
 
 	// Insert tất cả các object vào QuadTree
 	for (auto object : (*listObject))
@@ -63,9 +63,7 @@ void PlayScene::updateInput(float dt)
 
 void PlayScene::update(float dt)
 {
-	char str[50];
-	sprintf(str, "FPS: %.0f", 1000 / dt);
-	_text->setText(str);
+	_text->setText("FPS: " + to_string(int(1000 / dt)));
 
 	if (this->checkEndGame())
 	{
@@ -81,6 +79,7 @@ void PlayScene::update(float dt)
 	// Lấy HCN bound của viewport
 	RECT viewportBounding = _viewport->getBounding();
 
+	// Mở rộng một phần bound của Viewport
 	viewportBounding.left -= WINDOW_WIDTH / 2;
 	viewportBounding.top +=  WINDOW_HEIGHT / 2;
 	viewportBounding.right += WINDOW_WIDTH / 2;

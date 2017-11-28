@@ -37,32 +37,32 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//player.png");
 	sprite->setScale(SCALE_FACTOR);
-	this->_listSprite.insert(pair<eID, Sprite*>(eID::PLAYER, sprite));
+	this->_listSprite[eID::PLAYER] = sprite;
 	this->loadSpriteInfo(eID::PLAYER, "Resources//Images//player.txt");
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//enemy.png");
 	sprite->setScale(SCALE_FACTOR);
-	this->_listSprite.insert(pair<eID, Sprite*>(eID::ENEMY, sprite));
+	this->_listSprite[eID::ENEMY] = sprite;
 	this->loadSpriteInfo(eID::ENEMY, "Resources//Images//enemy.txt");
-	
+
 	sprite = new Sprite(spriteHandle, L"Resources//Images//bullet_effect.png");
 	sprite->setScale(SCALE_FACTOR);
-	this->_listSprite.insert(pair<eID, Sprite*>(eID::BULLET_EFFECT, sprite));
+	this->_listSprite[eID::BULLET_EFFECT] = sprite;
 	this->loadSpriteInfo(eID::BULLET_EFFECT, "Resources//Images//bullet_effect.txt");
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//item.png");
 	sprite->setScale(SCALE_FACTOR);
-	this->_listSprite.insert(pair<eID, Sprite*>(eID::ITEM, sprite));
+	this->_listSprite[eID::ITEM] = sprite;
 	this->loadSpriteInfo(eID::ITEM, "Resources//Images//item.txt");
 
 	// Load TileSet
-	sprite = loadXMLDoc(spriteHandle, L"Resources//Maps//map.tmx");
+	sprite = loadTileSetFromXML(spriteHandle, L"Resources//Maps//map.tmx");
 	sprite->setOrigin(VECTOR2ZERO);
 	sprite->setScale(SCALE_FACTOR);
-	this->_listSprite[eID::MAP_METROID] = sprite;
+	this->_listSprite[eID::TILESET_METROID] = sprite;
 }
 
-Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path)
+Sprite* SpriteManager::loadTileSetFromXML(LPD3DXSPRITE spriteHandle, LPWSTR path)
 {
 	xml_document doc;
 	xml_parse_result result = doc.load_file(path, parse_default | parse_pi);
@@ -78,8 +78,8 @@ Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path)
 	// Cắt từ chuỗi path ra để tìm path thư mục.
 	// Sau đó ghép với tên file ảnh được lấy từ file xml để load ảnh.
 	string filename = image.attribute("source").as_string();		// lấy filename từ xml node
-	wstring L_filename = wstring(filename.begin(), filename.end());	// convert to wstring.
-	wstring strPath = wstring(path);								// convert to wstring.
+	wstring L_filename = wstring(filename.begin(), filename.end());	// convert thành wstring.
+	wstring strPath = wstring(path);								// convert thành wstring.
 	int index = strPath.find_last_of(L'//');						// cắt chuỗi để tìm path thư mục
 	strPath = strPath.substr(0, index - 1);
 	strPath += L"//" + L_filename;									// nối chuỗi
@@ -93,31 +93,34 @@ Sprite* SpriteManager::getSprite(eID id)
 	return new Sprite(*it);
 }
 
-RECT SpriteManager::getSourceRect(eID id, string name)
+RECT SpriteManager::getSourceRect(eID id, string rectName)
 {
-	return _sourceRectList[id][name];
+	return _sourceRectList[id][rectName];
 }
 
-void SpriteManager::loadSpriteInfo(eID id, const char* fileInfoPath)
+void SpriteManager::loadSpriteInfo(eID id, string fileInfoPath)
 {
-	FILE* file;
-	file = fopen(fileInfoPath, "r");
+	ifstream fileIn;
+	fileIn.open(fileInfoPath, ios::in);
 
-	if (file)
+	if (fileIn)
 	{
-		while (!feof(file))
+		// Đọc dòng đầu tiên của file (title)
+		string firstLine;
+		getline(fileIn, firstLine);
+
+		while (!fileIn.eof())
 		{
-			RECT rect;
-			char name[100];
-			fgets(name, 100, file);
+			string rectName;
+			RECT frameRect;
 
-			fscanf(file, "%s %d %d %d %d", &name, &rect.left, &rect.top, &rect.right, &rect.bottom);
+			fileIn >> rectName >> frameRect.left >> frameRect.top >> frameRect.right >> frameRect.bottom;
 
-			_sourceRectList[id][string(name)] = rect;
+			_sourceRectList[id][rectName] = frameRect;
 		}
-	}
 
-	fclose(file);
+		fileIn.close();
+	}
 }
 
 void SpriteManager::release()

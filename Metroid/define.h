@@ -34,7 +34,7 @@ enum eID
 	LIFE_ICON = 4,
 	ENERGY_ICON = 5,
 
-	MAP_METROID = 6,
+	TILESET_METROID = 6,
 
 	WALL = 20,
 

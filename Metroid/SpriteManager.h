@@ -14,10 +14,10 @@ public:
 	void loadResource(LPD3DXSPRITE spriteHandle);
 
 	Sprite* getSprite(eID id);
-	RECT getSourceRect(eID id, string name);
+	RECT getSourceRect(eID id, string rectName);
 
 	// Đọc file text để lấy danh sách sourceRect
-	void loadSpriteInfo(eID id, const char* fileInfoPath);
+	void loadSpriteInfo(eID id, string fileInfoPath);
 
 	static void release();
 	~SpriteManager();
@@ -30,7 +30,7 @@ private:
 	map<eID, map<string, RECT>> _sourceRectList;
 
 	// Đọc file xml để tạo đối tượng Sprite (là TileSet Image)
-	Sprite* loadXMLDoc(LPD3DXSPRITE spriteHandle, LPWSTR path);
+	Sprite* loadTileSetFromXML(LPD3DXSPRITE spriteHandle, LPWSTR path);
 };
 
 #endif // !__SPRITEMANAGER_H__

@@ -1,6 +1,6 @@
 ﻿#include "maputils.h"
 
-list<BaseObject*>* GetListObjectFromFile(const string path)
+list<BaseObject*>* GetListObjectFromXML(const string path)
 {
 	xml_document doc;
 	list<BaseObject*>* listObject = new list<BaseObject*>();
@@ -35,7 +35,7 @@ list<BaseObject*>* GetListObjectFromFile(const string path)
 			continue;
 		}
 
-		auto baseObject = GetObjectByType(object, enumID, mapHeight);
+		auto baseObject = GetObjectById(object, enumID, mapHeight);
 		if (baseObject != nullptr)
 		{
 			listObject->push_back(baseObject);
@@ -70,9 +70,9 @@ map<string, string> GetObjectProperties(xml_node node)
 	return properties;
 }
 
-BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight)
+BaseObject* GetObjectById(xml_node item, eID id, int mapHeight)
 {
-	switch (type)
+	switch (id)
 	{
 	case WALL:
 		return GetWall(item, mapHeight);

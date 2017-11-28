@@ -29,13 +29,13 @@
 using namespace pugi;
 
 // Đọc danh sách các object từ file XML
-list<BaseObject*>* GetListObjectFromFile(const string path);
+list<BaseObject*>* GetListObjectFromXML(const string path);
 
 // Đọc tất cả properties của object từ 1 object node XML
 map<string, string> GetObjectProperties(xml_node node);
 
 // Lấy object từ eID
-BaseObject* GetObjectByType(xml_node item, eID type, int mapHeight);
+BaseObject* GetObjectById(xml_node item, eID type, int mapHeight);
 
 // Object
 BaseObject* GetWall(xml_node item, int mapHeight);
