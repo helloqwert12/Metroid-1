@@ -734,6 +734,45 @@ float Player::checkCollision(BaseObject* object, float dt)
 			//object->setStatus(DESTROY);
 		}
 	}
+	else if (objectId == BLUE_DOOR)
+	{
+		// Nếu cửa đang mở, đi ra xa một khoảng thì đóng cửa
+		if (!((BlueDoor*)object)->isClose())
+		{
+			auto objectPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2)
+			{
+				((BlueDoor*)object)->close();
+			}
+		}
+
+		if (!((BlueDoor*)object)->isDead())
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu cửa đang đóng thì không cho đi qua cửa
+				if (((BlueDoor*)object)->isClose())
+				{
+					// Nếu đang va chạm thì dời ra xa
+					float moveX, moveY;
+					if (collisionBody->isColliding(object, moveX, moveY, dt))
+					{
+						collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+					}
+				}
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((BlueDoor*)object)->wasHit(5);
+				else
+					((BlueDoor*)object)->wasHit(1);
+			}
+		}
+	}
 	else if (objectId == RIPPER)
 	{
 		if (!((Ripper*)object)->isDead() && _protectTime <= 0)

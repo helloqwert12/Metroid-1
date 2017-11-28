@@ -88,6 +88,13 @@ BaseObject* GetObjectById(eID id, int left, int top, int right, int bottom, eMap
 		return changeMapDirection;
 		break;
 	}
+	case BLUE_DOOR:
+	{
+		auto blueDoor = new BlueDoor(left, top);
+		blueDoor->init();
+		return blueDoor;
+		break;
+	}
 	case RIPPER:
 	{
 		auto ripper = new Ripper(left, top);
@@ -208,6 +215,9 @@ BaseObject* GetObjectById(xml_node item, eID id, int mapHeight)
 	case CHANGE_MAP_DIRECTION:
 		return GetChangeMapDirection(item, mapHeight);
 		break;
+	case BLUE_DOOR:
+		return GetBlueDoor(item, mapHeight);
+		break;
 	case RIPPER:
 		return GetRipper(item, mapHeight);
 		break;
@@ -295,6 +305,25 @@ BaseObject* GetChangeMapDirection(xml_node item, int mapHeight)
 	auto changeMapDirection = new ChangeMapDirection(x, y, width, height, mapDirection, mapDirectionAnchorPoint);
 	changeMapDirection->init();
 	return changeMapDirection;
+}
+
+BaseObject* GetBlueDoor(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto blueDoor = new BlueDoor(x, y);
+	blueDoor->init();
+	return blueDoor;
 }
 
 BaseObject* GetRipper(xml_node item, int mapHeight)

@@ -55,6 +55,11 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	this->_listSprite[eID::ITEM] = sprite;
 	this->loadSpriteInfo(eID::ITEM, "Resources//Images//item.txt");
 
+	sprite = new Sprite(spriteHandle, L"Resources//Images//door.png");
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite[eID::DOOR] = sprite;
+	this->loadSpriteInfo(eID::DOOR, "Resources//Images//door.txt");
+
 	// Load TileSet
 	sprite = loadTileSetFromXML(spriteHandle, L"Resources//Maps//map.tmx");
 	sprite->setOrigin(VECTOR2ZERO);

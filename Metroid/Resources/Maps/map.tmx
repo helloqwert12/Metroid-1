@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="431">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="434">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -88879,10 +88879,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="11"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="12"/>
    <tile/>
    <tile/>
    <tile/>
@@ -88895,10 +88891,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="11"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="12"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -88959,10 +88959,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="11"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="12"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -89359,10 +89359,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="19"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="20"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="1"/>
@@ -89375,10 +89375,10 @@
    <tile gid="1"/>
    <tile/>
    <tile/>
-   <tile gid="19"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="20"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -89439,10 +89439,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="19"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="20"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -89839,10 +89839,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="27"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="28"/>
    <tile/>
    <tile/>
    <tile/>
@@ -89855,10 +89851,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="27"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="28"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -89919,10 +89919,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="27"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="28"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -129864,5 +129864,8 @@
   <object id="427" name="Rio" type="55" x="1071.42" y="271.606" width="15.8182" height="15.4545"/>
   <object id="428" name="Skree" type="53" x="1088.09" y="288.939" width="15.8182" height="15.4545"/>
   <object id="430" name="Wall" type="20" x="1541.67" y="959.333" width="172.667" height="16"/>
+  <object id="431" name="BlueDoor" type="22" x="1184.34" y="2960.27" width="63.5682" height="47.4545"/>
+  <object id="432" name="BlueDoor" type="22" x="1440.22" y="2959.52" width="63.5682" height="47.4545"/>
+  <object id="433" name="BlueDoor" type="22" x="2464.09" y="2960.15" width="63.5682" height="47.4545"/>
  </objectgroup>
 </map>

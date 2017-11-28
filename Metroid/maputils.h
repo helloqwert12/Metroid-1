@@ -9,6 +9,7 @@
 
 #include "Wall.h"
 #include "ChangeMapDirection.h"
+#include "BlueDoor.h"
 
 #include "Ripper.h"
 #include "Waver.h"
@@ -41,6 +42,7 @@ BaseObject* GetObjectById(xml_node item, eID type, int mapHeight);
 // Object
 BaseObject* GetWall(xml_node item, int mapHeight);
 BaseObject* GetChangeMapDirection(xml_node item, int mapHeight);
+BaseObject* GetBlueDoor(xml_node item, int mapHeight);
 
 // Enemy
 BaseObject* GetRipper(xml_node item, int mapHeight);

@@ -41,7 +41,6 @@ void Rio::update(float deltatime)
 	if (_hitPoint > 0)
 	{
 		_animation->update(deltatime);
-		auto movement = (Movement*)this->_componentList["Movement"];
 
 		if (_startHitStopWatch)
 		{

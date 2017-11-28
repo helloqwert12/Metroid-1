@@ -127,10 +127,6 @@ void Ripper::deactive()
 
 	auto movement = (Movement*)this->_componentList["Movement"];
 	movement->setVelocity(GVector2(0, 0));
-
-	auto sinMovement = (Movement*)this->_componentList["SinMovement"];
-	_componentList.erase("SinMovement");
-	delete sinMovement;
 }
 
 bool Ripper::isActive()

@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="BlueDoor.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BombBall.cpp" />
     <ClCompile Include="ChangeMapDirection.cpp" />
@@ -214,6 +215,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="BlueDoor.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombBall.h" />
     <ClInclude Include="ChangeMapDirection.h" />

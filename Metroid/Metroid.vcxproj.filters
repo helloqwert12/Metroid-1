@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Object\Component">
       <UniqueIdentifier>{7b539416-9e07-410a-8dff-4c199fc46098}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Object\Door">
+      <UniqueIdentifier>{1ca05eb6-6723-4dc3-91ea-1e6984237fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\Door">
+      <UniqueIdentifier>{32703852-fe2a-4c9c-a45b-ec038e6b39b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -257,6 +263,9 @@
     </ClCompile>
     <ClCompile Include="SinMovement.cpp">
       <Filter>Source Files\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="BlueDoor.cpp">
+      <Filter>Source Files\Object\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +457,9 @@
     </ClInclude>
     <ClInclude Include="SinMovement.h">
       <Filter>Header Files\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="BlueDoor.h">
+      <Filter>Header Files\Object\Door</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
