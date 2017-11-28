@@ -95,6 +95,13 @@ BaseObject* GetObjectById(eID id, int left, int top, int right, int bottom, eMap
 		return blueDoor;
 		break;
 	}
+	case RED_DOOR:
+	{
+		auto redDoor = new RedDoor(left, top);
+		redDoor->init();
+		return redDoor;
+		break;
+	}
 	case RIPPER:
 	{
 		auto ripper = new Ripper(left, top);
@@ -218,6 +225,9 @@ BaseObject* GetObjectById(xml_node item, eID id, int mapHeight)
 	case BLUE_DOOR:
 		return GetBlueDoor(item, mapHeight);
 		break;
+	case RED_DOOR:
+		return GetRedDoor(item, mapHeight);
+		break;
 	case RIPPER:
 		return GetRipper(item, mapHeight);
 		break;
@@ -324,6 +334,25 @@ BaseObject* GetBlueDoor(xml_node item, int mapHeight)
 	auto blueDoor = new BlueDoor(x, y);
 	blueDoor->init();
 	return blueDoor;
+}
+
+BaseObject* GetRedDoor(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto redDoor = new RedDoor(x, y);
+	redDoor->init();
+	return redDoor;
 }
 
 BaseObject* GetRipper(xml_node item, int mapHeight)

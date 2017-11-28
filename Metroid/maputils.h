@@ -4,12 +4,13 @@
 #include "define.h"
 #include "pugixml/pugixml.hpp"
 #include "BaseObject.h"
-#include <list>
 #include <ctime>
+#include <list>
 
 #include "Wall.h"
 #include "ChangeMapDirection.h"
 #include "BlueDoor.h"
+#include "RedDoor.h"
 
 #include "Ripper.h"
 #include "Waver.h"
@@ -43,6 +44,7 @@ BaseObject* GetObjectById(xml_node item, eID type, int mapHeight);
 BaseObject* GetWall(xml_node item, int mapHeight);
 BaseObject* GetChangeMapDirection(xml_node item, int mapHeight);
 BaseObject* GetBlueDoor(xml_node item, int mapHeight);
+BaseObject* GetRedDoor(xml_node item, int mapHeight);
 
 // Enemy
 BaseObject* GetRipper(xml_node item, int mapHeight);

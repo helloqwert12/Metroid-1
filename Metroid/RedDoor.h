@@ -1,5 +1,5 @@
-﻿#ifndef __BLUEDOOR_H__
-#define __BLUEDOOR_H__
+#ifndef __REDDOOR_H__
+#define __REDDOOR_H__
 
 #include "define.h"
 #include "BaseObject.h"
@@ -8,10 +8,10 @@
 #include "Animation.h"
 #include "StopWatch.h"
 
-class BlueDoor : public BaseObject
+class RedDoor : public BaseObject
 {
 public:
-	BlueDoor(int x, int y);
+	RedDoor(int x, int y);
 
 	void init();
 	void update(float deltatime);
@@ -38,4 +38,4 @@ protected:
 	Animation* _effectAnimation;
 };
 
-#endif // !__BLUEDOOR_H__
+#endif // !__REDDOOR_H__

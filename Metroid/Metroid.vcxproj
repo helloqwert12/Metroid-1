@@ -181,6 +181,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="QuadTreeNode.cpp" />
+    <ClCompile Include="RedDoor.cpp" />
     <ClCompile Include="Rio.cpp" />
     <ClCompile Include="Ripper.cpp" />
     <ClCompile Include="SinMovement.cpp" />
@@ -247,6 +248,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="QuadTreeNode.h" />
+    <ClInclude Include="RedDoor.h" />
     <ClInclude Include="Rio.h" />
     <ClInclude Include="Ripper.h" />
     <ClInclude Include="SinMovement.h" />
