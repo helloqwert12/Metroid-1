@@ -5,9 +5,10 @@
 #include "BaseObject.h"
 #include <algorithm>
 #include <vector>
+#include "maputils.h"
 
 #define MAX_OBJECT 4
-#define MAX_LEVEL 32
+#define MAX_LEVEL 16
 
 class QuadTreeNode
 {
@@ -27,6 +28,12 @@ public:
 	// Xóa các object đã bị DESTROY ra khỏi list object hiện tại
 	void deleteObjects();
 
+	// Ghi QuadTree ra File
+	void writeQuadTreeNode(ofstream &fileOut, QuadTreeNode* node);
+
+	// Đọc QuadTree từ File
+	void readQuadTreeFromFile(ifstream& fileIn);
+
 	void release();
 
 protected:
@@ -38,7 +45,7 @@ protected:
 	vector<QuadTreeNode*> _children; // list chứa 4 Node con
 	vector<BaseObject*> _objects;	 // list chứa các object của Node hiện tại
 
-	// Kiểm tra xem HCN đang xét thuộc về phần hình vuông index thứ mấy (0-3)
+									 // Kiểm tra xem HCN đang xét thuộc về phần hình vuông index thứ mấy (0-3)
 	int getIndex(const RECT& bound);
 
 	// Chia Node hiện tại thành 4 Node con

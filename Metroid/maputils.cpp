@@ -70,6 +70,134 @@ map<string, string> GetObjectProperties(xml_node node)
 	return properties;
 }
 
+BaseObject* GetObjectById(eID id, int left, int top, int right, int bottom, eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint)
+{
+	switch (id)
+	{
+	case WALL:
+	{
+		auto wall = new Wall(left, bottom, right - left, top - bottom);
+		wall->init();
+		return wall;
+		break;
+	}
+	case CHANGE_MAP_DIRECTION:
+	{
+		auto changeMapDirection = new ChangeMapDirection(left, bottom, right - left, top - bottom, mapDirection, mapDirectionAnchorPoint);
+		changeMapDirection->init();
+		return changeMapDirection;
+		break;
+	}
+	case RIPPER:
+	{
+		auto ripper = new Ripper(left, top);
+		ripper->init();
+		return ripper;
+		break;
+	}
+	case WAVER:
+	{
+		auto waver = new Waver(left, top, false);
+		waver->init();
+		return waver;
+		break;
+	}
+	case SKREE:
+	{
+		auto skree = new Skree(left, top);
+		skree->init();
+		return skree;
+		break;
+	}
+	case MELLOW:
+	{
+		auto mellow = new Mellow(left, top, false);
+		mellow->init();
+		return mellow;
+		break;
+	}
+	case RIO:
+	{
+		auto rio = new Rio(left, top, false);
+		rio->init();
+		return rio;
+		break;
+	}
+	case ZEB_PIPE:
+	{
+		auto zebPipe = new ZebPipe(left, bottom, right - left, top - bottom);
+		zebPipe->init();
+		return zebPipe;
+		break;
+	}
+	case ZOOMER:
+	{
+		auto zoomer = new Zoomer(left, top);
+		zoomer->init();
+		return zoomer;
+		break;
+	}
+	case ENERGY_TANK:
+	{
+		auto energyTank = new EnergyTank(left, top);
+		energyTank->init();
+		return energyTank;
+		break;
+	}
+	case ENERGY_BALL:
+	{
+		auto energyBall = new EnergyBall(left, top);
+		energyBall->init();
+		return energyBall;
+		break;
+	}
+	case MARU_MARI:
+	{
+		auto maruMari = new MaruMari(left, top);
+		maruMari->init();
+		return maruMari;
+		break;
+	}
+	case LONG_BEAM:
+	{
+		auto longBeam = new LongBeam(left, top);
+		longBeam->init();
+		return longBeam;
+		break;
+	}
+	case ICE_BEAM:
+	{
+		auto iceBeam = new IceBeam(left, top);
+		iceBeam->init();
+		return iceBeam;
+		break;
+	}
+	case MISSILE_ROCKET_BALL:
+	{
+		auto missileRocketBall = new MissileRocketBall(left, top);
+		missileRocketBall->init();
+		return missileRocketBall;
+		break;
+	}
+	case BOMB_BALL:
+	{
+		auto bombBall = new BombBall(left, top);
+		bombBall->init();
+		return bombBall;
+		break;
+	}
+	case VARIA:
+	{
+		auto varia = new Varia(left, top);
+		varia->init();
+		return varia;
+		break;
+	}
+	default:
+		return nullptr;
+	}
+}
+
 BaseObject* GetObjectById(xml_node item, eID id, int mapHeight)
 {
 	switch (id)
