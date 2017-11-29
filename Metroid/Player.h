@@ -15,6 +15,10 @@
 
 #include "ChangeMapDirection.h"
 
+#include "BlueDoor.h"
+#include "RedDoor.h"
+#include "BreakableRedWall.h"
+
 #include "NormalBullet.h"
 #include "IceBullet.h"
 #include "MissileRocket.h"

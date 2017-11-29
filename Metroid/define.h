@@ -1,5 +1,5 @@
-﻿#ifndef __FRAMEWORK_H__
-#define __FRAMEWORK_H__
+﻿#ifndef _DEFINE_H__
+#define _DEFINE_H__
 
 #define _USE_MATH_DEFINES
 
@@ -37,14 +37,17 @@ enum eID
 	TILESET_METROID = 6,
 
 	WALL = 20,
-
-	CHANGE_MAP_DIRECTION = 30,
+	CHANGE_MAP_DIRECTION = 21,
 	
-	FIRE = 40,
+	FIRE = 30,
 
-	DOOR = 45,
-	BLUE_DOOR = 46,
-	RED_DOOR = 47,
+	DOOR = 35,
+	BLUE_DOOR = 36,
+	RED_DOOR = 37,
+	
+	BREAKABLE_WALL = 38,
+	BREAKABLE_RED_WALL = 39,
+	BREAKABLE_BLUE_WALL = 40,
 
 	ENEMY = 50,
 	RIPPER = 51,
@@ -133,4 +136,4 @@ if(p) \
 
 #endif // !SAFE_DELETE
 
-#endif // !__FRAMEWORK_H__
+#endif // !_DEFINE_H__

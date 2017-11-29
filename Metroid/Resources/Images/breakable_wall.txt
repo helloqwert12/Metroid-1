@@ -1,0 +1,4 @@
+frame_name		left	top	right	bottom
+breakable_red_wall_01		7	2	22	17
+breakable_blue_wall_01		32	2	47	17
+breakable_green_wall_01		57	2	72	17

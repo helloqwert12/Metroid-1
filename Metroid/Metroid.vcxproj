@@ -153,6 +153,7 @@
     <ClCompile Include="BlueDoor.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BombBall.cpp" />
+    <ClCompile Include="BreakableRedWall.cpp" />
     <ClCompile Include="ChangeMapDirection.cpp" />
     <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="BlueDoor.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombBall.h" />
+    <ClInclude Include="BreakableRedWall.h" />
     <ClInclude Include="ChangeMapDirection.h" />
     <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="define.h" />
