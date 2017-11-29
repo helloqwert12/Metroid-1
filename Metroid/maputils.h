@@ -12,6 +12,7 @@
 #include "Fire.h"
 #include "BlueDoor.h"
 #include "RedDoor.h"
+#include "BreakableBlueWall.h"
 #include "BreakableRedWall.h"
 
 #include "Ripper.h"
@@ -48,6 +49,7 @@ BaseObject* GetChangeMapDirection(xml_node item, int mapHeight);
 BaseObject* GetFire(xml_node item, int mapHeight);
 BaseObject* GetBlueDoor(xml_node item, int mapHeight);
 BaseObject* GetRedDoor(xml_node item, int mapHeight);
+BaseObject* GetBreakableBlueWall(xml_node item, int mapHeight);
 BaseObject* GetBreakableRedWall(xml_node item, int mapHeight);
 
 // Enemy

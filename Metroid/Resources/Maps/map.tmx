@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="443">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="446">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -90768,7 +90768,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="18"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -129868,12 +129868,14 @@
   <object id="432" name="RedDoor" type="37" x="1440.22" y="2960.09" width="63.5682" height="47.4545"/>
   <object id="433" name="BlueDoor" type="36" x="2464.09" y="2960.15" width="63.5682" height="47.4545"/>
   <object id="434" name="Fire" type="30" x="528.333" y="3047.88" width="32.083" height="23.875"/>
-  <object id="436" name="BreakableRedWall" type="39" x="703.949" y="2992.34" width="15.8182" height="15.4545"/>
-  <object id="437" name="BreakableRedWall" type="39" x="703.915" y="3008.14" width="15.8182" height="15.4545"/>
-  <object id="438" name="BreakableRedWall" type="39" x="704.006" y="3024.02" width="15.8182" height="15.4545"/>
-  <object id="439" name="Wall" type="20" x="687.958" y="3024.08" width="16" height="16"/>
-  <object id="440" name="BreakableRedWall" type="39" x="720.174" y="3024.06" width="15.8182" height="15.4545"/>
-  <object id="441" name="BreakableRedWall" type="39" x="736.341" y="3024.15" width="15.8182" height="15.4545"/>
-  <object id="442" name="BreakableRedWall" type="39" x="752.466" y="3024.15" width="15.8182" height="15.4545"/>
+  <object id="436" name="BreakableRedWall" type="40" x="703.949" y="2992.34" width="15.8182" height="15.4545"/>
+  <object id="437" name="BreakableRedWall" type="40" x="703.915" y="3008.14" width="15.8182" height="15.4545"/>
+  <object id="438" name="BreakableRedWall" type="40" x="704.006" y="3024.02" width="15.8182" height="15.4545"/>
+  <object id="440" name="BreakableRedWall" type="40" x="720.174" y="3024.06" width="15.8182" height="15.4545"/>
+  <object id="441" name="BreakableRedWall" type="40" x="736.341" y="3024.15" width="15.8182" height="15.4545"/>
+  <object id="442" name="BreakableBlueWall" type="39" x="656.091" y="3024.02" width="15.8182" height="15.4545"/>
+  <object id="443" name="BreakableBlueWall" type="39" x="672.216" y="3024.15" width="15.8182" height="15.4545"/>
+  <object id="444" name="BreakableBlueWall" type="39" x="688.216" y="3024.15" width="15.8182" height="15.4545"/>
+  <object id="445" name="BreakableBlueWall" type="39" x="703.977" y="2976.3" width="15.8182" height="15.4545"/>
  </objectgroup>
 </map>
