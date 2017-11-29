@@ -278,7 +278,7 @@ void QuadTreeNode::readQuadTreeFromFile(ifstream& fileIn)
 			fileIn >> left >> top;
 		}
 
-		BaseObject* object = GetObjectById((eID)objectId, left, top, right, bottom, (eMapDirection)mapDirection, mapDirectionAnchorPoint);
+		BaseObject* object = getObjectById((eID)objectId, left, top, right, bottom, (eMapDirection)mapDirection, mapDirectionAnchorPoint);
 		if (object)
 		{
 			_objects.push_back(object);

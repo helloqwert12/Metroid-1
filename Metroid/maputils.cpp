@@ -1,6 +1,6 @@
 ﻿#include "maputils.h"
 
-list<BaseObject*>* GetListObjectFromXML(const string path)
+list<BaseObject*>* getListObjectFromXML(const string path)
 {
 	xml_document doc;
 	list<BaseObject*>* listObject = new list<BaseObject*>();
@@ -10,13 +10,13 @@ list<BaseObject*>* GetListObjectFromXML(const string path)
 		return listObject;
 
 	auto map = doc.child("map");
-	if (map == NULL)
+	if (!map)
 		return listObject;
 
 	auto mapHeight = 2 * map.attribute("tileheight").as_int() * map.attribute("height").as_int();
 
 	xml_node objectGroup = map.child("objectgroup");
-	if (objectGroup == NULL)
+	if (!objectGroup)
 		return listObject;
 
 	auto objects = objectGroup.children();
@@ -35,7 +35,7 @@ list<BaseObject*>* GetListObjectFromXML(const string path)
 			continue;
 		}
 
-		auto baseObject = GetObjectById(object, enumID, mapHeight);
+		auto baseObject = getObjectById(object, enumID, mapHeight);
 		if (baseObject != nullptr)
 		{
 			listObject->push_back(baseObject);
@@ -45,7 +45,7 @@ list<BaseObject*>* GetListObjectFromXML(const string path)
 	return listObject;
 }
 
-map<string, string> GetObjectProperties(xml_node node)
+map<string, string> getObjectProperties(xml_node node)
 {
 	map<string, string> properties;
 
@@ -70,7 +70,7 @@ map<string, string> GetObjectProperties(xml_node node)
 	return properties;
 }
 
-BaseObject* GetObjectById(eID id, int left, int top, int right, int bottom, eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint)
+BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint)
 {
 	switch (id)
 	{
@@ -233,84 +233,84 @@ BaseObject* GetObjectById(eID id, int left, int top, int right, int bottom, eMap
 	}
 }
 
-BaseObject* GetObjectById(xml_node item, eID id, int mapHeight)
+BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 {
 	switch (id)
 	{
 	case WALL:
-		return GetWall(item, mapHeight);
+		return getWall(item, mapHeight);
 		break;
 	case CHANGE_MAP_DIRECTION:
-		return GetChangeMapDirection(item, mapHeight);
+		return getChangeMapDirection(item, mapHeight);
 		break;
 	case FIRE:
-		return GetFire(item, mapHeight);
+		return getFire(item, mapHeight);
 		break;
 	case BLUE_DOOR:
-		return GetBlueDoor(item, mapHeight);
+		return getBlueDoor(item, mapHeight);
 		break;
 	case RED_DOOR:
-		return GetRedDoor(item, mapHeight);
+		return getRedDoor(item, mapHeight);
 		break;
 	case BREAKABLE_BLUE_WALL:
-		return GetBreakableBlueWall(item, mapHeight);
+		return getBreakableBlueWall(item, mapHeight);
 		break;
 	case BREAKABLE_RED_WALL:
-		return GetBreakableRedWall(item, mapHeight);
+		return getBreakableRedWall(item, mapHeight);
 		break;
 	case RIPPER:
-		return GetRipper(item, mapHeight);
+		return getRipper(item, mapHeight);
 		break;
 	case WAVER:
-		return GetWaver(item, mapHeight);
+		return getWaver(item, mapHeight);
 		break;
 	case SKREE:
-		return GetSkree(item, mapHeight);
+		return getSkree(item, mapHeight);
 		break;
 	case MELLOW:
-		return GetMellow(item, mapHeight);
+		return getMellow(item, mapHeight);
 		break;
 	case RIO:
-		return GetRio(item, mapHeight);
+		return getRio(item, mapHeight);
 		break;
 	case ZEB_PIPE:
-		return GetZebPipe(item, mapHeight);
+		return getZebPipe(item, mapHeight);
 		break;
 	case ZOOMER:
-		return GetZoomer(item, mapHeight);
+		return getZoomer(item, mapHeight);
 		break;
 	case ENERGY_TANK:
-		return GetEnergyTank(item, mapHeight);
+		return getEnergyTank(item, mapHeight);
 		break;
 	case ENERGY_BALL:
-		return GetEnergyBall(item, mapHeight);
+		return getEnergyBall(item, mapHeight);
 		break;
 	case MARU_MARI:
-		return GetMaruMari(item, mapHeight);
+		return getMaruMari(item, mapHeight);
 		break;
 	case LONG_BEAM:
-		return GetLongBeam(item, mapHeight);
+		return getLongBeam(item, mapHeight);
 		break;
 	case ICE_BEAM:
-		return GetIceBeam(item, mapHeight);
+		return getIceBeam(item, mapHeight);
 		break;
 	case MISSILE_ROCKET_BALL:
-		return GetMissileRocketBall(item, mapHeight);
+		return getMissileRocketBall(item, mapHeight);
 		break;
 	case BOMB_BALL:
-		return GetBombBall(item, mapHeight);
+		return getBombBall(item, mapHeight);
 		break;
 	case VARIA:
-		return GetVaria(item, mapHeight);
+		return getVaria(item, mapHeight);
 		break;
 	default:
 		return nullptr;
 	}
 }
 
-BaseObject* GetWall(xml_node item, int mapHeight)
+BaseObject* getWall(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -325,9 +325,9 @@ BaseObject* GetWall(xml_node item, int mapHeight)
 	return wall;
 }
 
-BaseObject* GetChangeMapDirection(xml_node item, int mapHeight)
+BaseObject* getChangeMapDirection(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -347,9 +347,9 @@ BaseObject* GetChangeMapDirection(xml_node item, int mapHeight)
 	return changeMapDirection;
 }
 
-BaseObject* GetFire(xml_node item, int mapHeight)
+BaseObject* getFire(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -363,9 +363,9 @@ BaseObject* GetFire(xml_node item, int mapHeight)
 	return fire;
 }
 
-BaseObject* GetBlueDoor(xml_node item, int mapHeight)
+BaseObject* getBlueDoor(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -382,9 +382,9 @@ BaseObject* GetBlueDoor(xml_node item, int mapHeight)
 	return blueDoor;
 }
 
-BaseObject* GetRedDoor(xml_node item, int mapHeight)
+BaseObject* getRedDoor(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -401,9 +401,9 @@ BaseObject* GetRedDoor(xml_node item, int mapHeight)
 	return redDoor;
 }
 
-BaseObject* GetBreakableBlueWall(xml_node item, int mapHeight)
+BaseObject* getBreakableBlueWall(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -420,9 +420,9 @@ BaseObject* GetBreakableBlueWall(xml_node item, int mapHeight)
 	return breakableBlueWall;
 }
 
-BaseObject* GetBreakableRedWall(xml_node item, int mapHeight)
+BaseObject* getBreakableRedWall(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -439,9 +439,9 @@ BaseObject* GetBreakableRedWall(xml_node item, int mapHeight)
 	return breakableRedWall;
 }
 
-BaseObject* GetRipper(xml_node item, int mapHeight)
+BaseObject* getRipper(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -458,9 +458,9 @@ BaseObject* GetRipper(xml_node item, int mapHeight)
 	return ripper;
 }
 
-BaseObject* GetWaver(xml_node item, int mapHeight)
+BaseObject* getWaver(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -468,15 +468,18 @@ BaseObject* GetWaver(xml_node item, int mapHeight)
 	auto height = 2 * stoi(properties["height"]);
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
 
 	auto waver = new Waver(x, y, false);
 	waver->init();
 	return waver;
 }
 
-BaseObject* GetSkree(xml_node item, int mapHeight)
+BaseObject* getSkree(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -485,14 +488,17 @@ BaseObject* GetSkree(xml_node item, int mapHeight)
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
 
+	x = x + width / 2;
+	y = y + height / 2;
+
 	auto skree = new Skree(x, y);
 	skree->init();
 	return skree;
 }
 
-BaseObject* GetMellow(xml_node item, int mapHeight)
+BaseObject* getMellow(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -509,9 +515,9 @@ BaseObject* GetMellow(xml_node item, int mapHeight)
 	return mellow;
 }
 
-BaseObject* GetRio(xml_node item, int mapHeight)
+BaseObject* getRio(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -520,14 +526,17 @@ BaseObject* GetRio(xml_node item, int mapHeight)
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
 
+	x = x + width / 2;
+	y = y + height / 2;
+
 	auto rio = new Rio(x, y, false);
 	rio->init();
 	return rio;
 }
 
-BaseObject* GetZebPipe(xml_node item, int mapHeight)
+BaseObject* getZebPipe(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -541,9 +550,9 @@ BaseObject* GetZebPipe(xml_node item, int mapHeight)
 	return zebPipe;
 }
 
-BaseObject* GetZoomer(xml_node item, int mapHeight)
+BaseObject* getZoomer(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -552,14 +561,17 @@ BaseObject* GetZoomer(xml_node item, int mapHeight)
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
 
+	x = x + width / 2;
+	y = y + height / 2;
+
 	auto zoomer = new Zoomer(x, y);
 	zoomer->init();
 	return zoomer;
 }
 
-BaseObject* GetEnergyTank(xml_node item, int mapHeight)
+BaseObject* getEnergyTank(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -576,9 +588,9 @@ BaseObject* GetEnergyTank(xml_node item, int mapHeight)
 	return energyTank;
 }
 
-BaseObject* GetEnergyBall(xml_node item, int mapHeight)
+BaseObject* getEnergyBall(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -595,9 +607,9 @@ BaseObject* GetEnergyBall(xml_node item, int mapHeight)
 	return energyBall;
 }
 
-BaseObject* GetMaruMari(xml_node item, int mapHeight)
+BaseObject* getMaruMari(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -614,9 +626,9 @@ BaseObject* GetMaruMari(xml_node item, int mapHeight)
 	return maruMari;
 }
 
-BaseObject* GetLongBeam(xml_node item, int mapHeight)
+BaseObject* getLongBeam(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -633,9 +645,9 @@ BaseObject* GetLongBeam(xml_node item, int mapHeight)
 	return longBeam;
 }
 
-BaseObject* GetIceBeam(xml_node item, int mapHeight)
+BaseObject* getIceBeam(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -652,9 +664,9 @@ BaseObject* GetIceBeam(xml_node item, int mapHeight)
 	return iceBeam;
 }
 
-BaseObject* GetMissileRocketBall(xml_node item, int mapHeight)
+BaseObject* getMissileRocketBall(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -671,9 +683,9 @@ BaseObject* GetMissileRocketBall(xml_node item, int mapHeight)
 	return missileRocketBall;
 }
 
-BaseObject* GetBombBall(xml_node item, int mapHeight)
+BaseObject* getBombBall(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
@@ -690,9 +702,9 @@ BaseObject* GetBombBall(xml_node item, int mapHeight)
 	return bombBall;
 }
 
-BaseObject* GetVaria(xml_node item, int mapHeight)
+BaseObject* getVaria(xml_node item, int mapHeight)
 {
-	auto properties = GetObjectProperties(item);
+	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
 		return nullptr;
 
