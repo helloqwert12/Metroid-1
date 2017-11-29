@@ -88,6 +88,13 @@ BaseObject* GetObjectById(eID id, int left, int top, int right, int bottom, eMap
 		return changeMapDirection;
 		break;
 	}
+	case FIRE:
+	{
+		auto fire = new Fire(left, bottom, right - left, top - bottom);
+		fire->init();
+		return fire;
+		break;
+	}
 	case BLUE_DOOR:
 	{
 		auto blueDoor = new BlueDoor(left, top);
@@ -222,6 +229,9 @@ BaseObject* GetObjectById(xml_node item, eID id, int mapHeight)
 	case CHANGE_MAP_DIRECTION:
 		return GetChangeMapDirection(item, mapHeight);
 		break;
+	case FIRE:
+		return GetFire(item, mapHeight);
+		break;
 	case BLUE_DOOR:
 		return GetBlueDoor(item, mapHeight);
 		break;
@@ -315,6 +325,22 @@ BaseObject* GetChangeMapDirection(xml_node item, int mapHeight)
 	auto changeMapDirection = new ChangeMapDirection(x, y, width, height, mapDirection, mapDirectionAnchorPoint);
 	changeMapDirection->init();
 	return changeMapDirection;
+}
+
+BaseObject* GetFire(xml_node item, int mapHeight)
+{
+	auto properties = GetObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	auto fire = new Fire(x, y, width, height);
+	fire->init();
+	return fire;
 }
 
 BaseObject* GetBlueDoor(xml_node item, int mapHeight)

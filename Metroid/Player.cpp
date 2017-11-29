@@ -751,6 +751,17 @@ float Player::checkCollision(BaseObject* object, float dt)
 			//object->setStatus(DESTROY);
 		}
 	}
+	else if (objectId == FIRE)
+	{
+		if (_protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, false))
+			{
+				beHit(eDirection::NONE);
+				takeDamage(8);
+			}
+		}
+	}
 	else if (objectId == BLUE_DOOR)
 	{
 		// Nếu cửa đang mở, đi ra xa một khoảng thì đóng cửa

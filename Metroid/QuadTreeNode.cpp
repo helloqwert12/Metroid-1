@@ -215,21 +215,22 @@ void QuadTreeNode::writeQuadTreeNode(ofstream &fileOut, QuadTreeNode* node)
 
 		for (auto object : node->_objects)
 		{
-			if (object->getId() == WALL || object->getId() == ZEB_PIPE) // Lấy bound left-top-right-bottom
+			int objectId = object->getId();
+			if (objectId == WALL || objectId == FIRE || objectId == ZEB_PIPE) // Lấy bound left-top-right-bottom
 			{
-				fileOut << object->getId() << " ";
+				fileOut << objectId << " ";
 				fileOut << object->getBounding().left << " " << object->getBounding().top << " " << object->getBounding().right << " " << object->getBounding().bottom << "\t";
 			}
-			else if (object->getId() == CHANGE_MAP_DIRECTION) // Lấy bound left-top-right-bottom, mapDirection, MapDirectionAnchorPoint
+			else if (objectId == CHANGE_MAP_DIRECTION) // Lấy bound left-top-right-bottom, mapDirection, MapDirectionAnchorPoint
 			{
-				fileOut << object->getId() << " ";
+				fileOut << objectId << " ";
 				fileOut << object->getBounding().left << " " << object->getBounding().top << " " << object->getBounding().right << " " << object->getBounding().bottom << " ";
 				fileOut << ((ChangeMapDirection*)object)->getMapDirection() << " ";
 				fileOut << ((ChangeMapDirection*)object)->getMapDirectionAnchorPoint().x << " " << ((ChangeMapDirection*)object)->getMapDirectionAnchorPoint().y << "\t";
 			}
 			else // lấy vị trí x, y
 			{
-				fileOut << object->getId() << " " << object->getPosition().x << " " << object->getPosition().y << "\t";
+				fileOut << objectId << " " << object->getPosition().x << " " << object->getPosition().y << "\t";
 			}
 		}
 
@@ -264,7 +265,7 @@ void QuadTreeNode::readQuadTreeFromFile(ifstream& fileIn)
 
 		fileIn >> objectId;
 
-		if (objectId == WALL || objectId == ZEB_PIPE) // Lấy bound left-top-right-bottom
+		if (objectId == WALL || objectId == FIRE || objectId == ZEB_PIPE) // Lấy bound left-top-right-bottom
 		{
 			fileIn >> left >> top >> right >> bottom;
 		}
