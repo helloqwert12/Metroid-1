@@ -43,7 +43,9 @@
 #define GRAVITY 600
 
 #define PROTECT_TIME 1500
-#define ATTACK_TIME 150
+#define BULLET_ATTACK_TIME 150
+#define MISSILE_ROCKET_ATTACK_TIME 300
+#define BOMB_ATTACK_TIME 400
 
 class Player : public BaseObject, public Controlable
 {

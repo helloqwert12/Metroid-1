@@ -11,7 +11,7 @@ BlueDoor::BlueDoor(int x, int y) : BaseObject(BLUE_DOOR)
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::DOOR);
 	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::DOOR, "blue_door_01"));
-	_effectAnimation = new Animation(_effect, 0.15f, false);
+	_effectAnimation = new Animation(_effect, 0.1f, false);
 	_effectAnimation->addFrameRect(DOOR, "blue_door_01", "blue_door_02", "blue_door_03", "blue_door_04", "blue_door_05", NULL);
 
 	_hitPoint = 1;

@@ -11,7 +11,7 @@ RedDoor::RedDoor(int x, int y) : BaseObject(RED_DOOR)
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::DOOR);
 	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::DOOR, "red_door_01"));
-	_effectAnimation = new Animation(_effect, 0.15f, false);
+	_effectAnimation = new Animation(_effect, 0.1f, false);
 	_effectAnimation->addFrameRect(DOOR, "red_door_01", "red_door_02", "red_door_03", "red_door_04", "red_door_05", NULL);
 
 	_hitPoint = 25;

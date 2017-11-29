@@ -240,7 +240,24 @@ void Player::updateAttackStatus(float dt)
 {
 	if (this->isInStatus(eStatus::ATTACKING))
 	{
-		if (_attackStopWatch->isStopWatch(ATTACK_TIME))
+		int attackTime;
+		switch (_info->getWeapon())
+		{
+		case MISSILE_ROCKET:
+		{
+			attackTime = MISSILE_ROCKET_ATTACK_TIME;
+			break;
+		}
+		case BOMB:
+		{
+			attackTime = BOMB_ATTACK_TIME;
+			break;
+		}
+		default:
+			attackTime = BULLET_ATTACK_TIME;
+		}
+
+		if (_attackStopWatch->isStopWatch(attackTime))
 		{
 			Weapon* weapon = nullptr;
 			switch (_info->getWeapon())

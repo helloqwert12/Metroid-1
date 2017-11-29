@@ -33,7 +33,7 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 		if (isColliding(otherObject, moveX, moveY, dt))
 		{
 			// Lấy hướng bị va chạm của otherObject
-			auto side = this->getSide(otherObject);
+			auto side = this->getDirection(otherObject);
 			direction = side;
 
 			// Hướng va chạm của otherObject trùng với hướng có thể bị va chạm của nó
@@ -281,7 +281,7 @@ RECT CollisionBody::getSweptBroadphaseRect(BaseObject* object, float dt)
 	return rect;
 }
 
-eDirection CollisionBody::getSide(BaseObject* otherObject)
+eDirection CollisionBody::getDirection(BaseObject* otherObject)
 {
 	auto myRect = _target->getBounding();
 	auto otherRect = otherObject->getBounding();

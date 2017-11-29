@@ -34,7 +34,7 @@ public:
 	RECT getSweptBroadphaseRect(BaseObject* object, float dt);
 
 	// Lấy hướng bị va chạm của otherObject
-	eDirection getSide(BaseObject* otherObject);
+	eDirection getDirection(BaseObject* otherObject);
 
 	/*
 	Cập nhật target position khi va chạm
