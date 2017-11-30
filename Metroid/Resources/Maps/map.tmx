@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="918">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="921">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -91262,8 +91262,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="60"/>
+   <tile gid="61"/>
    <tile/>
    <tile/>
    <tile/>
@@ -91742,8 +91742,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="68"/>
+   <tile gid="69"/>
    <tile/>
    <tile/>
    <tile/>
@@ -92222,9 +92222,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="76"/>
+   <tile gid="77"/>
+   <tile gid="78"/>
    <tile/>
    <tile/>
    <tile/>
@@ -130399,7 +130399,10 @@
   <object id="913" name="BlueDoor" type="36" x="1440.47" y="2960.27" width="63.5682" height="47.4545"/>
   <object id="914" name="Wall" type="20" x="3103.67" y="416.667" width="63.3333" height="16"/>
   <object id="915" name="BlueItemBall" type="42" x="800.227" y="3056.02" width="15.8182" height="15.4545"/>
-  <object id="916" name="Wall" type="20" x="777.386" y="3048" width="22.8864" height="39.75"/>
+  <object id="916" name="Wall" type="20" x="777.011" y="3048" width="23.2614" height="39.75"/>
   <object id="917" name="Wall" type="20" x="800.136" y="3071.75" width="16" height="16"/>
+  <object id="918" name="RedItemBall" type="43" x="896.03" y="3056.12" width="15.8182" height="15.4545"/>
+  <object id="919" name="Wall" type="20" x="872.875" y="3048.04" width="22.8864" height="39.75"/>
+  <object id="920" name="Wall" type="20" x="895.875" y="3071.92" width="16" height="16"/>
  </objectgroup>
 </map>

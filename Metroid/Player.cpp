@@ -946,6 +946,27 @@ float Player::checkCollision(BaseObject* object, float dt)
 				{
 					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 				}
+
+				// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
+				// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
+				if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
+				{
+					auto gravity = (Gravity*)this->_componentList["Gravity"];
+					gravity->setStatus(eGravityStatus::SHALLOWED);
+
+					this->standing();
+					preWall = object;
+				}
+			}
+			else if (preWall == object) // Xét sau va chạm
+			{
+				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
+				auto gravity = (Gravity*)this->_componentList["Gravity"];
+				gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+				// Thêm status FALLING để cho player rớt xuống
+				if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
+					this->addStatus(eStatus::FALLING);
 			}
 
 			eID weaponId;
@@ -955,6 +976,51 @@ float Player::checkCollision(BaseObject* object, float dt)
 					((BlueItemBall*)object)->wasHit(5);
 				else
 					((BlueItemBall*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == RED_ITEM_BALL)
+	{
+		if (!((RedItemBall*)object)->isDead())
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+
+				// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
+				// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
+				if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
+				{
+					auto gravity = (Gravity*)this->_componentList["Gravity"];
+					gravity->setStatus(eGravityStatus::SHALLOWED);
+
+					this->standing();
+					preWall = object;
+				}
+			}
+			else if (preWall == object) // Xét sau va chạm
+			{
+				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
+				auto gravity = (Gravity*)this->_componentList["Gravity"];
+				gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+				// Thêm status FALLING để cho player rớt xuống
+				if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
+					this->addStatus(eStatus::FALLING);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((RedItemBall*)object)->wasHit(5);
+				else
+					((RedItemBall*)object)->wasHit(1);
 			}
 		}
 	}

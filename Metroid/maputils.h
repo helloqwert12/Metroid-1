@@ -15,6 +15,7 @@
 #include "BreakableBlueWall.h"
 #include "BreakableRedWall.h"
 #include "BlueItemBall.h"
+#include "RedItemBall.h"
 
 #include "Ripper.h"
 #include "Waver.h"
@@ -53,6 +54,7 @@ BaseObject* getRedDoor(xml_node item, int mapHeight);
 BaseObject* getBreakableBlueWall(xml_node item, int mapHeight);
 BaseObject* getBreakableRedWall(xml_node item, int mapHeight);
 BaseObject* getBlueItemBall(xml_node item, int mapHeight);
+BaseObject* getRedItemBall(xml_node item, int mapHeight);
 
 // Enemy
 BaseObject* getRipper(xml_node item, int mapHeight);

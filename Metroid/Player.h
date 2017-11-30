@@ -20,6 +20,7 @@
 #include "BreakableBlueWall.h"
 #include "BreakableRedWall.h"
 #include "BlueItemBall.h"
+#include "RedItemBall.h"
 
 #include "NormalBullet.h"
 #include "IceBullet.h"

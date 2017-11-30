@@ -130,6 +130,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, eMap
 		return blueItemBall;
 		break;
 	}
+	case RED_ITEM_BALL:
+	{
+		auto redItemBall = new RedItemBall(left, top);
+		redItemBall->init();
+		return redItemBall;
+		break;
+	}
 	case RIPPER:
 	{
 		auto ripper = new Ripper(left, top);
@@ -267,6 +274,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case BLUE_ITEM_BALL:
 		return getBlueItemBall(item, mapHeight);
+		break;
+	case RED_ITEM_BALL:
+		return getRedItemBall(item, mapHeight);
 		break;
 	case RIPPER:
 		return getRipper(item, mapHeight);
@@ -466,6 +476,25 @@ BaseObject* getBlueItemBall(xml_node item, int mapHeight)
 	auto blueItemBall = new BlueItemBall(x, y);
 	blueItemBall->init();
 	return blueItemBall;
+}
+
+BaseObject* getRedItemBall(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto redItemBall = new RedItemBall(x, y);
+	redItemBall->init();
+	return redItemBall;
 }
 
 BaseObject* getRipper(xml_node item, int mapHeight)
