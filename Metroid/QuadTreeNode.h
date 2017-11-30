@@ -22,7 +22,7 @@ public:
 	// Insert 1 object vào Node
 	void insert(BaseObject* object);
 
-	// Lấy list các object có khả năng va chạm với viewport
+	// Lấy list các object nằm trong viewport bound
 	vector<BaseObject*> retrieve(const RECT viewportBound);
 
 	// Xóa các object đã bị DESTROY ra khỏi list object hiện tại
@@ -32,7 +32,7 @@ public:
 	void writeQuadTreeNode(ofstream &fileOut, QuadTreeNode* node);
 
 	// Đọc QuadTree từ File
-	void readQuadTreeFromFile(ifstream& fileIn);
+	void readQuadTreeFromFile(ifstream &fileIn);
 
 	void release();
 
@@ -42,10 +42,10 @@ protected:
 	int _level;
 	RECT _bound;
 
-	vector<QuadTreeNode*> _children; // list chứa 4 Node con
 	vector<BaseObject*> _objects;	 // list chứa các object của Node hiện tại
+	vector<QuadTreeNode*> _children; // list chứa 4 Node con
 
-									 // Kiểm tra xem HCN đang xét thuộc về phần hình vuông index thứ mấy (0-3)
+	// Kiểm tra xem HCN đang xét thuộc về phần hình vuông index thứ mấy (0-3) của Node hiện tại
 	int getIndex(const RECT& bound);
 
 	// Chia Node hiện tại thành 4 Node con

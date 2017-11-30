@@ -748,7 +748,6 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
 			playScene->setMapDirection(((ChangeMapDirection*)object)->getMapDirection(), ((ChangeMapDirection*)object)->getMapDirectionAnchorPoint());
-			//object->setStatus(DESTROY);
 		}
 	}
 	else if (objectId == FIRE)
@@ -775,7 +774,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 
-		if (!((BlueDoor*)object)->isDead())
+		if (((BlueDoor*)object)->isClose())
 		{
 			if (collisionBody->checkCollision(object, direction, dt))
 			{
@@ -814,7 +813,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 
-		if (!((RedDoor*)object)->isDead())
+		if (((RedDoor*)object)->isClose())
 		{
 			if (collisionBody->checkCollision(object, direction, dt))
 			{

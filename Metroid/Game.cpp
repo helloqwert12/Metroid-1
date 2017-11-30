@@ -75,12 +75,12 @@ void Game::render()
 		return;
 
 	auto device = _deviceManager->getInstance();
-
+	
 	// Lấy tổng thời gian trôi qua kể từ lần cuối gọi hàm updateGameTime
 	float time = _gameTime->getElapsedGameTime();
 
 	// Xử lý để kéo, resize cửa sổ không bị dồn frame
-	if (time > this->_frameTime * 2)
+	if (time > this->_frameTime * 1.25f)
 		time = _frameTime;
 
 	// Bắt đầu vẽ

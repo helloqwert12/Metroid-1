@@ -64,7 +64,8 @@ int QuadTreeNode::getIndex(const RECT& bound)
 
 void QuadTreeNode::insert(BaseObject* object)
 {
-	// Kiểm tra xem object có nằm trong không gian của Node hiện tại hay không
+	// Kiểm tra xem object có nằm trong phần không gian của Node hiện tại hay không
+	// Nếu có thì tiếp tục, không thì return
 	if (!isIntersectedInGame(this->_bound, object->getBounding()))
 		return;
 
@@ -83,8 +84,8 @@ void QuadTreeNode::insert(BaseObject* object)
 	}
 
 	// Nếu Node hiện tại là Node lá (chưa được chia thành 4 Node con)
-	// hoặc object nằm trong 2 không gian Node con trở lên
-	// thì thêm object vào list object hiện tại
+	// hoặc object sau khi kiểm tra thì thấy nằm trong 2 không gian Node con trở lên
+	// thì thêm object vào list object của Node hiện tại
 	_objects.push_back(object);
 
 	// Nếu số object đã vượt quá mức quy định thì tiến hành đưa các object về 4 Node con
@@ -101,7 +102,7 @@ void QuadTreeNode::insert(BaseObject* object)
 			{
 				_children[index]->insert(_objects[i]);
 
-				// Insert vào Node con xong thì xóa object khỏi list object hiện tại
+				// Insert vào Node con xong thì xóa object khỏi list object của Node hiện tại
 				_objects.erase(_objects.begin() + i);
 			}
 			else
@@ -114,8 +115,8 @@ void QuadTreeNode::insert(BaseObject* object)
 
 void QuadTreeNode::split()
 {
-	const float halfWidth = (_bound.right - _bound.left) / 2.0f;
-	const float halfHeight = (_bound.top - _bound.bottom) / 2.0f;
+	auto halfWidth = (_bound.right - _bound.left) / 2.0f;
+	auto halfHeight = (_bound.top - _bound.bottom) / 2.0f;
 
 	// Tính toán bound cho 4 Node con
 	RECT rect;
@@ -147,7 +148,7 @@ vector<BaseObject*> QuadTreeNode::retrieve(const RECT viewportBound)
 {
 	vector<BaseObject*> foundObjects;
 
-	// Kiểm tra HCN viewport nằm trong không gian Node nào
+	// Kiểm tra viewport bound nằm trong phần không gian Node nào
 	int index = getIndex(viewportBound);
 	if (!_children.empty() && index != -1)
 	{
@@ -155,11 +156,11 @@ vector<BaseObject*> QuadTreeNode::retrieve(const RECT viewportBound)
 		foundObjects = _children[index]->retrieve(viewportBound);
 	}
 	else 	// Nếu Node hiện tại là Node lá (chưa được chia thành 4 Node con)
-			// hoặc HCN viewport nằm trong 2 không gian Node con trở lên
+			// hoặc viewport bound nằm trong 2 không gian Node con trở lên
 	{
 		for (auto child : _children)
 		{
-			// Kiểm tra HCN viewport có nằm trong không gian Node con không
+			// Kiểm tra viewport bound có nằm trong không gian Node con không
 			if (isIntersectedInGame(child->_bound, viewportBound))
 			{
 				// Đệ quy Retrieve tiếp ở Node con
@@ -245,7 +246,7 @@ void QuadTreeNode::writeQuadTreeNode(ofstream &fileOut, QuadTreeNode* node)
 	}
 }
 
-void QuadTreeNode::readQuadTreeFromFile(ifstream& fileIn)
+void QuadTreeNode::readQuadTreeFromFile(ifstream &fileIn)
 {
 	int level, left, top, right, bottom, numOfChildren, numOfObjects;
 	fileIn >> level >> left >> top >> right >> bottom;

@@ -165,7 +165,8 @@ bool Rio::isActive()
 
 float Rio::checkCollision(BaseObject* object, float dt)
 {
-	if (object->getId() == WALL)
+	auto objectId = object->getId();
+	if (objectId == WALL || objectId == BREAKABLE_BLUE_WALL || objectId == BREAKABLE_RED_WALL || objectId == BLUE_DOOR || objectId == RED_DOOR)
 	{
 		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 		eDirection direction;

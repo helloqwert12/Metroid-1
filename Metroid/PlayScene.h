@@ -39,11 +39,11 @@ private:
 	eMapDirection _mapDirection;
 	GVector2 _mapDirectionAnchorPoint;
 
-	// List chứa các object nằm trong vùng active.
-	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để draw.
+	// List chứa các object nằm trong viewport bound (Retrieve từ QuadTree)
+	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để vẽ tại hàm draw
 	vector<BaseObject*> _activeObject;
 
-	// Update tọa độ viewport theo 1 object
+	// Update tọa độ viewport theo 1 object (chọn Player)
 	void updateViewport(BaseObject* objectTracker);
 
 	bool checkEndGame();

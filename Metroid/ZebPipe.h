@@ -11,7 +11,7 @@
 #include <ctime>
 #include "Zeb.h"
 
-#define ZEB_APPEAR_TIME 1000
+#define ZEB_APPEAR_TIME 3000
 
 class ZebPipe : public BaseObject
 {
