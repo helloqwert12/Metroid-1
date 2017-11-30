@@ -173,6 +173,7 @@
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Info.cpp" />
+    <ClCompile Include="BlueItemBall.cpp" />
     <ClCompile Include="LongBeam.cpp" />
     <ClCompile Include="maputils.cpp" />
     <ClCompile Include="MaruMari.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="InputController.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Info.h" />
+    <ClInclude Include="BlueItemBall.h" />
     <ClInclude Include="LongBeam.h" />
     <ClInclude Include="maputils.h" />
     <ClInclude Include="MaruMari.h" />

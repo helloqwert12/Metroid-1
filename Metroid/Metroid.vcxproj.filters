@@ -279,6 +279,9 @@
     <ClCompile Include="BreakableBlueWall.cpp">
       <Filter>Source Files\Object\BreakableObject</Filter>
     </ClCompile>
+    <ClCompile Include="BlueItemBall.cpp">
+      <Filter>Source Files\Object\BreakableObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -483,6 +486,9 @@
       <Filter>Header Files\Object\BreakableObject</Filter>
     </ClInclude>
     <ClInclude Include="BreakableBlueWall.h">
+      <Filter>Header Files\Object\BreakableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BlueItemBall.h">
       <Filter>Header Files\Object\BreakableObject</Filter>
     </ClInclude>
   </ItemGroup>

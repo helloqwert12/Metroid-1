@@ -497,6 +497,13 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 	case DIK_3:
 		_info->setLife(_info->getLife() + 1);
 		break;
+	case DIK_4:
+	{
+		_info->setMaruMari(true);
+		_info->setBomb(true);
+		_info->setVaria(true);
+		break;
+	}
 	default:
 		break;
 	}
@@ -924,6 +931,30 @@ float Player::checkCollision(BaseObject* object, float dt)
 					((BreakableRedWall*)object)->wasHit(5);
 				else
 					((BreakableRedWall*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == BLUE_ITEM_BALL)
+	{
+		if (!((BlueItemBall*)object)->isDead())
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((BlueItemBall*)object)->wasHit(5);
+				else
+					((BlueItemBall*)object)->wasHit(1);
 			}
 		}
 	}

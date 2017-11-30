@@ -123,6 +123,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, eMap
 		return breakableRedWall;
 		break;
 	}
+	case BLUE_ITEM_BALL:
+	{
+		auto blueItemBall = new BlueItemBall(left, top);
+		blueItemBall->init();
+		return blueItemBall;
+		break;
+	}
 	case RIPPER:
 	{
 		auto ripper = new Ripper(left, top);
@@ -257,6 +264,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case BREAKABLE_RED_WALL:
 		return getBreakableRedWall(item, mapHeight);
+		break;
+	case BLUE_ITEM_BALL:
+		return getBlueItemBall(item, mapHeight);
 		break;
 	case RIPPER:
 		return getRipper(item, mapHeight);
@@ -437,6 +447,25 @@ BaseObject* getBreakableRedWall(xml_node item, int mapHeight)
 	auto breakableRedWall = new BreakableRedWall(x, y);
 	breakableRedWall->init();
 	return breakableRedWall;
+}
+
+BaseObject* getBlueItemBall(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto blueItemBall = new BlueItemBall(x, y);
+	blueItemBall->init();
+	return blueItemBall;
 }
 
 BaseObject* getRipper(xml_node item, int mapHeight)

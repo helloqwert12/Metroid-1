@@ -65,6 +65,11 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	this->_listSprite[eID::BREAKABLE_WALL] = sprite;
 	this->loadSpriteInfo(eID::BREAKABLE_WALL, "Resources//Images//breakable_wall.txt");
 
+	sprite = new Sprite(spriteHandle, L"Resources//Images//item_ball.png");
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite[eID::ITEM_BALL] = sprite;
+	this->loadSpriteInfo(eID::ITEM_BALL, "Resources//Images//item_ball.txt");
+
 	// Load TileSet
 	sprite = loadTileSetFromXML(spriteHandle, L"Resources//Maps//map.tmx");
 	sprite->setOrigin(VECTOR2ZERO);

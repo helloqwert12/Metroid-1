@@ -1,0 +1,7 @@
+frame_name		left	top	right	bottom
+blue_item_ball_01		7	3	23	19
+blue_item_ball_02		43	3	59	19
+blue_item_ball_03		79	3	95	19
+red_item_ball_01		7	30	23	49
+red_item_ball_02		43	30	59	49
+red_item_ball_03		79	30	95	49

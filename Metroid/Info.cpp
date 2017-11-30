@@ -7,6 +7,7 @@ Info::Info() : BaseObject(eID::INFO)
 	// Info dùng tọa độ top-left
 	_iconLife = SpriteManager::getInstance()->getSprite(eID::LIFE_ICON);
 	_iconLife->setPosition(50, 25);
+	_iconLife->setScale(1.5f);
 
 	_textLife = new TextSprite("", GVector2(0, 0));
 	_textLife->init();
