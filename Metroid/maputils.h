@@ -42,7 +42,7 @@ list<BaseObject*>* getListObjectFromXML(const string path);
 map<string, string> getObjectProperties(xml_node node);
 
 // Lấy object từ eID
-BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint);
+BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int intArgument, GVector2 pointArgument);
 BaseObject* getObjectById(xml_node item, eID type, int mapHeight);
 
 // Object

@@ -129810,14 +129810,12 @@
   <object id="343" name="Ripper" type="51" x="2624.76" y="3007.61" width="15.8182" height="15.4545"/>
   <object id="345" name="Ripper" type="51" x="2671.42" y="3056.27" width="15.8182" height="15.4545"/>
   <object id="346" name="LongBeam" type="84" x="1119.76" y="3071.94" width="15.8182" height="15.4545"/>
-  <object id="347" name="IceBeam" type="85" x="1024.09" y="3072.94" width="15.8182" height="15.4545"/>
   <object id="348" name="MissileRocketBall" type="86" x="672.46" y="3072.1" width="15.8182" height="15.4545"/>
   <object id="349" name="MaruMari" type="83" x="288.333" y="3024.27" width="15.3182" height="15.4545"/>
   <object id="351" name="BombBall" type="87" x="1167.42" y="3072.27" width="15.8182" height="15.4545"/>
   <object id="353" name="Mellow" type="54" x="1023.84" y="2960.52" width="15.8182" height="15.4545"/>
   <object id="360" name="Skree" type="53" x="767.591" y="2895.44" width="15.8182" height="15.4545"/>
   <object id="361" name="EnergyTank" type="81" x="720.424" y="3071.77" width="15.8182" height="15.4545"/>
-  <object id="362" name="Varia" type="88" x="1072.09" y="3072.39" width="15.8182" height="15.4545"/>
   <object id="372" name="Rio" type="55" x="2175.92" y="2928.27" width="15.8182" height="15.4545"/>
   <object id="376" name="MissileRocketBall" type="86" x="1552.59" y="3070.77" width="15.8182" height="15.4545"/>
   <object id="377" name="MissileRocketBall" type="86" x="1696.42" y="3071.6" width="15.8182" height="15.4545"/>
@@ -130398,10 +130396,18 @@
   </object>
   <object id="913" name="BlueDoor" type="36" x="1440.47" y="2960.27" width="63.5682" height="47.4545"/>
   <object id="914" name="Wall" type="20" x="3103.67" y="416.667" width="63.3333" height="16"/>
-  <object id="915" name="BlueItemBall" type="42" x="800.227" y="3056.02" width="15.8182" height="15.4545"/>
+  <object id="915" name="BlueItemBall" type="42" x="800.227" y="3056.02" width="15.8182" height="15.4545">
+   <properties>
+    <property name="itemid" value="88"/>
+   </properties>
+  </object>
   <object id="916" name="Wall" type="20" x="777.011" y="3048" width="23.2614" height="39.75"/>
   <object id="917" name="Wall" type="20" x="800.136" y="3071.75" width="16" height="16"/>
-  <object id="918" name="RedItemBall" type="43" x="896.03" y="3056.12" width="15.8182" height="15.4545"/>
+  <object id="918" name="RedItemBall" type="43" x="896.03" y="3056.12" width="15.8182" height="15.4545">
+   <properties>
+    <property name="itemid" value="85"/>
+   </properties>
+  </object>
   <object id="919" name="Wall" type="20" x="872.875" y="3048.04" width="22.8864" height="39.75"/>
   <object id="920" name="Wall" type="20" x="895.875" y="3071.92" width="16" height="16"/>
  </objectgroup>

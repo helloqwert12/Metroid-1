@@ -1,6 +1,6 @@
 #include "BlueItemBall.h"
 
-BlueItemBall::BlueItemBall(int x, int y) : BaseObject(BLUE_ITEM_BALL)
+BlueItemBall::BlueItemBall(int x, int y, eID itemId) : BaseObject(BLUE_ITEM_BALL)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM_BALL);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM_BALL, "blue_item_ball_01"));
@@ -14,6 +14,7 @@ BlueItemBall::BlueItemBall(int x, int y) : BaseObject(BLUE_ITEM_BALL)
 	_effectAnimation = new Animation(_effect, 0.25f, false);
 	_effectAnimation->addFrameRect(ITEM_BALL, "blue_item_ball_01", "blue_item_ball_02", "blue_item_ball_03", NULL);
 
+	_itemId = itemId;
 	_hitPoint = 2;
 }
 
@@ -42,6 +43,35 @@ void BlueItemBall::update(float deltatime)
 		if (!_effectAnimation->isAnimate())
 		{
 			this->setStatus(DESTROY);
+
+			BaseObject* item = nullptr;
+			switch (_itemId)
+			{
+			case ENERGY_TANK:
+				item = new EnergyTank(this->getPositionX(), this->getPositionY());
+				break;
+			case LONG_BEAM:
+				item = new LongBeam(this->getPositionX(), this->getPositionY());
+				break;
+			case ICE_BEAM:
+				item = new IceBeam(this->getPositionX(), this->getPositionY());
+				break;
+			case MISSILE_ROCKET_BALL:
+				item = new MissileRocketBall(this->getPositionX(), this->getPositionY());
+				break;
+			case BOMB_BALL:
+				item = new BombBall(this->getPositionX(), this->getPositionY());
+				break;
+			case VARIA:
+				item = new Varia(this->getPositionX(), this->getPositionY());
+				break;
+			}
+
+			if (item != nullptr)
+			{
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+			}
 		}
 	}
 }
@@ -77,4 +107,9 @@ bool BlueItemBall::isDead()
 float BlueItemBall::checkCollision(BaseObject* object, float dt)
 {
 	return 0;
+}
+
+eID BlueItemBall::getItemId()
+{
+	return _itemId;
 }

@@ -7,11 +7,12 @@
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
+#include "QuadTreeNode.h"
 
 class RedItemBall : public BaseObject
 {
 public:
-	RedItemBall(int x, int y);
+	RedItemBall(int x, int y, eID itemId);
 
 	void init();
 	void update(float deltatime);
@@ -21,12 +22,15 @@ public:
 	void wasHit(int hitPoint);
 	bool isDead();
 
+	eID getItemId();
+
 	float checkCollision(BaseObject* object, float dt);
 
 protected:
 	Animation* _animation;
 	map<string, Component*> _componentList;
 
+	eID _itemId;
 	int _hitPoint;
 
 	Sprite* _effect;

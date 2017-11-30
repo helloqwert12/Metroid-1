@@ -70,7 +70,7 @@ map<string, string> getObjectProperties(xml_node node)
 	return properties;
 }
 
-BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint)
+BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int intArgument, GVector2 pointArgument)
 {
 	switch (id)
 	{
@@ -83,6 +83,8 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, eMap
 	}
 	case CHANGE_MAP_DIRECTION:
 	{
+		auto mapDirection = (eMapDirection)intArgument;
+		auto mapDirectionAnchorPoint = pointArgument;
 		auto changeMapDirection = new ChangeMapDirection(left, bottom, right - left, top - bottom, mapDirection, mapDirectionAnchorPoint);
 		changeMapDirection->init();
 		return changeMapDirection;
@@ -125,14 +127,16 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, eMap
 	}
 	case BLUE_ITEM_BALL:
 	{
-		auto blueItemBall = new BlueItemBall(left, top);
+		auto itemId = (eID)intArgument;
+		auto blueItemBall = new BlueItemBall(left, top, itemId);
 		blueItemBall->init();
 		return blueItemBall;
 		break;
 	}
 	case RED_ITEM_BALL:
 	{
-		auto redItemBall = new RedItemBall(left, top);
+		auto itemId = (eID)intArgument;
+		auto redItemBall = new RedItemBall(left, top, itemId);
 		redItemBall->init();
 		return redItemBall;
 		break;
@@ -470,10 +474,12 @@ BaseObject* getBlueItemBall(xml_node item, int mapHeight)
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
 
+	auto itemId = (eID)stoi(properties["itemid"]);
+
 	x = x + width / 2;
 	y = y + height / 2;
 
-	auto blueItemBall = new BlueItemBall(x, y);
+	auto blueItemBall = new BlueItemBall(x, y, itemId);
 	blueItemBall->init();
 	return blueItemBall;
 }
@@ -489,10 +495,12 @@ BaseObject* getRedItemBall(xml_node item, int mapHeight)
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
 
+	auto itemId = (eID)stoi(properties["itemid"]);
+
 	x = x + width / 2;
 	y = y + height / 2;
 
-	auto redItemBall = new RedItemBall(x, y);
+	auto redItemBall = new RedItemBall(x, y, itemId);
 	redItemBall->init();
 	return redItemBall;
 }

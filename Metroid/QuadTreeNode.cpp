@@ -229,6 +229,14 @@ void QuadTreeNode::writeQuadTreeNode(ofstream &fileOut, QuadTreeNode* node)
 				fileOut << ((ChangeMapDirection*)object)->getMapDirection() << " ";
 				fileOut << ((ChangeMapDirection*)object)->getMapDirectionAnchorPoint().x << " " << ((ChangeMapDirection*)object)->getMapDirectionAnchorPoint().y << "\t";
 			}
+			else if (objectId == BLUE_ITEM_BALL) // Lấy vị trí x, y, itemId
+			{
+				fileOut << objectId << " " << object->getPosition().x << " " << object->getPosition().y << " " << ((BlueItemBall*)object)->getItemId() << "\t";
+			}
+			else if (objectId == RED_ITEM_BALL) // Lấy vị trí x, y, itemId
+			{
+				fileOut << objectId << " " << object->getPosition().x << " " << object->getPosition().y << " " << ((RedItemBall*)object)->getItemId() << "\t";
+			}
 			else // lấy vị trí x, y
 			{
 				fileOut << objectId << " " << object->getPosition().x << " " << object->getPosition().y << "\t";
@@ -261,8 +269,9 @@ void QuadTreeNode::readQuadTreeFromFile(ifstream &fileIn)
 	for (int i = 0; i < numOfObjects; i++)
 	{
 		int objectId = 0, left = 0, top = 0, right = 0, bottom = 0;
-		int mapDirection = 0;
-		GVector2 mapDirectionAnchorPoint = GVector2(0, 0);
+
+		int intArgument = 0;
+		GVector2 pointArgument = GVector2(0, 0);
 
 		fileIn >> objectId;
 
@@ -272,14 +281,18 @@ void QuadTreeNode::readQuadTreeFromFile(ifstream &fileIn)
 		}
 		else if (objectId == CHANGE_MAP_DIRECTION) // Lấy bound left-top-right-bottom, mapDirection, MapDirectionAnchorPoint
 		{
-			fileIn >> left >> top >> right >> bottom >> mapDirection >> mapDirectionAnchorPoint.x >> mapDirectionAnchorPoint.y;
+			fileIn >> left >> top >> right >> bottom >> intArgument >> pointArgument.x >> pointArgument.y;
+		}
+		else if (objectId == BLUE_ITEM_BALL || objectId == RED_ITEM_BALL) // Lấy vị trí x, y, itemId
+		{
+			fileIn >> left >> top >> intArgument;
 		}
 		else // lấy vị trí x, y
 		{
 			fileIn >> left >> top;
 		}
 
-		BaseObject* object = getObjectById((eID)objectId, left, top, right, bottom, (eMapDirection)mapDirection, mapDirectionAnchorPoint);
+		BaseObject* object = getObjectById((eID)objectId, left, top, right, bottom, intArgument, pointArgument);
 		if (object)
 		{
 			_objects.push_back(object);
