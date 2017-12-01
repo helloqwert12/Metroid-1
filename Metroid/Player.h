@@ -94,7 +94,7 @@ private:
 	map<int, Animation*> _animations;
 	map<string, Component*> _componentList;
 
-	eStatus _currentAnimateIndex;
+	eStatus _currentAnimationIndex;
 	Info* _info;
 
 	float _movingSpeed;

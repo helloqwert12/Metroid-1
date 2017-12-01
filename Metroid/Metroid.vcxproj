@@ -164,6 +164,7 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Gravity.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Gravity.h" />

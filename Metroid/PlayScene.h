@@ -9,7 +9,6 @@
 #include "Player.h"
 #include <algorithm>
 #include "SoundManager.h"
-#include "IntroScene.h"
 using namespace std;
 
 class PlayScene : public Scene

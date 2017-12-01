@@ -285,6 +285,9 @@
     <ClCompile Include="RedItemBall.cpp">
       <Filter>Source Files\Object\BreakableObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -496,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="RedItemBall.h">
       <Filter>Header Files\Object\BreakableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>Header Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

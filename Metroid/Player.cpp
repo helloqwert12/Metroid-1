@@ -96,7 +96,7 @@ void Player::init()
 	// Set origin của nhân vật ở giữa, phía dưới
 	this->setOrigin(GVector2(0.5f, 0.0f));
 	this->setStatus(eStatus::NORMAL);
-	_currentAnimateIndex = NORMAL;
+	_currentAnimationIndex = NORMAL;
 	_isRevive = false;
 
 	// Info dùng tọa độ top-left
@@ -131,7 +131,7 @@ void Player::update(float deltatime)
 	// Từ status để chuyển animation
 	this->updateCurrentAnimateIndex();
 
-	_animations[_currentAnimateIndex]->update(deltatime);
+	_animations[_currentAnimationIndex]->update(deltatime);
 
 	// Update các component
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -156,11 +156,11 @@ void Player::updateInput(float dt)
 void Player::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	if (_protectTime > 0)
-		_animations[_currentAnimateIndex]->enableFlashes(true);
+		_animations[_currentAnimationIndex]->enableFlashes(true);
 	else
-		_animations[_currentAnimateIndex]->enableFlashes(false);
+		_animations[_currentAnimationIndex]->enableFlashes(false);
 
-	_animations[_currentAnimateIndex]->draw(spriteHandle, viewport);
+	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
 
 	for (auto weapon : _listWeapon)
 	{
@@ -362,28 +362,28 @@ void Player::updateAttackStatus(float dt)
 
 void Player::updateCurrentAnimateIndex()
 {
-	_currentAnimateIndex = this->getStatus();
+	_currentAnimationIndex = this->getStatus();
 
-	if (!((_currentAnimateIndex & eStatus::ROLLING_DOWN) == eStatus::ROLLING_DOWN) && (_currentAnimateIndex & eStatus::FALLING) == eStatus::FALLING)
+	if (!((_currentAnimationIndex & eStatus::ROLLING_DOWN) == eStatus::ROLLING_DOWN) && (_currentAnimationIndex & eStatus::FALLING) == eStatus::FALLING)
 	{
-		_currentAnimateIndex = eStatus::FALLING;
+		_currentAnimationIndex = eStatus::FALLING;
 	}
 
-	if ((_currentAnimateIndex & eStatus::ROLLING_DOWN) == eStatus::ROLLING_DOWN)
+	if ((_currentAnimationIndex & eStatus::ROLLING_DOWN) == eStatus::ROLLING_DOWN)
 	{
-		_currentAnimateIndex = eStatus::ROLLING_DOWN;
+		_currentAnimationIndex = eStatus::ROLLING_DOWN;
 	}
 
 	// Nếu đang trong status MOVING_LEFT hoặc MOVING_RIGHT thì xóa status đó, thay bằng RUNNING
-	if ((_currentAnimateIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT || ((_currentAnimateIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT))
+	if ((_currentAnimationIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT || ((_currentAnimationIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT))
 	{
-		_currentAnimateIndex = (eStatus)(_currentAnimateIndex & ~(eStatus::MOVING_LEFT | MOVING_RIGHT));
-		_currentAnimateIndex = (eStatus)(_currentAnimateIndex | eStatus::RUNNING);
+		_currentAnimationIndex = (eStatus)(_currentAnimationIndex & ~(eStatus::MOVING_LEFT | MOVING_RIGHT));
+		_currentAnimationIndex = (eStatus)(_currentAnimationIndex | eStatus::RUNNING);
 	}
 
 	if (this->isInStatus(eStatus::DIE))
 	{
-		_currentAnimateIndex = eStatus::DIE;
+		_currentAnimationIndex = eStatus::DIE;
 	}
 }
 
@@ -1472,12 +1472,12 @@ RECT Player::getBounding()
 {
 	RECT bound = _sprite->getBounding();
 
-	if ((_currentAnimateIndex & LOOKING_UP) == LOOKING_UP)
+	if ((_currentAnimationIndex & LOOKING_UP) == LOOKING_UP)
 	{
 		bound.top -= 6;
 	}
 
-	if ((_currentAnimateIndex & NORMAL) == NORMAL)
+	if ((_currentAnimationIndex & NORMAL) == NORMAL)
 	{
 		if (this->getScale().x > 0)
 		{

@@ -1,13 +1,13 @@
 ﻿#include "PlayScene.h"
+#include "GameOverScene.h"
 #include "maputils.h"
 
 PlayScene::PlayScene()
 {
 	_viewport = new Viewport(0, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT);
-	_mapDirection = eMapDirection::HORIZONTAL;
 
 	// Vị trí neo của viewport ban đầu
-	_mapDirectionAnchorPoint = GVector2(896, 2468);
+	this->setMapDirection(eMapDirection::HORIZONTAL, GVector2(896, 2468));
 }
 
 PlayScene::~PlayScene()
@@ -188,8 +188,8 @@ bool PlayScene::checkEndGame()
 {
 	if (((Player*)_player)->getLifeNumber() < 0)
 	{
-		auto overScene = new IntroScene();
-		SceneManager::getInstance()->replaceScene(overScene);
+		auto gameOverScene = new GameOverScene();
+		SceneManager::getInstance()->replaceScene(gameOverScene);
 		return true;
 	}
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="921">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="976">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -29867,7 +29867,7 @@
    <tile gid="25"/>
    <tile gid="57"/>
    <tile gid="58"/>
-   <tile gid="59"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -30155,7 +30155,7 @@
    <tile gid="83"/>
    <tile gid="60"/>
    <tile gid="61"/>
-   <tile gid="62"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -30347,7 +30347,7 @@
    <tile gid="33"/>
    <tile gid="65"/>
    <tile gid="66"/>
-   <tile gid="67"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -30635,7 +30635,7 @@
    <tile gid="91"/>
    <tile gid="68"/>
    <tile gid="69"/>
-   <tile gid="70"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -46397,7 +46397,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
    <tile/>
    <tile/>
    <tile/>
@@ -46493,7 +46492,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
    <tile/>
    <tile/>
    <tile/>
@@ -46525,7 +46523,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -46877,7 +46877,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
    <tile/>
    <tile/>
    <tile/>
@@ -46973,7 +46972,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
    <tile/>
    <tile/>
    <tile/>
@@ -47005,7 +47003,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -47357,10 +47357,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
-   <tile/>
-   <tile/>
-   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -47402,6 +47398,10 @@
    <tile gid="26"/>
    <tile gid="26"/>
    <tile gid="26"/>
+   <tile gid="26"/>
+   <tile gid="26"/>
+   <tile gid="26"/>
+   <tile gid="26"/>
    <tile/>
    <tile/>
    <tile/>
@@ -47453,7 +47453,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
    <tile/>
    <tile/>
    <tile/>
@@ -47485,7 +47484,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -47837,7 +47837,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -47933,7 +47933,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -47965,7 +47965,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -48395,7 +48395,7 @@
    <tile/>
    <tile/>
    <tile gid="83"/>
-   <tile gid="86"/>
+   <tile/>
    <tile gid="83"/>
    <tile/>
    <tile/>
@@ -48875,7 +48875,7 @@
    <tile gid="89"/>
    <tile/>
    <tile gid="83"/>
-   <tile gid="86"/>
+   <tile/>
    <tile gid="83"/>
    <tile/>
    <tile gid="89"/>
@@ -49352,13 +49352,13 @@
    <tile gid="85"/>
    <tile gid="89"/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile gid="91"/>
-   <tile gid="86"/>
+   <tile/>
    <tile gid="91"/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -75160,13 +75160,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -75640,13 +75640,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="89"/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -76120,13 +76120,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="87"/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -76600,13 +76600,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="98"/>
    <tile/>
    <tile/>
-   <tile gid="86"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -91241,8 +91241,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="22"/>
-   <tile gid="22"/>
    <tile/>
    <tile/>
    <tile/>
@@ -91256,14 +91254,16 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="57"/>
-   <tile gid="58"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="60"/>
-   <tile gid="61"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -91721,8 +91721,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="30"/>
-   <tile gid="30"/>
    <tile/>
    <tile/>
    <tile/>
@@ -91736,14 +91734,16 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="65"/>
-   <tile gid="66"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="68"/>
-   <tile gid="69"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -92216,15 +92216,15 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="73"/>
-   <tile gid="74"/>
-   <tile gid="75"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="76"/>
-   <tile gid="77"/>
-   <tile gid="78"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -129636,7 +129636,7 @@
   <object id="44" name="Wall" type="20" x="672.667" y="2896" width="95.3333" height="16"/>
   <object id="45" name="Wall" type="20" x="704" y="2912.67" width="16" height="16"/>
   <object id="46" name="Wall" type="20" x="799.333" y="2894.67" width="96.6667" height="16"/>
-  <object id="47" name="Wall" type="20" x="832.667" y="2911.33" width="16" height="16"/>
+  <object id="47" name="Wall" type="20" x="831.94" y="2911.33" width="16" height="16"/>
   <object id="48" name="Wall" type="20" x="929.333" y="2896" width="95.3333" height="16"/>
   <object id="49" name="Wall" type="20" x="960.667" y="2912" width="16" height="16"/>
   <object id="50" name="Wall" type="20" x="1057.33" y="2896" width="238" height="16"/>
@@ -129750,7 +129750,7 @@
   <object id="179" name="Wall" type="20" x="945.333" y="384" width="110" height="95.3333"/>
   <object id="181" name="Wall" type="20" x="1056.67" y="416" width="31.3333" height="16"/>
   <object id="182" name="Wall" type="20" x="1073.33" y="432.667" width="30" height="16"/>
-  <object id="183" name="Wall" type="20" x="1056.66" y="448.667" width="158.667" height="14.6667"/>
+  <object id="183" name="Wall" type="20" x="721.16" y="480.667" width="221.667" height="14.6667"/>
   <object id="184" name="Wall" type="20" x="1214.67" y="383.333" width="64.6667" height="64"/>
   <object id="187" name="Wall" type="20" x="1312" y="383.333" width="64" height="64.6667"/>
   <object id="188" name="Wall" type="20" x="1408.67" y="400.667" width="64" height="16"/>
@@ -129767,9 +129767,9 @@
   <object id="206" name="Wall" type="20" x="1808" y="1104" width="16" height="62.6667"/>
   <object id="207" name="Wall" type="20" x="1472" y="1088.67" width="400" height="16"/>
   <object id="208" name="Wall" type="20" x="1711.95" y="990" width="32.0417" height="49.4167"/>
-  <object id="210" name="Wall" type="20" x="1535.33" y="976.667" width="16" height="62.6667"/>
-  <object id="211" name="Wall" type="20" x="1536" y="1040.67" width="96.6667" height="16"/>
-  <object id="212" name="Wall" type="20" x="1582.67" y="1056" width="16" height="16"/>
+  <object id="210" name="Wall" type="20" x="1535.33" y="976.667" width="19" height="62.6667"/>
+  <object id="211" name="Wall" type="20" x="1601.33" y="1040.67" width="31.3334" height="16"/>
+  <object id="212" name="Wall" type="20" x="1471.34" y="1056" width="127.333" height="16"/>
   <object id="213" name="Wall" type="20" x="895" y="385" width="48.5" height="16"/>
   <object id="214" name="Wall" type="20" x="912.5" y="368.5" width="143" height="16"/>
   <object id="215" name="Wall" type="20" x="945" y="240.5" width="46" height="78.5"/>
@@ -129785,12 +129785,11 @@
   <object id="231" name="Ripper" type="51" x="2528.42" y="2576.27" width="15.8182" height="15.4545"/>
   <object id="233" name="Ripper" type="51" x="2672.25" y="2448.27" width="15.8182" height="15.4545"/>
   <object id="235" name="Ripper" type="51" x="2559.42" y="2336.27" width="15.8182" height="15.4545"/>
-  <object id="269" name="Skree" type="53" x="831.758" y="2927.61" width="15.8182" height="15.4545"/>
+  <object id="269" name="Skree" type="53" x="831.946" y="2927.94" width="15.8182" height="15.4545"/>
   <object id="270" name="Skree" type="53" x="928.258" y="2912.44" width="15.8182" height="15.4545"/>
   <object id="274" name="Skree" type="53" x="1615.42" y="2911.61" width="15.8182" height="15.4545"/>
   <object id="275" name="Skree" type="53" x="1792.09" y="2894.94" width="15.8182" height="15.4545"/>
   <object id="276" name="Skree" type="53" x="1856.09" y="2928.27" width="15.8182" height="15.4545"/>
-  <object id="282" name="EnergyBall" type="82" x="623.758" y="3056.27" width="15.8182" height="15.4545"/>
   <object id="307" name="Skree" type="53" x="2144.76" y="991.94" width="15.8182" height="15.4545"/>
   <object id="308" name="Skree" type="53" x="2288.76" y="992.94" width="15.8182" height="15.4545"/>
   <object id="309" name="Skree" type="53" x="2049.09" y="992.606" width="15.8182" height="15.4545"/>
@@ -129809,19 +129808,9 @@
   <object id="341" name="Ripper" type="51" x="2559.42" y="2943.61" width="15.8182" height="15.4545"/>
   <object id="343" name="Ripper" type="51" x="2624.76" y="3007.61" width="15.8182" height="15.4545"/>
   <object id="345" name="Ripper" type="51" x="2671.42" y="3056.27" width="15.8182" height="15.4545"/>
-  <object id="346" name="LongBeam" type="84" x="1119.76" y="3071.94" width="15.8182" height="15.4545"/>
-  <object id="348" name="MissileRocketBall" type="86" x="672.46" y="3072.1" width="15.8182" height="15.4545"/>
   <object id="349" name="MaruMari" type="83" x="288.333" y="3024.27" width="15.3182" height="15.4545"/>
-  <object id="351" name="BombBall" type="87" x="1167.42" y="3072.27" width="15.8182" height="15.4545"/>
-  <object id="353" name="Mellow" type="54" x="1023.84" y="2960.52" width="15.8182" height="15.4545"/>
   <object id="360" name="Skree" type="53" x="767.591" y="2895.44" width="15.8182" height="15.4545"/>
-  <object id="361" name="EnergyTank" type="81" x="720.424" y="3071.77" width="15.8182" height="15.4545"/>
   <object id="372" name="Rio" type="55" x="2175.92" y="2928.27" width="15.8182" height="15.4545"/>
-  <object id="376" name="MissileRocketBall" type="86" x="1552.59" y="3070.77" width="15.8182" height="15.4545"/>
-  <object id="377" name="MissileRocketBall" type="86" x="1696.42" y="3071.6" width="15.8182" height="15.4545"/>
-  <object id="381" name="MissileRocketBall" type="86" x="1936.09" y="3070.94" width="15.8182" height="15.4545"/>
-  <object id="382" name="MissileRocketBall" type="86" x="2240.09" y="3071.27" width="15.8182" height="15.4545"/>
-  <object id="383" name="MissileRocketBall" type="86" x="2367.59" y="3071.27" width="15.8182" height="15.4545"/>
   <object id="404" name="Skree" type="53" x="1632.76" y="2927.61" width="15.8182" height="15.4545"/>
   <object id="405" name="Skree" type="53" x="1696.09" y="2894.94" width="15.8182" height="15.4545"/>
   <object id="406" name="Skree" type="53" x="1952.09" y="2910.94" width="15.8182" height="15.4545"/>
@@ -129903,7 +129892,6 @@
   <object id="486" name="Wall" type="20" x="3023" y="223.333" width="223.333" height="16"/>
   <object id="487" name="Wall" type="20" x="3023" y="239.333" width="16.6667" height="1280.67"/>
   <object id="489" name="Wall" type="20" x="3231" y="239.5" width="15.3334" height="1230.17"/>
-  <object id="492" name="Wall" type="20" x="3247" y="607.333" width="79.3334" height="112"/>
   <object id="494" name="Wall" type="20" x="1824.67" y="422.667" width="62.6667" height="8.66667"/>
   <object id="495" name="Wall" type="20" x="1824" y="431.333" width="63.3333" height="16"/>
   <object id="496" name="Wall" type="20" x="1632.67" y="407.333" width="31.3333" height="8"/>
@@ -130041,8 +130029,8 @@
   <object id="631" name="Wall" type="20" x="5088.67" y="1632" width="32.6667" height="16"/>
   <object id="632" name="Wall" type="20" x="5168.17" y="1615.5" width="31.6667" height="32"/>
   <object id="633" name="Wall" type="20" x="5279.67" y="1455.5" width="320.167" height="64.4091"/>
-  <object id="634" name="Wall" type="20" x="5280.67" y="1568.5" width="382.167" height="16"/>
-  <object id="635" name="Wall" type="20" x="5280.67" y="1585.5" width="16.1667" height="61.5"/>
+  <object id="634" name="Wall" type="20" x="5215.67" y="1568.5" width="447.167" height="15.3333"/>
+  <object id="635" name="Wall" type="20" x="5280.31" y="1583.86" width="16.1667" height="63.1364"/>
   <object id="636" name="Wall" type="20" x="5296.67" y="1648" width="15.6667" height="31"/>
   <object id="637" name="Wall" type="20" x="5582.67" y="1585.5" width="17.1667" height="61.5"/>
   <object id="638" name="Wall" type="20" x="5565.67" y="1646.5" width="17.6667" height="33.5"/>
@@ -130135,14 +130123,8 @@
   <object id="727" name="Wall" type="20" x="7423.83" y="960" width="48.3333" height="16"/>
   <object id="728" name="Wall" type="20" x="7375.83" y="1679.33" width="223.667" height="16"/>
   <object id="729" name="Wall" type="20" x="7375.83" y="1102.67" width="16" height="354"/>
-  <object id="731" name="Wall" type="20" x="7584" y="480.333" width="16" height="1199.33"/>
-  <object id="732" name="Wall" type="20" x="7375.33" y="480.667" width="16" height="479.667"/>
-  <object id="735" name="Wall" type="20" x="7455.83" y="654.667" width="48.3333" height="16"/>
-  <object id="736" name="Wall" type="20" x="7392.5" y="607.333" width="48.3333" height="16"/>
-  <object id="737" name="Wall" type="20" x="7551.83" y="623.333" width="31.6666" height="16"/>
-  <object id="738" name="Wall" type="20" x="7472.5" y="544.667" width="63.6666" height="16"/>
-  <object id="739" name="Wall" type="20" x="7423.83" y="480" width="48.3333" height="16"/>
-  <object id="740" name="Wall" type="20" x="7378.5" y="464.667" width="221.667" height="16"/>
+  <object id="731" name="Wall" type="20" x="7584" y="671.333" width="16" height="1008.33"/>
+  <object id="732" name="Wall" type="20" x="7375.33" y="671.667" width="16" height="288.667"/>
   <object id="742" name="Ripper" type="51" x="7535.42" y="1615.61" width="15.8182" height="15.4545"/>
   <object id="743" name="Ripper" type="51" x="7439.42" y="1503.61" width="15.8182" height="15.4545"/>
   <object id="744" name="Ripper" type="51" x="7406.76" y="1376.27" width="15.8182" height="15.4545"/>
@@ -130152,8 +130134,6 @@
   <object id="748" name="Ripper" type="51" x="7440.09" y="896.939" width="15.8182" height="15.4545"/>
   <object id="749" name="Ripper" type="51" x="7392.09" y="785.606" width="15.8182" height="15.4545"/>
   <object id="750" name="Ripper" type="51" x="7520.09" y="848.273" width="15.8182" height="15.4545"/>
-  <object id="751" name="Ripper" type="51" x="7535.42" y="656.939" width="15.8182" height="15.4545"/>
-  <object id="752" name="Ripper" type="51" x="7440.76" y="544.939" width="15.8182" height="15.4545"/>
   <object id="753" name="Waver" type="52" x="7408.09" y="879.606" width="15.8182" height="15.4545"/>
   <object id="754" name="Waver" type="52" x="7498.09" y="792.939" width="15.8182" height="15.4545"/>
   <object id="755" name="Wall" type="20" x="6336.5" y="976" width="1008.33" height="16"/>
@@ -130164,83 +130144,15 @@
   <object id="760" name="Wall" type="20" x="6432.19" y="1104.54" width="65.0038" height="16" rotation="-269.67"/>
   <object id="761" name="Wall" type="20" x="6080.5" y="1087.33" width="399.667" height="16"/>
   <object id="762" name="Wall" type="20" x="6143.17" y="959.333" width="193" height="16"/>
-  <object id="763" name="Wall" type="20" x="6209.83" y="1040.67" width="29.6666" height="16"/>
-  <object id="765" name="Wall" type="20" x="6144.17" y="976" width="15.6666" height="62.6667"/>
-  <object id="766" name="Wall" type="20" x="6167.33" y="1000" width="25.3333" height="40.6667"/>
-  <object id="767" name="Wall" type="20" x="6193.33" y="1023.33" width="16" height="48"/>
+  <object id="763" name="Wall" type="20" x="6207.5" y="1040.67" width="31.9999" height="16"/>
+  <object id="765" name="Wall" type="20" x="6144.17" y="976" width="17.6666" height="62.6667"/>
   <object id="768" name="Rio" type="55" x="7152.09" y="992.273" width="15.8182" height="15.4545"/>
   <object id="769" name="Rio" type="55" x="7008.09" y="992.273" width="15.8182" height="15.4545"/>
   <object id="770" name="Rio" type="55" x="6927.42" y="991.606" width="15.8182" height="15.4545"/>
   <object id="771" name="Rio" type="55" x="6751.42" y="992.273" width="15.8182" height="15.4545"/>
   <object id="772" name="Rio" type="55" x="6672.09" y="991.606" width="15.8182" height="15.4545"/>
   <object id="773" name="Wall" type="20" x="6064.17" y="1038.67" width="15.6666" height="62.6667"/>
-  <object id="774" name="Wall" type="20" x="3325.67" y="494.667" width="2497.33" height="16"/>
-  <object id="776" name="Wall" type="20" x="3327.67" y="654.667" width="62.6667" height="63.3333"/>
-  <object id="777" name="Wall" type="20" x="3391" y="688" width="256" height="30.6667"/>
-  <object id="778" name="Wall" type="20" x="3663.67" y="688.667" width="79.3334" height="30.6667"/>
-  <object id="779" name="Wall" type="20" x="3743.67" y="695.333" width="32" height="7.33333"/>
-  <object id="780" name="Wall" type="20" x="3775.67" y="656.667" width="512" height="61.3333"/>
-  <object id="781" name="Wall" type="20" x="3569" y="591.333" width="14.6667" height="79.3333"/>
-  <object id="782" name="Wall" type="20" x="3696.67" y="624.333" width="14.6667" height="63.3333"/>
-  <object id="783" name="Wall" type="20" x="3777.33" y="625" width="14.6667" height="30.6666"/>
-  <object id="784" name="Wall" type="20" x="3824" y="512" width="63.3334" height="48.6666"/>
-  <object id="785" name="Wall" type="20" x="3808" y="560.667" width="62" height="61.9999"/>
-  <object id="786" name="Wall" type="20" x="3840.67" y="624.667" width="14.6667" height="14.6666"/>
-  <object id="787" name="Wall" type="20" x="3936" y="511.333" width="479.333" height="30.6666"/>
-  <object id="788" name="Wall" type="20" x="3903.33" y="623.333" width="512.667" height="16.6666"/>
-  <object id="789" name="Wall" type="20" x="3919.67" y="592.333" width="494.667" height="16.6666"/>
   <object id="790" name="Wall" type="20" x="3921" y="559.667" width="526" height="16.6666"/>
-  <object id="791" name="Wall" type="20" x="4544.33" y="511" width="63.3334" height="63.9999"/>
-  <object id="792" name="Wall" type="20" x="4463.67" y="608.333" width="63.3334" height="62.6666"/>
-  <object id="793" name="Wall" type="20" x="4543.67" y="687" width="127.333" height="31.9999"/>
-  <object id="794" name="Wall" type="20" x="4671.67" y="672" width="191.333" height="46.6666"/>
-  <object id="795" name="Wall" type="20" x="4735" y="512" width="384" height="45.9999"/>
-  <object id="796" name="Wall" type="20" x="4735.67" y="607.333" width="383.333" height="64.6666"/>
-  <object id="797" name="Wall" type="20" x="4993" y="673.333" width="127.333" height="45.3332"/>
-  <object id="798" name="Wall" type="20" x="5121" y="656" width="62.6667" height="62.6666"/>
-  <object id="799" name="Wall" type="20" x="5183" y="688.667" width="192" height="29.9999"/>
-  <object id="800" name="Wall" type="20" x="5310.67" y="511.667" width="512.667" height="77.9999"/>
-  <object id="801" name="Wall" type="20" x="5312.67" y="657" width="62" height="29.9999"/>
-  <object id="802" name="Wall" type="20" x="5375.67" y="679.667" width="32" height="9.33323"/>
-  <object id="803" name="Wall" type="20" x="5409.67" y="657" width="62" height="61.9999"/>
-  <object id="804" name="Wall" type="20" x="5503" y="656.333" width="128" height="29.9999"/>
-  <object id="805" name="Wall" type="20" x="5569.67" y="688.333" width="62" height="29.9999"/>
-  <object id="806" name="Wall" type="20" x="5759.67" y="657" width="62" height="29.9999"/>
-  <object id="807" name="Wall" type="20" x="5665" y="657" width="62" height="60.6666"/>
-  <object id="808" name="Wall" type="20" x="5631.33" y="678.667" width="32" height="9.33323"/>
-  <object id="809" name="Wall" type="20" x="5823.33" y="639.333" width="32" height="79.9999"/>
-  <object id="810" name="Wall" type="20" x="5856" y="671.333" width="16" height="16"/>
-  <object id="811" name="Wall" type="20" x="6046.67" y="639.333" width="32" height="79.9999"/>
-  <object id="812" name="Wall" type="20" x="6031.33" y="672" width="16" height="16"/>
-  <object id="813" name="Wall" type="20" x="5888.67" y="560" width="16" height="16"/>
-  <object id="814" name="Wall" type="20" x="5984.67" y="560.667" width="16" height="16"/>
-  <object id="815" name="Wall" type="20" x="5936" y="592.667" width="16" height="79.3333"/>
-  <object id="816" name="Wall" type="20" x="5822" y="480" width="258.667" height="16"/>
-  <object id="817" name="Wall" type="20" x="6080" y="480" width="126" height="111.333"/>
-  <object id="818" name="Wall" type="20" x="6208" y="591.333" width="16" height="62.6667"/>
-  <object id="819" name="Wall" type="20" x="6078.67" y="655.333" width="144.667" height="16"/>
-  <object id="820" name="Ripper" type="51" x="3648.76" y="640.273" width="15.8182" height="15.4545"/>
-  <object id="821" name="ZebPipe" type="57" x="3751.42" y="686.273" width="15.8182" height="15.4545"/>
-  <object id="822" name="Waver" type="52" x="3440.76" y="655.606" width="15.8182" height="15.4545"/>
-  <object id="823" name="Waver" type="52" x="3440.76" y="511.606" width="15.8182" height="15.4545"/>
-  <object id="824" name="Waver" type="52" x="3439.42" y="607.606" width="15.8182" height="15.4545"/>
-  <object id="825" name="Waver" type="52" x="3440.09" y="559.606" width="15.8182" height="15.4545"/>
-  <object id="826" name="Waver" type="52" x="3744.09" y="575.606" width="15.8182" height="15.4545"/>
-  <object id="827" name="Waver" type="52" x="3904.09" y="544.273" width="15.8182" height="15.4545"/>
-  <object id="828" name="Waver" type="52" x="4384.76" y="670.939" width="15.8182" height="15.4545"/>
-  <object id="829" name="Ripper" type="51" x="4432.09" y="544.273" width="15.8182" height="15.4545"/>
-  <object id="830" name="Waver" type="52" x="4622.76" y="592.939" width="15.8182" height="15.4545"/>
-  <object id="831" name="Waver" type="52" x="4847.42" y="558.939" width="15.8182" height="15.4545"/>
-  <object id="832" name="Waver" type="52" x="5232.09" y="654.939" width="15.8182" height="15.4545"/>
-  <object id="833" name="Waver" type="52" x="5232.09" y="607.606" width="15.8182" height="15.4545"/>
-  <object id="834" name="Waver" type="52" x="5232.09" y="558.939" width="15.8182" height="15.4545"/>
-  <object id="835" name="Waver" type="52" x="5231.42" y="511.606" width="15.8182" height="15.4545"/>
-  <object id="836" name="ZebPipe" type="57" x="5384.76" y="672.273" width="15.8182" height="15.4545"/>
-  <object id="837" name="Rio" type="55" x="5472.76" y="591.606" width="15.8182" height="15.4545"/>
-  <object id="838" name="Rio" type="55" x="5728.09" y="592.273" width="15.8182" height="15.4545"/>
-  <object id="839" name="ZebPipe" type="57" x="5639.42" y="671.606" width="15.8182" height="15.4545"/>
-  <object id="840" name="Rio" type="55" x="6158.76" y="590.939" width="15.8182" height="15.4545"/>
-  <object id="841" name="Ripper" type="51" x="6159.42" y="606.939" width="15.8182" height="15.4545"/>
   <object id="842" name="BlueDoor" type="36" x="1184.22" y="2959.77" width="63.5682" height="47.4545"/>
   <object id="844" name="BlueDoor" type="36" x="2463.88" y="2959.94" width="63.5682" height="47.4545"/>
   <object id="845" name="ChangeMapDirection" type="21" x="2496.49" y="2991.55" width="15.8182" height="15.4545">
@@ -130288,15 +130200,7 @@
    </properties>
   </object>
   <object id="855" name="BlueDoor" type="36" x="2463.97" y="320.773" width="63.5682" height="47.4545"/>
-  <object id="857" name="BreakableBlueWall" type="39" x="672.486" y="3024.35" width="15.8182" height="15.8893"/>
-  <object id="858" name="BreakableRedWall" type="40" x="704.355" y="2992.39" width="15.9052" height="15.8023"/>
-  <object id="859" name="BreakableBlueWall" type="39" x="688.424" y="3024.35" width="15.8182" height="15.8893"/>
-  <object id="861" name="BreakableRedWall" type="40" x="720.337" y="3024.48" width="15.9052" height="15.8023"/>
-  <object id="862" name="BreakableRedWall" type="40" x="704.399" y="3008.4" width="15.9052" height="15.8023"/>
-  <object id="863" name="BreakableRedWall" type="40" x="736.337" y="3024.48" width="15.9052" height="15.8023"/>
-  <object id="864" name="BreakableRedWall" type="40" x="704.339" y="3024.4" width="15.9052" height="15.8023"/>
-  <object id="865" name="BreakableBlueWall" type="39" x="704.413" y="2976.38" width="15.8182" height="15.8893"/>
-  <object id="866" name="Fire" type="30" x="528.292" y="3047.4" width="31.1739" height="24.6023"/>
+  <object id="865" name="BreakableBlueWall" type="39" x="1313.08" y="3040.38" width="15.8182" height="15.8893"/>
   <object id="867" name="ChangeMapDirection" type="21" x="2751.95" y="1551.59" width="15.8182" height="15.4545">
    <properties>
     <property name="anchorpointx" value="2751.59"/>
@@ -130396,19 +130300,64 @@
   </object>
   <object id="913" name="BlueDoor" type="36" x="1440.47" y="2960.27" width="63.5682" height="47.4545"/>
   <object id="914" name="Wall" type="20" x="3103.67" y="416.667" width="63.3333" height="16"/>
-  <object id="915" name="BlueItemBall" type="42" x="800.227" y="3056.02" width="15.8182" height="15.4545">
+  <object id="921" name="Fire" type="30" x="720.413" y="455.699" width="223.174" height="24.1023"/>
+  <object id="922" name="Fire" type="30" x="1791.91" y="454.949" width="127.174" height="24.1023"/>
+  <object id="923" name="Wall" type="20" x="1791.17" y="479" width="128.667" height="16"/>
+  <object id="924" name="Fire" type="30" x="4319.91" y="2615.95" width="190.174" height="24.1023"/>
+  <object id="925" name="Wall" type="20" x="4318.5" y="2640" width="417.5" height="16"/>
+  <object id="926" name="Fire" type="30" x="4608.91" y="2615.45" width="126.674" height="24.1023"/>
+  <object id="928" name="Fire" type="30" x="3279.66" y="1656.45" width="993.174" height="24.1023"/>
+  <object id="929" name="Fire" type="30" x="4320.16" y="1655.95" width="191.674" height="24.1023"/>
+  <object id="930" name="Fire" type="30" x="4561.16" y="1655.95" width="734.674" height="24.1023"/>
+  <object id="931" name="Fire" type="30" x="5343.66" y="1655.45" width="191.674" height="24.1023"/>
+  <object id="932" name="Fire" type="30" x="5584.66" y="1655.95" width="494.674" height="24.1023"/>
+  <object id="933" name="Fire" type="30" x="6113.16" y="1654.95" width="190.174" height="24.1023"/>
+  <object id="934" name="Fire" type="30" x="6336.66" y="1655.95" width="1007.17" height="24.1023"/>
+  <object id="935" name="Wall" type="20" x="3266.16" y="1680" width="4095.67" height="16"/>
+  <object id="936" name="BreakableRedWall" type="40" x="4352.18" y="2495.85" width="15.9052" height="16.3023"/>
+  <object id="937" name="BreakableRedWall" type="40" x="4352.18" y="2511.97" width="15.9052" height="15.8023"/>
+  <object id="938" name="BreakableRedWall" type="40" x="4352.18" y="2527.85" width="15.9052" height="15.8023"/>
+  <object id="939" name="BreakableRedWall" type="40" x="4352.18" y="2543.85" width="15.9052" height="15.8023"/>
+  <object id="940" name="BreakableRedWall" type="40" x="4448.18" y="2496.1" width="15.9052" height="15.8023"/>
+  <object id="941" name="BreakableRedWall" type="40" x="4448.3" y="2511.97" width="15.9052" height="15.8023"/>
+  <object id="942" name="BreakableRedWall" type="40" x="4448.3" y="2527.97" width="15.9052" height="15.8023"/>
+  <object id="943" name="BreakableRedWall" type="40" x="4448.3" y="2544.1" width="15.9052" height="15.8023"/>
+  <object id="944" name="BreakableRedWall" type="40" x="4944.05" y="1536.1" width="15.9052" height="15.8023"/>
+  <object id="945" name="BreakableRedWall" type="40" x="4943.55" y="1551.6" width="15.9052" height="15.8023"/>
+  <object id="946" name="BreakableRedWall" type="40" x="4944.05" y="1567.1" width="15.9052" height="15.8023"/>
+  <object id="947" name="BreakableRedWall" type="40" x="4943.55" y="1583.6" width="15.9052" height="15.8023"/>
+  <object id="948" name="BreakableRedWall" type="40" x="6144.05" y="1632.6" width="15.9052" height="15.8023"/>
+  <object id="949" name="BreakableRedWall" type="40" x="6480.05" y="1536.6" width="15.9052" height="15.8023"/>
+  <object id="951" name="BreakableRedWall" type="40" x="6480.18" y="1552.1" width="15.9052" height="15.8023"/>
+  <object id="952" name="BreakableRedWall" type="40" x="6480.05" y="1568.1" width="15.9052" height="15.8023"/>
+  <object id="953" name="BreakableRedWall" type="40" x="6480.05" y="1584.1" width="15.9052" height="15.8023"/>
+  <object id="954" name="BreakableRedWall" type="40" x="6992.18" y="1536.1" width="15.9052" height="15.8023"/>
+  <object id="955" name="BreakableRedWall" type="40" x="6992.3" y="1552.1" width="15.9052" height="15.8023"/>
+  <object id="956" name="BreakableRedWall" type="40" x="6992.18" y="1567.97" width="15.9052" height="15.8023"/>
+  <object id="957" name="BreakableRedWall" type="40" x="6992.3" y="1583.85" width="15.9052" height="15.8023"/>
+  <object id="958" name="Wall" type="20" x="1561.77" y="1000.13" width="23.2614" height="39.75"/>
+  <object id="959" name="Wall" type="20" x="1584.9" y="1023.88" width="16" height="16"/>
+  <object id="960" name="BlueItemBall" type="42" x="1584.76" y="1008.27" width="15.8182" height="15.4545">
    <properties>
-    <property name="itemid" value="88"/>
+    <property name="itemid" value="84"/>
    </properties>
   </object>
-  <object id="916" name="Wall" type="20" x="777.011" y="3048" width="23.2614" height="39.75"/>
-  <object id="917" name="Wall" type="20" x="800.136" y="3071.75" width="16" height="16"/>
-  <object id="918" name="RedItemBall" type="43" x="896.03" y="3056.12" width="15.8182" height="15.4545">
+  <object id="961" name="Wall" type="20" x="6169.17" y="999.727" width="22.8864" height="39.75"/>
+  <object id="962" name="Wall" type="20" x="6192.17" y="1023.61" width="16" height="16"/>
+  <object id="963" name="RedItemBall" type="43" x="6192.32" y="1007.81" width="15.8182" height="15.4545">
    <properties>
-    <property name="itemid" value="85"/>
+    <property name="itemid" value="87"/>
    </properties>
   </object>
-  <object id="919" name="Wall" type="20" x="872.875" y="3048.04" width="22.8864" height="39.75"/>
-  <object id="920" name="Wall" type="20" x="895.875" y="3071.92" width="16" height="16"/>
+  <object id="964" name="Wall" type="20" x="6080.33" y="1055.67" width="127.333" height="16"/>
+  <object id="965" name="Wall" type="20" x="1087.67" y="448.667" width="141.333" height="16.6667"/>
+  <object id="966" name="Varia" type="88" x="1823.67" y="3024" width="16" height="16"/>
+  <object id="968" name="IceBeam" type="85" x="1761" y="2991.67" width="16" height="16"/>
+  <object id="970" name="EnergyTank" type="81" x="6192.42" y="1567.94" width="15.8182" height="15.4545"/>
+  <object id="971" name="MissileRocketBall" type="86" x="4400.42" y="2496.27" width="15.8182" height="15.4545"/>
+  <object id="972" name="BreakableRedWall" type="40" x="6191.87" y="1600.46" width="15.9052" height="15.8023"/>
+  <object id="973" name="BreakableRedWall" type="40" x="6240.23" y="1631.74" width="15.9052" height="15.8023"/>
+  <object id="974" name="BreakableRedWall" type="40" x="6191.87" y="1631.74" width="15.9052" height="15.8023"/>
+  <object id="975" name="BreakableRedWall" type="40" x="6192.05" y="1615.74" width="15.9052" height="15.8023"/>
  </objectgroup>
 </map>

@@ -131,11 +131,11 @@ typedef D3DXVECTOR2 GVector2;
 
 #ifndef SAFE_DELETE
 
-#define SAFE_DELETE(p) \
-if(p) \
+#define SAFE_DELETE(ptr) \
+if(ptr) \
 {\
-	delete (p); \
-	p = nullptr; \
+	delete (ptr); \
+	ptr = nullptr; \
 } \
 
 #endif // !SAFE_DELETE
