@@ -21,7 +21,11 @@ public:
 	void update(float deltatime);
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release(); 
+
+	bool isExploded();
 	
+	Animation* getEffectAnimation();
+	RECT getBounding();
 	CollisionBody* getCollisionBody();
 
 protected:
@@ -30,7 +34,6 @@ protected:
 
 	Sprite* _effect;
 	Animation* _effectAnimation;
-	StopWatch* _effectStopWatch;
 
 	bool _isExploded;
 	StopWatch* _explodeStopWatch;

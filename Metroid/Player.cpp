@@ -394,21 +394,55 @@ bool Player::checkWeaponCollision(BaseObject* object, eDirection& direction, eID
 		auto i = 0;
 		while (i < _listWeapon.size())
 		{
-			// Nếu có va chạm với object (là enemy, hoặc wall) đang xét thì xóa đạn, bomb đang xét ra khỏi list
-			// đồng thời return TRUE
-			auto weaponCollision = _listWeapon[i]->getCollisionBody();
-			if (weaponCollision->checkCollision(object, direction, dt, false))
+			if (_listWeapon[i]->getId() == BOMB) // Nếu là bomb
 			{
-				// Lưu lại weaponID để xét loại weapon sau này
-				weaponID = _listWeapon[i]->getId();
+				auto bomb = (Bomb*)_listWeapon[i];
+				// Nếu bomb chưa nổ hoặc object là tường thì không xét va chạm
+				if (!bomb->isExploded() || object->getId() == WALL)
+				{
+					i++;
+					continue;
+				}
+				else // Nếu bomb đã nổ
+				{
+					// Nếu có va chạm với object (là enemy) đang xét thì return TRUE
+					auto bombCollisionBody = bomb->getCollisionBody();
+					if (bombCollisionBody->checkCollision(object, direction, dt, false))
+					{
+						// Lưu lại weaponID để xét loại weapon sau này
+						weaponID = eID::BOMB;
+						return true;
+					}
 
-				auto object = _listWeapon[i];
-				_listWeapon.erase(_listWeapon.begin() + i);
-				object->release();
-				delete object;
-				
-				return true;
+					// Nổ xong mới xóa bomb ra khỏi list
+					auto bombEffectAnimation = ((Bomb*)_listWeapon[i])->getEffectAnimation();
+					if (!bombEffectAnimation->isAnimate())
+					{
+						_listWeapon.erase(_listWeapon.begin() + i);
+						bomb->release();
+						delete bomb;
+					}
+				}
 			}
+			else // Không phải bomb (mà là bullet, rocket)
+			{
+				// Nếu có va chạm với object (là enemy, hoặc wall) đang xét thì xóa đạn đang xét ra khỏi list
+				// đồng thời return TRUE
+				auto weaponCollisionBody = _listWeapon[i]->getCollisionBody();
+				if (weaponCollisionBody->checkCollision(object, direction, dt, false))
+				{
+					// Lưu lại weaponID để xét loại weapon sau này
+					weaponID = _listWeapon[i]->getId();
+
+					auto weapon = _listWeapon[i];
+					_listWeapon.erase(_listWeapon.begin() + i);
+					weapon->release();
+					delete weapon;
+
+					return true;
+				}
+			}
+
 			i++;
 		}
 	}
@@ -1447,13 +1481,13 @@ RECT Player::getBounding()
 	{
 		if (this->getScale().x > 0)
 		{
-			bound.right -= 3;
-			bound.left += 3;
+			bound.right -= 4;
+			bound.left += 4;
 		}
 		else if (this->getScale().x < 0)
 		{
-			bound.left += 3;
-			bound.right -= 3;
+			bound.left += 4;
+			bound.right -= 4;
 		}
 	}
 

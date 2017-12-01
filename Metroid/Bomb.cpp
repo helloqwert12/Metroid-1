@@ -10,8 +10,8 @@ Bomb::Bomb(int x, int y) : Weapon(BOMB)
 	_animation->addFrameRect(eID::BULLET_EFFECT, "bomb_01", "bomb_02", NULL);
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
-	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_01"));
-	_effectAnimation = new Animation(_effect, 0.1);
+	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_03"));
+	_effectAnimation = new Animation(_effect, 0.1, false);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
@@ -22,8 +22,6 @@ void Bomb::init()
 {
 	auto collisionBody = new CollisionBody(this);
 	_componentList["CollisionBody"] = collisionBody;
-
-	_effectStopWatch = new StopWatch();
 
 	_isExploded = false;
 	_explodeStopWatch = new StopWatch();
@@ -45,11 +43,6 @@ void Bomb::update(float deltatime)
 	{
 		_effect->setPosition(this->getPosition());
 		_effectAnimation->update(deltatime);
-
-		if (_effectStopWatch->isStopWatch(200))
-		{
-			this->setStatus(eStatus::DESTROY);
-		}
 	}
 
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -68,6 +61,25 @@ void Bomb::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 
 void Bomb::release()
 {
+}
+
+bool Bomb::isExploded()
+{
+	return _isExploded;
+}
+
+Animation* Bomb::getEffectAnimation()
+{
+	return _effectAnimation;
+}
+
+RECT Bomb::getBounding()
+{
+	// Bound dựa theo bomb nổ hay chưa
+	if (_isExploded)
+		return _effect->getBounding();
+	else
+		return _sprite->getBounding();
 }
 
 CollisionBody* Bomb::getCollisionBody()
