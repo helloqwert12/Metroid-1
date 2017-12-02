@@ -3,9 +3,6 @@
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
- <tileset firstgid="105" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
-  <image source="tileset_metroid.png" width="128" height="208"/>
- </tileset>
  <layer name="Tile Layer 1" width="480" height="270">
   <data>
    <tile/>

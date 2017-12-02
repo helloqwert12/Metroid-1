@@ -27,13 +27,15 @@ public:
 	void onKeyPressed(KeyEventArg* keyEvent);
 
 private:
+	Sprite* _choiceIcon;
 	TextSprite* _gameOver;
-	TextSprite* _pressStart;
-	TextSprite* _pressEscape;
+	TextSprite* _playAgain;
+	TextSprite* _endGame;
 
 	StopWatch* _flash;
 	StopWatch* _startGame;
 
+	bool _choice;
 	bool _isPressed;
 	bool _isDrawText;
 };

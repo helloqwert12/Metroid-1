@@ -110,6 +110,7 @@ enum eDirection
 	ALL = (TOP | BOTTOM | LEFT | RIGHT),
 };
 
+// Hướng map
 enum eMapDirection
 {
 	VERTICAL = 0,
@@ -126,7 +127,6 @@ enum eSoundId
 
 typedef D3DXVECTOR3 GVector3;
 typedef D3DXVECTOR2 GVector2;
-
 #define VECTOR2ZERO GVector2(0.0f, 0.0f)
 
 #ifndef SAFE_DELETE
