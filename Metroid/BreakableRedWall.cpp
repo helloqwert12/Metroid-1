@@ -11,7 +11,7 @@ BreakableRedWall::BreakableRedWall(int x, int y) : BaseObject(BREAKABLE_RED_WALL
 
 	_effect = SpriteManager::getInstance()->getSprite(eID::BULLET_EFFECT);
 	_effect->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BULLET_EFFECT, "explosion_01"));
-	_effectAnimation = new Animation(_effect, 0.1);
+	_effectAnimation = new Animation(_effect, 0.1f, false);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
 	_hitPoint = 1;
@@ -41,9 +41,14 @@ void BreakableRedWall::update(float deltatime)
 		_effect->setPosition(this->getPosition());
 		_effectAnimation->update(deltatime);
 
-		if (_effectStopWatch->isStopWatch(200))
+		if (!_effectAnimation->isAnimate())
 		{
-			this->setStatus(DESTROY);
+			if (_effectStopWatch->isStopWatch(5000))
+			{
+				_hitPoint = 1;
+				_effectAnimation->restart();
+				_effectStopWatch->restart();
+			}
 		}
 	}
 }
@@ -53,7 +58,10 @@ void BreakableRedWall::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	if (_hitPoint > 0)
 		_animation->draw(spriteHandle, viewport);
 	else
-		_effectAnimation->draw(spriteHandle, viewport);
+	{
+		if (_effectAnimation->isAnimate())
+			_effectAnimation->draw(spriteHandle, viewport);
+	}
 }
 
 void BreakableRedWall::release()
