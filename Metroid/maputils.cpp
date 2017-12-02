@@ -90,6 +90,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return changeMapDirection;
 		break;
 	}
+	case AUTO_MOVE_VIEWPORT:
+	{
+		auto autoMoveViewport = new AutoMoveViewport(left, bottom, right - left, top - bottom);
+		autoMoveViewport->init();
+		return autoMoveViewport;
+		break;
+	}
 	case FIRE:
 	{
 		auto fire = new Fire(left, bottom, right - left, top - bottom);
@@ -261,6 +268,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 	case CHANGE_MAP_DIRECTION:
 		return getChangeMapDirection(item, mapHeight);
 		break;
+	case AUTO_MOVE_VIEWPORT:
+		return getAutoMoveViewport(item, mapHeight);
+		break;
 	case FIRE:
 		return getFire(item, mapHeight);
 		break;
@@ -369,6 +379,22 @@ BaseObject* getChangeMapDirection(xml_node item, int mapHeight)
 	auto changeMapDirection = new ChangeMapDirection(x, y, width, height, mapDirection, mapDirectionAnchorPoint);
 	changeMapDirection->init();
 	return changeMapDirection;
+}
+
+BaseObject* getAutoMoveViewport(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	auto autoMoveViewport = new AutoMoveViewport(x, y, width, height);
+	autoMoveViewport->init();
+	return autoMoveViewport;
 }
 
 BaseObject* getFire(xml_node item, int mapHeight)

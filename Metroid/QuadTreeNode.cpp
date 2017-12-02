@@ -217,7 +217,7 @@ void QuadTreeNode::writeQuadTreeNode(ofstream &fileOut, QuadTreeNode* node)
 		for (auto object : node->_objects)
 		{
 			int objectId = object->getId();
-			if (objectId == WALL || objectId == FIRE || objectId == ZEB_PIPE) // Lấy bound left-top-right-bottom
+			if (objectId == WALL || objectId == AUTO_MOVE_VIEWPORT || objectId == FIRE || objectId == ZEB_PIPE) // Lấy bound left-top-right-bottom
 			{
 				fileOut << objectId << " ";
 				fileOut << object->getBounding().left << " " << object->getBounding().top << " " << object->getBounding().right << " " << object->getBounding().bottom << "\t";
@@ -275,7 +275,7 @@ void QuadTreeNode::readQuadTreeFromFile(ifstream &fileIn)
 
 		fileIn >> objectId;
 
-		if (objectId == WALL || objectId == FIRE || objectId == ZEB_PIPE) // Lấy bound left-top-right-bottom
+		if (objectId == WALL || objectId == AUTO_MOVE_VIEWPORT || objectId == FIRE || objectId == ZEB_PIPE) // Lấy bound left-top-right-bottom
 		{
 			fileIn >> left >> top >> right >> bottom;
 		}

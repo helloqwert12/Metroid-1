@@ -9,7 +9,9 @@
 
 #include "Wall.h"
 #include "ChangeMapDirection.h"
+#include "AutoMoveViewport.h"
 #include "Fire.h"
+
 #include "BlueDoor.h"
 #include "RedDoor.h"
 #include "BreakableBlueWall.h"
@@ -48,6 +50,7 @@ BaseObject* getObjectById(xml_node item, eID type, int mapHeight);
 // Object
 BaseObject* getWall(xml_node item, int mapHeight);
 BaseObject* getChangeMapDirection(xml_node item, int mapHeight);
+BaseObject* getAutoMoveViewport(xml_node item, int mapHeight);
 BaseObject* getFire(xml_node item, int mapHeight);
 BaseObject* getBlueDoor(xml_node item, int mapHeight);
 BaseObject* getRedDoor(xml_node item, int mapHeight);

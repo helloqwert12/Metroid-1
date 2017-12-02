@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AutoMoveViewport.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="BlueDoor.cpp" />
     <ClCompile Include="Bomb.cpp" />
@@ -221,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AutoMoveViewport.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BlueDoor.h" />
     <ClInclude Include="Bomb.h" />

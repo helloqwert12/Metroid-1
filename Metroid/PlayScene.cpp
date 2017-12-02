@@ -29,58 +29,58 @@ bool PlayScene::init()
 	// Tạo TileMap
 	_tileMap = TileMap::loadMapFromFile("Resources//Maps//map.tmx", eID::TILESET_METROID);
 
-	// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
-	auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
-	RECT rectMap;
-	rectMap.left = 0;
-	rectMap.top = quadTreeWidth;
-	rectMap.right = quadTreeWidth;
-	rectMap.bottom = 0;
-
-	// Tạo QuadTree
-	_root = new QuadTreeNode(rectMap);
-	QuadTreeNode::setInstance(_root);
-
-	// Đọc file XML để lấy list các object
-	auto listObject = getListObjectFromXML("Resources//Maps//map.tmx");
-
-	// Insert tất cả các object vào QuadTree
-	for (auto object : (*listObject))
-	{
-		_root->insert(object);
-	}
-	listObject->clear();
-
-	// Ghi QuadTree ra File
-	ofstream fileOut;
-	fileOut.open("Resources//Maps//QuadTree.txt", ios::out);
-
-	if (fileOut)
-	{
-		fileOut << "level\t\tleft\t\ttop\t\tright\t\tbottom\t\tnum_children\tnum_objects\tobjects" << endl;
-		QuadTreeNode::getInstance()->writeQuadTreeNode(fileOut, _root);
-
-		fileOut.close();
-	}
+	//// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
+	//auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
+	//RECT rectMap;
+	//rectMap.left = 0;
+	//rectMap.top = quadTreeWidth;
+	//rectMap.right = quadTreeWidth;
+	//rectMap.bottom = 0;
 
 	//// Tạo QuadTree
-	//_root = new QuadTreeNode(RECT{ 0, 0, 0, 0 });
+	//_root = new QuadTreeNode(rectMap);
 	//QuadTreeNode::setInstance(_root);
 
-	//// Đọc QuadTree từ File
-	//ifstream fileIn;
-	//fileIn.open("Resources//Maps//QuadTree.txt", ios::in);
+	//// Đọc file XML để lấy list các object
+	//auto listObject = getListObjectFromXML("Resources//Maps//map.tmx");
 
-	//if (fileIn)
+	//// Insert tất cả các object vào QuadTree
+	//for (auto object : (*listObject))
 	//{
-	//	// Đọc dòng đầu tiên của file (title)
-	//	string firstLine;
-	//	getline(fileIn, firstLine);
-
-	//	QuadTreeNode::getInstance()->readQuadTreeFromFile(fileIn);
-
-	//	fileIn.close();
+	//	_root->insert(object);
 	//}
+	//listObject->clear();
+
+	//// Ghi QuadTree ra File
+	//ofstream fileOut;
+	//fileOut.open("Resources//Maps//QuadTree.txt", ios::out);
+
+	//if (fileOut)
+	//{
+	//	fileOut << "level\t\tleft\t\ttop\t\tright\t\tbottom\t\tnum_children\tnum_objects\tobjects" << endl;
+	//	QuadTreeNode::getInstance()->writeQuadTreeNode(fileOut, _root);
+
+	//	fileOut.close();
+	//}
+
+	// Tạo QuadTree
+	_root = new QuadTreeNode(RECT{ 0, 0, 0, 0 });
+	QuadTreeNode::setInstance(_root);
+
+	// Đọc QuadTree từ File
+	ifstream fileIn;
+	fileIn.open("Resources//Maps//QuadTree.txt", ios::in);
+
+	if (fileIn)
+	{
+		// Đọc dòng đầu tiên của file (title)
+		string firstLine;
+		getline(fileIn, firstLine);
+
+		QuadTreeNode::getInstance()->readQuadTreeFromFile(fileIn);
+
+		fileIn.close();
+	}
 
 	this->getPlayer()->resetValues();
 
@@ -104,7 +104,7 @@ void PlayScene::update(float dt)
 	// Update viewport theo object tracker là Player
 	if (!_player->isInStatus(eStatus::DIE))
 	{
-		this->updateViewport(this->getPlayer());
+		this->updateViewport(this->getPlayer(), dt);
 	}
 
 	// Lấy HCN bound của viewport
@@ -151,14 +151,47 @@ void PlayScene::update(float dt)
 	}
 }
 
-void PlayScene::updateViewport(BaseObject* objectTracker)
+void PlayScene::updateViewport(BaseObject* objectTracker, float dt)
 {
 	// Update tọa độ viewport theo vị trí Player và hướng Map
 	GVector2 newPosition;
-	if (_mapDirection == eMapDirection::HORIZONTAL) // hướng ngang
-		newPosition = GVector2(objectTracker->getPositionX() - WINDOW_WIDTH / 2, _mapDirectionAnchorPoint.y + 400);
-	else if (_mapDirection == eMapDirection::VERTICAL) // hướng dọc
-		newPosition = GVector2(_mapDirectionAnchorPoint.x - 64, objectTracker->getPositionY() + 400);
+
+	auto player = (Player*)objectTracker;
+	auto playerInfo = player->getInfo();
+
+	if (!playerInfo->isAutoMoveViewport())
+	{
+		if (_mapDirection == eMapDirection::HORIZONTAL) // hướng ngang
+			newPosition = GVector2(objectTracker->getPositionX() - WINDOW_WIDTH / 2, _mapDirectionAnchorPoint.y + 400);
+		else if (_mapDirection == eMapDirection::VERTICAL) // hướng dọc
+			newPosition = GVector2(_mapDirectionAnchorPoint.x - 64, objectTracker->getPositionY() + 250);
+	}
+	else // Nếu đang trong chế độ AutoMoveViewport
+	{
+		newPosition = _viewport->getPositionWorld();
+
+		if (newPosition.x + WINDOW_WIDTH / 2 <= _viewportCheckpoint.x)
+			playerInfo->startMoveViewport();
+
+		if (player->getScale().x > 0)
+		{
+			newPosition.x += 150 * dt / 1000;
+			if (newPosition.x >= _viewportCheckpoint.x)
+			{
+				newPosition.x = _viewportCheckpoint.x;
+				playerInfo->setAutoMoveViewport(false);
+			}
+		}
+		else
+		{
+			newPosition.x -= 150 * dt / 1000;
+			if (newPosition.x + WINDOW_WIDTH <= _viewportCheckpoint.x)
+			{
+				newPosition.x = _viewportCheckpoint.x - WINDOW_WIDTH;
+				playerInfo->setAutoMoveViewport(false);
+			}
+		}
+	}
 
 	_viewport->setPositionWorld(newPosition);
 }
@@ -210,4 +243,14 @@ void PlayScene::setMapDirection(eMapDirection mapDirection, GVector2 mapDirectio
 {
 	_mapDirection = mapDirection;
 	_mapDirectionAnchorPoint = mapDirectionAnchorPoint;
+}
+
+GVector2 PlayScene::getViewportCheckpoint()
+{
+	return _viewportCheckpoint;
+}
+
+void PlayScene::setViewportCheckpoint(GVector2 viewportCheckpoint)
+{
+	_viewportCheckpoint = viewportCheckpoint;
 }

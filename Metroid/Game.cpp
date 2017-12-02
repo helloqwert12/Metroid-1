@@ -80,7 +80,7 @@ void Game::render()
 	float time = _gameTime->getElapsedGameTime();
 
 	// Xử lý để kéo, resize cửa sổ không bị dồn frame
-	if (time > this->_frameTime * 1.25f)
+	if (time > this->_frameTime * 1.1f)
 		time = _frameTime;
 
 	// Bắt đầu vẽ

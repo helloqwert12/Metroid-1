@@ -28,6 +28,9 @@ public:
 	eMapDirection getMapDirection();
 	void setMapDirection(eMapDirection mapDirection, GVector2 mapDirectionAnchorPoint);
 
+	GVector2 getViewportCheckpoint();
+	void setViewportCheckpoint(GVector2 viewportCheckpoint);
+
 private:
 	Text* _text;
 	TileMap* _tileMap;
@@ -38,12 +41,15 @@ private:
 	eMapDirection _mapDirection;
 	GVector2 _mapDirectionAnchorPoint;
 
+	// Điểm checkpoint để dịch viewport
+	GVector2 _viewportCheckpoint;
+
 	// List chứa các object nằm trong viewport bound (Retrieve từ QuadTree)
 	// Qua mỗi vòng lặp sẽ được update tại hàm update, và dùng để vẽ tại hàm draw
 	vector<BaseObject*> _activeObject;
 
 	// Update tọa độ viewport theo 1 object (chọn Player)
-	void updateViewport(BaseObject* objectTracker);
+	void updateViewport(BaseObject* objectTracker, float dt);
 
 	bool checkEndGame();
 };

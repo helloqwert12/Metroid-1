@@ -117,6 +117,30 @@ void Player::update(float deltatime)
 		_protectTime = 0;
 	}
 
+	if (_info->isAutoMoveViewport())
+	{
+		if (_info->isStartMoveViewport())
+		{
+			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
+			auto viewportCheckpoint = playScene->getViewportCheckpoint();
+
+			if (this->getScale().x > 0)
+			{
+				if (this->getPosition().x < viewportCheckpoint.x + 75)
+					this->setStatus(eStatus::MOVING_RIGHT);
+				else
+					this->setStatus(eStatus::NORMAL);
+			}
+			else
+			{
+				if (this->getPosition().x > viewportCheckpoint.x - 75)
+					this->setStatus(eStatus::MOVING_LEFT);
+				else
+					this->setStatus(eStatus::NORMAL);
+			}
+		}
+	}
+
 	if (_protectTime > 0)
 	{
 		_protectTime -= deltatime;
@@ -451,6 +475,9 @@ bool Player::checkWeaponCollision(BaseObject* object, eDirection& direction, eID
 
 void Player::onKeyPressed(KeyEventArg* keyEvent)
 {
+	if (_info->isAutoMoveViewport())
+		return;
+
 	if (this->isInStatus(eStatus::DIE))
 		return;
 
@@ -588,7 +615,7 @@ void Player::onKeyReleased(KeyEventArg* keyEvent)
 void Player::resetValues()
 {
 	_listWeapon.clear();
-	preWall = nullptr;
+	_preWall = nullptr;
 
 	this->setScale(SCALE_FACTOR);
 	_movingSpeed = MOVE_SPEED;
@@ -763,10 +790,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
 				this->standing();
-				preWall = object;
+				_preWall = object;
 			}
 		}
-		else if (preWall == object) // Xét sau va chạm
+		else if (_preWall == object) // Xét sau va chạm
 		{	
 			// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 			auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -789,6 +816,20 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
 			playScene->setMapDirection(((ChangeMapDirection*)object)->getMapDirection(), ((ChangeMapDirection*)object)->getMapDirectionAnchorPoint());
+		}
+	}
+	else if (objectId == AUTO_MOVE_VIEWPORT)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
+
+			if (this->getScale().x > 0)
+			playScene->setViewportCheckpoint(GVector2(object->getPosition().x, object->getPosition().y));
+			else
+			playScene->setViewportCheckpoint(GVector2(object->getPosition().x, object->getPosition().y));
+
+			_info->setAutoMoveViewport(true);
 		}
 	}
 	else if (objectId == FIRE)
@@ -899,10 +940,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
 					this->standing();
-					preWall = object;
+					_preWall = object;
 				}
 			}
-			else if (preWall == object) // Xét sau va chạm
+			else if (_preWall == object) // Xét sau va chạm
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -944,10 +985,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
 					this->standing();
-					preWall = object;
+					_preWall = object;
 				}
 			}
-			else if (preWall == object) // Xét sau va chạm
+			else if (_preWall == object) // Xét sau va chạm
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -989,10 +1030,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
 					this->standing();
-					preWall = object;
+					_preWall = object;
 				}
 			}
-			else if (preWall == object) // Xét sau va chạm
+			else if (_preWall == object) // Xét sau va chạm
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -1034,10 +1075,10 @@ float Player::checkCollision(BaseObject* object, float dt)
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
 					this->standing();
-					preWall = object;
+					_preWall = object;
 				}
 			}
-			else if (preWall == object) // Xét sau va chạm
+			else if (_preWall == object) // Xét sau va chạm
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -1461,6 +1502,11 @@ void Player::setStatus(eStatus status)
 GVector2 Player::getPosition()
 {
 	return _sprite->getPosition();
+}
+
+Info* Player::getInfo()
+{
+	return _info;
 }
 
 int Player::getLifeNumber()

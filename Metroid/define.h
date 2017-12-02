@@ -38,6 +38,7 @@ enum eID
 
 	WALL = 20,
 	CHANGE_MAP_DIRECTION = 21,
+	AUTO_MOVE_VIEWPORT = 22,
 	
 	FIRE = 30,
 

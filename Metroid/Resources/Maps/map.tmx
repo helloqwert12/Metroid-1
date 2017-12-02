@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="985">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="995">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -74735,10 +74735,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="11"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="12"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -75215,10 +75215,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="19"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="20"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -75695,10 +75695,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="27"/>
-   <tile gid="10"/>
-   <tile gid="10"/>
-   <tile gid="28"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -129659,7 +129659,7 @@
   <object id="77" name="Wall" type="20" x="2176.67" y="2911.67" width="16" height="16.3333"/>
   <object id="78" name="Wall" type="20" x="2240" y="2911.33" width="16" height="16"/>
   <object id="80" name="Wall" type="20" x="2320.67" y="2895.33" width="157.333" height="16"/>
-  <object id="81" name="Wall" type="20" x="2463.33" y="2911.33" width="16" height="49.3333"/>
+  <object id="81" name="Wall" type="20" x="2463.33" y="2911.33" width="48.25" height="49.3333"/>
   <object id="82" name="Wall" type="20" x="2399.33" y="3007.33" width="176.667" height="16"/>
   <object id="83" name="Wall" type="20" x="2464.42" y="3023.5" width="62" height="95"/>
   <object id="85" name="Wall" type="20" x="2494.67" y="3119.33" width="256.667" height="16"/>
@@ -129726,7 +129726,7 @@
   <object id="153" name="Wall" type="20" x="2751.33" y="1504" width="255.334" height="16"/>
   <object id="154" name="Wall" type="20" x="2399.33" y="368" width="192" height="16"/>
   <object id="155" name="Wall" type="20" x="2527.22" y="383.838" width="64" height="61.9824" rotation="-270.166"/>
-  <object id="156" name="Wall" type="20" x="2464" y="240" width="63.3334" height="78.6667"/>
+  <object id="156" name="Wall" type="20" x="2464" y="240" width="63.3334" height="79.9167"/>
   <object id="157" name="Wall" type="20" x="1984" y="448.667" width="480" height="16"/>
   <object id="159" name="Wall" type="20" x="2337" y="255.333" width="126" height="16"/>
   <object id="161" name="Wall" type="20" x="2209" y="256" width="94.6667" height="16"/>
@@ -129958,7 +129958,7 @@
   <object id="563" name="Wall" type="20" x="4671.17" y="2433" width="17.6667" height="16"/>
   <object id="564" name="Wall" type="20" x="5056.17" y="2432" width="17.6667" height="16"/>
   <object id="565" name="Wall" type="20" x="5216.17" y="2528" width="206.667" height="16"/>
-  <object id="566" name="Wall" type="20" x="5279.17" y="2432" width="47.6667" height="46"/>
+  <object id="566" name="Wall" type="20" x="5279.17" y="2432" width="49.4167" height="48"/>
   <object id="567" name="Wall" type="20" x="5551.17" y="2431" width="17.6667" height="109"/>
   <object id="568" name="Wall" type="20" x="5457.17" y="2529" width="96.6667" height="16"/>
   <object id="569" name="Wall" type="20" x="5279.17" y="2546" width="31.6667" height="63"/>
@@ -130071,7 +130071,7 @@
   <object id="677" name="Wall" type="20" x="7135.5" y="1615.5" width="33" height="16"/>
   <object id="678" name="Wall" type="20" x="7248.5" y="1456" width="64" height="16"/>
   <object id="679" name="Wall" type="20" x="7217" y="1600" width="30.5" height="31.5"/>
-  <object id="680" name="Wall" type="20" x="7328" y="1456.5" width="64" height="62.5"/>
+  <object id="680" name="Wall" type="20" x="7328" y="1456.5" width="64" height="63.4091"/>
   <object id="681" name="Wall" type="20" x="7296.5" y="1567.5" width="143" height="16"/>
   <object id="682" name="Wall" type="20" x="7329" y="1584.5" width="64" height="60.5"/>
   <object id="683" name="Wall" type="20" x="7345" y="1646" width="47.5" height="34"/>
@@ -130152,14 +130152,14 @@
   <object id="790" name="Wall" type="20" x="3921" y="559.667" width="526" height="16.6666"/>
   <object id="842" name="BlueDoor" type="36" x="1184.22" y="2959.77" width="63.5682" height="47.4545"/>
   <object id="844" name="BlueDoor" type="36" x="2463.88" y="2959.94" width="63.5682" height="47.4545"/>
-  <object id="845" name="ChangeMapDirection" type="21" x="2496.49" y="2991.55" width="15.8182" height="15.4545">
+  <object id="845" name="ChangeMapDirection" type="21" x="2496.05" y="2991.89" width="15.8182" height="15.5473">
    <properties>
     <property name="anchorpointx" value="2528.09"/>
     <property name="anchorpointy" value="2991.77"/>
     <property name="direction" value="0"/>
    </properties>
   </object>
-  <object id="846" name="ChangeMapDirection" type="21" x="2480.36" y="2991.67" width="15.8182" height="15.4545">
+  <object id="846" name="ChangeMapDirection" type="21" x="2479.99" y="2991.93" width="15.8182" height="15.3181">
    <properties>
     <property name="anchorpointx" value="2416.09"/>
     <property name="anchorpointy" value="3072.02"/>
@@ -130167,14 +130167,14 @@
    </properties>
   </object>
   <object id="847" name="BlueDoor" type="36" x="2464.22" y="1039.94" width="63.5682" height="47.4545"/>
-  <object id="848" name="ChangeMapDirection" type="21" x="2480.42" y="1071.83" width="15.8182" height="15.4545">
+  <object id="848" name="ChangeMapDirection" type="21" x="2480.42" y="1072.2" width="15.8182" height="15.0795">
    <properties>
     <property name="anchorpointx" value="2463.09"/>
     <property name="anchorpointy" value="1151.27"/>
     <property name="direction" value="1"/>
    </properties>
   </object>
-  <object id="849" name="ChangeMapDirection" type="21" x="2496.16" y="1071.21" width="15.8182" height="15.4545">
+  <object id="849" name="ChangeMapDirection" type="21" x="2496.16" y="1072.25" width="15.8182" height="15.1628">
    <properties>
     <property name="anchorpointx" value="2529.09"/>
     <property name="anchorpointy" value="1071.27"/>
@@ -130182,14 +130182,14 @@
    </properties>
   </object>
   <object id="852" name="Wall" type="20" x="2528" y="432.667" width="65.1667" height="16"/>
-  <object id="853" name="ChangeMapDirection" type="21" x="2480.29" y="352.605" width="15.8182" height="15.4545">
+  <object id="853" name="ChangeMapDirection" type="21" x="2480.29" y="351.855" width="15.8182" height="15.7045">
    <properties>
     <property name="anchorpointx" value="2448.34"/>
     <property name="anchorpointy" value="432.52"/>
     <property name="direction" value="1"/>
    </properties>
   </object>
-  <object id="854" name="ChangeMapDirection" type="21" x="2496.32" y="352.326" width="15.8182" height="15.4545">
+  <object id="854" name="ChangeMapDirection" type="21" x="2496.32" y="352.076" width="15.8182" height="15.7045">
    <properties>
     <property name="anchorpointx" value="2528.34"/>
     <property name="anchorpointy" value="352.02"/>
@@ -130198,7 +130198,7 @@
   </object>
   <object id="855" name="BlueDoor" type="36" x="2463.97" y="320.773" width="63.5682" height="47.4545"/>
   <object id="865" name="BreakableBlueWall" type="39" x="1313.08" y="3040.38" width="15.8182" height="15.8893"/>
-  <object id="867" name="ChangeMapDirection" type="21" x="2751.95" y="1551.59" width="15.8182" height="15.4545">
+  <object id="867" name="ChangeMapDirection" type="21" x="2751.95" y="1552.14" width="15.8182" height="14.909">
    <properties>
     <property name="anchorpointx" value="2751.59"/>
     <property name="anchorpointy" value="1630.77"/>
@@ -130206,7 +130206,7 @@
    </properties>
   </object>
   <object id="868" name="BlueDoor" type="36" x="2720.47" y="1519.86" width="63.5682" height="47.4545"/>
-  <object id="869" name="ChangeMapDirection" type="21" x="2735.58" y="1551.47" width="15.8182" height="15.4545">
+  <object id="869" name="ChangeMapDirection" type="21" x="2735.58" y="1552.26" width="15.8182" height="14.6666">
    <properties>
     <property name="anchorpointx" value="2528.59"/>
     <property name="anchorpointy" value="1568.77"/>
@@ -130221,7 +130221,7 @@
     <property name="direction" value="1"/>
    </properties>
   </object>
-  <object id="878" name="ChangeMapDirection" type="21" x="3008.6" y="1552.16" width="15.8182" height="15.4545">
+  <object id="878" name="ChangeMapDirection" type="21" x="3008.24" y="1552.16" width="15.8182" height="15.4545">
    <properties>
     <property name="anchorpointx" value="3040.34"/>
     <property name="anchorpointy" value="1630.77"/>
@@ -130229,14 +130229,14 @@
    </properties>
   </object>
   <object id="879" name="BlueDoor" type="36" x="2976.22" y="1520.36" width="63.5682" height="47.4545"/>
-  <object id="881" name="ChangeMapDirection" type="21" x="3263.7" y="1552" width="15.8182" height="15.4545">
+  <object id="881" name="ChangeMapDirection" type="21" x="3263.7" y="1552.55" width="15.8182" height="14.909">
    <properties>
     <property name="anchorpointx" value="3296.59"/>
     <property name="anchorpointy" value="1630.27"/>
     <property name="direction" value="1"/>
    </properties>
   </object>
-  <object id="882" name="ChangeMapDirection" type="21" x="3247.33" y="1551.88" width="15.8182" height="15.4545">
+  <object id="882" name="ChangeMapDirection" type="21" x="3248.06" y="1552.27" width="15.8182" height="15.0606">
    <properties>
     <property name="anchorpointx" value="3040.34"/>
     <property name="anchorpointy" value="1552.02"/>
@@ -130248,7 +130248,7 @@
   <object id="889" name="BlueDoor" type="36" x="4512.22" y="1520.09" width="63.5682" height="47.4545"/>
   <object id="890" name="BlueDoor" type="36" x="5280.03" y="1520.3" width="63.5682" height="47.8181"/>
   <object id="891" name="BlueDoor" type="36" x="5536.22" y="1520.27" width="63.5682" height="47.4545"/>
-  <object id="892" name="ChangeMapDirection" type="21" x="7360.6" y="1552.07" width="15.8182" height="15.4545">
+  <object id="892" name="ChangeMapDirection" type="21" x="7360.24" y="1552.93" width="15.8182" height="14.5909">
    <properties>
     <property name="anchorpointx" value="7392.42"/>
     <property name="anchorpointy" value="1552.27"/>
@@ -130256,14 +130256,14 @@
    </properties>
   </object>
   <object id="893" name="BlueDoor" type="36" x="7328.22" y="1520.27" width="63.5682" height="47.4545"/>
-  <object id="894" name="ChangeMapDirection" type="21" x="7344.06" y="1552" width="15.8182" height="15.4545">
+  <object id="894" name="ChangeMapDirection" type="21" x="7344.06" y="1552.27" width="15.8182" height="15.1818">
    <properties>
     <property name="anchorpointx" value="7312.09"/>
     <property name="anchorpointy" value="1632.27"/>
     <property name="direction" value="1"/>
    </properties>
   </object>
-  <object id="900" name="ChangeMapDirection" type="21" x="7360.39" y="1071.99" width="15.8182" height="15.4545">
+  <object id="900" name="ChangeMapDirection" type="21" x="7360.39" y="1072.24" width="15.8182" height="15.2045">
    <properties>
     <property name="anchorpointx" value="7392.34"/>
     <property name="anchorpointy" value="1072.02"/>
@@ -130281,14 +130281,14 @@
   <object id="906" name="RedDoor" type="37" x="1696.17" y="1039.77" width="63.6591" height="48.4545"/>
   <object id="907" name="RedDoor" type="37" x="6304.12" y="1039.73" width="63.6591" height="48.4545"/>
   <object id="908" name="BlueDoor" type="36" x="3231.85" y="2479.82" width="63.5682" height="47.4545"/>
-  <object id="909" name="ChangeMapDirection" type="21" x="3247.96" y="2511.93" width="15.8182" height="15.4545">
+  <object id="909" name="ChangeMapDirection" type="21" x="3247.96" y="2512.3" width="15.8182" height="15.0833">
    <properties>
     <property name="anchorpointx" value="3039.84"/>
     <property name="anchorpointy" value="2528.27"/>
     <property name="direction" value="0"/>
    </properties>
   </object>
-  <object id="910" name="ChangeMapDirection" type="21" x="3263.83" y="2511.55" width="15.8182" height="15.4545">
+  <object id="910" name="ChangeMapDirection" type="21" x="3263.83" y="2512.47" width="15.8182" height="14.5378">
    <properties>
     <property name="anchorpointx" value="3297.09"/>
     <property name="anchorpointy" value="2592.27"/>
@@ -130356,5 +130356,8 @@
   <object id="973" name="BreakableRedWall" type="40" x="6240.23" y="1631.74" width="15.9052" height="15.8023"/>
   <object id="974" name="BreakableRedWall" type="40" x="6191.87" y="1631.74" width="15.9052" height="15.8023"/>
   <object id="975" name="BreakableRedWall" type="40" x="6192.05" y="1615.74" width="15.9052" height="15.8023"/>
+  <object id="990" name="AutoMoveViewport" type="22" x="2487.95" y="2991.99" width="16" height="15.5455"/>
+  <object id="993" name="BlueDoor" type="36" x="5279.72" y="2480.47" width="63.5682" height="47.4545"/>
+  <object id="994" name="AutoMoveViewport" type="22" x="832.5" y="3071.98" width="16" height="15.5455"/>
  </objectgroup>
 </map>

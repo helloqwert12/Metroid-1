@@ -87,6 +87,7 @@ public:
 	void setStatus(eStatus status);
 
 	GVector2 getPosition();
+	Info* getInfo();
 	int getLifeNumber();
 	RECT getBounding();
 
@@ -120,7 +121,7 @@ private:
 	GVector2 getVelocity();
 
 	// Dùng để xét đã rời khỏi Wall đụng trước đó hay chưa
-	BaseObject* preWall;
+	BaseObject* _preWall;
 
 	// Dùng để giới hạn thời gian giữa 2 lần bắn đạn hoặc đặt bomb
 	StopWatch* _attackStopWatch;

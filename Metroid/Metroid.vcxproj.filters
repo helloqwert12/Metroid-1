@@ -288,6 +288,9 @@
     <ClCompile Include="GameOverScene.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="AutoMoveViewport.cpp">
+      <Filter>Source Files\Object\EmptyObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -502,6 +505,9 @@
     </ClInclude>
     <ClInclude Include="GameOverScene.h">
       <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoMoveViewport.h">
+      <Filter>Header Files\Object\EmptyObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -41,6 +41,9 @@ void Info::init()
 	_hasMaruMari = false;
 	_hasBomb = false;
 	_hasVaria = false;
+
+	_isAutoMoveViewport = false;
+	_startMoveViewport = false;
 }
 
 void Info::update(float deltatime)
@@ -212,4 +215,24 @@ bool Info::hasVaria()
 void Info::setVaria(bool flag)
 {
 	_hasVaria = flag;
+}
+
+bool Info::isAutoMoveViewport()
+{
+	return _isAutoMoveViewport;
+}
+
+void Info::setAutoMoveViewport(bool flag)
+{
+	_isAutoMoveViewport = flag;
+}
+
+bool Info::isStartMoveViewport()
+{
+	return _startMoveViewport;
+}
+
+void Info::startMoveViewport()
+{
+	_startMoveViewport = true;
 }

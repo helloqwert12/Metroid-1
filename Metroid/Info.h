@@ -43,6 +43,12 @@ public:
 	bool hasVaria();
 	void setVaria(bool flag);
 
+	bool isAutoMoveViewport();
+	void setAutoMoveViewport(bool flag);
+
+	bool isStartMoveViewport();
+	void startMoveViewport();
+
 private:
 	Sprite* _iconLife;
 	int _lifeNumber;
@@ -68,6 +74,9 @@ private:
 	bool _hasMaruMari;
 	bool _hasBomb;
 	bool _hasVaria;
+
+	bool _isAutoMoveViewport;
+	bool _startMoveViewport;
 };
 
 #endif // !__INFO_H__
