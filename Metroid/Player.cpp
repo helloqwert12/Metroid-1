@@ -1523,6 +1523,26 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 	}
+	else if (objectId == MOTHER_BRAIN)
+	{
+		if (!((MotherBrain*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, false))
+			{
+				beHit(direction);
+				takeDamage(8);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((MotherBrain*)object)->wasHit(5);
+				else
+					((MotherBrain*)object)->wasHit(1);
+			}
+		}
+	}
 	else if (objectId == ENERGY_TANK)
 	{
 		if (collisionBody->checkCollision(object, direction, dt, false))

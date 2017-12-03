@@ -183,6 +183,7 @@
     <ClCompile Include="Metroid.cpp" />
     <ClCompile Include="MissileRocket.cpp" />
     <ClCompile Include="MissileRocketBall.cpp" />
+    <ClCompile Include="MotherBrain.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NormalBullet.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -259,6 +260,7 @@
     <ClInclude Include="Metroid.h" />
     <ClInclude Include="MissileRocket.h" />
     <ClInclude Include="MissileRocketBall.h" />
+    <ClInclude Include="MotherBrain.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="NormalBullet.h" />
     <ClInclude Include="Player.h" />

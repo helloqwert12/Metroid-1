@@ -297,6 +297,9 @@
     <ClCompile Include="Metroid.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="MotherBrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -520,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="Metroid.h">
       <Filter>Header Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="MotherBrain.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

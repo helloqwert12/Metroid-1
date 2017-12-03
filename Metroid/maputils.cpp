@@ -211,6 +211,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return metroid;
 		break;
 	}
+	case MOTHER_BRAIN:
+	{
+		auto motherBrain = new MotherBrain(left, top);
+		motherBrain->init();
+		return motherBrain;
+		break;
+	}
 	case ENERGY_TANK:
 	{
 		auto energyTank = new EnergyTank(left, top);
@@ -332,6 +339,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case METROID:
 		return getMetroid(item, mapHeight);
+		break;
+	case MOTHER_BRAIN:
+		return getMotherBrain(item, mapHeight);
 		break;
 	case ENERGY_TANK:
 		return getEnergyTank(item, mapHeight);
@@ -587,6 +597,25 @@ BaseObject* getMetroid(xml_node item, int mapHeight)
 	auto metroid = new Metroid(x, y, false);
 	metroid->init();
 	return metroid;
+}
+
+BaseObject* getMotherBrain(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto motherBrain = new MotherBrain(x, y);
+	motherBrain->init();
+	return motherBrain;
 }
 
 BaseObject* getRipper(xml_node item, int mapHeight)
