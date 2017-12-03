@@ -218,6 +218,7 @@
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Zeb.cpp" />
     <ClCompile Include="ZebPipe.cpp" />
+    <ClCompile Include="Zeebetite.cpp" />
     <ClCompile Include="Zoomer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +293,7 @@
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Zeb.h" />
     <ClInclude Include="ZebPipe.h" />
+    <ClInclude Include="Zeebetite.h" />
     <ClInclude Include="Zoomer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

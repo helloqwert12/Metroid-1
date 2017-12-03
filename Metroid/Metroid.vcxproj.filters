@@ -291,6 +291,9 @@
     <ClCompile Include="AutoMoveViewport.cpp">
       <Filter>Source Files\Object\EmptyObject</Filter>
     </ClCompile>
+    <ClCompile Include="Zeebetite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -508,6 +511,9 @@
     </ClInclude>
     <ClInclude Include="AutoMoveViewport.h">
       <Filter>Header Files\Object\EmptyObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Zeebetite.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

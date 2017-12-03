@@ -148,6 +148,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return redItemBall;
 		break;
 	}
+	case ZEEBETITE:
+	{
+		auto zeebetite = new Zeebetite(left, bottom);
+		zeebetite->init();
+		return zeebetite;
+		break;
+	}
 	case RIPPER:
 	{
 		auto ripper = new Ripper(left, top);
@@ -291,6 +298,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case RED_ITEM_BALL:
 		return getRedItemBall(item, mapHeight);
+		break;
+	case ZEEBETITE:
+		return getZeebetite(item, mapHeight);
 		break;
 	case RIPPER:
 		return getRipper(item, mapHeight);
@@ -529,6 +539,25 @@ BaseObject* getRedItemBall(xml_node item, int mapHeight)
 	auto redItemBall = new RedItemBall(x, y, itemId);
 	redItemBall->init();
 	return redItemBall;
+}
+
+BaseObject* getZeebetite(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto zeebetite = new Zeebetite(x, y);
+	zeebetite->init();
+	return zeebetite;
 }
 
 BaseObject* getRipper(xml_node item, int mapHeight)

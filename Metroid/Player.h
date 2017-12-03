@@ -36,6 +36,8 @@
 #include "ZebPipe.h"
 #include "Zoomer.h"
 
+#include "Zeebetite.h"
+
 #include "EnergyTank.h"
 #include "EnergyBall.h"
 #include "MaruMari.h"

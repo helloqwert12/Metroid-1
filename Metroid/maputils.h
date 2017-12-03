@@ -27,6 +27,8 @@
 #include "ZebPipe.h"
 #include "Zoomer.h"
 
+#include "Zeebetite.h"
+
 #include "EnergyTank.h"
 #include "EnergyBall.h"
 #include "MaruMari.h"
@@ -67,6 +69,9 @@ BaseObject* getMellow(xml_node item, int mapHeight);
 BaseObject* getRio(xml_node item, int mapHeight);
 BaseObject* getZebPipe(xml_node item, int mapHeight);
 BaseObject* getZoomer(xml_node item, int mapHeight);
+
+// Boss Stage
+BaseObject* getZeebetite(xml_node item, int mapHeight);
 
 // Item
 BaseObject* getEnergyTank(xml_node item, int mapHeight);

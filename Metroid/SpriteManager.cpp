@@ -70,6 +70,11 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	this->_listSprite[eID::ITEM_BALL] = sprite;
 	this->loadSpriteInfo(eID::ITEM_BALL, "Resources//Images//item_ball.txt");
 
+	sprite = new Sprite(spriteHandle, L"Resources//Images//boss_stage.png");
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite[eID::BOSS_STAGE] = sprite;
+	this->loadSpriteInfo(eID::BOSS_STAGE, "Resources//Images//boss_stage.txt");
+
 	// Load TileSet
 	sprite = loadTileSetFromXML(spriteHandle, L"Resources//Maps//map.tmx");
 	sprite->setOrigin(VECTOR2ZERO);

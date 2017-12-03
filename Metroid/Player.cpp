@@ -1099,6 +1099,30 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 	}
+	else if (objectId == ZEEBETITE)
+	{
+		if (!((Zeebetite*)object)->isDead())
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((Zeebetite*)object)->wasHit(5);
+				else
+					((Zeebetite*)object)->wasHit(1);
+			}
+		}
+	}
 	else if (objectId == RIPPER)
 	{
 		if (!((Ripper*)object)->isDead() && _protectTime <= 0)
