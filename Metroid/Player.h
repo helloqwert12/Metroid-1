@@ -39,6 +39,7 @@
 #include "Zeebetite.h"
 #include "Metroid.h"
 #include "MotherBrain.h"
+#include "Rinka.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"

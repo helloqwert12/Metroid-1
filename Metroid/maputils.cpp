@@ -218,6 +218,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return motherBrain;
 		break;
 	}
+	case RINKA:
+	{
+		auto rinka = new Rinka(left, top, GVector2(50, 0));
+		rinka->init();
+		return rinka;
+		break;
+	}
 	case ENERGY_TANK:
 	{
 		auto energyTank = new EnergyTank(left, top);
@@ -342,6 +349,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case MOTHER_BRAIN:
 		return getMotherBrain(item, mapHeight);
+		break;
+	case RINKA:
+		return getRinka(item, mapHeight);
 		break;
 	case ENERGY_TANK:
 		return getEnergyTank(item, mapHeight);
@@ -561,63 +571,6 @@ BaseObject* getRedItemBall(xml_node item, int mapHeight)
 	return redItemBall;
 }
 
-BaseObject* getZeebetite(xml_node item, int mapHeight)
-{
-	auto properties = getObjectProperties(item);
-	if (properties.size() == 0)
-		return nullptr;
-
-	auto width = 2 * stoi(properties["width"]);
-	auto height = 2 * stoi(properties["height"]);
-	auto x = 2 * stoi(properties["x"]);
-	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
-
-	x = x + width / 2;
-	y = y + height / 2;
-
-	auto zeebetite = new Zeebetite(x, y);
-	zeebetite->init();
-	return zeebetite;
-}
-
-BaseObject* getMetroid(xml_node item, int mapHeight)
-{
-	auto properties = getObjectProperties(item);
-	if (properties.size() == 0)
-		return nullptr;
-
-	auto width = 2 * stoi(properties["width"]);
-	auto height = 2 * stoi(properties["height"]);
-	auto x = 2 * stoi(properties["x"]);
-	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
-
-	x = x + width / 2;
-	y = y + height / 2;
-
-	auto metroid = new Metroid(x, y, false);
-	metroid->init();
-	return metroid;
-}
-
-BaseObject* getMotherBrain(xml_node item, int mapHeight)
-{
-	auto properties = getObjectProperties(item);
-	if (properties.size() == 0)
-		return nullptr;
-
-	auto width = 2 * stoi(properties["width"]);
-	auto height = 2 * stoi(properties["height"]);
-	auto x = 2 * stoi(properties["x"]);
-	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
-
-	x = x + width / 2;
-	y = y + height / 2;
-
-	auto motherBrain = new MotherBrain(x, y);
-	motherBrain->init();
-	return motherBrain;
-}
-
 BaseObject* getRipper(xml_node item, int mapHeight)
 {
 	auto properties = getObjectProperties(item);
@@ -746,6 +699,82 @@ BaseObject* getZoomer(xml_node item, int mapHeight)
 	auto zoomer = new Zoomer(x, y);
 	zoomer->init();
 	return zoomer;
+}
+
+BaseObject* getZeebetite(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto zeebetite = new Zeebetite(x, y);
+	zeebetite->init();
+	return zeebetite;
+}
+
+BaseObject* getMetroid(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto metroid = new Metroid(x, y, false);
+	metroid->init();
+	return metroid;
+}
+
+BaseObject* getMotherBrain(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto motherBrain = new MotherBrain(x, y);
+	motherBrain->init();
+	return motherBrain;
+}
+
+BaseObject* getRinka(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto rinka = new Rinka(x, y, GVector2(50, 0));
+	rinka->init();
+	return rinka;
 }
 
 BaseObject* getEnergyTank(xml_node item, int mapHeight)
