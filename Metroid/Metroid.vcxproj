@@ -192,6 +192,7 @@
     <ClCompile Include="RedDoor.cpp" />
     <ClCompile Include="RedItemBall.cpp" />
     <ClCompile Include="Rinka.cpp" />
+    <ClCompile Include="RinkaCannon.cpp" />
     <ClCompile Include="Rio.cpp" />
     <ClCompile Include="Ripper.cpp" />
     <ClCompile Include="SinMovement.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="RedDoor.h" />
     <ClInclude Include="RedItemBall.h" />
     <ClInclude Include="Rinka.h" />
+    <ClInclude Include="RinkaCannon.h" />
     <ClInclude Include="Rio.h" />
     <ClInclude Include="Ripper.h" />
     <ClInclude Include="SinMovement.h" />

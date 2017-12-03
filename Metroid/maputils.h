@@ -30,7 +30,7 @@
 #include "Zeebetite.h"
 #include "Metroid.h"
 #include "MotherBrain.h"
-#include "Rinka.h"
+#include "RinkaCannon.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
@@ -77,7 +77,7 @@ BaseObject* getZoomer(xml_node item, int mapHeight);
 BaseObject* getZeebetite(xml_node item, int mapHeight);
 BaseObject* getMetroid(xml_node item, int mapHeight);
 BaseObject* getMotherBrain(xml_node item, int mapHeight);
-BaseObject* getRinka(xml_node item, int mapHeight);
+BaseObject* getRinkaCannon(xml_node item, int mapHeight);
 
 // Item
 BaseObject* getEnergyTank(xml_node item, int mapHeight);

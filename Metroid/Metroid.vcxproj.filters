@@ -301,6 +301,9 @@
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Rinka.cpp">
+      <Filter>Source Files\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RinkaCannon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -531,6 +534,9 @@
       <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Rinka.h">
+      <Filter>Header Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RinkaCannon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

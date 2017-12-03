@@ -218,11 +218,11 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return motherBrain;
 		break;
 	}
-	case RINKA:
+	case RINKA_CANNON:
 	{
-		auto rinka = new Rinka(left, top, GVector2(50, 0));
-		rinka->init();
-		return rinka;
+		auto rinkaCannon = new RinkaCannon(left, bottom, right - left, top - bottom);
+		rinkaCannon->init();
+		return rinkaCannon;
 		break;
 	}
 	case ENERGY_TANK:
@@ -350,8 +350,8 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 	case MOTHER_BRAIN:
 		return getMotherBrain(item, mapHeight);
 		break;
-	case RINKA:
-		return getRinka(item, mapHeight);
+	case RINKA_CANNON:
+		return getRinkaCannon(item, mapHeight);
 		break;
 	case ENERGY_TANK:
 		return getEnergyTank(item, mapHeight);
@@ -758,7 +758,7 @@ BaseObject* getMotherBrain(xml_node item, int mapHeight)
 	return motherBrain;
 }
 
-BaseObject* getRinka(xml_node item, int mapHeight)
+BaseObject* getRinkaCannon(xml_node item, int mapHeight)
 {
 	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
@@ -769,12 +769,9 @@ BaseObject* getRinka(xml_node item, int mapHeight)
 	auto x = 2 * stoi(properties["x"]);
 	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
 
-	x = x + width / 2;
-	y = y + height / 2;
-
-	auto rinka = new Rinka(x, y, GVector2(50, 0));
-	rinka->init();
-	return rinka;
+	auto rinkaCannon = new RinkaCannon(x, y, width, height);
+	rinkaCannon->init();
+	return rinkaCannon;
 }
 
 BaseObject* getEnergyTank(xml_node item, int mapHeight)

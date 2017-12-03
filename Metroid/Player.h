@@ -40,6 +40,7 @@
 #include "Metroid.h"
 #include "MotherBrain.h"
 #include "Rinka.h"
+#include "RinkaCannon.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"

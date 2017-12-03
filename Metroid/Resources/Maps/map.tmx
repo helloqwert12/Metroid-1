@@ -130459,11 +130459,6 @@
   <object id="1073" name="RedDoor" type="37" x="5280.22" y="3232.02" width="63.5682" height="47.4545"/>
   <object id="1075" name="BlueDoor" type="36" x="4127.72" y="3231.27" width="63.5682" height="47.9545"/>
   <object id="1076" name="MotherBrain" type="62" x="688.797" y="3024.1" width="79.4052" height="63.0523"/>
-  <object id="1077" name="Rinka" type="63" x="656.047" y="2944.1" width="15.9052" height="15.8023"/>
-  <object id="1078" name="Rinka" type="63" x="655.547" y="2992.1" width="15.9052" height="15.8023"/>
-  <object id="1079" name="Rinka" type="63" x="688.547" y="2976.1" width="15.9052" height="15.8023"/>
-  <object id="1080" name="Rinka" type="63" x="608.047" y="3041.1" width="15.9052" height="15.8023"/>
-  <object id="1081" name="Rinka" type="63" x="575.047" y="2976.6" width="15.9052" height="15.8023"/>
-  <object id="1082" name="Rinka" type="63" x="512.047" y="3040.1" width="15.9052" height="15.8023"/>
+  <object id="1082" name="RinkaCannon" type="64" x="512.047" y="3040.1" width="15.9052" height="15.8023"/>
  </objectgroup>
 </map>
