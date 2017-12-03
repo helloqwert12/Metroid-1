@@ -186,7 +186,8 @@ void Player::update(float deltatime)
 	{
 		if (_bloodSuckingStopWatch->isStopWatch(50))
 		{
-			_info->setEnergy(_info->getEnergy() - 1);
+			// Giảm energy theo số enemy dính vào với Player
+			_info->setEnergy(_info->getEnergy() - 1 * _stickyObjects.size());
 			_bloodSuckingStopWatch->restart();
 		}
 	}

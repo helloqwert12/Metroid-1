@@ -1,4 +1,6 @@
-#include "RinkaCannon.h"
+﻿#include "RinkaCannon.h"
+#include "SceneManager.h"
+#include "PlayScene.h"
 
 RinkaCannon::RinkaCannon(int x, int y, int width, int height) : BaseObject(RINKA_CANNON)
 {
@@ -26,7 +28,39 @@ void RinkaCannon::update(float deltatime)
 	{
 		if (_rinkaAppearStopWatch->isStopWatch(RINKA_APPEAR_TIME))
 		{
-			Rinka* rinka = new Rinka((_bound.left + _bound.right) / 2, (_bound.top + _bound.bottom) / 2, GVector2(20, 0));
+			// Lấy vị trí của Player
+			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
+			auto playerPosition = playScene->getPlayer()->getPosition();
+			auto rinkaPosition = GVector2((_bound.left + _bound.right) / 2, (_bound.top + _bound.bottom) / 2);
+
+			Rinka* rinka = nullptr;
+			
+			if (playerPosition.x > rinkaPosition.x + 20)
+			{
+				if (playerPosition.y > rinkaPosition.y + 20 )
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(RINKA_MOVE_SPEED, RINKA_MOVE_SPEED));
+				else if (playerPosition.y < rinkaPosition.y - 20)
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(RINKA_MOVE_SPEED, -RINKA_MOVE_SPEED));
+				else
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(RINKA_MOVE_SPEED, 0));
+			}
+			else if (playerPosition.x < rinkaPosition.x - 20)
+			{
+				if (playerPosition.y > rinkaPosition.y + 20)
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(-RINKA_MOVE_SPEED, RINKA_MOVE_SPEED));
+				else if (playerPosition.y < rinkaPosition.y - 20)
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(-RINKA_MOVE_SPEED, -RINKA_MOVE_SPEED));
+				else
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(-RINKA_MOVE_SPEED, 0));
+			}
+			else
+			{
+				if (playerPosition.y > rinkaPosition.y)
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(0, RINKA_MOVE_SPEED));
+				else
+					rinka = new Rinka(rinkaPosition.x, rinkaPosition.y, GVector2(0, -RINKA_MOVE_SPEED));
+			}
+
 			rinka->init();
 			QuadTreeNode::getInstance()->insert(rinka);
 
