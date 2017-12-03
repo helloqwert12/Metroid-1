@@ -112,6 +112,7 @@ private:
 	bool _isRevive;
 	GVector2 _revivePosition;
 
+	// Bị hút máu
 	bool _isBeingBloodSucking;
 
 	// Từ status để gọi hành động
@@ -133,6 +134,8 @@ private:
 
 	// Dùng để giới hạn thời gian giữa 2 lần bắn đạn hoặc đặt bomb
 	StopWatch* _attackStopWatch;
+
+	StopWatch* _bloodSuckingStopWatch;
 };
 
 #endif // !__PLAYER_H__

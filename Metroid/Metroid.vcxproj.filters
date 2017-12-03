@@ -295,7 +295,7 @@
       <Filter>Source Files\Object\BreakableObject</Filter>
     </ClCompile>
     <ClCompile Include="Metroid.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -519,7 +519,7 @@
       <Filter>Header Files\Object\BreakableObject</Filter>
     </ClInclude>
     <ClInclude Include="Metroid.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

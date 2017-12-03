@@ -32,7 +32,7 @@ void Player::init()
 	_animations[eStatus::NORMAL | eStatus::ATTACKING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::NORMAL | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "normal", NULL);
 
-	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.07f);
+	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.05f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::PLAYER, "walk_right_01", "walk_right_02", "walk_right_03", NULL);
 
 	_animations[eStatus::JUMPING | eStatus::NORMAL] = new Animation(_sprite, 0.07f);
@@ -50,10 +50,10 @@ void Player::init()
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::LOOKING_UP | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "look_up", NULL);
 
-	_animations[eStatus::LOOKING_UP | eStatus::RUNNING] = new Animation(_sprite, 0.07f);
+	_animations[eStatus::LOOKING_UP | eStatus::RUNNING] = new Animation(_sprite, 0.05f);
 	_animations[eStatus::LOOKING_UP | eStatus::RUNNING]->addFrameRect(eID::PLAYER, "run_look_up_01", "run_look_up_02", "run_look_up_03", NULL);
 
-	_animations[eStatus::LOOKING_UP | eStatus::RUNNING | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
+	_animations[eStatus::LOOKING_UP | eStatus::RUNNING | eStatus::ATTACKING] = new Animation(_sprite, 0.05f);
 	_animations[eStatus::LOOKING_UP | eStatus::RUNNING | eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "run_look_up_01", "run_look_up_02", "run_look_up_03", NULL);
 
 	_animations[eStatus::LOOKING_UP | eStatus::RUNNING | eStatus::JUMPING] = new Animation(_sprite, 0.07f);
@@ -80,7 +80,7 @@ void Player::init()
 	_animations[eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::ATTACKING]->addFrameRect(eID::PLAYER, "normal", NULL);
 
-	_animations[eStatus::ATTACKING | eStatus::RUNNING] = new Animation(_sprite, 0.07f);
+	_animations[eStatus::ATTACKING | eStatus::RUNNING] = new Animation(_sprite, 0.05f);
 	_animations[eStatus::ATTACKING | eStatus::RUNNING]->addFrameRect(eID::PLAYER, "run_attack_01", "run_attack_02", "run_attack_03", NULL);
 
 	_animations[eStatus::JUMPING | eStatus::ATTACKING] = new Animation(_sprite, 0.07f);
@@ -92,6 +92,7 @@ void Player::init()
 
 	// Khởi tạo StopWatch
 	_attackStopWatch = new StopWatch();
+	_bloodSuckingStopWatch = new StopWatch();
 
 	// Set origin của nhân vật ở giữa, phía dưới
 	this->setOrigin(GVector2(0.5f, 0.0f));
@@ -173,7 +174,21 @@ void Player::update(float deltatime)
 	for (auto object : _stickyObjects)
 	{
 		object->update(deltatime);
-		object->setPosition(this->getPosition().x, this->getPosition().y + 45);
+		if (this->isInStatus(eStatus::ROLLING_DOWN) )
+			object->setPosition(this->getPosition().x, this->getPosition().y + 20);
+		else if (this->isInStatus(eStatus::JUMPING))
+			object->setPosition(this->getPosition().x, this->getPosition().y + 35);
+		else
+			object->setPosition(this->getPosition().x, this->getPosition().y + 55);
+	}
+
+	if (_isBeingBloodSucking)
+	{
+		if (_bloodSuckingStopWatch->isStopWatch(50))
+		{
+			_info->setEnergy(_info->getEnergy() - 1);
+			_bloodSuckingStopWatch->restart();
+		}
 	}
 
 	this->_info->update(deltatime);
@@ -1464,7 +1479,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 	else if (objectId == METROID)
 	{
 		// Lại gần thì active
-		if (!((Metroid*)object)->isActive() && !_isBeingBloodSucking)
+		if (!((Metroid*)object)->isActive())
 		{
 			auto objectPosition = object->getPosition();
 			auto position = this->getPosition();
@@ -1494,6 +1509,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 				metroid->init();
 				_stickyObjects.push_back(metroid);
 
+				_isBeingBloodSucking = true;
 				object->setStatus(DESTROY);
 			}
 
