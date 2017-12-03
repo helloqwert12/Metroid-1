@@ -28,6 +28,7 @@
 #include "Zoomer.h"
 
 #include "Zeebetite.h"
+#include "Metroid.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
@@ -72,6 +73,7 @@ BaseObject* getZoomer(xml_node item, int mapHeight);
 
 // Boss Stage
 BaseObject* getZeebetite(xml_node item, int mapHeight);
+BaseObject* getMetroid(xml_node item, int mapHeight);
 
 // Item
 BaseObject* getEnergyTank(xml_node item, int mapHeight);

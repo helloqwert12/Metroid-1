@@ -140,7 +140,7 @@ void Player::update(float deltatime)
 			}
 		}
 	}
-
+		
 	if (_protectTime > 0)
 	{
 		_protectTime -= deltatime;
@@ -169,6 +169,13 @@ void Player::update(float deltatime)
 		weapon->update(deltatime);
 	}
 
+	// Update metroid
+	for (auto object : _stickyObjects)
+	{
+		object->update(deltatime);
+		object->setPosition(this->getPosition().x, this->getPosition().y + 45);
+	}
+
 	this->_info->update(deltatime);
 }
 
@@ -189,6 +196,11 @@ void Player::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	for (auto weapon : _listWeapon)
 	{
 		weapon->draw(spriteHandle, viewport);
+	}
+
+	for (auto object : _stickyObjects)
+	{
+		object->draw(spriteHandle, viewport);
 	}
 
 	_info->draw(spriteHandle, viewport);
@@ -615,7 +627,10 @@ void Player::onKeyReleased(KeyEventArg* keyEvent)
 void Player::resetValues()
 {
 	_listWeapon.clear();
+	_stickyObjects.clear();
+
 	_preWall = nullptr;
+	_isBeingBloodSucking = false;
 
 	this->setScale(SCALE_FACTOR);
 	_movingSpeed = MOVE_SPEED;
@@ -1099,30 +1114,6 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 	}
-	else if (objectId == ZEEBETITE)
-	{
-		if (!((Zeebetite*)object)->isDead())
-		{
-			if (collisionBody->checkCollision(object, direction, dt))
-			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-			}
-
-			eID weaponId;
-			if (this->checkWeaponCollision(object, direction, weaponId, dt))
-			{
-				if (weaponId == eID::MISSILE_ROCKET)
-					((Zeebetite*)object)->wasHit(5);
-				else
-					((Zeebetite*)object)->wasHit(1);
-			}
-		}
-	}
 	else if (objectId == RIPPER)
 	{
 		if (!((Ripper*)object)->isDead() && _protectTime <= 0)
@@ -1443,6 +1434,76 @@ float Player::checkCollision(BaseObject* object, float dt)
 					((Zoomer*)object)->wasHit(5);
 				else
 					((Zoomer*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == ZEEBETITE)
+	{
+		if (!((Zeebetite*)object)->isDead())
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((Zeebetite*)object)->wasHit(5);
+				else
+					((Zeebetite*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == METROID)
+	{
+		// Lại gần thì active
+		if (!((Metroid*)object)->isActive() && !_isBeingBloodSucking)
+		{
+			auto objectPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objectPosition.x) < WINDOW_WIDTH / 2 + 25)
+			{
+				((Metroid*)object)->active(position.x > objectPosition.x);
+			}
+		}
+
+		// Ra xa một khoảng thì deactive
+		if (((Metroid*)object)->isActive())
+		{
+			auto objectPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 + 25)
+			{
+				((Metroid*)object)->deactive();
+			}
+		}
+
+		if (!((Metroid*)object)->isDead())
+		{
+			if (collisionBody->checkCollision(object, direction, dt, false))
+			{
+				// Tạo object Metroid mới để insert vào list stickyObjects
+				BaseObject* metroid = new Metroid(object->getPosition().x, object->getPosition().y, false);
+				metroid->init();
+				_stickyObjects.push_back(metroid);
+
+				object->setStatus(DESTROY);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((Metroid*)object)->wasHit(5);
+				else
+					((Metroid*)object)->wasHit(1);
 			}
 		}
 	}

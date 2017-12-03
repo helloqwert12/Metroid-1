@@ -292,6 +292,9 @@
       <Filter>Source Files\Object\EmptyObject</Filter>
     </ClCompile>
     <ClCompile Include="Zeebetite.cpp">
+      <Filter>Source Files\Object\BreakableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Metroid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -513,6 +516,9 @@
       <Filter>Header Files\Object\EmptyObject</Filter>
     </ClInclude>
     <ClInclude Include="Zeebetite.h">
+      <Filter>Header Files\Object\BreakableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Metroid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

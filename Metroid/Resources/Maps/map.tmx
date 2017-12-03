@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="998">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1002">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="104" columns="8">
   <image source="tileset_metroid.png" width="128" height="208"/>
  </tileset>
@@ -90293,13 +90293,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -130361,5 +130361,9 @@
   <object id="995" name="Zeebetite" type="60" x="704.333" y="3039.73" width="16" height="32.5455"/>
   <object id="996" name="BreakableRedWall" type="40" x="704.547" y="3024.1" width="15.9052" height="15.8023"/>
   <object id="997" name="BreakableRedWall" type="40" x="704.547" y="3072.35" width="15.9052" height="15.8023"/>
+  <object id="998" name="Metroid" type="61" x="784.797" y="3024.6" width="15.9052" height="15.8023"/>
+  <object id="999" name="Wall" type="20" x="767.583" y="3007.75" width="111.333" height="16"/>
+  <object id="1000" name="Metroid" type="61" x="672.047" y="2991.85" width="15.9052" height="15.8023"/>
+  <object id="1001" name="Metroid" type="61" x="239.797" y="2991.6" width="15.9052" height="15.8023"/>
  </objectgroup>
 </map>

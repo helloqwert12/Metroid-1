@@ -148,13 +148,6 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return redItemBall;
 		break;
 	}
-	case ZEEBETITE:
-	{
-		auto zeebetite = new Zeebetite(left, bottom);
-		zeebetite->init();
-		return zeebetite;
-		break;
-	}
 	case RIPPER:
 	{
 		auto ripper = new Ripper(left, top);
@@ -202,6 +195,20 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		auto zoomer = new Zoomer(left, top);
 		zoomer->init();
 		return zoomer;
+		break;
+	}
+	case ZEEBETITE:
+	{
+		auto zeebetite = new Zeebetite(left, top);
+		zeebetite->init();
+		return zeebetite;
+		break;
+	}
+	case METROID:
+	{
+		auto metroid = new Metroid(left, top, false);
+		metroid->init();
+		return metroid;
 		break;
 	}
 	case ENERGY_TANK:
@@ -299,9 +306,6 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 	case RED_ITEM_BALL:
 		return getRedItemBall(item, mapHeight);
 		break;
-	case ZEEBETITE:
-		return getZeebetite(item, mapHeight);
-		break;
 	case RIPPER:
 		return getRipper(item, mapHeight);
 		break;
@@ -322,6 +326,12 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case ZOOMER:
 		return getZoomer(item, mapHeight);
+		break;
+	case ZEEBETITE:
+		return getZeebetite(item, mapHeight);
+		break;
+	case METROID:
+		return getMetroid(item, mapHeight);
 		break;
 	case ENERGY_TANK:
 		return getEnergyTank(item, mapHeight);
@@ -558,6 +568,25 @@ BaseObject* getZeebetite(xml_node item, int mapHeight)
 	auto zeebetite = new Zeebetite(x, y);
 	zeebetite->init();
 	return zeebetite;
+}
+
+BaseObject* getMetroid(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto metroid = new Metroid(x, y, false);
+	metroid->init();
+	return metroid;
 }
 
 BaseObject* getRipper(xml_node item, int mapHeight)

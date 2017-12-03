@@ -66,6 +66,7 @@ enum eID
 
 	BOSS_STAGE = 59,
 	ZEEBETITE = 60,
+	METROID = 61,
 
 	ITEM = 80,
 	ENERGY_TANK = 81,

@@ -37,6 +37,7 @@
 #include "Zoomer.h"
 
 #include "Zeebetite.h"
+#include "Metroid.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
@@ -52,8 +53,8 @@
 #define GRAVITY 600
 
 #define PROTECT_TIME 1500
-#define BULLET_ATTACK_TIME 150
-#define MISSILE_ROCKET_ATTACK_TIME 300
+#define BULLET_ATTACK_TIME 200
+#define MISSILE_ROCKET_ATTACK_TIME 350
 #define BOMB_ATTACK_TIME 400
 
 class Player : public BaseObject, public Controlable
@@ -105,8 +106,13 @@ private:
 
 	vector<Weapon*> _listWeapon;
 
+	// List các enemy dính vào với player (Metroid)
+	vector<BaseObject*> _stickyObjects;
+
 	bool _isRevive;
 	GVector2 _revivePosition;
+
+	bool _isBeingBloodSucking;
 
 	// Từ status để gọi hành động
 	void updateStatus(float dt);

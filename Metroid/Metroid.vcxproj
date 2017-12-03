@@ -180,6 +180,7 @@
     <ClCompile Include="maputils.cpp" />
     <ClCompile Include="MaruMari.cpp" />
     <ClCompile Include="Mellow.cpp" />
+    <ClCompile Include="Metroid.cpp" />
     <ClCompile Include="MissileRocket.cpp" />
     <ClCompile Include="MissileRocketBall.cpp" />
     <ClCompile Include="Movement.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="maputils.h" />
     <ClInclude Include="MaruMari.h" />
     <ClInclude Include="Mellow.h" />
+    <ClInclude Include="Metroid.h" />
     <ClInclude Include="MissileRocket.h" />
     <ClInclude Include="MissileRocketBall.h" />
     <ClInclude Include="Movement.h" />
