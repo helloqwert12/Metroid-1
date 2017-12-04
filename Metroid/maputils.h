@@ -31,6 +31,7 @@
 #include "Metroid.h"
 #include "MotherBrain.h"
 #include "RinkaCannon.h"
+#include "CannonBullet.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
@@ -78,6 +79,7 @@ BaseObject* getZeebetite(xml_node item, int mapHeight);
 BaseObject* getMetroid(xml_node item, int mapHeight);
 BaseObject* getMotherBrain(xml_node item, int mapHeight);
 BaseObject* getRinkaCannon(xml_node item, int mapHeight);
+BaseObject* getCannonBullet(xml_node item, int mapHeight);
 
 // Item
 BaseObject* getEnergyTank(xml_node item, int mapHeight);

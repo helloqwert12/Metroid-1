@@ -1548,7 +1548,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((Rinka*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt, false))
+			if (collisionBody->checkCollision(object, direction, dt))
 			{
 				// Nếu đang va chạm thì dời ra xa
 				float moveX, moveY;
@@ -1592,6 +1592,34 @@ float Player::checkCollision(BaseObject* object, float dt)
 			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 - 50)
 			{
 				((RinkaCannon*)object)->deactive();
+			}
+		}
+	}
+	else if (objectId == CANNON_BULLET)
+	{
+		if (!((CannonBullet*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt))
+			{
+				// Nếu đang va chạm thì dời ra xa
+				float moveX, moveY;
+				if (collisionBody->isColliding(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+
+				object->setStatus(DESTROY);
+				beHit(direction);
+				takeDamage(8);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				if (weaponId == eID::MISSILE_ROCKET)
+					((CannonBullet*)object)->wasHit(5);
+				else
+					((CannonBullet*)object)->wasHit(1);
 			}
 		}
 	}

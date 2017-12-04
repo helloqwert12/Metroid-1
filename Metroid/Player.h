@@ -41,6 +41,7 @@
 #include "MotherBrain.h"
 #include "Rinka.h"
 #include "RinkaCannon.h"
+#include "CannonBullet.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"

@@ -11,8 +11,8 @@
 #include <ctime>
 #include "Rinka.h"
 
-#define RINKA_APPEAR_TIME 3000
-#define RINKA_MOVE_SPEED 30
+#define RINKA_APPEAR_TIME 4000
+#define RINKA_MOVE_SPEED 40
 
 class RinkaCannon : public BaseObject
 {

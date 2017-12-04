@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1083">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1093">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="136" columns="8">
   <image source="tileset_metroid.png" width="128" height="272"/>
  </tileset>
@@ -90775,7 +90775,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="118"/>
    <tile/>
    <tile/>
    <tile/>
@@ -92215,7 +92215,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="119"/>
    <tile/>
    <tile/>
    <tile/>
@@ -130414,11 +130414,11 @@
   </object>
   <object id="1044" name="Wall" type="20" x="848.065" y="318.375" width="16" height="16"/>
   <object id="1045" name="Wall" type="20" x="824.935" y="294.625" width="23.2614" height="39.75"/>
-  <object id="1052" name="BreakableRedWall" type="40" x="799.982" y="3024.43" width="15.9052" height="15.8023"/>
-  <object id="1053" name="Zeebetite" type="60" x="799.768" y="3040.06" width="16" height="32.5455"/>
+  <object id="1052" name="BreakableBlueWall" type="39" x="848.209" y="2992.43" width="15.9052" height="15.8023"/>
+  <object id="1053" name="Zeebetite" type="60" x="800.313" y="3040.06" width="15.4545" height="32.5455"/>
   <object id="1054" name="Metroid" type="61" x="480.232" y="2959.68" width="15.9052" height="15.8023"/>
   <object id="1056" name="Metroid" type="61" x="479.482" y="3023.43" width="15.9052" height="15.8023"/>
-  <object id="1057" name="BreakableRedWall" type="40" x="799.982" y="3072.68" width="15.9052" height="15.8023"/>
+  <object id="1057" name="BreakableRedWall" type="40" x="831.982" y="2992.32" width="15.9052" height="15.8023"/>
   <object id="1058" name="Metroid" type="61" x="5376.05" y="2801.1" width="15.9052" height="15.8023"/>
   <object id="1059" name="Metroid" type="61" x="5440.55" y="2865.1" width="15.9052" height="15.8023"/>
   <object id="1060" name="Metroid" type="61" x="5424.55" y="2927.1" width="15.9052" height="15.8023"/>
@@ -130460,5 +130460,14 @@
   <object id="1075" name="BlueDoor" type="36" x="4127.72" y="3231.27" width="63.5682" height="47.9545"/>
   <object id="1076" name="MotherBrain" type="62" x="688.797" y="3024.1" width="79.4052" height="63.0523"/>
   <object id="1082" name="RinkaCannon" type="64" x="576.047" y="3023.6" width="15.9052" height="15.8023"/>
+  <object id="1084" name="RinkaCannon" type="64" x="528.547" y="3056.1" width="15.9052" height="15.8023"/>
+  <object id="1085" name="RinkaCannon" type="64" x="624.547" y="3056.1" width="15.9052" height="15.8023"/>
+  <object id="1086" name="RinkaCannon" type="64" x="527.547" y="2991.6" width="15.9052" height="15.8023"/>
+  <object id="1087" name="RinkaCannon" type="64" x="624.297" y="2991.85" width="15.9052" height="15.8023"/>
+  <object id="1088" name="CannonBullet" type="65" x="576.381" y="3071.77" width="15.9052" height="15.8023"/>
+  <object id="1089" name="CannonBullet" type="65" x="560.047" y="3055.77" width="15.9052" height="15.8023"/>
+  <object id="1090" name="CannonBullet" type="65" x="592.381" y="3055.43" width="15.9052" height="15.8023"/>
+  <object id="1091" name="Wall" type="20" x="799.818" y="3072.18" width="16" height="16"/>
+  <object id="1092" name="Wall" type="20" x="800" y="3023.82" width="16" height="16"/>
  </objectgroup>
 </map>
