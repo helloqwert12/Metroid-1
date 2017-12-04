@@ -24,9 +24,6 @@ public:
 	float checkCollision(BaseObject* object, float dt);
 
 protected:
-	vector<Animation*> _animation;
-	int _animationIndex;
-
 	map<string, Component*> _componentList;
 
 	int _hitPoint;

@@ -24,7 +24,7 @@ public:
 	float checkCollision(BaseObject* object, float dt);
 
 protected:
-	vector<Animation*> _animation;
+	vector<Animation*> _animations;
 	int _animationIndex;
 
 	map<string, Component*> _componentList;
@@ -34,6 +34,9 @@ protected:
 	Sprite* _effect;
 	Animation* _effectAnimation;
 	StopWatch* _effectStopWatch;
+
+	StopWatch* _hitStopWatch;
+	bool _startHitStopWatch;
 };
 
 #endif // !__MOTHERBRAIN_H__
