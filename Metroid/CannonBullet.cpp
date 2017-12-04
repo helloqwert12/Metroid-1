@@ -51,7 +51,7 @@ void CannonBullet::update(float deltatime)
 		}
 
 		// Nếu CannonBullet ra khỏi khoảng di chuyển thì DESTROY
-		if (getDistance(this->getPosition(), _initPosition) > RINKA_MOVE_RANGE)
+		if (getDistance(this->getPosition(), _initPosition) > CANNON_BULLET_RANGE)
 		{
 			this->setStatus(eStatus::DESTROY);
 		}

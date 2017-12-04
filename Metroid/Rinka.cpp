@@ -56,7 +56,7 @@ void Rinka::update(float deltatime)
 		}
 
 		// Nếu Rinka ra khỏi khoảng di chuyển thì DESTROY
-		if (getDistance(this->getPosition(), _initPosition) > RINKA_MOVE_RANGE)
+		if (getDistance(this->getPosition(), _initPosition) > RINKA_RANGE)
 		{
 			this->setStatus(eStatus::DESTROY);
 		}

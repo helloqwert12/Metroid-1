@@ -11,7 +11,7 @@
 #include "QuadtreeNode.h"
 #include <ctime>
 
-#define RINKA_MOVE_RANGE 300
+#define RINKA_RANGE 300
 
 class Rinka : public BaseObject
 {

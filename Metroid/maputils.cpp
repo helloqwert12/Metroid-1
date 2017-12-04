@@ -225,11 +225,11 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return rinkaCannon;
 		break;
 	}
-	case CANNON_BULLET:
+	case LEFT_CANNON:
 	{
-		auto cannonBullet = new CannonBullet(left, top, GVector2(0, 100));
-		cannonBullet->init();
-		return cannonBullet;
+		auto leftCannon = new LeftCannon(left, top);
+		leftCannon->init();
+		return leftCannon;
 		break;
 	}
 	case ENERGY_TANK:
@@ -360,8 +360,8 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 	case RINKA_CANNON:
 		return getRinkaCannon(item, mapHeight);
 		break;
-	case CANNON_BULLET:
-		return getCannonBullet(item, mapHeight);
+	case LEFT_CANNON:
+		return getLeftCannon(item, mapHeight);
 		break;
 	case ENERGY_TANK:
 		return getEnergyTank(item, mapHeight);
@@ -784,7 +784,7 @@ BaseObject* getRinkaCannon(xml_node item, int mapHeight)
 	return rinkaCannon;
 }
 
-BaseObject* getCannonBullet(xml_node item, int mapHeight)
+BaseObject* getLeftCannon(xml_node item, int mapHeight)
 {
 	auto properties = getObjectProperties(item);
 	if (properties.size() == 0)
@@ -798,9 +798,9 @@ BaseObject* getCannonBullet(xml_node item, int mapHeight)
 	x = x + width / 2;
 	y = y + height / 2;
 
-	auto cannonBullet = new CannonBullet(x, y, GVector2(0, 100));
-	cannonBullet->init();
-	return cannonBullet;
+	auto leftCannon = new LeftCannon(x, y);
+	leftCannon->init();
+	return leftCannon;
 }
 
 BaseObject* getEnergyTank(xml_node item, int mapHeight)

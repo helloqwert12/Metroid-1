@@ -157,6 +157,7 @@
     <ClCompile Include="BreakableBlueWall.cpp" />
     <ClCompile Include="BreakableRedWall.cpp" />
     <ClCompile Include="CannonBullet.cpp" />
+    <ClCompile Include="LeftCannon.cpp" />
     <ClCompile Include="ChangeMapDirection.cpp" />
     <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="BreakableBlueWall.h" />
     <ClInclude Include="BreakableRedWall.h" />
     <ClInclude Include="CannonBullet.h" />
+    <ClInclude Include="LeftCannon.h" />
     <ClInclude Include="ChangeMapDirection.h" />
     <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="define.h" />

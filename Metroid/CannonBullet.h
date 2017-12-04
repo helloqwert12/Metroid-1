@@ -11,7 +11,10 @@
 #include "QuadtreeNode.h"
 #include <ctime>
 
-#define CANNON_BULLET_MOVE_RANGE 300
+#define CANNON_BULLET_APPEAR_TIME 500
+
+#define CANNON_BULLET_MOVE_SPEED 200
+#define CANNON_BULLET_RANGE 150
 
 class CannonBullet : public BaseObject
 {
