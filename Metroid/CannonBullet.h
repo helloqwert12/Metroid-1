@@ -11,16 +11,16 @@
 #include "QuadtreeNode.h"
 #include <ctime>
 
-#define CANNON_BULLET_APPEAR_TIME 500
-
+#define CANNON_BULLET_APPEAR_TIME 1000
 #define CANNON_BULLET_MOVE_SPEED 200
 #define CANNON_BULLET_RANGE 150
 
 class CannonBullet : public BaseObject
 {
 public:
-	// @velocity: vận tốc ban đầu, dùng để xác định hướng di chuyển
-	CannonBullet(int x, int y, GVector2 velocity);
+	// @cannonId ID của cannon (LEFT_CANNON, MIDDLE_CANNON, RIGHT_CANNON),'
+	// dùng để set vận tốc và hướng sprite đạn
+	CannonBullet(int x, int y, eID cannonId);
 
 	void init();
 	void update(float deltatime);

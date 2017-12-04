@@ -1,6 +1,6 @@
 ﻿#include "CannonBullet.h"
 
-CannonBullet::CannonBullet(int x, int y, GVector2 velocity) : BaseObject(CANNON_BULLET)
+CannonBullet::CannonBullet(int x, int y, eID cannonId) : BaseObject(CANNON_BULLET)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::BOSS_STAGE);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "cannon_bullet_01"));
@@ -15,9 +15,20 @@ CannonBullet::CannonBullet(int x, int y, GVector2 velocity) : BaseObject(CANNON_
 
 	_hitPoint = 1;
 	_isActive = true;
-	_velocity = velocity;
+	
+	switch (cannonId)
+	{
+	case LEFT_CANNON:
+	{
+		_velocity = GVector2(CANNON_BULLET_MOVE_SPEED, -CANNON_BULLET_MOVE_SPEED);
+		_sprite->setRotate(135);
+		break;
+	}
+	default:
+		break;
+	}
 
-	auto movement = new Movement(GVector2(0, 0), _velocity, _sprite);
+	Movement* movement = new Movement(GVector2(0, 0), _velocity, _sprite);
 	_componentList["Movement"] = movement;
 }
 

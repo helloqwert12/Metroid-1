@@ -27,7 +27,7 @@ void LeftCannon::update(float deltatime)
 		if (_cannonBulletAppearStopWatch->isStopWatch(CANNON_BULLET_APPEAR_TIME))
 		{
 			_spriteIndex++;
-			if (_spriteIndex >= 5)
+			if (_spriteIndex >= 8)
 				_spriteIndex = 0;
 
 			switch (_spriteIndex)
@@ -47,15 +47,24 @@ void LeftCannon::update(float deltatime)
 			case 4:
 				_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "cannon_05"));
 				break;
+			case 5:
+				_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "cannon_04"));
+				break;
+			case 6:
+				_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "cannon_03"));
+				break;
+			case 7:
+				_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "cannon_02"));
+				break;
 			default:
 				break;
 			}
 
-			if (_spriteIndex == 3)
+			if (_spriteIndex == 3 || _spriteIndex == 5)
 			{
 				auto cannonBulletPosition = GVector2(this->getPosition().x, this->getPosition().y);
 
-				CannonBullet* cannonBullet = new CannonBullet(cannonBulletPosition.x, cannonBulletPosition.y, GVector2(CANNON_BULLET_MOVE_SPEED, -CANNON_BULLET_MOVE_SPEED));
+				CannonBullet* cannonBullet = new CannonBullet(cannonBulletPosition.x, cannonBulletPosition.y, eID::LEFT_CANNON);
 				cannonBullet->init();
 				QuadTreeNode::getInstance()->insert(cannonBullet);
 			}

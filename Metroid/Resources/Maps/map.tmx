@@ -130464,7 +130464,7 @@
   <object id="1085" name="RinkaCannon" type="64" x="623.547" y="2990.1" width="15.9052" height="15.8023"/>
   <object id="1091" name="Wall" type="20" x="799.818" y="3072.18" width="16" height="16"/>
   <object id="1092" name="Wall" type="20" x="800" y="3023.82" width="16" height="16"/>
-  <object id="1093" name="LeftCannon" type="66" x="912.458" y="3040.12" width="16" height="16"/>
+  <object id="1093" name="LeftCannon" type="66" x="928.003" y="3040.12" width="16" height="16"/>
   <object id="1094" name="LeftCannon" type="66" x="927.916" y="3007.59" width="16" height="16"/>
  </objectgroup>
 </map>
