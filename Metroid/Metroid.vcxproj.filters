@@ -312,6 +312,9 @@
     <ClCompile Include="LeftCannon.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="MiddleCannon.cpp">
+      <Filter>Source Files\Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -549,6 +552,9 @@
       <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="LeftCannon.h">
+      <Filter>Header Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="MiddleCannon.h">
       <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>

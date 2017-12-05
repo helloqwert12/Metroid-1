@@ -43,6 +43,7 @@
 #include "RinkaCannon.h"
 #include "CannonBullet.h"
 #include "LeftCannon.h"
+#include "MiddleCannon.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"

@@ -183,6 +183,7 @@
     <ClCompile Include="MaruMari.cpp" />
     <ClCompile Include="Mellow.cpp" />
     <ClCompile Include="Metroid.cpp" />
+    <ClCompile Include="MiddleCannon.cpp" />
     <ClCompile Include="MissileRocket.cpp" />
     <ClCompile Include="MissileRocketBall.cpp" />
     <ClCompile Include="MotherBrain.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="MaruMari.h" />
     <ClInclude Include="Mellow.h" />
     <ClInclude Include="Metroid.h" />
+    <ClInclude Include="MiddleCannon.h" />
     <ClInclude Include="MissileRocket.h" />
     <ClInclude Include="MissileRocketBall.h" />
     <ClInclude Include="MotherBrain.h" />

@@ -1647,6 +1647,30 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 	}
+	else if (objectId == MIDDLE_CANNON)
+	{
+		// Lại gần thì active
+		if (!((MiddleCannon*)object)->isActive())
+		{
+			auto objectPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objectPosition.x) < WINDOW_WIDTH / 2 - 50)
+			{
+				((MiddleCannon*)object)->active();
+			}
+		}
+
+		// Ra xa một khoảng thì deactive
+		if (((MiddleCannon*)object)->isActive())
+		{
+			auto objectPosition = object->getPosition();
+			auto position = this->getPosition();
+			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 - 50)
+			{
+				((MiddleCannon*)object)->deactive();
+			}
+		}
+	}
 	else if (objectId == ENERGY_TANK)
 	{
 		if (collisionBody->checkCollision(object, direction, dt, false))

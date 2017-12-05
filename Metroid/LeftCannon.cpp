@@ -1,6 +1,4 @@
 ﻿#include "LeftCannon.h"
-#include "SceneManager.h"
-#include "PlayScene.h"
 
 LeftCannon::LeftCannon(int x, int y) : BaseObject(LEFT_CANNON)
 {
