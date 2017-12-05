@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1096">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1108">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="136" columns="8">
   <image source="tileset_metroid.png" width="128" height="272"/>
  </tileset>
@@ -88847,9 +88847,9 @@
    <tile gid="7"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -89327,9 +89327,9 @@
    <tile gid="1"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -89807,9 +89807,9 @@
    <tile gid="9"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -90775,18 +90775,18 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="118"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -91249,9 +91249,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="25"/>
+   <tile gid="25"/>
+   <tile gid="25"/>
    <tile/>
    <tile/>
    <tile/>
@@ -92215,18 +92215,18 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="119"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -129620,15 +129620,15 @@
   <object id="17" name="Wall" type="20" x="241.333" y="2878.67" width="2254" height="16"/>
   <object id="18" name="Wall" type="20" x="288" y="2894.67" width="224.667" height="16"/>
   <object id="20" name="Wall" type="20" x="448.667" y="2911.33" width="16" height="16"/>
-  <object id="21" name="Wall" type="20" x="352" y="2944" width="64.5" height="63.3333"/>
-  <object id="24" name="Wall" type="20" x="369.333" y="2975.67" width="62" height="63.3333"/>
-  <object id="25" name="Wall" type="20" x="384.667" y="3007.67" width="62.5" height="63.3333"/>
+  <object id="21" name="Wall" type="20" x="352" y="2944" width="64.5" height="63.8333"/>
+  <object id="24" name="Wall" type="20" x="368.333" y="2975.67" width="63.5" height="64.0833"/>
+  <object id="25" name="Wall" type="20" x="384.667" y="3007.67" width="63.5" height="63.8333"/>
   <object id="34" name="Wall" type="20" x="528.333" y="3072.33" width="111.333" height="16"/>
-  <object id="36" name="Wall" type="20" x="528" y="2928.67" width="16" height="110.167"/>
-  <object id="37" name="Wall" type="20" x="544.333" y="2959.33" width="15" height="80.3333"/>
-  <object id="38" name="Wall" type="20" x="608" y="2960.67" width="15.6667" height="79.3333"/>
-  <object id="39" name="Wall" type="20" x="623.333" y="2928" width="16" height="112"/>
-  <object id="42" name="Wall" type="20" x="544.667" y="2895.33" width="95.3333" height="16"/>
+  <object id="36" name="Wall" type="20" x="528" y="2927.8" width="15.9565" height="112.129"/>
+  <object id="37" name="Wall" type="20" x="544.029" y="2960.08" width="15.913" height="79.8442"/>
+  <object id="38" name="Wall" type="20" x="608" y="2959.92" width="15.9167" height="80.0208"/>
+  <object id="39" name="Wall" type="20" x="623.958" y="2928" width="16" height="111.938"/>
+  <object id="42" name="Wall" type="20" x="544.167" y="2895.33" width="95.8333" height="16"/>
   <object id="43" name="Wall" type="20" x="576.667" y="2911.33" width="16" height="16"/>
   <object id="44" name="Wall" type="20" x="672.667" y="2896" width="95.3333" height="16"/>
   <object id="45" name="Wall" type="20" x="704" y="2912.67" width="16" height="16"/>
@@ -130414,11 +130414,11 @@
   </object>
   <object id="1044" name="Wall" type="20" x="848.065" y="318.375" width="16" height="16"/>
   <object id="1045" name="Wall" type="20" x="824.935" y="294.625" width="23.2614" height="39.75"/>
-  <object id="1052" name="BreakableBlueWall" type="39" x="848.209" y="2992.43" width="15.9052" height="15.8023"/>
-  <object id="1053" name="Zeebetite" type="60" x="800.313" y="3040.06" width="15.4545" height="32.5455"/>
+  <object id="1052" name="BreakableBlueWall" type="39" x="1136.39" y="3039.84" width="15.9052" height="15.8023"/>
+  <object id="1053" name="Zeebetite" type="60" x="976.313" y="3039.7" width="15.4545" height="32.5455"/>
   <object id="1054" name="Metroid" type="61" x="481.565" y="2928.35" width="15.9052" height="15.8023"/>
   <object id="1056" name="Metroid" type="61" x="447.482" y="2960.1" width="15.9052" height="15.8023"/>
-  <object id="1057" name="BreakableRedWall" type="40" x="831.982" y="2992.32" width="15.9052" height="15.8023"/>
+  <object id="1057" name="BreakableRedWall" type="40" x="1120.16" y="3039.73" width="15.9052" height="15.8023"/>
   <object id="1058" name="Metroid" type="61" x="5376.05" y="2801.1" width="15.9052" height="15.8023"/>
   <object id="1059" name="Metroid" type="61" x="5440.55" y="2865.1" width="15.9052" height="15.8023"/>
   <object id="1060" name="Metroid" type="61" x="5424.55" y="2927.1" width="15.9052" height="15.8023"/>
@@ -130458,14 +130458,22 @@
   <object id="1072" name="Metroid" type="61" x="4272.71" y="3231.77" width="15.9052" height="15.8023"/>
   <object id="1073" name="RedDoor" type="37" x="5280.22" y="3232.02" width="63.5682" height="47.4545"/>
   <object id="1075" name="BlueDoor" type="36" x="4127.72" y="3231.27" width="63.5682" height="47.9545"/>
-  <object id="1076" name="MotherBrain" type="62" x="688.797" y="3024.1" width="79.4052" height="63.0523"/>
+  <object id="1076" name="MotherBrain" type="62" x="864.797" y="3024.1" width="79.4052" height="63.0523"/>
   <object id="1082" name="RinkaCannon" type="64" x="576.047" y="3023.6" width="15.9052" height="15.8023"/>
   <object id="1084" name="RinkaCannon" type="64" x="528.214" y="2992.1" width="15.9052" height="15.8023"/>
   <object id="1085" name="RinkaCannon" type="64" x="623.547" y="2990.1" width="15.9052" height="15.8023"/>
-  <object id="1091" name="Wall" type="20" x="799.818" y="3072.18" width="16" height="16"/>
-  <object id="1092" name="Wall" type="20" x="800" y="3023.82" width="16" height="16"/>
-  <object id="1093" name="MiddleCannon" type="67" x="975.942" y="3007.67" width="16" height="16"/>
-  <object id="1094" name="LeftCannon" type="66" x="927.855" y="3023.77" width="16" height="16"/>
-  <object id="1095" name="RightCannon" type="68" x="1023.97" y="3024.09" width="16" height="16"/>
+  <object id="1091" name="Wall" type="20" x="975.818" y="3071.82" width="16" height="16"/>
+  <object id="1092" name="Wall" type="20" x="976" y="3023.46" width="16" height="16"/>
+  <object id="1093" name="MiddleCannon" type="67" x="1055.74" y="2991.48" width="16" height="16"/>
+  <object id="1094" name="LeftCannon" type="66" x="1007.83" y="3007.95" width="16" height="16"/>
+  <object id="1095" name="RightCannon" type="68" x="1104.13" y="3007.55" width="16" height="16"/>
+  <object id="1096" name="Wall" type="20" x="672.432" y="2960.39" width="47.8182" height="48"/>
+  <object id="1097" name="Zoomer" type="58" x="688.402" y="2945.02" width="15.8182" height="15.4545"/>
+  <object id="1098" name="Wall" type="20" x="704.068" y="3039.82" width="48.3636" height="16"/>
+  <object id="1099" name="Zoomer" type="58" x="720.341" y="3023.91" width="15.8182" height="15.4545"/>
+  <object id="1101" name="BreakableRedWall" type="40" x="752.152" y="2991.89" width="15.9052" height="15.8023"/>
+  <object id="1102" name="Zoomer" type="58" x="752.159" y="2976.27" width="15.8182" height="15.4545"/>
+  <object id="1105" name="Zoomer" type="58" x="624.008" y="2912.7" width="15.8182" height="15.4545"/>
+  <object id="1106" name="Zoomer" type="58" x="528.091" y="2912.65" width="15.8182" height="15.4545"/>
  </objectgroup>
 </map>

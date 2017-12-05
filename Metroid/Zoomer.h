@@ -8,15 +8,12 @@
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
-#include "QuadtreeNode.h"
-#include <ctime>
 
 #define ZOOMER_MOVE_SPEED 80
 
 class Zoomer : public BaseObject
 {
 public:
-	// @direction: hướng của object. TRUE sang phải, FALSE sang trái
 	Zoomer(int x, int y);
 
 	void init();
@@ -27,7 +24,7 @@ public:
 	void wasHit(int hitPoint);
 	bool isDead();
 
-	void active(bool direction);
+	void active();
 	void deactive();
 	bool isActive();
 
@@ -37,6 +34,7 @@ protected:
 	Animation* _animation;
 	map<string, Component*> _componentList;
 
+	GVector2 _velocity;
 	int _hitPoint;
 	bool _isActive;
 
@@ -47,8 +45,8 @@ protected:
 	StopWatch* _hitStopWatch;
 	bool _startHitStopWatch;
 
-	BaseObject* _preWall;
 	eDirection _preDirection;
+	BaseObject* _preWall;
 };
 
 #endif // !__ZOOMER_H__

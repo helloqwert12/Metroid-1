@@ -14,13 +14,16 @@ Zoomer::Zoomer(int x, int y) : BaseObject(ZOOMER)
 	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
+	// Ban đầu cho Zoomer đi sang phải
+	_velocity = GVector2(ZOOMER_MOVE_SPEED, -30);
+
 	_hitPoint = 2;
 	_isActive = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
 
-	movement->setVelocity(GVector2(ZOOMER_MOVE_SPEED, 0));
+	movement->setVelocity(_velocity);
 }
 
 void Zoomer::init()
@@ -32,8 +35,8 @@ void Zoomer::init()
 	_hitStopWatch = new StopWatch();
 	_startHitStopWatch = false;
 
-	_preWall = nullptr;
 	_preDirection = eDirection::NONE;
+	_preWall = nullptr;
 }
 
 void Zoomer::update(float deltatime)
@@ -54,7 +57,7 @@ void Zoomer::update(float deltatime)
 				_startHitStopWatch = false;
 				_hitStopWatch->restart();
 				// Do đã có điều kiện active bên Player nên không cần active lại
-				//this->active();
+				this->active();
 			}
 		}
 
@@ -116,12 +119,12 @@ bool Zoomer::isDead()
 	return (_hitPoint <= 0);
 }
 
-void Zoomer::active(bool direction)
+void Zoomer::active()
 {
 	_isActive = true;
 
 	auto movement = (Movement*)this->_componentList["Movement"];
-	movement->setVelocity(GVector2(ZOOMER_MOVE_SPEED, 0));
+	movement->setVelocity(_velocity);
 }
 
 void Zoomer::deactive()
@@ -153,14 +156,33 @@ float Zoomer::checkCollision(BaseObject* object, float dt)
 				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
 			}
 
-			if (direction == TOP)
+			if (direction == TOP) // Va chạm Wall TOP thì tiếp tục đi sang phải
+			{
+				_velocity = GVector2(ZOOMER_MOVE_SPEED, -30);
+				_sprite->setRotate(0);
 				_preDirection = eDirection::TOP;
-			else if (direction == LEFT)
-				_preDirection = eDirection::LEFT;
-			else if (direction == RIGHT) 
+			}
+			else if (direction == RIGHT) // Va chạm Wall RIGHT thì tiếp tục đi xuống
+			{
+				_velocity = GVector2(-30, -ZOOMER_MOVE_SPEED);
+				_sprite->setRotate(90);
 				_preDirection = eDirection::RIGHT;
-			else if (direction == BOTTOM) 
+			}
+			else if (direction == BOTTOM) // Va chạm Wall BOTTOM thì tiếp tục đi sang trái
+			{
+				_velocity = GVector2(-ZOOMER_MOVE_SPEED, 30);
+				_sprite->setRotate(180);
 				_preDirection = eDirection::BOTTOM;
+			}
+			else if (direction == LEFT) // Va chạm Wall LEFT thì tiếp tục đi lên
+			{
+				_velocity = GVector2(30, ZOOMER_MOVE_SPEED);
+				_sprite->setRotate(270);
+				_preDirection = eDirection::LEFT;
+			}
+
+			auto movement = (Movement*)this->_componentList["Movement"];
+			movement->setVelocity(_velocity);
 
 			_preWall = object;
 			return 1.0f;
@@ -170,22 +192,22 @@ float Zoomer::checkCollision(BaseObject* object, float dt)
 			if (_preDirection == TOP) // Va chạm Wall trước đó TOP thì đi xuống
 			{
 				auto movement = (Movement*)this->_componentList["Movement"];
-				movement->setVelocity(GVector2(0, -ZOOMER_MOVE_SPEED));
+				movement->setVelocity(GVector2(-30, -ZOOMER_MOVE_SPEED));
 			}
-			else if (_preDirection == LEFT) // Va chạm Wall trước đó LEFT thì đi sang trái
+			else if (_preDirection == RIGHT) // Va chạm Wall trước đó LEFT thì đi sang trái
 			{
 				auto movement = (Movement*)this->_componentList["Movement"];
-				movement->setVelocity(GVector2(-ZOOMER_MOVE_SPEED, 0));
-			}
-			else if (_preDirection == RIGHT) // Va chạm Wall trước đó RIGHT thì sang phải
-			{
-				auto movement = (Movement*)this->_componentList["Movement"];
-				movement->setVelocity(GVector2(ZOOMER_MOVE_SPEED, 0));
+				movement->setVelocity(GVector2(-ZOOMER_MOVE_SPEED, 30));
 			}
 			else if (_preDirection == BOTTOM) // Va chạm Wall trước đó BOTTOM thì đi lên
 			{
 				auto movement = (Movement*)this->_componentList["Movement"];
-				movement->setVelocity(GVector2(0, ZOOMER_MOVE_SPEED));
+				movement->setVelocity(GVector2(30, ZOOMER_MOVE_SPEED));
+			}
+			else if (_preDirection == LEFT) // Va chạm Wall trước đó RIGHT thì sang phải
+			{
+				auto movement = (Movement*)this->_componentList["Movement"];
+				movement->setVelocity(GVector2(ZOOMER_MOVE_SPEED, -30));
 			}
 		}
 	}

@@ -1109,7 +1109,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					_preWall = object;
 				}
 			}
-			else if (_preWall == object) // Xét sau va chạm
+			else if (_preWall == object)
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -1413,7 +1413,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 			auto position = this->getPosition();
 			if (abs(position.x - objectPosition.x) < WINDOW_WIDTH / 2 + 25)
 			{
-				((Zoomer*)object)->active(position.x > objectPosition.x);
+				((Zoomer*)object)->active();
 			}
 		}
 
