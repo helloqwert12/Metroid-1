@@ -5,10 +5,8 @@
 #include "BaseObject.h"
 #include "Component.h"
 #include "CollisionBody.h"
-#include "Animation.h"
 #include "StopWatch.h"
 #include "QuadtreeNode.h"
-#include <ctime>
 #include "CannonBullet.h"
 
 class LeftCannon : public BaseObject

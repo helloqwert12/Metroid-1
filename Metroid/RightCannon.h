@@ -1,5 +1,5 @@
-#ifndef __MIDDLECANNON_H__
-#define __MIDDLECANNON_H__
+#ifndef __RIGHTCANNON_H__
+#define __RIGHTCANNON_H__
 
 #include "define.h"
 #include "BaseObject.h"
@@ -9,10 +9,10 @@
 #include "QuadtreeNode.h"
 #include "CannonBullet.h"
 
-class MiddleCannon : public BaseObject
+class RightCannon : public BaseObject
 {
 public:
-	MiddleCannon(int x, int y);
+	RightCannon(int x, int y);
 
 	void init();
 	void update(float deltatime);
@@ -34,4 +34,4 @@ protected:
 	StopWatch* _cannonBulletAppearStopWatch;
 };
 
-#endif // !__MIDDLECANNON_H__
+#endif // !__RIGHTCANNON_H__

@@ -194,6 +194,7 @@
     <ClCompile Include="QuadTreeNode.cpp" />
     <ClCompile Include="RedDoor.cpp" />
     <ClCompile Include="RedItemBall.cpp" />
+    <ClCompile Include="RightCannon.cpp" />
     <ClCompile Include="Rinka.cpp" />
     <ClCompile Include="RinkaCannon.cpp" />
     <ClCompile Include="Rio.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="QuadTreeNode.h" />
     <ClInclude Include="RedDoor.h" />
     <ClInclude Include="RedItemBall.h" />
+    <ClInclude Include="RightCannon.h" />
     <ClInclude Include="Rinka.h" />
     <ClInclude Include="RinkaCannon.h" />
     <ClInclude Include="Rio.h" />

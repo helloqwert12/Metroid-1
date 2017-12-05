@@ -239,6 +239,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return middleCannon;
 		break;
 	}
+	case RIGHT_CANNON:
+	{
+		auto rightCannon = new RightCannon(left, top);
+		rightCannon->init();
+		return rightCannon;
+		break;
+	}
 	case ENERGY_TANK:
 	{
 		auto energyTank = new EnergyTank(left, top);
@@ -372,6 +379,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case MIDDLE_CANNON:
 		return getMiddleCannon(item, mapHeight);
+		break;
+	case RIGHT_CANNON:
+		return getRightCannon(item, mapHeight);
 		break;
 	case ENERGY_TANK:
 		return getEnergyTank(item, mapHeight);
@@ -830,6 +840,25 @@ BaseObject* getMiddleCannon(xml_node item, int mapHeight)
 	auto middleCannon = new MiddleCannon(x, y);
 	middleCannon->init();
 	return middleCannon;
+}
+
+BaseObject* getRightCannon(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto rightCannon = new RightCannon(x, y);
+	rightCannon->init();
+	return rightCannon;
 }
 
 BaseObject* getEnergyTank(xml_node item, int mapHeight)

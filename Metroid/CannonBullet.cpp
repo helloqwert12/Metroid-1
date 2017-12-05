@@ -30,6 +30,12 @@ CannonBullet::CannonBullet(int x, int y, eID cannonId) : BaseObject(CANNON_BULLE
 		_sprite->setRotate(180);
 		break;
 	}
+	case RIGHT_CANNON:
+	{
+		_velocity = GVector2(-CANNON_BULLET_MOVE_SPEED, -CANNON_BULLET_MOVE_SPEED);
+		_sprite->setRotate(235);
+		break;
+	}
 	default:
 		break;
 	}

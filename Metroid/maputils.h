@@ -33,6 +33,7 @@
 #include "RinkaCannon.h"
 #include "LeftCannon.h"
 #include "MiddleCannon.h"
+#include "RightCannon.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
@@ -82,6 +83,7 @@ BaseObject* getMotherBrain(xml_node item, int mapHeight);
 BaseObject* getRinkaCannon(xml_node item, int mapHeight);
 BaseObject* getLeftCannon(xml_node item, int mapHeight);
 BaseObject* getMiddleCannon(xml_node item, int mapHeight);
+BaseObject* getRightCannon(xml_node item, int mapHeight);
 
 // Item
 BaseObject* getEnergyTank(xml_node item, int mapHeight);

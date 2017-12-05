@@ -44,6 +44,7 @@
 #include "CannonBullet.h"
 #include "LeftCannon.h"
 #include "MiddleCannon.h"
+#include "RightCannon.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"
