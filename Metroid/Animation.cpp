@@ -83,6 +83,12 @@ void Animation::update(float dt)
 	}
 }
 
+void Animation::draw(LPD3DXSPRITE spriteHandle)
+{
+	_spriteSheet->setFrameRect(_currentRect);
+	_spriteSheet->render(spriteHandle);
+}
+
 void Animation::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_spriteSheet->setFrameRect(_currentRect);

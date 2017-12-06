@@ -17,7 +17,7 @@ SpriteManager::SpriteManager()
 
 void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 {
-	Sprite* sprite = NULL;
+	Sprite* sprite = nullptr;
 
 	sprite = new Sprite(spriteHandle, L"Resources//Images//intro.png");
 	sprite->setScale(SCALE_FACTOR);
@@ -74,6 +74,11 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::BOSS_STAGE] = sprite;
 	this->loadSpriteInfo(eID::BOSS_STAGE, "Resources//Images//boss_stage.txt");
+
+	sprite = new Sprite(spriteHandle, L"Resources//Images//player_victory.png");
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite[eID::PLAYER_VICTORY] = sprite;
+	this->loadSpriteInfo(eID::PLAYER_VICTORY, "Resources//Images//player_victory.txt");
 
 	// Load TileSet
 	sprite = loadTileSetFromXML(spriteHandle, L"Resources//Maps//map.tmx");

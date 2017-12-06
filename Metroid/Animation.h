@@ -33,6 +33,7 @@ public:
 	void update(float dt);
 
 	// Vẽ animation
+	void draw(LPD3DXSPRITE spriteHandle);
 	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
 
 	// Lấy giá trị thời gian chuyển frame

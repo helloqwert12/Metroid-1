@@ -1,4 +1,5 @@
 ﻿#include "MetroidGame.h"
+#include "IntroScene.h"
 
 MetroidGame::MetroidGame(HINSTANCE hInstance, LPWSTR name) : Game(hInstance, name, WINDOW_WIDTH, WINDOW_HEIGHT)
 {

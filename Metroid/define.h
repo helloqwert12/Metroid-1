@@ -91,7 +91,9 @@ enum eID
 	MISSILE_ROCKET = 103,
 	BOMB = 104,
 
-	EXPLOSION = 105
+	EXPLOSION = 105,
+
+	PLAYER_VICTORY = 106
 };
 
 // Trạng thái của object

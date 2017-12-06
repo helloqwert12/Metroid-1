@@ -318,6 +318,9 @@
     <ClCompile Include="RightCannon.cpp">
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="VictoryScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TimeSpan.h">
@@ -562,6 +565,9 @@
     </ClInclude>
     <ClInclude Include="RightCannon.h">
       <Filter>Header Files\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="VictoryScene.h">
+      <Filter>Header Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,7 +6,6 @@
 #include "SpriteManager.h"
 #include "SceneManager.h"
 #include "SoundManager.h"
-#include "IntroScene.h"
 
 class MetroidGame : public Game
 {

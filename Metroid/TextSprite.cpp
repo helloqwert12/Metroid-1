@@ -39,29 +39,19 @@ void TextSprite::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 			index = ((int)c) - 'A';
 		}
 		else if (c >= 'a' && c <= 'z')
-		{
 			index = ((int)c) - 'a';
-		}
 		else if (c >= '0' && c <= '9')
-		{
 			index = (((int)c) - '0') + 26;
-		}
 		else if (c == '.')
-		{
 			index = 36;
-		}
+		else if (c == '!')
+			index = 42;
 		else if (c == '-')
-		{
 			index = 44;
-		}
 		else if (c == ':')
-		{
 			index = 45;
-		}
 		else if (c == ' ')
-		{
 			index = 53;
-		}
 
 		// Set index để lấy frameRect tương ứng muốn vẽ
 		_sprite->setIndex(index);
