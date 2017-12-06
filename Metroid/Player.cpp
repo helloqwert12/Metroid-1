@@ -794,8 +794,6 @@ float Player::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getStatus() == eStatus::DESTROY || this->isInStatus(eStatus::DIE))
 		return 0.0f;
-	if (this == object)
-		return 0.0f;
 
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID objectId = object->getId();
@@ -804,15 +802,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	if (objectId == eID::WALL)
 	{
 		// Kiểm tra va chạm
-		if (collisionBody->checkCollision(object, direction, dt, false))
+		if (collisionBody->checkCollision(object, direction, dt, true))
 		{
-			// Nếu đang va chạm thì dời ra xa
-			float moveX, moveY;
-			if (collisionBody->isColliding(object, moveX, moveY, dt))
-			{
-				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-			}
-
 			// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
 			// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
 			if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
@@ -856,9 +847,9 @@ float Player::checkCollision(BaseObject* object, float dt)
 			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
 
 			if (this->getScale().x > 0)
-			playScene->setViewportCheckpoint(GVector2(object->getPosition().x, object->getPosition().y));
+				playScene->setViewportCheckpoint(GVector2(object->getPosition().x, object->getPosition().y));
 			else
-			playScene->setViewportCheckpoint(GVector2(object->getPosition().x, object->getPosition().y));
+				playScene->setViewportCheckpoint(GVector2(object->getPosition().x, object->getPosition().y));
 
 			_info->setAutoMoveViewport(true);
 		}
@@ -889,18 +880,9 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (((BlueDoor*)object)->isClose())
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			// Nếu cửa đang đóng thì không cho đi qua cửa
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu cửa đang đóng thì không cho đi qua cửa
-				if (((BlueDoor*)object)->isClose())
-				{
-					// Nếu đang va chạm thì dời ra xa
-					float moveX, moveY;
-					if (collisionBody->isColliding(object, moveX, moveY, dt))
-					{
-						collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-					}
-				}
 			}
 
 			eID weaponId;
@@ -928,18 +910,9 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (((RedDoor*)object)->isClose())
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			// Nếu cửa đang đóng thì không cho đi qua cửa
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu cửa đang đóng thì không cho đi qua cửa
-				if (((RedDoor*)object)->isClose())
-				{
-					// Nếu đang va chạm thì dời ra xa
-					float moveX, moveY;
-					if (collisionBody->isColliding(object, moveX, moveY, dt))
-					{
-						collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-					}
-				}
 			}
 
 			eID weaponId;
@@ -954,15 +927,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((BreakableBlueWall*)object)->isDead())
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
 				// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
 				if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
@@ -974,7 +940,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					_preWall = object;
 				}
 			}
-			else if (_preWall == object) // Xét sau va chạm
+			else if (_preWall == object)
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -999,15 +965,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((BreakableRedWall*)object)->isDead())
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
 				// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
 				if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
@@ -1019,7 +978,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					_preWall = object;
 				}
 			}
-			else if (_preWall == object) // Xét sau va chạm
+			else if (_preWall == object)
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -1044,15 +1003,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((BlueItemBall*)object)->isDead())
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
 				// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
 				if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
@@ -1064,7 +1016,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					_preWall = object;
 				}
 			}
-			else if (_preWall == object) // Xét sau va chạm
+			else if (_preWall == object)
 			{
 				// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -1089,15 +1041,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((RedItemBall*)object)->isDead())
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				// Nếu va chạm TOP mà trừ trường hợp nhảy lên vận tốc y lớn hơn 0
 				// Trường hợp vận tốc y lớn hơn 0 là trường hợp nhảy từ dưới lên
 				if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
@@ -1134,15 +1079,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((SkreeBullet*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1161,15 +1099,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((Ripper*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt, false))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1208,15 +1139,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (!((Waver*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1246,15 +1170,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (!((Skree*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt, false))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1295,15 +1212,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (!((Mellow*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1344,15 +1254,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (!((Rio*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1384,15 +1287,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (!((Zeb*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1457,15 +1353,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 
 		if (!((Zoomer*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1484,14 +1373,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((Zeebetite*)object)->isDead())
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
 			}
 
 			eID weaponId;
@@ -1575,15 +1458,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((Rinka*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				beHit(direction);
 				takeDamage(8);
 			}
@@ -1626,15 +1502,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 	{
 		if (!((CannonBullet*)object)->isDead() && _protectTime <= 0)
 		{
-			if (collisionBody->checkCollision(object, direction, dt))
+			if (collisionBody->checkCollision(object, direction, dt, true))
 			{
-				// Nếu đang va chạm thì dời ra xa
-				float moveX, moveY;
-				if (collisionBody->isColliding(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-
 				object->setStatus(DESTROY);
 				beHit(direction);
 				takeDamage(8);
