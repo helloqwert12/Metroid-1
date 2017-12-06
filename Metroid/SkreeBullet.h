@@ -1,25 +1,24 @@
-﻿#ifndef __SKREE_H__
-#define __SKREE_H__
+﻿#ifndef __SKREEBULLET_H__
+#define __SKREEBULLET_H__
 
 #include "define.h"
 #include "BaseObject.h"
 #include "Component.h"
 #include "Movement.h"
-#include "SinMovement.h"
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
 #include "QuadtreeNode.h"
 #include <ctime>
-#include "SkreeBullet.h"
-#include "EnergyBall.h"
 
-#define SKREE_MOVE_SPEED 300
+#define SKREE_BULLET_RANGE 75
+#define SKREE_BULLET_MOVE_SPEED 275
 
-class Skree : public BaseObject
+class SkreeBullet : public BaseObject
 {
 public:
-	Skree(int x, int y);
+	// @velocity: vận tốc ban đầu, dùng để xác định hướng di chuyển
+	SkreeBullet(int x, int y, GVector2 velocity);
 
 	void init();
 	void update(float deltatime);
@@ -36,12 +35,13 @@ public:
 	float checkCollision(BaseObject* object, float dt);
 
 protected:
-	Animation* _animation;
 	map<string, Component*> _componentList;
 
 	int _hitPoint;
 	bool _isActive;
-	bool _shootBullet;
+
+	GVector2 _initPosition;
+	GVector2 _velocity;
 
 	Sprite* _effect;
 	Animation* _effectAnimation;
@@ -51,4 +51,4 @@ protected:
 	bool _startHitStopWatch;
 };
 
-#endif // !__SKREE_H__
+#endif // !__SKREEBULLET_H__

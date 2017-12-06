@@ -16,6 +16,7 @@ Skree::Skree(int x, int y) : BaseObject(SKREE)
 	
 	_hitPoint = 2;
 	_isActive = false;
+	_shootBullet = false;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList["Movement"] = movement;
@@ -66,13 +67,33 @@ void Skree::update(float deltatime)
 		{
 			this->setStatus(DESTROY);
 
+			BaseObject* item = nullptr;
+
 			srand(time(0));
 			auto random = rand() % 10;
-			BaseObject* item = nullptr;
 			if (random < 5)
 				item = new EnergyBall(this->getPositionX(), this->getPositionY());
 			if (item != nullptr)
 			{
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+			}
+
+			if (_shootBullet)
+			{
+				item = new SkreeBullet(this->getPositionX(), this->getPositionY(), GVector2(-SKREE_BULLET_MOVE_SPEED, 0));
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+
+				item = new SkreeBullet(this->getPositionX(), this->getPositionY(), GVector2(SKREE_BULLET_MOVE_SPEED, 0));
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+
+				item = new SkreeBullet(this->getPositionX(), this->getPositionY(), GVector2(-SKREE_BULLET_MOVE_SPEED, 175));
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+
+				item = new SkreeBullet(this->getPositionX(), this->getPositionY(), GVector2(SKREE_BULLET_MOVE_SPEED, 175));
 				item->init();
 				QuadTreeNode::getInstance()->insert(item);
 			}
@@ -167,6 +188,7 @@ float Skree::checkCollision(BaseObject* object, float dt)
 				if (direction == TOP)
 				{
 					this->wasHit(2);
+					_shootBullet = true;
 				}
 			}
 			return 1.0f;

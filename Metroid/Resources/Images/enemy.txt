@@ -15,6 +15,7 @@ frozen_waver_02		168	62	184	74
 frozen_waver_03		186	64	202	72
 yellow_skree_01		15	30	31	54
 yellow_skree_02		33	30	51	54
+skree_bullet_01		205	47	212	53
 mellow_01		512	46	528	54
 mellow_02		530	46	546	54
 yellow_rio_01		214	35	238	54

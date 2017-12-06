@@ -97,8 +97,8 @@ void VictoryScene::draw(LPD3DXSPRITE spriteHandle)
 	if (_samusAnimations[_animationIndex]->isAnimate())
 		_samusAnimations[_animationIndex]->draw(spriteHandle);
 
-	for (auto it = _text.begin(); it != _text.end(); it++)
-		(*it)->draw(spriteHandle);
+	for (auto text : _text)
+		text->draw(spriteHandle);
 }
 
 void VictoryScene::release()

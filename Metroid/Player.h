@@ -27,6 +27,7 @@
 #include "MissileRocket.h"
 #include "Bomb.h"
 
+#include "SkreeBullet.h"
 #include "Ripper.h"
 #include "Waver.h"
 #include "Skree.h"

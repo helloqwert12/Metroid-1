@@ -1,5 +1,5 @@
-#ifndef __GAMEVICTORYSCENE_H__
-#define __GAMEVICTORYSCENE_H__
+#ifndef __VICTORYSCENE_H__
+#define __VICTORYSCENE_H__
 
 #include "Sprite.h"
 #include "SpriteManager.h"
@@ -38,4 +38,4 @@ private:
 	bool _isPressed;
 };
 
-#endif // !__GAMEVICTORYSCENE_H__
+#endif // !__VICTORYSCENE_H__

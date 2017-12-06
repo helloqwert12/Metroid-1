@@ -157,6 +157,7 @@
     <ClCompile Include="BreakableBlueWall.cpp" />
     <ClCompile Include="BreakableRedWall.cpp" />
     <ClCompile Include="CannonBullet.cpp" />
+    <ClCompile Include="SkreeBullet.cpp" />
     <ClCompile Include="VictoryScene.cpp" />
     <ClCompile Include="LeftCannon.cpp" />
     <ClCompile Include="ChangeMapDirection.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="BreakableBlueWall.h" />
     <ClInclude Include="BreakableRedWall.h" />
     <ClInclude Include="CannonBullet.h" />
+    <ClInclude Include="SkreeBullet.h" />
     <ClInclude Include="VictoryScene.h" />
     <ClInclude Include="LeftCannon.h" />
     <ClInclude Include="ChangeMapDirection.h" />

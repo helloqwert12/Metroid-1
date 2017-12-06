@@ -1,11 +1,10 @@
-﻿#ifndef __MAPUTIL_H__
-#define __MAPUTIL_H__
+﻿#ifndef __MAPUTILS_H__
+#define __MAPUTILS_H__
 
 #include "define.h"
 #include "pugixml/pugixml.hpp"
-#include "BaseObject.h"
-#include <ctime>
 #include <list>
+#include "BaseObject.h"
 
 #include "Wall.h"
 #include "ChangeMapDirection.h"
