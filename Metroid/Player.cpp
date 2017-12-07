@@ -1084,15 +1084,6 @@ float Player::checkCollision(BaseObject* object, float dt)
 				beHit(direction);
 				takeDamage(8);
 			}
-
-			eID weaponId;
-			if (this->checkWeaponCollision(object, direction, weaponId, dt))
-			{
-				if (weaponId == eID::MISSILE_ROCKET)
-					((SkreeBullet*)object)->wasHit(5);
-				else
-					((SkreeBullet*)object)->wasHit(1);
-			}
 		}
 	}
 	else if (objectId == RIPPER)
@@ -1108,8 +1099,6 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
-				if (weaponId == eID::MISSILE_ROCKET)
-					((Ripper*)object)->wasHit(5);
 			}
 		}
 	}

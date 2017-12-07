@@ -163,17 +163,10 @@ float CannonBullet::checkCollision(BaseObject* object, float dt)
 	{
 		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 		eDirection direction;
-		if (collisionBody->checkCollision(object, direction, dt, false))
+		if (collisionBody->checkCollision(object, direction, dt, true))
 		{
-			float moveX, moveY;
-			if (collisionBody->isColliding(object, moveX, moveY, dt))
-			{
-				// Update lại vị trí (tránh không cho đi xuyên)
-				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-
-				// Va chạm Wall thì DESTROY
-				this->setStatus(DESTROY);
-			}
+			// Va chạm Wall thì DESTROY
+			this->setStatus(DESTROY);
 			return 1.0f;
 		}
 	}

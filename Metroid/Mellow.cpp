@@ -152,21 +152,14 @@ float Mellow::checkCollision(BaseObject* object, float dt)
 	{
 		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 		eDirection direction;
-		if (collisionBody->checkCollision(object, direction, dt, false))
+		if (collisionBody->checkCollision(object, direction, dt, true))
 		{
-			float moveX, moveY;
-			if (collisionBody->isColliding(object, moveX, moveY, dt))
+			// Va chạm Wall TOP hoặc BOTTOM thì đi chéo ngược lại
+			if (direction == TOP || direction == BOTTOM)
 			{
-				// Update lại vị trí (tránh không cho đi xuyên)
-				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-
-				// Va chạm Wall TOP hoặc BOTTOM thì đi chéo ngược lại
-				if (direction == TOP || direction == BOTTOM)
-				{
-					auto movement = (Movement*)this->_componentList["Movement"];
-					movement->setVelocity(GVector2(movement->getVelocity().x, -movement->getVelocity().y));
-					this->setScaleX(this->getScale().x * -1);
-				}
+				auto movement = (Movement*)this->_componentList["Movement"];
+				movement->setVelocity(GVector2(movement->getVelocity().x, -movement->getVelocity().y));
+				this->setScaleX(this->getScale().x * -1);
 			}
 			return 1.0f;
 		}

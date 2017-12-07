@@ -147,15 +147,8 @@ float Zoomer::checkCollision(BaseObject* object, float dt)
 	{
 		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 		eDirection direction;
-		if (collisionBody->checkCollision(object, direction, dt, false))
+		if (collisionBody->checkCollision(object, direction, dt, true))
 		{
-			float moveX, moveY;
-			if (collisionBody->isColliding(object, moveX, moveY, dt))
-			{
-				// Update lại vị trí (tránh không cho đi xuyên)
-				collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-			}
-
 			if (direction == TOP) // Va chạm Wall TOP thì tiếp tục đi sang phải
 			{
 				_velocity = GVector2(ZOOMER_MOVE_SPEED, -30);
