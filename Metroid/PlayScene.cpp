@@ -1,5 +1,6 @@
 ﻿#include "PlayScene.h"
 #include "GameOverScene.h"
+#include "VictoryScene.h"
 #include "maputils.h"
 
 PlayScene::PlayScene()
@@ -23,6 +24,7 @@ bool PlayScene::init()
 	player->setPosition(1170, 2500);
 	player->getBounding();
 	this->_player = player;
+	this->getPlayer()->resetValues();
 
 	_text = new Text(L"Tahoma", "", 445, 445, 22);
 
@@ -82,8 +84,7 @@ bool PlayScene::init()
 	//	fileIn.close();
 	//}
 
-	this->getPlayer()->resetValues();
-
+	_isVictory = false;
 	return true;
 }
 
@@ -225,6 +226,12 @@ bool PlayScene::checkEndGame()
 		SceneManager::getInstance()->replaceScene(gameOverScene);
 		return true;
 	}
+	else if (_isVictory)
+	{
+		auto victoryScene = new VictoryScene();
+		SceneManager::getInstance()->replaceScene(victoryScene);
+		return true;
+	}
 
 	return false;
 }
@@ -253,4 +260,9 @@ GVector2 PlayScene::getViewportCheckpoint()
 void PlayScene::setViewportCheckpoint(GVector2 viewportCheckpoint)
 {
 	_viewportCheckpoint = viewportCheckpoint;
+}
+
+void PlayScene::setVictory(bool flag)
+{
+	_isVictory = flag;
 }

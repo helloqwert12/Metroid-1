@@ -1,4 +1,6 @@
 ﻿#include "MotherBrain.h"
+#include "SceneManager.h"
+#include "PlayScene.h"
 
 MotherBrain::MotherBrain(int x, int y) : BaseObject(MOTHER_BRAIN)
 {
@@ -71,6 +73,9 @@ void MotherBrain::update(float deltatime)
 		if (_effectStopWatch->isStopWatch(5000))
 		{
 			this->setStatus(DESTROY);
+
+			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();
+			playScene->setVictory(true);
 		}
 	}
 }

@@ -31,11 +31,14 @@ public:
 	GVector2 getViewportCheckpoint();
 	void setViewportCheckpoint(GVector2 viewportCheckpoint);
 
+	void setVictory(bool flag);
+
 private:
 	Text* _text;
 	TileMap* _tileMap;
 	QuadTreeNode* _root;
 	BaseObject* _player;
+	bool _isVictory;
 
 	// Hướng Map
 	eMapDirection _mapDirection;
