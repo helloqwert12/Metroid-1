@@ -6,7 +6,6 @@ Fire::Fire(int x, int y, int width, int height) : BaseObject(eID::FIRE)
 	this->_bound.bottom = y;
 	this->_bound.top = y + height;
 	this->_bound.right = x + width;
-	this->setPhysicsBodySide(eDirection::ALL);
 }
 
 void Fire::init()

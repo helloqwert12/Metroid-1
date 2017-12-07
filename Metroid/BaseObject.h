@@ -54,23 +54,19 @@ public:
 	virtual void setColor(D3DXCOLOR color);
 	virtual D3DXCOLOR getColor();
 
-	virtual RECT getBounding();
-
-	virtual float checkCollision(BaseObject* object, float dt);
-
 	// Object nào cũng có vận tốc, mặc định là đứng yên sẽ trả về (0, 0)
 	// Nếu object có chuyển động phải override lại để lấy vận tốc.
 	virtual GVector2 getVelocity();
 
-	virtual void setPhysicsBodySide(eDirection side);
-	virtual eDirection getPhysicsBodySide();
+	virtual RECT getBounding();
+
+	virtual float checkCollision(BaseObject* object, float dt);
 
 protected:
 	Sprite* _sprite; // Reference đến Sprite
 
 	eID _id; // ID của object
 	eStatus _status; // Trạng thái của object
-	eDirection _physicsSide; // Hướng có thể bị va chạm của object
 };
 
 

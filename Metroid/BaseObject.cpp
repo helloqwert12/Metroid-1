@@ -5,7 +5,6 @@ BaseObject::BaseObject(eID id)
 	this->_id = id;
 	this->_sprite = nullptr;
 	this->setStatus(eStatus::NORMAL);
-	this->setPhysicsBodySide(eDirection::ALL);
 }
 
 BaseObject::~BaseObject()
@@ -154,6 +153,11 @@ D3DXCOLOR BaseObject::getColor()
 	return _sprite->getColor();
 }
 
+GVector2 BaseObject::getVelocity()
+{
+	return GVector2(0, 0);
+}
+
 RECT BaseObject::getBounding()
 {
 	return _sprite->getBounding();
@@ -162,22 +166,6 @@ RECT BaseObject::getBounding()
 float BaseObject::checkCollision(BaseObject* object, float dt)
 {
 	return 0.0f;
-}
-
-GVector2 BaseObject::getVelocity()
-{
-	return GVector2(0, 0);
-}
-
-void BaseObject::setPhysicsBodySide(eDirection side)
-{
-	if (_physicsSide != side)
-		_physicsSide = side;
-}
-
-eDirection BaseObject::getPhysicsBodySide()
-{
-	return _physicsSide;
 }
 
 Controlable::Controlable()

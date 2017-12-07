@@ -8,7 +8,6 @@ ZebPipe::ZebPipe(int x, int y, int width, int height) : BaseObject(ZEB_PIPE)
 	this->_bound.bottom = y;
 	this->_bound.top = y + height;
 	this->_bound.right = x + width;
-	this->setPhysicsBodySide(eDirection::ALL);
 
 	_isActive = false;
 }

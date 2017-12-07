@@ -6,7 +6,6 @@ ChangeMapDirection::ChangeMapDirection(int x, int y, int width, int height, eMap
 	this->_bound.bottom = y;
 	this->_bound.top = y + height;
 	this->_bound.right = x + width;
-	this->setPhysicsBodySide(eDirection::ALL);
 
 	this->_mapDirection = mapDirection;
 	this->_mapDirectionAnchorPoint = mapDirectionAnchorPoint;

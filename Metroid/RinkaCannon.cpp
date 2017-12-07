@@ -8,7 +8,6 @@ RinkaCannon::RinkaCannon(int x, int y, int width, int height) : BaseObject(RINKA
 	this->_bound.bottom = y;
 	this->_bound.top = y + height;
 	this->_bound.right = x + width;
-	this->setPhysicsBodySide(eDirection::ALL);
 
 	_isActive = false;
 }

@@ -1,6 +1,6 @@
 ﻿#include "CollisionBody.h"
 
-CollisionBody::CollisionBody(BaseObject * target)
+CollisionBody::CollisionBody(BaseObject* target)
 {
 	_target = target;
 }
@@ -15,12 +15,8 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 
 	if (time < 1.0f) // Nếu sẽ xảy ra va chạm
 	{
-		// Hướng va chạm của otherObject trùng với hướng có thể bị va chạm của nó
-		if (otherObject->getPhysicsBodySide() != eDirection::NONE && (direction & otherObject->getPhysicsBodySide()) == direction)
-		{
-			// Update tọa độ (cản lại)
-			updateTargetPosition(otherObject, direction, true);
-		}
+		// Update tọa độ (cản lại)
+		updateTargetPosition(otherObject, direction, true);
 
 		return true;
 	}
@@ -35,14 +31,10 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 			// Lấy hướng bị va chạm của otherObject
 			auto side = this->getDirection(otherObject);
 			direction = side;
-
-			// Hướng va chạm của otherObject trùng với hướng có thể bị va chạm của nó
-			if (otherObject->getPhysicsBodySide() != eDirection::NONE && (direction & otherObject->getPhysicsBodySide()) == direction)
-			{
-				// Update tọa độ (dịch chuyển ra xa)
-				if (isUpdatePosition)
-					updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
-			}
+			
+			// Update tọa độ (dịch chuyển ra xa)
+			if (isUpdatePosition)
+				updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
 
 			return true;
 		}
@@ -213,43 +205,39 @@ void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection dir
 {
 	if (withVelocity) // cản lại khi va chạm
 	{
-		// Hướng va chạm của otherObject trùng với hướng có thể bị va chạm của nó
-		if (otherObject->getPhysicsBodySide() != eDirection::NONE || (direction & otherObject->getPhysicsBodySide()) == direction)
+		auto position = _target->getPosition();
+
+		if (_txEntry > _tyEntry)
 		{
-			auto position = _target->getPosition();
-
-			if (_txEntry > _tyEntry)
-			{
-				// Xử lý cản left và right
-				if (_txEntry > 0 && _txEntry < 1)
-					position.x += _dxEntry;
-			}
-			else
-			{
-				// Xử lý cản top và bottom
-				if (_tyEntry > 0 && _tyEntry < 1)
-					position.y += _dyEntry;
-			}
-
-			_target->setPosition(position);
+			// Xử lý cản left và right
+			if (_txEntry > 0 && _txEntry < 1)
+				position.x += _dxEntry;
 		}
+		else
+		{
+			// Xử lý cản top và bottom
+			if (_tyEntry > 0 && _tyEntry < 1)
+				position.y += _dyEntry;
+		}
+
+		_target->setPosition(position);
 	}
 	else // dịch ra xa khi đang va chạm rồi
 	{
-		if (move.y > 0 && (otherObject->getPhysicsBodySide() & eDirection::TOP) == eDirection::TOP && _target->getVelocity().y <= 0)
+		if (move.y > 0 && _target->getVelocity().y <= 0) // Va chạm TOP
 		{
 			_target->setPositionY(_target->getPositionY() + move.y);
 		}
-		else if (move.y < 0 && (otherObject->getPhysicsBodySide() & eDirection::BOTTOM) == eDirection::BOTTOM && _target->getVelocity().y >= 0)
+		else if (move.y < 0 && _target->getVelocity().y >= 0) // Va chạm BOTTOM
 		{
 			_target->setPositionY(_target->getPositionY() + move.y);
 		}
 
-		if (move.x > 0 && (otherObject->getPhysicsBodySide() & eDirection::RIGHT) == eDirection::RIGHT && _target->getVelocity().x <= 0)
+		if (move.x > 0 && _target->getVelocity().x <= 0) // Va chạm RIGHT
 		{
 			_target->setPositionX(_target->getPositionX() + move.x);
 		}
-		else if (move.x < 0 && (otherObject->getPhysicsBodySide() & eDirection::LEFT) == eDirection::LEFT && _target->getVelocity().x >= 0)
+		else if (move.x < 0 && _target->getVelocity().x >= 0) // Va chạm LEFT
 		{
 			_target->setPositionX(_target->getPositionX() + move.x);
 		}

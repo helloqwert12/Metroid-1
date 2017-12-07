@@ -6,7 +6,6 @@ AutoMoveViewport::AutoMoveViewport(int x, int y, int width, int height) : BaseOb
 	this->_bound.bottom = y;
 	this->_bound.top = y + height;
 	this->_bound.right = x + width;
-	this->setPhysicsBodySide(eDirection::ALL);
 }
 
 void AutoMoveViewport::init()
