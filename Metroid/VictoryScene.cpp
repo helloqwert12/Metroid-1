@@ -59,6 +59,8 @@ bool VictoryScene::init()
 	_startGame = new StopWatch();
 	_isPressed = false;
 
+	SoundManager::getInstance()->Play(eSoundID::VICTORY_SCENE);
+
 	return true;
 }
 
@@ -74,7 +76,7 @@ void VictoryScene::onKeyPressed(KeyEventArg* keyEvent)
 
 void VictoryScene::update(float dt)
 {
-	if (_changeAnimation->isStopWatch(3000))
+	if (_changeAnimation->isStopWatch(5000))
 	{
 		if (_animationIndex < 3)
 		{
@@ -103,6 +105,8 @@ void VictoryScene::draw(LPD3DXSPRITE spriteHandle)
 
 void VictoryScene::release()
 {
+	SoundManager::getInstance()->Stop(eSoundID::VICTORY_SCENE);
+
 	for (auto it = _samusAnimations.begin(); it != _samusAnimations.end(); it++)
 	{
 		SAFE_DELETE(*it);

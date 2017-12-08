@@ -1,6 +1,6 @@
 #include "IntroScene.h"
-#include "SoundManager.h"
 #include "PlayScene.h"
+#include "SoundManager.h"
 
 IntroScene::IntroScene()
 {
@@ -46,7 +46,7 @@ bool IntroScene::init()
 	_isPressed = false;
 	_isDrawText = false;
 
-	//SoundManager::getInstance()->PlayLoop(INTRO_SCENE);
+	SoundManager::getInstance()->PlayLoop(eSoundID::INTRO_SCENE);
 
 	return true;
 }
@@ -103,7 +103,7 @@ void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 
 void IntroScene::release()
 {
-	//SoundManager::getInstance()->Stop(INTRO_SCENE);
+	SoundManager::getInstance()->Stop(eSoundID::INTRO_SCENE);
 
 	SAFE_DELETE(_background);
 	SAFE_DELETE(_pressStart);

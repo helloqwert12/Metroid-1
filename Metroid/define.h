@@ -133,11 +133,21 @@ enum eMapDirection
 };
 
 // ID của Sound
-enum eSoundId
+enum eSoundID
 {
 	INTRO_SCENE,
 	PLAY_SCENE,
 	OVER_SCENE,
+	VICTORY_SCENE,
+	
+	PLAYER_JUMP,
+	PLAYER_BE_HIT,
+	PLAYER_DIE,
+
+	NORMAL_BULLET_FIRE,
+	ICE_BULLET_FIRE,
+	MISSILE_ROCKET_FIRE,
+	BOMB_SET,
 };
 
 typedef D3DXVECTOR3 GVector3;

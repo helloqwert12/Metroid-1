@@ -1,6 +1,7 @@
 ﻿#include "Player.h"
 #include "SceneManager.h"
 #include "PlayScene.h"
+#include "SoundManager.h"
 
 Player::Player() : BaseObject(eID::PLAYER)
 {
@@ -316,6 +317,8 @@ void Player::updateAttackStatus(float dt)
 			{
 			case NORMAL_BULLET:
 			{
+				SoundManager::getInstance()->Play(eSoundID::NORMAL_BULLET_FIRE);
+
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
 					if (this->getScale().x > 0)
@@ -334,6 +337,8 @@ void Player::updateAttackStatus(float dt)
 			}
 			case ICE_BULLET:
 			{
+				SoundManager::getInstance()->Play(eSoundID::ICE_BULLET_FIRE);
+
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
 					if (this->getScale().x > 0)
@@ -352,6 +357,8 @@ void Player::updateAttackStatus(float dt)
 			}
 			case MISSILE_ROCKET:
 			{
+				SoundManager::getInstance()->Play(eSoundID::MISSILE_ROCKET_FIRE);
+
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
 					if (this->getScale().x > 0)
@@ -374,10 +381,15 @@ void Player::updateAttackStatus(float dt)
 				break;
 			}
 			case BOMB:
+			{
 				// Nếu đang FALLING thì không được đặt bomb
 				if (!this->isInStatus(eStatus::FALLING))
+				{
+					SoundManager::getInstance()->Play(eSoundID::BOMB_SET);
 					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
+				}
 				break;
+			}
 			default:
 				break;
 			}
@@ -709,6 +721,8 @@ void Player::jump()
 	if (this->isInStatus(eStatus::JUMPING) || this->isInStatus(eStatus::FALLING))
 		return;
 
+	SoundManager::getInstance()->Play(eSoundID::PLAYER_JUMP);
+
 	this->addStatus(eStatus::JUMPING);
 
 	auto movement = (Movement*)this->_componentList["Movement"];
@@ -725,6 +739,8 @@ void Player::falling()
 
 void Player::beHit(eDirection direction)
 {
+	SoundManager::getInstance()->Play(eSoundID::PLAYER_BE_HIT);
+
 	_protectTime = PROTECT_TIME;
 
 	if (direction == NONE)
@@ -777,6 +793,9 @@ void Player::die()
 {
 	if (!this->isInStatus(eStatus::DIE))
 		this->setStatus(eStatus::DIE);
+
+	if (!SoundManager::getInstance()->IsPlaying(eSoundID::PLAYER_DIE))
+		SoundManager::getInstance()->Play(eSoundID::PLAYER_DIE);
 }
 
 void Player::revive()
