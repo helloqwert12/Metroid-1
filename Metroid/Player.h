@@ -93,14 +93,11 @@ public:
 	void die();
 	void revive();
 
-	float checkCollision(BaseObject* object, float dt);
-
-	void setStatus(eStatus status);
-
-	GVector2 getPosition();
 	Info* getInfo();
 	int getLifeNumber();
 	RECT getBounding();
+
+	float checkCollision(BaseObject* object, float dt);
 
 private:
 	map<int, Animation*> _animations;

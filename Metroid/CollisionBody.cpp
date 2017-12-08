@@ -29,8 +29,7 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 		if (isColliding(otherObject, moveX, moveY, dt))
 		{
 			// Lấy hướng bị va chạm của otherObject
-			auto side = this->getDirection(otherObject);
-			direction = side;
+			direction = this->getDirection(otherObject);
 			
 			// Update tọa độ (dịch chuyển ra xa)
 			if (isUpdatePosition)
@@ -50,8 +49,8 @@ float CollisionBody::isCollide(BaseObject* otherObject, eDirection& direction, f
 	RECT otherRect = otherObject->getBounding();
 
 	// Sử dụng Broadphase rect để kiểm tra trước vùng tiếp theo có va chạm không
-	RECT broadphaseRect = getSweptBroadphaseRect(_target, dt);	// là bound của object được mở rộng ra thêm một phần bằng với vận tốc (dự đoán trước bound)
-	if (!isColliding(broadphaseRect, otherRect))				// kiểm tra tính chồng lắp của 2 HCN
+	RECT broadphaseRect = getSweptBroadphaseRect(_target, dt); // là bound của object được mở rộng ra thêm một phần bằng với vận tốc (dự đoán trước bound)
+	if (!isColliding(broadphaseRect, otherRect)) // kiểm tra tính chồng lắp của 2 HCN
 	{
 		// Không va chạm trả về 1 đi tiếp bình thường
 		direction = eDirection::NONE;
@@ -201,6 +200,80 @@ bool CollisionBody::isColliding(BaseObject* otherObject, float& moveX, float& mo
 	return true;
 }
 
+bool CollisionBody::isColliding(RECT myRect, RECT otherRect)
+{
+	float left = otherRect.left - myRect.right;
+	float top = otherRect.top - myRect.bottom;
+	float right = otherRect.right - myRect.left;
+	float bottom = otherRect.bottom - myRect.top;
+
+	return !(left > 0 || top < 0 || right < 0 || bottom > 0);
+}
+
+RECT CollisionBody::getSweptBroadphaseRect(BaseObject* object, float dt)
+{
+	// Vận tốc mỗi frame (vX, vY)
+	auto velocity = GVector2(object->getVelocity().x * dt / 1000, object->getVelocity().y * dt / 1000);
+	auto myRect = object->getBounding();
+
+	RECT rect;
+	rect.left = velocity.x > 0 ? myRect.left : myRect.left + velocity.x;
+	rect.top = velocity.y > 0 ? myRect.top + velocity.y : myRect.top;
+	rect.right = velocity.x > 0 ? myRect.right + velocity.x : myRect.right;
+	rect.bottom = velocity.y > 0 ? myRect.bottom : myRect.bottom + velocity.y;
+
+	return rect;
+}
+
+eDirection CollisionBody::getDirection(BaseObject* otherObject)
+{
+	auto myRect = _target->getBounding();
+	auto otherRect = otherObject->getBounding();
+
+	float left = otherRect.left - myRect.right;
+	float top = otherRect.top - myRect.bottom;
+	float right = otherRect.right - myRect.left;
+	float bottom = otherRect.bottom - myRect.top;
+
+	// Kiểm tra va chạm
+	if (left > 0 || right < 0 || top < 0 || bottom > 0)
+		return eDirection::NONE;
+
+	float minX, minY;
+	eDirection sideX, sideY;
+
+	if (top < abs(bottom))
+	{
+		minY = top;
+		sideY = eDirection::TOP;
+	}
+	else
+	{
+		minY = bottom;
+		sideY = eDirection::BOTTOM;
+	}
+
+	if (abs(left)< right)
+	{
+		minX = left;
+		sideX = eDirection::LEFT;
+	}
+	else
+	{
+		minX = right;
+		sideX = eDirection::RIGHT;
+	}
+
+	if (abs(minX) < abs(minY))
+	{
+		return sideX;
+	}
+	else
+	{
+		return sideY;
+	}
+}
+
 void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection direction, bool withVelocity, GVector2 move)
 {
 	if (withVelocity) // cản lại khi va chạm
@@ -241,82 +314,6 @@ void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection dir
 		{
 			_target->setPositionX(_target->getPositionX() + move.x);
 		}
-	}
-}
-
-bool CollisionBody::isColliding(RECT myRect, RECT otherRect)
-{
-	float left = otherRect.left - myRect.right;
-	float top = otherRect.top - myRect.bottom;
-	float right = otherRect.right - myRect.left;
-	float bottom = otherRect.bottom - myRect.top;
-
-	return !(left > 0 || top < 0 || right < 0 || bottom > 0);
-}
-
-RECT CollisionBody::getSweptBroadphaseRect(BaseObject* object, float dt)
-{
-	// Vận tốc mỗi frame (vX, vY)
-	auto velocity = GVector2(object->getVelocity().x * dt / 1000, object->getVelocity().y * dt / 1000);
-	auto myRect = object->getBounding();
-
-	RECT rect;
-	rect.left = velocity.x > 0 ? myRect.left : myRect.left + velocity.x;
-	rect.top = velocity.y > 0 ? myRect.top + velocity.y : myRect.top;
-	rect.right = velocity.x > 0 ? myRect.right + velocity.x : myRect.right;
-	rect.bottom = velocity.y > 0 ? myRect.bottom : myRect.bottom + velocity.y;
-
-	return rect;
-}
-
-eDirection CollisionBody::getDirection(BaseObject* otherObject)
-{
-	auto myRect = _target->getBounding();
-	auto otherRect = otherObject->getBounding();
-
-	float left = otherRect.left - myRect.right;
-	float top = otherRect.top - myRect.bottom;
-	float right = otherRect.right - myRect.left;
-	float bottom = otherRect.bottom - myRect.top;
-
-	// Kiểm tra va chạm
-	if (left > 0 || right < 0 || top < 0 || bottom > 0)
-		return eDirection::NONE;
-
-	float minX;
-	float minY;
-	eDirection sideY;
-	eDirection sideX;
-
-	if (top < abs(bottom))
-	{
-		minY = top;
-		sideY = eDirection::TOP;
-	}
-	else
-	{
-		minY = bottom;
-		sideY = eDirection::BOTTOM;
-	}
-
-	if (abs(left)< right)
-	{
-		minX = left;
-		sideX = eDirection::LEFT;
-	}
-	else
-	{
-		minX = right;
-		sideX = eDirection::RIGHT;
-	}
-
-	if (abs(minX) < abs(minY))
-	{
-		return sideX;
-	}
-	else
-	{
-		return sideY;
 	}
 }
 

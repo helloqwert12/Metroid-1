@@ -101,6 +101,18 @@ bool MiddleCannon::isActive()
 	return _isActive;
 }
 
+RECT MiddleCannon::getBounding()
+{
+	RECT bound = _sprite->getBounding();
+
+	bound.left -= 3;
+	bound.top -= 3;
+	bound.right -= 3;
+	bound.bottom -= 3;
+
+	return bound;
+}
+
 float MiddleCannon::checkCollision(BaseObject* object, float dt)
 {
 	return 0;

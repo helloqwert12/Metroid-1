@@ -74,6 +74,18 @@ void Zoomer::update(float deltatime)
 		if (_effectStopWatch->isStopWatch(200))
 		{
 			this->setStatus(DESTROY);
+
+			BaseObject* item = nullptr;
+
+			srand(time(0));
+			auto random = rand() % 10;
+			if (random < 5)
+				item = new EnergyBall(this->getPositionX(), this->getPositionY());
+			if (item != nullptr)
+			{
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+			}
 		}
 	}
 }

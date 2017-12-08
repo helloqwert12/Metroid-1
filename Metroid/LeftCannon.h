@@ -23,6 +23,8 @@ public:
 	void deactive();
 	bool isActive();
 
+	RECT getBounding();
+
 	float checkCollision(BaseObject* object, float dt);
 
 protected:

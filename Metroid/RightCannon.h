@@ -22,6 +22,8 @@ public:
 	void active();
 	void deactive();
 	bool isActive();
+	
+	RECT getBounding();
 
 	float checkCollision(BaseObject* object, float dt);
 

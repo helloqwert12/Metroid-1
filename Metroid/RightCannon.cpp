@@ -101,6 +101,18 @@ bool RightCannon::isActive()
 	return _isActive;
 }
 
+RECT RightCannon::getBounding()
+{
+	RECT bound = _sprite->getBounding();
+
+	bound.left -= 3;
+	bound.top -= 3;
+	bound.right -= 3;
+	bound.bottom -= 3;
+
+	return bound;
+}
+
 float RightCannon::checkCollision(BaseObject* object, float dt)
 {
 	return 0;

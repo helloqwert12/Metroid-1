@@ -39,7 +39,7 @@ void Player::init()
 	_animations[eStatus::JUMPING | eStatus::NORMAL]->addFrameRect(eID::PLAYER, "jump", NULL);
 
 	_animations[eStatus::FALLING] = new Animation(_sprite, 0.07f);
-	_animations[eStatus::FALLING]->addFrameRect(eID::PLAYER, "normal", NULL);
+	_animations[eStatus::FALLING]->addFrameRect(eID::PLAYER, "jump", NULL);
 
 	_animations[eStatus::LOOKING_UP] = new Animation(_sprite, 0.07f);
 	_animations[eStatus::LOOKING_UP]->addFrameRect(eID::PLAYER, "look_up", NULL);
@@ -790,6 +790,48 @@ void Player::revive()
 	this->jump();
 }
 
+Info* Player::getInfo()
+{
+	return _info;
+}
+
+int Player::getLifeNumber()
+{
+	return _info->getLife();
+}
+
+RECT Player::getBounding()
+{
+	RECT bound = _sprite->getBounding();
+
+	if ((_currentAnimationIndex & LOOKING_UP) == LOOKING_UP)
+	{
+		bound.top -= 6;
+	}
+
+	if ((_currentAnimationIndex & NORMAL) == NORMAL)
+	{
+		if (this->getScale().x > 0)
+		{
+			bound.right -= 4;
+			bound.left += 4;
+		}
+		else if (this->getScale().x < 0)
+		{
+			bound.left += 4;
+			bound.right -= 4;
+		}
+	}
+
+	return bound;
+}
+
+GVector2 Player::getVelocity()
+{
+	auto movement = (Movement*)this->_componentList["Movement"];
+	return movement->getVelocity();
+}
+
 float Player::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getStatus() == eStatus::DESTROY || this->isInStatus(eStatus::DIE))
@@ -1531,6 +1573,15 @@ float Player::checkCollision(BaseObject* object, float dt)
 				((LeftCannon*)object)->deactive();
 			}
 		}
+
+		if (_protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, true))
+			{
+				beHit(direction);
+				takeDamage(8);
+			}
+		}
 	}
 	else if (objectId == MIDDLE_CANNON)
 	{
@@ -1555,6 +1606,15 @@ float Player::checkCollision(BaseObject* object, float dt)
 				((MiddleCannon*)object)->deactive();
 			}
 		}
+
+		if (_protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, true))
+			{
+				beHit(direction);
+				takeDamage(8);
+			}
+		}
 	}
 	else if (objectId == RIGHT_CANNON)
 	{
@@ -1577,6 +1637,15 @@ float Player::checkCollision(BaseObject* object, float dt)
 			if (abs(position.x - objectPosition.x) > WINDOW_WIDTH / 2 - 50)
 			{
 				((RightCannon*)object)->deactive();
+			}
+		}
+
+		if (_protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, true))
+			{
+				beHit(direction);
+				takeDamage(8);
 			}
 		}
 	}
@@ -1650,56 +1719,4 @@ float Player::checkCollision(BaseObject* object, float dt)
 			object->setStatus(DESTROY);
 		}
 	}
-}
-
-void Player::setStatus(eStatus status)
-{
-	_status = status;
-}
-
-GVector2 Player::getPosition()
-{
-	return _sprite->getPosition();
-}
-
-Info* Player::getInfo()
-{
-	return _info;
-}
-
-int Player::getLifeNumber()
-{
-	return _info->getLife();
-}
-
-RECT Player::getBounding()
-{
-	RECT bound = _sprite->getBounding();
-
-	if ((_currentAnimationIndex & LOOKING_UP) == LOOKING_UP)
-	{
-		bound.top -= 6;
-	}
-
-	if ((_currentAnimationIndex & NORMAL) == NORMAL)
-	{
-		if (this->getScale().x > 0)
-		{
-			bound.right -= 4;
-			bound.left += 4;
-		}
-		else if (this->getScale().x < 0)
-		{
-			bound.left += 4;
-			bound.right -= 4;
-		}
-	}
-
-	return bound;
-}
-
-GVector2 Player::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
 }
