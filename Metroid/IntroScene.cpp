@@ -46,7 +46,7 @@ bool IntroScene::init()
 	_isPressed = false;
 	_isDrawText = false;
 
-	SoundManager::getInstance()->PlayLoop(eSoundID::INTRO_SCENE);
+	SoundManager::getInstance()->playLoop(eSoundID::INTRO_SCENE);
 
 	return true;
 }
@@ -103,7 +103,7 @@ void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 
 void IntroScene::release()
 {
-	SoundManager::getInstance()->Stop(eSoundID::INTRO_SCENE);
+	SoundManager::getInstance()->stop(eSoundID::INTRO_SCENE);
 
 	SAFE_DELETE(_background);
 	SAFE_DELETE(_pressStart);

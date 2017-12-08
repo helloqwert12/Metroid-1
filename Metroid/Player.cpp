@@ -317,7 +317,7 @@ void Player::updateAttackStatus(float dt)
 			{
 			case NORMAL_BULLET:
 			{
-				SoundManager::getInstance()->Play(eSoundID::NORMAL_BULLET_FIRE);
+				SoundManager::getInstance()->play(eSoundID::FIRE_NORMAL_BULLET);
 
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
@@ -337,7 +337,7 @@ void Player::updateAttackStatus(float dt)
 			}
 			case ICE_BULLET:
 			{
-				SoundManager::getInstance()->Play(eSoundID::ICE_BULLET_FIRE);
+				SoundManager::getInstance()->play(eSoundID::FIRE_ICE_BULLET);
 
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
@@ -357,7 +357,7 @@ void Player::updateAttackStatus(float dt)
 			}
 			case MISSILE_ROCKET:
 			{
-				SoundManager::getInstance()->Play(eSoundID::MISSILE_ROCKET_FIRE);
+				SoundManager::getInstance()->play(eSoundID::FIRE_MISSILE_ROCKET);
 
 				if (this->isInStatus(eStatus::LOOKING_UP))
 				{
@@ -385,7 +385,7 @@ void Player::updateAttackStatus(float dt)
 				// Nếu đang FALLING thì không được đặt bomb
 				if (!this->isInStatus(eStatus::FALLING))
 				{
-					SoundManager::getInstance()->Play(eSoundID::BOMB_SET);
+					SoundManager::getInstance()->play(eSoundID::SET_BOMB);
 					weapon = new Bomb(this->getPositionX(), this->getPositionY() + 10);
 				}
 				break;
@@ -721,7 +721,7 @@ void Player::jump()
 	if (this->isInStatus(eStatus::JUMPING) || this->isInStatus(eStatus::FALLING))
 		return;
 
-	SoundManager::getInstance()->Play(eSoundID::PLAYER_JUMP);
+	SoundManager::getInstance()->play(eSoundID::PLAYER_JUMP);
 
 	this->addStatus(eStatus::JUMPING);
 
@@ -739,7 +739,7 @@ void Player::falling()
 
 void Player::beHit(eDirection direction)
 {
-	SoundManager::getInstance()->Play(eSoundID::PLAYER_BE_HIT);
+	SoundManager::getInstance()->play(eSoundID::PLAYER_BE_HIT);
 
 	_protectTime = PROTECT_TIME;
 
@@ -794,8 +794,8 @@ void Player::die()
 	if (!this->isInStatus(eStatus::DIE))
 		this->setStatus(eStatus::DIE);
 
-	if (!SoundManager::getInstance()->IsPlaying(eSoundID::PLAYER_DIE))
-		SoundManager::getInstance()->Play(eSoundID::PLAYER_DIE);
+	if (!SoundManager::getInstance()->isPlaying(eSoundID::PLAYER_DIE))
+		SoundManager::getInstance()->play(eSoundID::PLAYER_DIE);
 }
 
 void Player::revive()
@@ -1160,6 +1160,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_RIPPER);
 			}
 		}
 	}
@@ -1198,6 +1199,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Waver*)object)->wasHit(5);
 				else
@@ -1229,6 +1232,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Skree*)object)->wasHit(5);
 				else
@@ -1271,6 +1276,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Mellow*)object)->wasHit(5);
 				else
@@ -1313,6 +1320,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Rio*)object)->wasHit(5);
 				else
@@ -1346,6 +1355,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Zeb*)object)->wasHit(5);
 				else
@@ -1412,6 +1423,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Zoomer*)object)->wasHit(5);
 				else
@@ -1430,6 +1443,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Zeebetite*)object)->wasHit(5);
 				else
@@ -1477,6 +1492,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Metroid*)object)->wasHit(5);
 				else
@@ -1497,6 +1514,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_MOTHER_BRAIN);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((MotherBrain*)object)->wasHit(5);
 				else
@@ -1517,6 +1536,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((Rinka*)object)->wasHit(5);
 				else
@@ -1562,6 +1583,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 			eID weaponId;
 			if (this->checkWeaponCollision(object, direction, weaponId, dt))
 			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
 				if (weaponId == eID::MISSILE_ROCKET)
 					((CannonBullet*)object)->wasHit(5);
 				else
@@ -1674,6 +1697,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			_info->setLife(_info->getLife() + 1);
 			object->setStatus(DESTROY);
+
+			SoundManager::getInstance()->play(eSoundID::GET_ENERGY_TANK);
 		}
 	}
 	else if (objectId == ENERGY_BALL)
@@ -1682,6 +1707,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			_info->setEnergy(_info->getEnergy() + 5);
 			object->setStatus(DESTROY);
+
+			SoundManager::getInstance()->play(eSoundID::GET_ENERGY_BALL);
 		}
 	}
 	else if (objectId == MARU_MARI)
@@ -1720,6 +1747,8 @@ float Player::checkCollision(BaseObject* object, float dt)
 		{
 			_info->setMissileRocket(_info->getMissileRocket() + 5);
 			object->setStatus(DESTROY);
+
+			SoundManager::getInstance()->play(eSoundID::GET_MISSILE_ROCKET_BALL);
 		}
 	}
 	else if (objectId == BOMB_BALL)

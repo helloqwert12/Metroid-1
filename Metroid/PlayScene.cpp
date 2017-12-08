@@ -86,7 +86,7 @@ bool PlayScene::init()
 
 	_isVictory = false;
 
-	//SoundManager::getInstance()->PlayLoop(eSoundID::PLAY_SCENE);
+	SoundManager::getInstance()->playLoop(eSoundID::PLAY_SCENE);
 
 	return true;
 }
@@ -216,7 +216,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 
 void PlayScene::release()
 {
-	//SoundManager::getInstance()->Stop(eSoundID::PLAY_SCENE);
+	SoundManager::getInstance()->stop(eSoundID::PLAY_SCENE);
 
 	_root->release();
 	SAFE_DELETE(_root);

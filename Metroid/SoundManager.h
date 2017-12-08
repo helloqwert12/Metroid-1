@@ -14,10 +14,10 @@ public:
 	static SoundManager* getInstance();
 
 	void loadSound(HWND hWnd);
-	void Play(eSoundID soundId);
-	void Stop(eSoundID soundId);
-	void PlayLoop(eSoundID soundId);
-	bool IsPlaying(eSoundID soundId);
+	void play(eSoundID soundId);
+	void stop(eSoundID soundId);
+	void playLoop(eSoundID soundId);
+	bool isPlaying(eSoundID soundId);
 
 private:
 	SoundManager();

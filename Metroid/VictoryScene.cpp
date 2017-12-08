@@ -59,7 +59,7 @@ bool VictoryScene::init()
 	_startGame = new StopWatch();
 	_isPressed = false;
 
-	SoundManager::getInstance()->Play(eSoundID::VICTORY_SCENE);
+	SoundManager::getInstance()->play(eSoundID::VICTORY_SCENE);
 
 	return true;
 }
@@ -105,7 +105,7 @@ void VictoryScene::draw(LPD3DXSPRITE spriteHandle)
 
 void VictoryScene::release()
 {
-	SoundManager::getInstance()->Stop(eSoundID::VICTORY_SCENE);
+	SoundManager::getInstance()->stop(eSoundID::VICTORY_SCENE);
 
 	for (auto it = _samusAnimations.begin(); it != _samusAnimations.end(); it++)
 	{
