@@ -1,4 +1,5 @@
 ﻿#include "Skree.h"
+#include "SoundManager.h"
 
 Skree::Skree(int x, int y) : BaseObject(SKREE)
 {
@@ -65,6 +66,8 @@ void Skree::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 
 			BaseObject* item = nullptr;

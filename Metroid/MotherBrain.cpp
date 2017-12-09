@@ -1,6 +1,7 @@
 ﻿#include "MotherBrain.h"
 #include "SceneManager.h"
 #include "PlayScene.h"
+#include "SoundManager.h"
 
 MotherBrain::MotherBrain(int x, int y) : BaseObject(MOTHER_BRAIN)
 {
@@ -72,6 +73,8 @@ void MotherBrain::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(5000))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 
 			auto playScene = (PlayScene*)SceneManager::getInstance()->getCurrentScene();

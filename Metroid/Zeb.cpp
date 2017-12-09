@@ -1,4 +1,5 @@
 ﻿#include "Zeb.h"
+#include "SoundManager.h"
 
 Zeb::Zeb(int x, int y, GVector2 playerPosition) : BaseObject(ZEB)
 {
@@ -87,6 +88,8 @@ void Zeb::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 		}
 	}

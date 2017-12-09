@@ -1,4 +1,5 @@
 ﻿#include "Rinka.h"
+#include "SoundManager.h"
 
 Rinka::Rinka(int x, int y, GVector2 velocity) : BaseObject(RINKA)
 {
@@ -58,6 +59,8 @@ void Rinka::update(float deltatime)
 		// Nếu Rinka ra khỏi khoảng di chuyển thì DESTROY
 		if (getDistance(this->getPosition(), _initPosition) > RINKA_RANGE)
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(eStatus::DESTROY);
 		}
 

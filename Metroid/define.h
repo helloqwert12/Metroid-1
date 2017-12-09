@@ -110,7 +110,7 @@ enum eStatus
 	ROLLING_DOWN = (1 << 6),
 	ATTACKING = (1 << 7),
 	DIE = (1 << 8),
-	DESTROY = (1 << 9),
+	DESTROY = (1 << 9)
 };
 
 // Hướng bị va chạm của object
@@ -121,8 +121,7 @@ enum eDirection
 	TOP = (1 << 0),
 	LEFT = (1 << 1),
 	RIGHT = (1 << 2),
-	BOTTOM = (1 << 3),
-	ALL = (TOP | BOTTOM | LEFT | RIGHT),
+	BOTTOM = (1 << 3)
 };
 
 // Hướng map

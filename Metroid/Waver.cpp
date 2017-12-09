@@ -1,4 +1,5 @@
 ﻿#include "Waver.h"
+#include "SoundManager.h"
 
 Waver::Waver(int x, int y, bool direction) : BaseObject(WAVER)
 {
@@ -70,6 +71,8 @@ void Waver::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿#include "Zoomer.h"
+#include "SoundManager.h"
 
 Zoomer::Zoomer(int x, int y) : BaseObject(ZOOMER)
 {
@@ -73,6 +74,8 @@ void Zoomer::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 
 			BaseObject* item = nullptr;

@@ -1,4 +1,5 @@
 ﻿#include "Metroid.h"
+#include "SoundManager.h"
 
 Metroid::Metroid(int x, int y, bool direction) : BaseObject(METROID)
 {
@@ -70,6 +71,8 @@ void Metroid::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 		}
 	}

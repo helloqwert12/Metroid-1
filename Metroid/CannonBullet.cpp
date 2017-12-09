@@ -1,4 +1,5 @@
 ﻿#include "CannonBullet.h"
+#include "SoundManager.h"
 
 CannonBullet::CannonBullet(int x, int y, eID cannonId) : BaseObject(CANNON_BULLET)
 {
@@ -91,6 +92,8 @@ void CannonBullet::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 		}
 	}

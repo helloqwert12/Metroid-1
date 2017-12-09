@@ -1,4 +1,5 @@
 ﻿#include "Mellow.h"
+#include "SoundManager.h"
 
 Mellow::Mellow(int x, int y, bool direction) : BaseObject(MELLOW)
 {
@@ -70,6 +71,8 @@ void Mellow::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 		}
 	}

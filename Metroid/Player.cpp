@@ -106,7 +106,7 @@ void Player::init()
 	_info->init();
 	_info->setLife(2);
 	_info->setEnergy(30);
-	_info->setMissileRocket(5);
+	_info->setMissileRocket(0);
 
 	this->resetValues();
 }

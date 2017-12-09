@@ -1,4 +1,5 @@
 ﻿#include "Rio.h"
+#include "SoundManager.h"
 
 Rio::Rio(int x, int y, bool direction) : BaseObject(RIO)
 {
@@ -70,6 +71,8 @@ void Rio::update(float deltatime)
 
 		if (_effectStopWatch->isStopWatch(200))
 		{
+			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
+
 			this->setStatus(DESTROY);
 
 			srand(time(0));
