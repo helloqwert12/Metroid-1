@@ -126,12 +126,17 @@ void Mellow::active(bool direction)
 	auto movement = (Movement*)this->_componentList["Movement"];
 	if (direction)
 	{
-		movement->setVelocity(GVector2(MELLOW_MOVE_SPEED, -250));
+		if (_sprite->getScale().x < 0)
+			_sprite->setScaleX(_sprite->getScale().x * -1);
+
+		movement->setVelocity(GVector2(MELLOW_MOVE_SPEED, 0));
 	}
 	else
 	{
-		_sprite->setScaleX(_sprite->getScale().x * -1);
-		movement->setVelocity(GVector2(-MELLOW_MOVE_SPEED, -250));
+		if (_sprite->getScale().x > 0)
+			_sprite->setScaleX(_sprite->getScale().x * -1);
+
+		movement->setVelocity(GVector2(-MELLOW_MOVE_SPEED, 0));
 	}
 }
 

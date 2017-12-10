@@ -140,11 +140,16 @@ void Rio::active(bool direction)
 	auto movement = (Movement*)this->_componentList["Movement"];
 	if (direction)
 	{
+		if (_sprite->getScale().x < 0)
+			_sprite->setScaleX(_sprite->getScale().x * -1);
+
 		movement->setVelocity(GVector2(RIO_MOVE_SPEED, 0));
 	}
 	else
 	{
-		_sprite->setScaleX(_sprite->getScale().x * -1);
+		if (_sprite->getScale().x > 0)
+			_sprite->setScaleX(_sprite->getScale().x * -1);
+
 		movement->setVelocity(GVector2(-RIO_MOVE_SPEED, 0));
 	}
 }
