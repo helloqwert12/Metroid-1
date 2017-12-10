@@ -75,6 +75,11 @@ void SpriteManager::loadResource(LPD3DXSPRITE spriteHandle)
 	this->_listSprite[eID::BOSS_STAGE] = sprite;
 	this->loadSpriteInfo(eID::BOSS_STAGE, "Resources//Images//boss_stage.txt");
 
+	sprite = new Sprite(spriteHandle, L"Resources//Images//ridley.png");
+	sprite->setScale(SCALE_FACTOR);
+	this->_listSprite[eID::RIDLEY] = sprite;
+	this->loadSpriteInfo(eID::RIDLEY, "Resources//Images//ridley.txt");
+
 	sprite = new Sprite(spriteHandle, L"Resources//Images//player_victory.png");
 	sprite->setScale(SCALE_FACTOR);
 	this->_listSprite[eID::PLAYER_VICTORY] = sprite;

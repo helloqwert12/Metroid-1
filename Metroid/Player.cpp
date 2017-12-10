@@ -1691,6 +1691,28 @@ float Player::checkCollision(BaseObject* object, float dt)
 			}
 		}
 	}
+	else if (objectId == RIDLEY_BULLET)
+	{
+		if (!((RidleyBullet*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, true))
+			{
+				beHit(direction);
+				takeDamage(8);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
+				if (weaponId == eID::MISSILE_ROCKET)
+					((RidleyBullet*)object)->wasHit(5);
+				else
+					((RidleyBullet*)object)->wasHit(1);
+			}
+		}
+	}
 	else if (objectId == ENERGY_TANK)
 	{
 		if (collisionBody->checkCollision(object, direction, dt, false))

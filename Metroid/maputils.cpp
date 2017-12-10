@@ -246,6 +246,13 @@ BaseObject* getObjectById(eID id, int left, int top, int right, int bottom, int 
 		return rightCannon;
 		break;
 	}
+	case RIDLEY_BULLET:
+	{
+		auto ridleyBullet = new RidleyBullet(left, top, false);
+		ridleyBullet->init();
+		return ridleyBullet;
+		break;
+	}
 	case ENERGY_TANK:
 	{
 		auto energyTank = new EnergyTank(left, top);
@@ -382,6 +389,9 @@ BaseObject* getObjectById(xml_node item, eID id, int mapHeight)
 		break;
 	case RIGHT_CANNON:
 		return getRightCannon(item, mapHeight);
+		break;
+	case RIDLEY_BULLET:
+		return getRidleyBullet(item, mapHeight);
 		break;
 	case ENERGY_TANK:
 		return getEnergyTank(item, mapHeight);
@@ -859,6 +869,25 @@ BaseObject* getRightCannon(xml_node item, int mapHeight)
 	auto rightCannon = new RightCannon(x, y);
 	rightCannon->init();
 	return rightCannon;
+}
+
+BaseObject* getRidleyBullet(xml_node item, int mapHeight)
+{
+	auto properties = getObjectProperties(item);
+	if (properties.size() == 0)
+		return nullptr;
+
+	auto width = 2 * stoi(properties["width"]);
+	auto height = 2 * stoi(properties["height"]);
+	auto x = 2 * stoi(properties["x"]);
+	auto y = mapHeight - 2 * stoi(properties["y"]) - height;
+
+	x = x + width / 2;
+	y = y + height / 2;
+
+	auto ridleyBullet = new RidleyBullet(x, y, true);
+	ridleyBullet->init();
+	return ridleyBullet;
 }
 
 BaseObject* getEnergyTank(xml_node item, int mapHeight)
