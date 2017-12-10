@@ -60,6 +60,7 @@
 #include "Varia.h"
 
 #define MOVE_SPEED 150
+#define MOVE_SPEED_IN_FIRE 75
 #define JUMP_VELOCITY 450
 #define GRAVITY 600
 
@@ -86,11 +87,11 @@ public:
 
 	void resetValues();
 
-	void standing();
+	void stand();
 	void moveLeft();
 	void moveRight();
 	void jump();
-	void falling();
+	void fall();
 	void beHit(eDirection direction);
 	void takeDamage(int number);
 	void die();
@@ -109,7 +110,7 @@ private:
 	eStatus _currentAnimationIndex;
 	Info* _info;
 
-	float _movingSpeed;
+	float _moveSpeed;
 	float _protectTime;
 
 	vector<Weapon*> _listWeapon;
@@ -139,6 +140,9 @@ private:
 
 	// Dùng để xét đã rời khỏi Wall đụng trước đó hay chưa
 	BaseObject* _preWall;
+
+	// Dùng để xét đã rời khỏi Fire đụng trước đó hay chưa
+	BaseObject* _preFire;
 
 	// Dùng để giới hạn thời gian giữa 2 lần bắn đạn hoặc đặt bomb
 	StopWatch* _attackStopWatch;

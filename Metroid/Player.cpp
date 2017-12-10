@@ -142,7 +142,7 @@ void Player::update(float deltatime)
 			}
 		}
 	}
-		
+
 	if (_protectTime > 0)
 	{
 		_protectTime -= deltatime;
@@ -175,7 +175,7 @@ void Player::update(float deltatime)
 	for (auto object : _stickyObjects)
 	{
 		object->update(deltatime);
-		if (this->isInStatus(eStatus::ROLLING_DOWN) )
+		if (this->isInStatus(eStatus::ROLLING_DOWN))
 			object->setPosition(this->getPosition().x, this->getPosition().y + 20);
 		else if (this->isInStatus(eStatus::JUMPING))
 			object->setPosition(this->getPosition().x, this->getPosition().y + 35);
@@ -270,11 +270,11 @@ void Player::updateStatus(float dt)
 	}
 	else if ((this->getStatus() & eStatus::FALLING) == eStatus::FALLING)
 	{
-		this->falling();
+		this->fall();
 	}
 	else if ((this->getStatus() & eStatus::JUMPING) != eStatus::JUMPING)
 	{
-		this->standing();
+		this->stand();
 	}
 
 	if ((this->getStatus() & eStatus::ATTACKING) == eStatus::ATTACKING)
@@ -411,7 +411,7 @@ void Player::updateAttackStatus(float dt)
 		while (i < _listWeapon.size())
 		{
 			auto object = _listWeapon[i];
-			
+
 			if (_listWeapon[i]->isInStatus(DESTROY))
 			{
 				_listWeapon.erase(_listWeapon.begin() + i);
@@ -536,7 +536,7 @@ void Player::onKeyPressed(KeyEventArg* keyEvent)
 		break;
 	}
 	case DIK_UP:
-	{	
+	{
 		// Nếu đang không trong status ROLLING_DOWN, JUMPING và FALLING thì ngắm hướng lên (LOOKING_UP)
 		if (!this->isInStatus(eStatus::ROLLING_DOWN) && !this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 		{
@@ -658,10 +658,11 @@ void Player::resetValues()
 	_stickyObjects.clear();
 
 	_preWall = nullptr;
+	_preFire = nullptr;
 	_isBeingBloodSucking = false;
 
 	this->setScale(SCALE_FACTOR);
-	_movingSpeed = MOVE_SPEED;
+	_moveSpeed = MOVE_SPEED;
 	_protectTime = PROTECT_TIME;
 
 	// Set các giá trị khi hồi sinh (life, energy,...)
@@ -689,7 +690,7 @@ void Player::resetValues()
 	}
 }
 
-void Player::standing()
+void Player::stand()
 {
 	auto movement = (Movement*)this->_componentList["Movement"];
 	movement->setVelocity(GVector2(0, 0));
@@ -704,7 +705,7 @@ void Player::moveLeft()
 		this->setScaleX(this->getScale().x * (-1));
 
 	auto movement = (Movement*)this->_componentList["Movement"];
-	movement->setVelocity(GVector2(-_movingSpeed, movement->getVelocity().y));
+	movement->setVelocity(GVector2(-_moveSpeed, movement->getVelocity().y));
 }
 
 void Player::moveRight()
@@ -713,7 +714,7 @@ void Player::moveRight()
 		this->setScaleX(this->getScale().x * (-1));
 
 	auto movement = (Movement*)this->_componentList["Movement"];
-	movement->setVelocity(GVector2(_movingSpeed, movement->getVelocity().y));
+	movement->setVelocity(GVector2(_moveSpeed, movement->getVelocity().y));
 }
 
 void Player::jump()
@@ -728,10 +729,10 @@ void Player::jump()
 	auto movement = (Movement*)this->_componentList["Movement"];
 	movement->setVelocity(GVector2(movement->getVelocity().x, JUMP_VELOCITY));
 
-	this->falling();
+	this->fall();
 }
 
-void Player::falling()
+void Player::fall()
 {
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
@@ -872,16 +873,16 @@ float Player::checkCollision(BaseObject* object, float dt)
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
-				this->standing();
+				this->stand();
 				_preWall = object;
 			}
 		}
 		else if (_preWall == object)
-		{	
+		{
 			// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 			auto gravity = (Gravity*)this->_componentList["Gravity"];
 			gravity->setStatus(eGravityStatus::FALLING_DOWN);
-			
+
 			// Thêm status FALLING để cho player rớt xuống
 			if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 				this->addStatus(eStatus::FALLING);
@@ -917,14 +918,22 @@ float Player::checkCollision(BaseObject* object, float dt)
 	}
 	else if (objectId == FIRE)
 	{
-		if (_protectTime <= 0)
+		if (collisionBody->checkCollision(object, direction, dt, false))
 		{
-			if (collisionBody->checkCollision(object, direction, dt, false))
+			if (_protectTime <= 0)
 			{
 				beHit(eDirection::NONE);
 				takeDamage(8);
 			}
+
+			_moveSpeed = MOVE_SPEED_IN_FIRE;
+			_preFire = object;
 		}
+		else if (_preFire == object)
+		{
+			_moveSpeed = MOVE_SPEED;
+		}
+
 	}
 	else if (objectId == BLUE_DOOR)
 	{
@@ -997,7 +1006,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					auto gravity = (Gravity*)this->_componentList["Gravity"];
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
-					this->standing();
+					this->stand();
 					_preWall = object;
 				}
 			}
@@ -1035,7 +1044,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					auto gravity = (Gravity*)this->_componentList["Gravity"];
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
-					this->standing();
+					this->stand();
 					_preWall = object;
 				}
 			}
@@ -1073,7 +1082,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					auto gravity = (Gravity*)this->_componentList["Gravity"];
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
-					this->standing();
+					this->stand();
 					_preWall = object;
 				}
 			}
@@ -1111,7 +1120,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 					auto gravity = (Gravity*)this->_componentList["Gravity"];
 					gravity->setStatus(eGravityStatus::SHALLOWED);
 
-					this->standing();
+					this->stand();
 					_preWall = object;
 				}
 			}
