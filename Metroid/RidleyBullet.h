@@ -9,7 +9,7 @@
 #include "Animation.h"
 #include "StopWatch.h"
 
-#define RIDLEY_BULLET_MOVE_SPEED 100
+#define RIDLEY_BULLET_MOVE_SPEED 80
 #define RIDLEY_BULLET_RANGE 300
 
 class RidleyBullet : public BaseObject

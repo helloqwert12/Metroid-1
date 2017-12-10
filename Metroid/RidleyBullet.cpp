@@ -163,8 +163,17 @@ float RidleyBullet::checkCollision(BaseObject* object, float dt)
 		eDirection direction;
 		if (collisionBody->checkCollision(object, direction, dt, true))
 		{
-			// Va chạm Wall thì DESTROY
-			this->setStatus(DESTROY);
+
+			if (direction == TOP) // Va chạm Wall TOP thì nảy lên
+			{
+				auto movement = (Movement*)this->_componentList["Movement"];
+				movement->setVelocity(GVector2(RIDLEY_BULLET_MOVE_SPEED, -movement->getVelocity().y / 1.5));
+			}
+			else // Va chạm Wall 3 trường hợp còn lại thì DESTROY
+			{
+				this->setStatus(DESTROY);
+			}
+
 			return 1.0f;
 		}
 	}

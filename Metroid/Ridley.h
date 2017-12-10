@@ -9,7 +9,7 @@
 #include "QuadtreeNode.h"
 #include "RidleyBullet.h"
 
-#define RIDLEY_BULLET_APPEAR_TIME 500
+#define RIDLEY_BULLET_APPEAR_TIME 1000
 #define RIDLEY_JUMP_TIME 2500
 #define RIDLEY_JUMP_VELOCITY 300
 

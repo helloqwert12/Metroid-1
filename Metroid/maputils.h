@@ -86,6 +86,7 @@ BaseObject* getLeftCannon(xml_node item, int mapHeight);
 BaseObject* getMiddleCannon(xml_node item, int mapHeight);
 BaseObject* getRightCannon(xml_node item, int mapHeight);
 
+// Mini Boss
 BaseObject* getRidley(xml_node item, int mapHeight);
 
 // Item
