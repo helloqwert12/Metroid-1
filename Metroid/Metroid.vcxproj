@@ -157,6 +157,7 @@
     <ClCompile Include="BreakableBlueWall.cpp" />
     <ClCompile Include="BreakableRedWall.cpp" />
     <ClCompile Include="CannonBullet.cpp" />
+    <ClCompile Include="Ridley.cpp" />
     <ClCompile Include="RidleyBullet.cpp" />
     <ClCompile Include="SkreeBullet.cpp" />
     <ClCompile Include="VictoryScene.cpp" />
@@ -242,6 +243,7 @@
     <ClInclude Include="BreakableBlueWall.h" />
     <ClInclude Include="BreakableRedWall.h" />
     <ClInclude Include="CannonBullet.h" />
+    <ClInclude Include="Ridley.h" />
     <ClInclude Include="RidleyBullet.h" />
     <ClInclude Include="SkreeBullet.h" />
     <ClInclude Include="VictoryScene.h" />

@@ -48,6 +48,7 @@
 #include "RightCannon.h"
 
 #include "RidleyBullet.h"
+#include "Ridley.h"
 
 #include "EnergyTank.h"
 #include "EnergyBall.h"

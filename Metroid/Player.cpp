@@ -876,7 +876,7 @@ float Player::checkCollision(BaseObject* object, float dt)
 				_preWall = object;
 			}
 		}
-		else if (_preWall == object) // Xét sau va chạm
+		else if (_preWall == object)
 		{	
 			// Nếu đã đi ra khỏi hết Wall đụng trước đó thì cho rớt xuống
 			auto gravity = (Gravity*)this->_componentList["Gravity"];
@@ -1710,6 +1710,28 @@ float Player::checkCollision(BaseObject* object, float dt)
 					((RidleyBullet*)object)->wasHit(5);
 				else
 					((RidleyBullet*)object)->wasHit(1);
+			}
+		}
+	}
+	else if (objectId == RIDLEY)
+	{
+		if (!((Ridley*)object)->isDead() && _protectTime <= 0)
+		{
+			if (collisionBody->checkCollision(object, direction, dt, true))
+			{
+				beHit(direction);
+				takeDamage(8);
+			}
+
+			eID weaponId;
+			if (this->checkWeaponCollision(object, direction, weaponId, dt))
+			{
+				SoundManager::getInstance()->play(eSoundID::HIT_ENEMY);
+
+				if (weaponId == eID::MISSILE_ROCKET)
+					((Ridley*)object)->wasHit(5);
+				else
+					((Ridley*)object)->wasHit(1);
 			}
 		}
 	}

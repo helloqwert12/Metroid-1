@@ -1,22 +1,22 @@
-﻿#ifndef __RIDLEYBULLET_H__
-#define __RIDLEYBULLET_H__
+﻿#ifndef __RIDLEY_H__
+#define __RIDLEY_H__
 
 #include "define.h"
 #include "BaseObject.h"
 #include "Component.h"
-#include "Movement.h"
 #include "CollisionBody.h"
-#include "Animation.h"
 #include "StopWatch.h"
+#include "QuadtreeNode.h"
+#include "RidleyBullet.h"
 
-#define RIDLEY_BULLET_MOVE_SPEED 100
-#define RIDLEY_BULLET_RANGE 300
+#define RIDLEY_BULLET_APPEAR_TIME 500
+#define RIDLEY_JUMP_TIME 2500
+#define RIDLEY_JUMP_VELOCITY 300
 
-class RidleyBullet : public BaseObject
+class Ridley : public BaseObject
 {
 public:
-	// @direction: hướng của object. TRUE sang phải, FALSE sang trái
-	RidleyBullet(int x, int y, bool direction);
+	Ridley(int x, int y);
 
 	void init();
 	void update(float deltatime);
@@ -30,18 +30,20 @@ public:
 	void deactive();
 	bool isActive();
 
+	void jump();
+	void fall();
+	void stand();
+
 	float checkCollision(BaseObject* object, float dt);
 
 protected:
-	Animation* _animation;
+	map<int, Animation*> _animations;
 	map<string, Component*> _componentList;
+
+	eStatus _currentAnimationIndex;
 
 	int _hitPoint;
 	bool _isActive;
-
-	GVector2 _initPosition;
-	GVector2 _accelerate;
-	GVector2 _velocity;
 
 	Sprite* _effect;
 	Animation* _effectAnimation;
@@ -49,6 +51,12 @@ protected:
 
 	StopWatch* _hitStopWatch;
 	bool _startHitStopWatch;
+
+	StopWatch* _ridleyBulletAppearStopWatch;
+	StopWatch* _ridleyJumpStopWatch;
+
+	// Dùng để xét đã rời khỏi Wall đụng trước đó hay chưa
+	BaseObject* _preWall;
 };
 
-#endif // !__RIDLEYBULLET_H__
+#endif // !__RIDLEY_H__
