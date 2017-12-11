@@ -134,6 +134,12 @@ bool SkreeBullet::isActive()
 	return _isActive;
 }
 
+GVector2 SkreeBullet::getVelocity()
+{
+	auto movement = (Movement*)this->_componentList["Movement"];
+	return movement->getVelocity();
+}
+
 float SkreeBullet::checkCollision(BaseObject* object, float dt)
 {
 	return 0;

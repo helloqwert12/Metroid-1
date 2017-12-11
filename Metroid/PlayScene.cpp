@@ -114,12 +114,6 @@ void PlayScene::update(float dt)
 	// Lấy HCN bound của viewport
 	RECT viewportBounding = _viewport->getBounding();
 
-	// Mở rộng một phần bound của Viewport
-	//viewportBounding.left -= WINDOW_WIDTH / 4;
-	//viewportBounding.top +=  WINDOW_HEIGHT / 4;
-	//viewportBounding.right += WINDOW_WIDTH / 4;
-	//viewportBounding.bottom -= WINDOW_HEIGHT / 4;
-
 	// Xóa các object đã bị DESTROY ra khỏi QuadTree
 	_root->deleteObjects();
 

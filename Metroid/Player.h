@@ -100,6 +100,7 @@ public:
 	Info* getInfo();
 	int getLifeNumber();
 	RECT getBounding();
+	GVector2 getVelocity();
 
 	float checkCollision(BaseObject* object, float dt);
 
@@ -135,8 +136,6 @@ private:
 
 	// Kiểm tra va chạm weapon (đạn, bomb)
 	bool checkWeaponCollision(BaseObject* object, eDirection& direction, eID& weaponID, float dt);
-
-	GVector2 getVelocity();
 
 	// Dùng để xét đã rời khỏi Wall đụng trước đó hay chưa
 	BaseObject* _preWall;

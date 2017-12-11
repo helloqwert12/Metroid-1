@@ -129,14 +129,14 @@ void Mellow::active(bool direction)
 		if (_sprite->getScale().x < 0)
 			_sprite->setScaleX(_sprite->getScale().x * -1);
 
-		movement->setVelocity(GVector2(MELLOW_MOVE_SPEED, 0));
+		movement->setVelocity(GVector2(MELLOW_MOVE_SPEED, -250));
 	}
 	else
 	{
 		if (_sprite->getScale().x > 0)
 			_sprite->setScaleX(_sprite->getScale().x * -1);
 
-		movement->setVelocity(GVector2(-MELLOW_MOVE_SPEED, 0));
+		movement->setVelocity(GVector2(-MELLOW_MOVE_SPEED, -250));
 	}
 }
 
@@ -151,6 +151,12 @@ void Mellow::deactive()
 bool Mellow::isActive()
 {
 	return _isActive;
+}
+
+GVector2 Mellow	::getVelocity()
+{
+	auto movement = (Movement*)this->_componentList["Movement"];
+	return movement->getVelocity();
 }
 
 float Mellow::checkCollision(BaseObject* object, float dt)

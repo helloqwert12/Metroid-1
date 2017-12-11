@@ -173,6 +173,12 @@ bool Skree::isActive()
 	return _isActive;
 }
 
+GVector2 Skree::getVelocity()
+{
+	auto movement = (Movement*)this->_componentList["Movement"];
+	return movement->getVelocity();
+}
+
 float Skree::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getId() == WALL)
