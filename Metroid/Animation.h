@@ -1,12 +1,12 @@
 ﻿#ifndef __ANIMATION_H__
 #define __ANIMATION_H__
 
-#include <vector>
-#include <stdarg.h>
 #include "define.h"
 #include "Sprite.h"
 #include "Component.h"
 #include "SpriteManager.h"
+#include <vector>
+#include <stdarg.h>
 
 class Animation
 {

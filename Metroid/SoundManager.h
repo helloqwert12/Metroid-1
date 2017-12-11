@@ -4,7 +4,6 @@
 #include "define.h"
 #include "dxaudio.h"
 #include <map>
-#include <wincon.h>
 
 using namespace std;
 class SoundManager

@@ -8,7 +8,6 @@
 #include "Animation.h"
 #include "StopWatch.h"
 #include "QuadtreeNode.h"
-#include <ctime>
 #include "Zeb.h"
 
 #define ZEB_APPEAR_TIME 3000

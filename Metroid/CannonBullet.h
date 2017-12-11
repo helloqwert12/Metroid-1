@@ -8,6 +8,7 @@
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
+#include "utils.h"
 
 #define CANNON_BULLET_APPEAR_TIME 1000
 #define CANNON_BULLET_MOVE_SPEED 200

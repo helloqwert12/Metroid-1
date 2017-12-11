@@ -1,8 +1,8 @@
 #ifndef __GRAPHICS_H__
 #define __GRAPHICS_H__
 
-#include <Windows.h>
 #include "define.h"
+#include <windows.h>
 
 class Graphics
 {

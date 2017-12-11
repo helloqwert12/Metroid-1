@@ -11,6 +11,7 @@
 #include "QuadtreeNode.h"
 #include <ctime>
 #include "EnergyBall.h"
+
 #define ZOOMER_MOVE_SPEED 80
 
 class Zoomer : public BaseObject

@@ -8,7 +8,6 @@
 #include "Animation.h"
 #include "StopWatch.h"
 #include "QuadtreeNode.h"
-#include <ctime>
 #include "Rinka.h"
 
 #define RINKA_APPEAR_TIME 4000

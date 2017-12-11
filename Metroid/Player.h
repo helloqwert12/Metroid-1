@@ -2,15 +2,14 @@
 #define __PLAYER_H__
 
 #include "define.h"
-#include "Animation.h"
-#include "InputController.h"
 #include "Viewport.h"
-#include "StopWatch.h"
 #include "BaseObject.h"
 #include "Component.h"
 #include "Movement.h"
 #include "Gravity.h"
 #include "CollisionBody.h"
+#include "Animation.h"
+#include "StopWatch.h"
 #include "Info.h"
 
 #include "ChangeMapDirection.h"

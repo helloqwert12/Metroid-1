@@ -8,8 +8,6 @@
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
-#include "QuadtreeNode.h"
-#include <ctime>
 
 #define ZEB_MOVE_SPEED 300
 

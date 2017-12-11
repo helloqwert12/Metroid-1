@@ -1,8 +1,7 @@
 ﻿#ifndef __COMPONENT_H__
 #define __COMPONENT_H__
 
-#include "define.h"
-using namespace std;
+#include <map>
 
 class Component
 {

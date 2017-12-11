@@ -2,12 +2,10 @@
 #define __SPRITE_H__
 
 #include "define.h"
-#include "DeviceManager.h"
+#include "Transformable.h"
 #include "Texture.h"
 #include "Viewport.h"
-#include "Transformable.h"
-#include <list>
-using namespace std;
+#include <cmath>
 
 class Sprite : public Transformable
 {

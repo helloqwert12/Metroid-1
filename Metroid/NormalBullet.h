@@ -2,13 +2,13 @@
 #define __NORMALBULLET_H__
 
 #include "define.h"
-#include "BaseObject.h"
 #include "Component.h"
 #include "Movement.h"
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
 #include "Weapon.h"
+#include "utils.h"
 
 #define NORMAL_BULLET_SPEED 250
 

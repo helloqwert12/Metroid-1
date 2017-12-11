@@ -3,9 +3,8 @@
 
 #include "BaseObject.h"
 #include "Component.h"
-#include "Event.h"
 
-// HỆ TỌA ĐỘ WOLRD (X, Y)
+// Hệ tọa độ World (x, y)
 class CollisionBody : public Component
 {
 public:

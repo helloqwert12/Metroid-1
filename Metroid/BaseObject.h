@@ -3,7 +3,6 @@
 
 #include "define.h"
 #include "SpriteManager.h"
-#include "Sprite.h"
 #include "InputController.h"
 #include "Viewport.h"
 

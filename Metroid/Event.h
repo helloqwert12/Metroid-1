@@ -8,4 +8,13 @@ public:
 	~EventArg();
 };
 
+
+class KeyEventArg : public EventArg
+{
+public:
+	int keyCode;
+
+	KeyEventArg(int keyCode);
+};
+
 #endif // !__EVENT_H__

@@ -9,8 +9,6 @@
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
-#include "QuadtreeNode.h"
-#include <ctime>
 
 #define METROID_MOVE_SPEED 80
 

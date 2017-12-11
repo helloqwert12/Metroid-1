@@ -1,10 +1,10 @@
 ﻿#ifndef __SPRITEMANAGER_H__
 #define __SPRITEMANAGER_H__
 
-#include <map>
-#include <fstream>
 #include "define.h"
 #include "Sprite.h"
+#include <map>
+#include <fstream>
 
 class SpriteManager
 {

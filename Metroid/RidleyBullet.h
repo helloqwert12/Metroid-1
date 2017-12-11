@@ -8,6 +8,7 @@
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
+#include "utils.h"
 
 #define RIDLEY_BULLET_MOVE_SPEED 80
 #define RIDLEY_BULLET_RANGE 300

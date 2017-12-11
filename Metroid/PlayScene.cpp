@@ -159,9 +159,9 @@ void PlayScene::updateViewport(BaseObject* objectTracker, float dt)
 
 	if (!playerInfo->isAutoMoveViewport())
 	{
-		if (_mapDirection == eMapDirection::HORIZONTAL) // hướng ngang
+		if (_mapDirection == eMapDirection::HORIZONTAL) // map hướng ngang
 			newPosition = GVector2(objectTracker->getPositionX() - WINDOW_WIDTH / 2, _mapDirectionAnchorPoint.y + 400);
-		else if (_mapDirection == eMapDirection::VERTICAL) // hướng dọc
+		else if (_mapDirection == eMapDirection::VERTICAL) // map hướng dọc
 			newPosition = GVector2(_mapDirectionAnchorPoint.x - 64, objectTracker->getPositionY() + 250);
 	}
 	else // Nếu đang trong chế độ AutoMoveViewport

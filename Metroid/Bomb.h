@@ -2,7 +2,6 @@
 #define __BOMB_H__
 
 #include "define.h"
-#include "BaseObject.h"
 #include "Component.h"
 #include "Movement.h"
 #include "CollisionBody.h"

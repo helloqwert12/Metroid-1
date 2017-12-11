@@ -22,7 +22,7 @@ Ridley::Ridley(int x, int y) : BaseObject(RIDLEY)
 	_effectAnimation = new Animation(_effect, 0.1);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
-	_hitPoint = 20;
+	_hitPoint = 30;
 	_isActive = true;
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);

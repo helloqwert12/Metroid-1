@@ -1,8 +1,8 @@
 ﻿#ifndef __MOVEMENT_H__
 #define __MOVEMENT_H__
 
-#include "Sprite.h"
 #include "Component.h"
+#include "Sprite.h"
 
 // Chuyển động theo gia tốc và vận tốc.
 class Movement : public Component

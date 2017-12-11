@@ -2,14 +2,12 @@
 #define __PLAYSCENE_H__
 
 #include "Scene.h"
-#include "BaseObject.h"
-#include "Text.h"
 #include "TileMap.h"
 #include "QuadTreeNode.h"
+#include "BaseObject.h"
 #include "Player.h"
-#include <algorithm>
+#include "Text.h"
 #include "SoundManager.h"
-using namespace std;
 
 class PlayScene : public Scene
 {

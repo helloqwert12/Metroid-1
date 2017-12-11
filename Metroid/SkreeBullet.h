@@ -8,8 +8,7 @@
 #include "CollisionBody.h"
 #include "Animation.h"
 #include "StopWatch.h"
-#include "QuadtreeNode.h"
-#include <ctime>
+#include "utils.h"
 
 #define SKREE_BULLET_RANGE 75
 #define SKREE_BULLET_MOVE_SPEED 275

@@ -5,15 +5,6 @@
 
 #include <d3d9.h>
 #include <d3dx9.h>
-#include <dinput.h>
-#include <dsound.h>
-#include <windows.h>
-#include <exception>
-#include <math.h>
-#include <string>
-#include <map>
-#include <vector>
-#include "utils.h"
 using namespace std;
 
 #define WINDOW_WIDTH 512

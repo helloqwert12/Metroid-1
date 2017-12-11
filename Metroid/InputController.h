@@ -2,23 +2,10 @@
 #define __INPUTCONTROLLER_H__
 
 #include "define.h"
-#include "Graphics.h"
+#include <dinput.h>
 #include "Event.h"
-#include <vector>
-#include "define.h"
 
 #define KEYBOARD_BUFFER_SIZE 1024
-
-class KeyEventArg : public EventArg
-{
-public:
-	KeyEventArg(int keyCode) 
-	{ 
-		this->keyCode = keyCode;
-	}
-
-	int keyCode;
-};
 
 [event_source(native)]
 class InputController

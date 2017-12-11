@@ -11,7 +11,7 @@ Zeebetite::Zeebetite(int x, int y) : BaseObject(ZEEBETITE)
 	_effectAnimation = new Animation(_effect, 0.1f, false);
 	_effectAnimation->addFrameRect(BULLET_EFFECT, "explosion_01", "explosion_02", "explosion_03", NULL);
 
-	_hitPoint = 100;
+	_hitPoint = 40;
 }
 
 void Zeebetite::init()
@@ -26,11 +26,11 @@ void Zeebetite::update(float deltatime)
 {
 	if (_hitPoint > 0)
 	{
-		if (_hitPoint > 75)
+		if (_hitPoint > 30)
 			_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "zeebetite_01"));
-		else if (_hitPoint > 50 && _hitPoint <= 75)
+		else if (_hitPoint > 20 && _hitPoint <= 30)
 			_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "zeebetite_02"));
-		else if (_hitPoint > 25 && _hitPoint <= 50)
+		else if (_hitPoint > 10 && _hitPoint <= 20)
 			_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "zeebetite_03"));
 		else
 			_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BOSS_STAGE, "zeebetite_04"));

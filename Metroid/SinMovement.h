@@ -1,9 +1,8 @@
 ﻿#ifndef __SINMOVEMENT_H__
 #define __SINMOVEMENT_H__
 
-#include "Sprite.h"
 #include "Component.h"
-#include <numeric>
+#include "Sprite.h"
 
 // Chuyển động theo hàm Sin
 class SinMovement : public Component

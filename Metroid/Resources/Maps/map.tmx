@@ -92209,13 +92209,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="53"/>
-   <tile gid="54"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="53"/>
-   <tile gid="54"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -130647,29 +130647,7 @@
   <object id="1470" name="Wall" type="20" x="5616" y="3183.38" width="15.75" height="81"/>
   <object id="1471" name="Ridley" type="70" x="5744.59" y="3239.11" width="31.1515" height="39.1212"/>
   <object id="1472" name="Fire" type="30" x="5599.62" y="3367.95" width="208.212" height="23.4508"/>
-  <object id="1474" name="Rio" type="55" x="672.758" y="2991.61" width="15.8182" height="15.4545"/>
-  <object id="1475" name="Waver" type="52" x="450.091" y="2974.94" width="15.8182" height="15.4545"/>
-  <object id="1476" name="Waver" type="52" x="480.758" y="2943.61" width="15.8182" height="15.4545"/>
-  <object id="1477" name="Rio" type="55" x="479.424" y="3054.27" width="15.8182" height="15.4545"/>
-  <object id="1478" name="Ripper" type="51" x="464.758" y="3008.94" width="15.8182" height="15.4545"/>
-  <object id="1479" name="Ripper" type="51" x="576.091" y="2991.61" width="15.8182" height="15.4545"/>
-  <object id="1480" name="Mellow" type="54" x="496.091" y="2992.94" width="15.8182" height="15.4545"/>
-  <object id="1481" name="Mellow" type="54" x="672.758" y="3042.27" width="15.8182" height="15.4545"/>
-  <object id="1482" name="ZebPipe" type="57" x="712.591" y="3072.27" width="15.8182" height="15.4545"/>
-  <object id="1483" name="ZebPipe" type="57" x="793.091" y="3072.27" width="15.8182" height="15.4545"/>
-  <object id="1484" name="RinkaCannon" type="64" x="736.5" y="3023.5" width="16" height="16"/>
-  <object id="1485" name="RinkaCannon" type="64" x="704.5" y="2992" width="16" height="16"/>
-  <object id="1486" name="LeftCannon" type="66" x="815.75" y="3023.66" width="16" height="16"/>
-  <object id="1487" name="RightCannon" type="68" x="911.25" y="3023.66" width="16" height="16"/>
-  <object id="1488" name="MiddleCannon" type="67" x="863.42" y="3007.34" width="16" height="16"/>
-  <object id="1489" name="LeftCannon" type="66" x="992.25" y="3023.16" width="16" height="16"/>
-  <object id="1490" name="RightCannon" type="68" x="1087.75" y="3023.16" width="16" height="16"/>
-  <object id="1491" name="MiddleCannon" type="67" x="1039.92" y="3006.84" width="16" height="16"/>
-  <object id="1492" name="Metroid" type="61" x="656.547" y="3009.1" width="15.9052" height="15.8023"/>
-  <object id="1493" name="Metroid" type="61" x="736.047" y="2959.1" width="15.9052" height="15.8023"/>
-  <object id="1494" name="Metroid" type="61" x="768.547" y="2991.6" width="15.9052" height="15.8023"/>
-  <object id="1495" name="Ridley" type="70" x="943.924" y="3048.44" width="31.1515" height="39.1212"/>
-  <object id="1497" name="Ridley" type="70" x="1121.42" y="2967.94" width="31.1515" height="39.1212"/>
+  <object id="1495" name="Ridley" type="70" x="1040.59" y="3047.11" width="31.1515" height="39.1212"/>
   <object id="1498" name="Ridley" type="70" x="5648.42" y="3255.94" width="31.1515" height="39.1212"/>
  </objectgroup>
 </map>
