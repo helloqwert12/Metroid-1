@@ -1,10 +1,8 @@
 ﻿#ifndef __TILESET_H__
 #define __TILESET_H__
 
-#include <string>
-#include <vector>
-#include <stdexcept>
 #include "Tile.h"
+#include <vector>
 #include "pugixml/pugixml.hpp"
 using namespace pugi;
 

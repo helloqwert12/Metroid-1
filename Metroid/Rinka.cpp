@@ -143,12 +143,6 @@ bool Rinka::isActive()
 	return _isActive;
 }
 
-GVector2 Rinka::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
-}
-
 float Rinka::checkCollision(BaseObject* object, float dt)
 {
 	return 0;

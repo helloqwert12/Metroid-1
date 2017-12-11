@@ -160,12 +160,6 @@ bool Zeb::isActive()
 	return _isActive;
 }
 
-GVector2 Zeb::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
-}
-
 float Zeb::checkCollision(BaseObject* object, float dt)
 {
 	return 0;

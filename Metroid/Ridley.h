@@ -34,7 +34,6 @@ public:
 	void fall();
 	void stand();
 
-	GVector2 getVelocity();
 	float checkCollision(BaseObject* object, float dt);
 
 protected:

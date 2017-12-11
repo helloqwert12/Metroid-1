@@ -1,7 +1,6 @@
 ﻿#ifndef __TILE_H__
 #define __TILE_H__
 
-#include <string>
 #include "Sprite.h"
 
 // Dùng để lưu thông tin của 1 ô Tile (id và srcRect)

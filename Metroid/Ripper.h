@@ -28,7 +28,6 @@ public:
 	void deactive();
 	bool isActive();
 
-	GVector2 getVelocity();
 	float checkCollision(BaseObject* object, float dt);
 
 protected:

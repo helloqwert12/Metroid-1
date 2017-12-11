@@ -2,7 +2,6 @@
 #define __UTILS_H__
 
 #include "define.h"
-using namespace std;
 
 // Dùng trong hệ world (x, y)
 // Kiểm tra 2 HCN có chồng lên nhau không.

@@ -208,12 +208,6 @@ void Ridley::stand()
 	this->setStatus(NORMAL);
 }
 
-GVector2 Ridley::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
-}
-
 float Ridley::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getStatus() == eStatus::DESTROY)

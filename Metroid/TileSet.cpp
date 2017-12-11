@@ -1,5 +1,4 @@
 ﻿#include "TileSet.h"
-#include "Tile.h"
 #include "SpriteManager.h"
 
 TileSet::TileSet(eID spriteId)

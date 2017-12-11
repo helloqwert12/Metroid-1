@@ -160,12 +160,6 @@ bool CannonBullet::isActive()
 	return _isActive;
 }
 
-GVector2 CannonBullet::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
-}
-
 float CannonBullet::checkCollision(BaseObject* object, float dt)
 {
 	if (object->getId() == WALL)

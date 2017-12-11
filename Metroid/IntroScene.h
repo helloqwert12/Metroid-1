@@ -1,11 +1,8 @@
 #ifndef __INTROSCENE_H__
 #define __INTROSCENE_H__
 
-#include "Sprite.h"
 #include "SpriteManager.h"
-#include "Scene.h"
 #include "SceneManager.h"
-#include "InputController.h"
 #include "StopWatch.h"
 #include "Component.h"
 #include "BaseObject.h"

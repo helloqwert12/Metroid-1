@@ -160,12 +160,6 @@ bool Waver::isActive()
 	return _isActive;
 }
 
-GVector2 Waver::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
-}
-
 float Waver::checkCollision(BaseObject* object, float dt)
 {
 	auto objectId = object->getId();

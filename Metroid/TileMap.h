@@ -1,12 +1,10 @@
 ﻿#ifndef __TILEMAP_H__
 #define __TILEMAP_H__
 
-#include "TileSet.h"
 #include "define.h"
-#include "Sprite.h"
+#include "TileSet.h"
 #include "SpriteManager.h"
 #include "pugixml\pugixml.hpp"
-using namespace std;
 using namespace pugi;
 
 class TileMap

@@ -1,10 +1,10 @@
 ﻿#ifndef __TEXT_H__
 #define __TEXT_H__
 
-#include <string>
 #include "define.h"
 #include "DeviceManager.h"
 #include "Transformable.h"
+#include <string>
 
 class Text : public Transformable
 {

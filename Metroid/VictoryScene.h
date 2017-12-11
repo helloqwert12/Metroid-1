@@ -1,11 +1,8 @@
 #ifndef __VICTORYSCENE_H__
 #define __VICTORYSCENE_H__
 
-#include "Sprite.h"
 #include "SpriteManager.h"
-#include "Scene.h"
 #include "SceneManager.h"
-#include "InputController.h"
 #include "StopWatch.h"
 #include "Animation.h"
 #include "TextSprite.h"

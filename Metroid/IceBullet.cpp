@@ -59,12 +59,6 @@ void IceBullet::release()
 {
 }
 
-GVector2 IceBullet::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
-}
-
 CollisionBody* IceBullet::getCollisionBody()
 {
 	return (CollisionBody*)_componentList["CollisionBody"];

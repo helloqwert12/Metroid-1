@@ -1,8 +1,4 @@
 ﻿#include "Game.h"
-#include <string>
-#include <dinput.h>
-#include <d3dx9tex.h>
-using namespace std;
 
 bool Game::isExit = false;
 Graphics* Game::_hWindow = NULL;

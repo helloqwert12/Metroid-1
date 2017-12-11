@@ -171,12 +171,6 @@ bool Rio::isActive()
 	return _isActive;
 }
 
-GVector2 Rio::getVelocity()
-{
-	auto movement = (Movement*)this->_componentList["Movement"];
-	return movement->getVelocity();
-}
-
 float Rio::checkCollision(BaseObject* object, float dt)
 {
 	auto objectId = object->getId();
