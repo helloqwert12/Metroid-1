@@ -61,6 +61,12 @@ void MissileRocket::release()
 {
 }
 
+GVector2 MissileRocket::getVelocity()
+{
+	auto movement = (Movement*)this->_componentList["Movement"];
+	return movement->getVelocity();
+}
+
 CollisionBody* MissileRocket::getCollisionBody()
 {
 	return (CollisionBody*)_componentList["CollisionBody"];

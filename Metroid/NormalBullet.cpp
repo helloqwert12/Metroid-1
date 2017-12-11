@@ -59,6 +59,12 @@ void NormalBullet::release()
 {
 }
 
+GVector2 NormalBullet::getVelocity()
+{
+	auto movement = (Movement*)this->_componentList["Movement"];
+	return movement->getVelocity();
+}
+
 CollisionBody* NormalBullet::getCollisionBody()
 {
 	return (CollisionBody*)_componentList["CollisionBody"];

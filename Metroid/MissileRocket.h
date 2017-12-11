@@ -10,7 +10,7 @@
 #include "StopWatch.h"
 #include "Weapon.h"
 
-#define MISSILE_ROCKET_SPEED 350
+#define MISSILE_ROCKET_SPEED 300
 
 class MissileRocket : public Weapon
 {
@@ -22,6 +22,7 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
 
+	GVector2 getVelocity();
 	CollisionBody* getCollisionBody();
 
 protected:

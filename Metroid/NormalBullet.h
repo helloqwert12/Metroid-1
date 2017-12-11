@@ -22,6 +22,7 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
 
+	GVector2 getVelocity();
 	CollisionBody* getCollisionBody();
 
 protected:
