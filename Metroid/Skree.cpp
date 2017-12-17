@@ -76,7 +76,7 @@ void Skree::update(float deltatime)
 			auto random = rand() % 10;
 			if (random < 5)
 				item = new EnergyBall(this->getPositionX(), this->getPositionY());
-			if (item != nullptr)
+				if (item != nullptr)
 			{
 				item->init();
 				QuadTreeNode::getInstance()->insert(item);

@@ -55,6 +55,7 @@
 #include "LongBeam.h"
 #include "IceBeam.h"
 #include "MissileRocketBall.h"
+#include "RocketBall.h"
 #include "BombBall.h"
 #include "Varia.h"
 

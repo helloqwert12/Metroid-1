@@ -1804,6 +1804,16 @@ float Player::checkCollision(BaseObject* object, float dt)
 			SoundManager::getInstance()->play(eSoundID::GET_MISSILE_ROCKET_BALL);
 		}
 	}
+	else if (objectId == ROCKET_BALL)
+	{
+		if (collisionBody->checkCollision(object, direction, dt, false))
+		{
+			_info->setMissileRocket(_info->getMissileRocket() + 5);
+			object->setStatus(DESTROY);
+
+			SoundManager::getInstance()->play(eSoundID::GET_MISSILE_ROCKET_BALL);
+		}
+	}
 	else if (objectId == BOMB_BALL)
 	{
 		if (collisionBody->checkCollision(object, direction, dt, false))

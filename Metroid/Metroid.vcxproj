@@ -159,6 +159,7 @@
     <ClCompile Include="CannonBullet.cpp" />
     <ClCompile Include="Ridley.cpp" />
     <ClCompile Include="RidleyBullet.cpp" />
+    <ClCompile Include="RocketBall.cpp" />
     <ClCompile Include="SkreeBullet.cpp" />
     <ClCompile Include="VictoryScene.cpp" />
     <ClCompile Include="LeftCannon.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="CannonBullet.h" />
     <ClInclude Include="Ridley.h" />
     <ClInclude Include="RidleyBullet.h" />
+    <ClInclude Include="RocketBall.h" />
     <ClInclude Include="SkreeBullet.h" />
     <ClInclude Include="VictoryScene.h" />
     <ClInclude Include="LeftCannon.h" />
