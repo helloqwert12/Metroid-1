@@ -13,6 +13,7 @@
 #include <ctime>
 #include "SkreeBullet.h"
 #include "EnergyBall.h"
+#include "RocketBall.h"
 
 #define SKREE_MOVE_SPEED 300
 

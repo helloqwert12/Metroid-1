@@ -10,7 +10,7 @@
 #include "StopWatch.h"
 #include "utils.h"
 
-#define RINKA_RANGE 300
+#define RINKA_RANGE 250
 
 class Rinka : public BaseObject
 {

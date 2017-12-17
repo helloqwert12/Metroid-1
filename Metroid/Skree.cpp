@@ -71,12 +71,15 @@ void Skree::update(float deltatime)
 			this->setStatus(DESTROY);
 
 			BaseObject* item = nullptr;
-
 			srand(time(0));
 			auto random = rand() % 10;
-			if (random < 5)
+
+			if (random < 3)
 				item = new EnergyBall(this->getPositionX(), this->getPositionY());
-				if (item != nullptr)
+			else if (random >= 3 && random < 6)
+				item = new RocketBall(this->getPositionX(), this->getPositionY());
+
+			if (item != nullptr)
 			{
 				item->init();
 				QuadTreeNode::getInstance()->insert(item);

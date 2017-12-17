@@ -116,6 +116,24 @@ void Ridley::update(float deltatime)
 			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
 
 			this->setStatus(DESTROY);
+
+			BaseObject* item = nullptr;
+
+			item = new RocketBall(this->getPositionX() - 30, this->getPositionY());
+			item->init();
+			QuadTreeNode::getInstance()->insert(item);
+			
+			item = new RocketBall(this->getPositionX(), this->getPositionY());
+			item->init();
+			QuadTreeNode::getInstance()->insert(item);
+
+			item = new RocketBall(this->getPositionX(), this->getPositionY() + 30);
+			item->init();
+			QuadTreeNode::getInstance()->insert(item);
+
+			item = new RocketBall(this->getPositionX() + 30, this->getPositionY());
+			item->init();
+			QuadTreeNode::getInstance()->insert(item);
 		}
 	}
 }

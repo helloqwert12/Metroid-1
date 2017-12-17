@@ -10,7 +10,7 @@
 #include "QuadtreeNode.h"
 #include "Rinka.h"
 
-#define RINKA_APPEAR_TIME 4000
+#define RINKA_APPEAR_TIME 6000
 #define RINKA_MOVE_SPEED 40
 
 class RinkaCannon : public BaseObject

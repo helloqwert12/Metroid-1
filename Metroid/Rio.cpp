@@ -75,11 +75,13 @@ void Rio::update(float deltatime)
 
 			this->setStatus(DESTROY);
 
+			BaseObject* item = nullptr;
 			srand(time(0));
 			auto random = rand() % 10;
-			BaseObject* item = nullptr;
+
 			if (random < 5)
 				item = new EnergyBall(this->getPositionX(), this->getPositionY());
+
 			if (item != nullptr)
 			{
 				item->init();

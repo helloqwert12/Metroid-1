@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1505">
+<map version="1.0" tiledversion="2017.10.11" orientation="orthogonal" renderorder="right-down" width="480" height="270" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1506">
  <tileset firstgid="1" name="tileset_full" tilewidth="16" tileheight="16" tilecount="136" columns="8">
   <image source="tileset_metroid.png" width="128" height="272"/>
  </tileset>
@@ -130291,7 +130291,6 @@
   <object id="972" name="BreakableRedWall" type="40" x="6191.87" y="1600.46" width="15.9052" height="15.8023"/>
   <object id="974" name="BreakableRedWall" type="40" x="6191.87" y="1631.74" width="15.9052" height="15.8023"/>
   <object id="975" name="BreakableRedWall" type="40" x="6192.05" y="1615.74" width="15.9052" height="15.8023"/>
-  <object id="990" name="AutoMoveViewport" type="22" x="2487.95" y="2991.99" width="16" height="15.5455"/>
   <object id="993" name="BlueDoor" type="36" x="5279.72" y="2480.47" width="63.5682" height="47.4545"/>
   <object id="995" name="Wall" type="20" x="5326.5" y="2560" width="17.6667" height="671.667"/>
   <object id="996" name="Wall" type="20" x="5535.83" y="2558" width="17.6667" height="673.75"/>
@@ -130384,7 +130383,6 @@
    </properties>
   </object>
   <object id="1070" name="Wall" type="20" x="3391.33" y="3152" width="15.8333" height="238.833"/>
-  <object id="1072" name="Metroid" type="61" x="4255.37" y="3247.77" width="15.9052" height="15.8023"/>
   <object id="1073" name="RedDoor" type="37" x="5280.22" y="3232.02" width="63.5682" height="47.4545"/>
   <object id="1075" name="BlueDoor" type="36" x="4127.72" y="3231.27" width="63.5682" height="47.9545"/>
   <object id="1105" name="Zoomer" type="58" x="624.008" y="2912.7" width="15.8182" height="15.4545"/>

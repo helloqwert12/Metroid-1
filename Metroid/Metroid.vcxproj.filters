@@ -331,7 +331,7 @@
       <Filter>Source Files\Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="RocketBall.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -340,9 +340,6 @@
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="MetroidGame.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
@@ -590,8 +587,11 @@
     <ClInclude Include="Ridley.h">
       <Filter>Header Files\Object\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="RocketBall.h">
+    <ClInclude Include="MetroidGame.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RocketBall.h">
+      <Filter>Header Files\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

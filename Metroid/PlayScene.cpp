@@ -29,58 +29,58 @@ bool PlayScene::init()
 	// Tạo TileMap
 	_tileMap = TileMap::loadMapFromFile("Resources//Maps//map.tmx", eID::TILESET_METROID);
 
-	// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
-	auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
-	RECT rectMap;
-	rectMap.left = 0;
-	rectMap.top = quadTreeWidth;
-	rectMap.right = quadTreeWidth;
-	rectMap.bottom = 0;
-
-	// Tạo QuadTree
-	_root = new QuadTreeNode(rectMap);
-	QuadTreeNode::setInstance(_root);
-
-	// Đọc file XML để lấy list các object
-	auto listObject = getListObjectFromXML("Resources//Maps//map.tmx");
-
-	// Insert tất cả các object vào QuadTree
-	for (auto object : (*listObject))
-	{
-		_root->insert(object);
-	}
-	listObject->clear();
-
-	// Ghi QuadTree ra File
-	ofstream fileOut;
-	fileOut.open("Resources//Maps//QuadTree.txt", ios::out);
-
-	if (fileOut)
-	{
-		fileOut << "level\t\tleft\t\ttop\t\tright\t\tbottom\t\tnum_children\tnum_objects\tobjects" << endl;
-		QuadTreeNode::getInstance()->writeQuadTreeNode(fileOut, _root);
-
-		fileOut.close();
-	}
+	//// Lấy kích thước của QuadTree (do QuadTree hình vuông nên ta lấy cạnh lớn nhất)
+	//auto quadTreeWidth = (_tileMap->worldWidth() >= _tileMap->worldHeight()) ? _tileMap->worldWidth() : _tileMap->worldHeight();
+	//RECT rectMap;
+	//rectMap.left = 0;
+	//rectMap.top = quadTreeWidth;
+	//rectMap.right = quadTreeWidth;
+	//rectMap.bottom = 0;
 
 	//// Tạo QuadTree
-	//_root = new QuadTreeNode(RECT{ 0, 0, 0, 0 });
+	//_root = new QuadTreeNode(rectMap);
 	//QuadTreeNode::setInstance(_root);
 
-	//// Đọc QuadTree từ File
-	//ifstream fileIn;
-	//fileIn.open("Resources//Maps//QuadTree.txt", ios::in);
+	//// Đọc file XML để lấy list các object
+	//auto listObject = getListObjectFromXML("Resources//Maps//map.tmx");
 
-	//if (fileIn)
+	//// Insert tất cả các object vào QuadTree
+	//for (auto object : (*listObject))
 	//{
-	//	// Đọc dòng đầu tiên của file (title)
-	//	string firstLine;
-	//	getline(fileIn, firstLine);
-
-	//	QuadTreeNode::getInstance()->readQuadTreeFromFile(fileIn);
-
-	//	fileIn.close();
+	//	_root->insert(object);
 	//}
+	//listObject->clear();
+
+	//// Ghi QuadTree ra File
+	//ofstream fileOut;
+	//fileOut.open("Resources//Maps//QuadTree.txt", ios::out);
+
+	//if (fileOut)
+	//{
+	//	fileOut << "level\t\tleft\t\ttop\t\tright\t\tbottom\t\tnum_children\tnum_objects\tobjects" << endl;
+	//	QuadTreeNode::getInstance()->writeQuadTreeNode(fileOut, _root);
+
+	//	fileOut.close();
+	//}
+
+	// Tạo QuadTree
+	_root = new QuadTreeNode(RECT{ 0, 0, 0, 0 });
+	QuadTreeNode::setInstance(_root);
+
+	// Đọc QuadTree từ File
+	ifstream fileIn;
+	fileIn.open("Resources//Maps//QuadTree.txt", ios::in);
+
+	if (fileIn)
+	{
+		// Đọc dòng đầu tiên của file (title)
+		string firstLine;
+		getline(fileIn, firstLine);
+
+		QuadTreeNode::getInstance()->readQuadTreeFromFile(fileIn);
+
+		fileIn.close();
+	}
 
 	_isVictory = false;
 

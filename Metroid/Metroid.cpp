@@ -74,6 +74,14 @@ void Metroid::update(float deltatime)
 			SoundManager::getInstance()->play(eSoundID::EXPLOSION_SOUND);
 
 			this->setStatus(DESTROY);
+
+			BaseObject* item = new RocketBall(this->getPositionX(), this->getPositionY());
+
+			if (item != nullptr)
+			{
+				item->init();
+				QuadTreeNode::getInstance()->insert(item);
+			}
 		}
 	}
 }

@@ -25,7 +25,7 @@ MotherBrain::MotherBrain(int x, int y) : BaseObject(MOTHER_BRAIN)
 	_effectAnimation = new Animation(_effect, 0.1f);
 	_effectAnimation->addFrameRect(BOSS_STAGE, "mother_brain_explode_01", "mother_brain_explode_02", NULL);
 
-	_hitPoint = 200;
+	_hitPoint = 100;
 }
 
 void MotherBrain::init()
@@ -43,7 +43,7 @@ void MotherBrain::update(float deltatime)
 {
 	if (_hitPoint > 0)
 	{
-		if (_hitPoint > 100)
+		if (_hitPoint > 50)
 			_animationIndex = 0;
 		else
 			_animationIndex = 1;
