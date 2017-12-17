@@ -101,10 +101,10 @@ void TileMap::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 
 int TileMap::worldHeight()
 {
-	return _frameWidth * _mapSize.x;
+	return _frameHeight * _mapSize.y;
 }
 
 int TileMap::worldWidth()
 {
-	return _frameHeight * _mapSize.y;
+	return _frameWidth * _mapSize.x;
 }

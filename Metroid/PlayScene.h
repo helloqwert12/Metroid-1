@@ -32,7 +32,6 @@ public:
 	void setVictory(bool flag);
 
 private:
-	Text* _text;
 	TileMap* _tileMap;
 	QuadTreeNode* _root;
 	BaseObject* _player;
